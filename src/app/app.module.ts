@@ -9,11 +9,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import {HttpClientModule } from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthGuardService } from './services/auth-guard.service';
 import { InteractionService } from './services/interaction.service';
-import { InterceptorService } from './services/interceptor.service';
+import { InterceptorService, UnauthorizedInterceptor } from './services/interceptor.service';
 import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { ProccessHttpErrosService } from './services/proccess-http-erros.service';
@@ -33,9 +33,18 @@ import { ProccessHttpErrosService } from './services/proccess-http-erros.service
     AuthGuardService,
     AuthService,
     InteractionService,
-    InterceptorService,
     StorageService,
     ProccessHttpErrosService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UnauthorizedInterceptor,
+      multi: true
+    },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

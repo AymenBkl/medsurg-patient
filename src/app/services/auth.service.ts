@@ -27,7 +27,8 @@ export class AuthService {
   checkJWT() {
     const token = this.storageService.getToken();
     if (token){
-      this.httpClient.get<AuthResponse>(this.authURL + 'checkJWT')
+      console.log(token);
+      this.httpClient.get<AuthResponse>(this.authURL + 'jwt')
       .subscribe(response => {
         console.log(response);
         if (response.token === 'TOKEN VALID' && response.status === 200){
@@ -115,6 +116,8 @@ export class AuthService {
     this.user = null;
     this.currentUser.next(null);
     this.authenticated.next(false);
+    this.authenticated.complete();
+    this.authenticated = null;
     this.storageService.removeUser();
   }
 
