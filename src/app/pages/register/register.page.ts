@@ -56,7 +56,7 @@ export class RegisterPage implements OnInit {
       .then(result => {
         if (result && result !== false){
           this.submitted = false;
-          this.interactionService.createToast('WELCOM TO NAT3RFOU', 'success', 'bottom');
+          this.interactionService.createToast('WELCOMU', 'success', 'bottom');
           this.goToHome();
         } else {
           this.interactionService.createToast('Something Went Wrong ! Try Again', 'danger', 'bottom');
