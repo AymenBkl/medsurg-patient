@@ -15,7 +15,7 @@ import { catchError } from 'rxjs/operators';
 export class AuthService {
 
 
-  authURL = config.baseURL + 'users/';
+  authURL = config.baseURL + 'account/';
   private currentUser: Subject<User> = new Subject<User>();
   user: User;
   authenticated: Subject<boolean> = new Subject<false>();
@@ -49,7 +49,7 @@ export class AuthService {
 
   signUp(user: User) {
     return new Promise((resolve, reject) => {
-      this.httpClient.post<AuthResponse>(this.authURL + 'singup', user)
+      this.httpClient.post<AuthResponse>(this.authURL + 'signup', user)
         .subscribe(response => {
           this.storageService.removeUser();
           if (response.status === 200) {
