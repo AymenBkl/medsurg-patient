@@ -45,6 +45,7 @@ export class LoginPage implements OnInit {
     this.submitted = true;
     this.authService.logIn(this.loginForm.value)
       .then((result: any) => {
+        console.log(result);
         if (result && result !== false){
           this.interactionService.createToast('WELCOM', 'success', 'bottom');
           console.log(result);
@@ -61,6 +62,7 @@ export class LoginPage implements OnInit {
         }
       })
       .catch(err => {
+        console.log(err);
         this.submitted = false;
         this.validationErrors = err;
         this.interactionService.createToast(this.validationErrors.errmsg, 'danger', 'bottom')

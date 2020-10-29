@@ -19,6 +19,7 @@ export class AuthService {
   private currentUser: Subject<User> = new Subject<User>();
   user: User;
   authenticated: Subject<boolean> = new Subject<false>();
+  isAuthenticated = false;
   constructor(private httpClient: HttpClient,
               private storageService: StorageService,
               private httpErrorHandler: ProccessHttpErrosService) {
@@ -113,15 +114,15 @@ export class AuthService {
   }
 
   destroyUserCredentials() {
+    this.isAuthenticated = false;
     this.user = null;
     this.currentUser.next(null);
     this.authenticated.next(false);
-    this.authenticated.complete();
-    this.authenticated = null;
     this.storageService.removeUser();
   }
 
   setUserCredentials(user){
+    this.isAuthenticated = true;
     this.user = user;
     this.currentUser.next(user);
     this.authenticated.next(true);
