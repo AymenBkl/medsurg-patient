@@ -1,9 +1,65 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [page]="'Profile'"></app-header>
 
 <ion-content>
+
+  <ion-grid *ngIf="currentUser && currentUser != null">
+    <ion-row>
+      <ion-col size="12" class="col">
+        <ion-avatar class="img">
+          <img src="../../../assets/imgs/pharmacy-user-img.png">
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="12">
+        <div class="name-holder">
+          <ion-label class="display-name">
+            {{currentUser.firstname | uppercase}} {{currentUser.lastname | uppercase}}
+          </ion-label>
+        </div>
+        <div class="name-holder">
+          <ion-label class="username">
+            @{{currentUser.username}}
+          </ion-label>
+        </div>
+        <div class="name-holder">
+          <ion-label class="email">
+            {{currentUser.email}}
+          </ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="bottom-row">
+      <ion-col size="6" class="card-holder">
+        <ion-card class="card">
+          <ion-avatar class="img-icon">
+            <img src="../../../assets/imgs/pills.svg">
+          </ion-avatar>
+          <div class="name-holder">
+            <ion-text class="card-title">Your Product</ion-text>
+          </div>
+          <div class="name-holder">
+            <ion-text class="card-subtitle">15</ion-text>
+          </div>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" class="card-holder">
+        <ion-card class="card second">
+          <ion-avatar class="img-icon">
+            <img src="../../../assets/imgs/patient.svg">
+          </ion-avatar>
+          <div class="name-holder">
+            <ion-text class="card-title">Patients</ion-text>
+          </div>
+          <div class="name-holder">
+            <ion-text class="card-subtitle">7</ion-text>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <div class="spin" *ngIf="!currentUser">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
 
 </ion-content>

@@ -17,6 +17,7 @@
   text-align: center;
     color: white;
     width: 100%;
+    position: relative;
 }
 
 .city-item {
@@ -48,9 +49,9 @@
 }
 
 .img {
-    display: inline-block;
-    height: 30px;
-    width: 30px;
+  height: 25px;
+  margin: 0 auto;
+  width: 25px;
 }
 
 .title1 {
@@ -59,8 +60,10 @@
 }
 
 .chip {
-  display: inline-block;
-  padding: 5px;
+  padding: 0px;
   width: 30px;
   height: 30px;
+  position: absolute;
+  top: -7px;
+  right: 15px;
 }
