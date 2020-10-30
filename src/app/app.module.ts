@@ -17,6 +17,9 @@ import { InterceptorService, UnauthorizedInterceptor } from './services/intercep
 import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { ProccessHttpErrosService } from './services/proccess-http-erros.service';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { config } from './services/config';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +38,8 @@ import { ProccessHttpErrosService } from './services/proccess-http-erros.service
     InteractionService,
     StorageService,
     ProccessHttpErrosService,
+    FileChooser,
+    File,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
@@ -45,7 +50,8 @@ import { ProccessHttpErrosService } from './services/proccess-http-erros.service
       useClass: UnauthorizedInterceptor,
       multi: true
     },
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {provide : 'bucketURL', useValue : config.bucket}
   ],
   bootstrap: [AppComponent]
 })

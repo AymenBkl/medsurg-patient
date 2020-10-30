@@ -11,7 +11,8 @@ export class UserService {
   userUrl = config.baseURL + 'account/user/';
   constructor(private httpClient: HttpClient,
               private proccessHttpErrorService: ProccessHttpErrosService,
-              private authService: AuthService) { }
+              private authService: AuthService) {
+              }
 
 
   public getUser(userId: any) {
@@ -31,9 +32,25 @@ export class UserService {
     });
   }
 
+  getImage(imageUrl){
+    return new Promise((resolve, reject) => {
+      this.httpClient.get<AuthResponse>(config.baseURL + 'account/files/getfile/' + imageUrl)
+        .subscribe(response => {
+          if (response.status === 200) {
+            resolve(response.msg);
+          }
+          else {
+            resolve(false);
+          }
+        }, err => {
+          reject(this.proccessHttpErrorService.handleError(err));
+        });
+    });
+  }
+
   postImage(formData: FormData) {
     return new Promise((resolve, reject) => {
-    this.httpClient.post<AuthResponse>(this.userUrl + 'uploadimage', formData)
+    this.httpClient.post<AuthResponse>(this.userUrl + 'image', formData)
       .subscribe(response => {
         if (response.status === 200) {
           this.authService.userUpdated(response.user);

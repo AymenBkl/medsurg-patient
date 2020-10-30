@@ -11,8 +11,13 @@
       </ion-chip>
       </ion-col>
       <ion-col size="12" class="col">
+        <div class="rounded-input" *ngIf="toggle">
+          <label for="files" class="btn"><ion-icon name="camera-outline"></ion-icon></label>
+          <input id="files" type="file" style="visibility:hidden;" [(ngModel)]="image" (change)="selectedImage($event)" >
+        </div>
         <ion-avatar class="img">
-          <img src="../../../assets/imgs/pharmacy-user-img.png">
+          <img *ngIf="!currentUser || currentUser.imageUrl == '' " src="../../../assets/imgs/pharmacy-user-img.png">
+          <img *ngIf="currentUser && currentUser.imageUrl != ''" [src]="currentUser.imageUrl">
         </ion-avatar>
       </ion-col>
       <ion-col size="12" *ngIf="!toggle">
@@ -47,7 +52,7 @@
         </ion-item>
         <ion-label class="label-error" *ngIf="formErrors && formErrors.lastname">*{{formErrors.lastname}}</ion-label>
         <ion-button class="buttons" [disabled]="profileForm.invalid || submitted" (click)="update()" shape="round" size="default" expand="full">
-          <ion-label *ngIf="!submitted">REGISTER</ion-label>
+          <ion-label *ngIf="!submitted">UPDATE</ion-label>
           <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
         </ion-button>
       </form>

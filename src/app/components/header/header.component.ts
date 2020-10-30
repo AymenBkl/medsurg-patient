@@ -13,7 +13,9 @@ export class HeaderComponent implements OnInit {
   currentUser: User;
   constructor(private authService: AuthService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getCurrentUser();
+  }
 
 
   getCurrentUser() {
@@ -22,4 +24,6 @@ export class HeaderComponent implements OnInit {
         this.currentUser = user;
       });
   }
+
+  
 }

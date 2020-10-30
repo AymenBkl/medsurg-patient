@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
       title: 'Profile',
       url: 'profile',
       icon: 'people-circle',
-      auth : 'true'
+      auth : true
     },
     {
       title: 'Login',

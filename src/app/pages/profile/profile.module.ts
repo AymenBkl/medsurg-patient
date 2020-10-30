@@ -16,7 +16,7 @@ import { HeaderComponent } from '../../components/header/header.component';
     FormsModule,
     IonicModule,
     ProfilePageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [ProfilePage, HeaderComponent]
 })
