@@ -98,18 +98,7 @@ export class AuthService {
 
   logOut(){
     return new Promise((resolve, reject) => {
-      this.httpClient.get<AuthResponse>(this.authURL + 'logout')
-        .subscribe(response => {
-          if (response.status === 200){
-            this.destroyUserCredentials();
-            resolve(true);
-          }
-          else {
-            resolve(false);
-          }
-        } , err => {
-          reject(err);
-        });
+        this.destroyUserCredentials();
     });
   }
 
