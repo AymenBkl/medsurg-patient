@@ -11,11 +11,15 @@ import { User } from '../../interfaces/user';
 export class ProfilePage implements OnInit {
 
   currentUser: User;
+  toggle = false;
   constructor(private authService: AuthService,
               private interactionService: InteractionService) { }
 
   ngOnInit() {
     this.getCurrentUser();
+    setInterval(() => {
+      console.log(this.toggle);
+    },2000);
   }
 
 
