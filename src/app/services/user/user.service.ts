@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service';
   providedIn: 'root'
 })
 export class UserService {
-  userUrl = config.baseURL + 'users/user/';
+  userUrl = config.baseURL + 'account/user/';
   constructor(private httpClient: HttpClient,
               private proccessHttpErrorService: ProccessHttpErrosService,
               private authService: AuthService) { }
@@ -48,9 +48,9 @@ export class UserService {
     });
   }
 
-  updateUser() {
+  updateUser(newInfo) {
     return new Promise((resolve, reject) => {
-      this.httpClient.put<AuthResponse>(this.userUrl + 'setup', {setup : true})
+      this.httpClient.put<AuthResponse>(this.userUrl + 'updateuser', newInfo)
         .subscribe(response => {
           if (response.status === 200){
             this.authService.userUpdated(response.user);

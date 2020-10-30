@@ -20,22 +20,7 @@
     position: relative;
 }
 
-.city-item {
-  text-align: left;
-  margin-top: 5px;
-  width: 80%;
-  margin-left: 15px;
-  padding: 15px;
-}
-.city-item-selected {
-   text-align: left;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  margin-top: 5px;
-  width: 80%;
-  margin-left: 15px;
-  border-radius: 40px;
-  padding: 15px;
-}
+
 
 .toolbar {
   --background: #2B91BF !important;
@@ -52,6 +37,14 @@
   height: 25px;
   margin: 0 auto;
   width: 25px;
+}
+
+.button-header {
+  padding: 0px;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 15px;
 }
 
 .title1 {
