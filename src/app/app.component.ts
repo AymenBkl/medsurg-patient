@@ -17,6 +17,12 @@ export class AppComponent implements OnInit {
   public user: User;
   public appPages = [
     {
+      title: 'Home',
+      url: 'home',
+      icon: 'home',
+      auth : true
+    },
+    {
       title: 'Profile',
       url: 'profile',
       icon: 'people-circle',
@@ -88,6 +94,8 @@ export class AppComponent implements OnInit {
   logOut(){
     this.authService.logOut()
       .then(() => {
+        this.router.navigate(['/login']);
+      }).catch(() => {
         this.router.navigate(['/login']);
       });
   }

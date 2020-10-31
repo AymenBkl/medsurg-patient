@@ -91,7 +91,7 @@ ion-toggle {
 .rounded-input {
     display: flex;
     position: absolute;
-    color: white;
+    color: #2B91BF;
     font-size: 40px;
     width: 100%;
     top: 61%;
@@ -102,4 +102,12 @@ ion-toggle {
   .btn {
     width: 140%;
     text-align: center;
+  }
+
+  .spin{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    color : #2B91BF;
+    transform: translate(-50%, -50%);
   }

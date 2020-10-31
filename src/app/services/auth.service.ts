@@ -99,6 +99,7 @@ export class AuthService {
   logOut(){
     return new Promise((resolve, reject) => {
         this.destroyUserCredentials();
+        resolve(true);
     });
   }
 
