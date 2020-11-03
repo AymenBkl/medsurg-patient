@@ -8,15 +8,16 @@ import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { RegisterPage } from './register.page';
 
-import { HeaderComponent } from '../../components/header/header.component';
+import { ShareModule } from '../../components/share/share.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     RegisterPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ShareModule
   ],
-  declarations: [RegisterPage, HeaderComponent]
+  declarations: [RegisterPage]
 })
 export class RegisterPageModule {}

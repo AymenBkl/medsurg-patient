@@ -8,7 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 
-import { HeaderComponent } from '../../components/header/header.component';
+import { ShareModule } from '../../components/share/share.module';
 
 @NgModule({
   imports: [
@@ -16,8 +16,9 @@ import { HeaderComponent } from '../../components/header/header.component';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ShareModule
   ],
-  declarations: [HomePage , HeaderComponent]
+  declarations: [HomePage]
 })
 export class HomePageModule {}

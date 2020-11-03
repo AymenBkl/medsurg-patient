@@ -8,7 +8,7 @@ import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
 
-import { HeaderComponent } from '../../components/header/header.component';
+import { ShareModule } from '../../components/share/share.module';
 
 @NgModule({
   imports: [
@@ -16,8 +16,9 @@ import { HeaderComponent } from '../../components/header/header.component';
     FormsModule,
     IonicModule,
     LoginPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ShareModule
   ],
-  declarations: [LoginPage , HeaderComponent]
+  declarations: [LoginPage]
 })
 export class LoginPageModule {}
