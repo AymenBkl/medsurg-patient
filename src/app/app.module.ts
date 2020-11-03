@@ -16,6 +16,7 @@ import { InteractionService } from './services/interaction.service';
 import { InterceptorService, UnauthorizedInterceptor } from './services/interceptor.service';
 import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
+import { SearchMedecinService } from './services/search/search-medecin.service';
 import { ProccessHttpErrosService } from './services/proccess-http-erros.service';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -40,6 +41,7 @@ import { config } from './services/config';
     InteractionService,
     StorageService,
     ProccessHttpErrosService,
+    SearchMedecinService,
     FileChooser,
     File,
     {

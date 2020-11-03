@@ -30,6 +30,10 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
     canActivate : [AuthGuard]
+  },
+  {
+    path: 'search-medecin',
+    loadChildren: () => import('./pages/search-medecin/search-medecin.module').then( m => m.SearchMedecinPageModule)
   }
 ];
 
