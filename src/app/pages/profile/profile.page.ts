@@ -90,10 +90,12 @@ export class ProfilePage implements OnInit {
               this.currentUser.imageUrl = result;
             }
             else {
+              this.interactionService.hide();
               this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
             }
       }   );
       }).catch(err => {
+        this.interactionService.hide();
         this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
       });
   }

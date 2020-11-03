@@ -112,7 +112,7 @@ export class AuthService {
   }
 
   setUserCredentials(user){
-    this.isAuthenticated = true;
+    this.isAuthenticated = user.role === 'patient';
     this.user = user;
     this.currentUser.next(user);
     this.authenticated.next(true);
@@ -128,6 +128,7 @@ export class AuthService {
 
   userUpdated(user) {
     user.token = this.user.token;
+    this.user = user;
     this.currentUser.next(user);
   }
 

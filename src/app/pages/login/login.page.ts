@@ -49,11 +49,16 @@ export class LoginPage implements OnInit {
         if (result && result !== false){
           this.interactionService.createToast('WELCOM', 'success', 'bottom');
           console.log(result);
-          if (result.emailVerified === false || result.emailVerified == null){
-            this.goToHome();
+          if (result.role === 'patient'){
+            if (result.emailVerified === false || result.emailVerified == null){
+              this.goToHome();
+            }
+            else {
+              this.goToHome();
+            }
           }
           else {
-            this.goToHome();
+            this.toastAlert();
           }
         }
         else {
@@ -95,6 +100,11 @@ export class LoginPage implements OnInit {
 
   ionViewDidEnter() {
     this.submitted = false;
+  }
+
+  toastAlert(){
+    this.submitted = false;
+    this.interactionService.createToast('You are not allowed', 'danger', 'bottom');
   }
 
 

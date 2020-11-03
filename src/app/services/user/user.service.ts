@@ -53,6 +53,7 @@ export class UserService {
     this.httpClient.post<AuthResponse>(this.userUrl + 'image', formData)
       .subscribe(response => {
         if (response.status === 200) {
+          console.log(response.user);
           this.authService.userUpdated(response.user);
           resolve(response.user.imageUrl);
         }
