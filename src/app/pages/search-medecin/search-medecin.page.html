@@ -1,9 +1,32 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>search-medecin</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="toolbar0">
+    <ion-buttons slot="start" class="button-header">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="title">
+      <ion-text class="title1">
+        Patient
+      </ion-text>
+      <ion-chip class="chip" *ngIf="currentUser != null">
+        <ion-avatar class="img">
+          <img *ngIf="!currentUser || currentUser.imageUrl == '' " src="../../../assets/imgs/pharmacy-user-img.png">
+          <img *ngIf="currentUser && currentUser.imageUrl != ''" [src]="currentUser.imageUrl">
+        </ion-avatar>
+      </ion-chip>
+    </ion-title>
   </ion-toolbar>
+  <ion-toolbar class="toolbar">
+  </ion-toolbar>
+  <ion-searchbar 
+  class="search_bar-xyz" 
+  cancelButtonText="Custom Cancel" 
+  showCancelButton="focus"
+  animated
+  autocorrect="off"
+  inputmode="search"
+  (keyup.enter)="onInput(searchbar.value)"
+  placeholder="Medecin1,Medecin2,Med.."
+  #searchbar>
+
+</ion-searchbar>
 </ion-header>
-
-<ion-content>
-
-</ion-content>

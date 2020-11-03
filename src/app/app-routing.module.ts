@@ -33,7 +33,8 @@ const routes: Routes = [
   },
   {
     path: 'search-medecin',
-    loadChildren: () => import('./pages/search-medecin/search-medecin.module').then( m => m.SearchMedecinPageModule)
+    loadChildren: () => import('./pages/search-medecin/search-medecin.module').then( m => m.SearchMedecinPageModule),
+    canActivate : [AuthGuard]
   }
 ];
 

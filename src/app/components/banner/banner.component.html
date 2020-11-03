@@ -1,27 +1,27 @@
 <ion-slides pager="true" [options]="slideOpts">
 
   <ion-slide  class="animate-item">
-    <ion-card class="card">
+    <ion-card class="card" (click)="goTo('search-medecin')">
       <ion-text>
-        Corporates Doctors gives you more access to medecins
+        Want to find your medecins FASTER !!
       </ion-text>
-        <img src="../../../assets/imgs/doctor.png">
+        <img src="../../../assets/imgs/medicament.png">
     </ion-card>
   </ion-slide>
   <ion-slide  class="animate-item">
-    <ion-card class="card" id="card-pharmacy" (click)="goTo('category')">
+    <ion-card class="card" id="card-pharmacy" >
       <ion-text>
-        Adding more Categories will get you noticed
+        Post your PRESCRIPTION and get noticed
       </ion-text>
-        <img src="../../../assets/imgs/pharmacy.png">
+        <img src="../../../assets/imgs/ordonnance.png">
     </ion-card>
   </ion-slide>
   <ion-slide  class="animate-item">
-    <ion-card class="card" id="card-categorie" (click)="goTo('addproduct')">
+    <ion-card class="card" id="card-categorie" >
       <ion-text>
-        Medecins is all what patients looking for ?
+        See the status of your orders ?
       </ion-text>
-        <img src="../../../assets/imgs/pills.png">
+        <img src="../../../assets/imgs/presse-papiers.png">
     </ion-card>
   </ion-slide>
   <ion-slide  class="animate-item">
