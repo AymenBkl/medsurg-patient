@@ -30,3 +30,49 @@
 
 </ion-searchbar>
 </ion-header>
+
+<ion-content>
+  
+    <div class="main_content_div">
+      <ion-list class="list-orders" >
+        <ion-item lines="none" class="item-order"  *ngFor="let product of searchProduct" (click)="goPharmacyDetail(product)">
+          <div class="main-container">
+          <div class="container" style="width: 20%;">
+            <img class="avatar-icon" src="../../../assets/imgs/pharmacy.png"  width="50px" height="50px">
+        </div>
+          <div class="container">
+            <div class="container" style="text-align: center; width: 100%;">
+              <ion-label style="text-align: center; width: 100%;" class="inner-item" ><h1>name</h1></ion-label>
+  
+            </div>
+            <div class="inner-container">
+  
+              <ion-label class="inner-item"><ion-icon class="ion-icon" name="time-outline"></ion-icon> : data </ion-label>  
+              <ion-label class="inner-item"><ion-icon class="ion-icon" name="cash-outline"></ion-icon> : €total</ion-label>
+            </div>
+  
+            <div class="inner-container" >
+              <ion-label class="inner-item"><ion-icon class="ion-icon" name="document-outline"></ion-icon> : id</ion-label>
+              <ion-label class="inner-item"><ion-icon class="ion-icon" name="cash-outline"></ion-icon> : €total</ion-label>
+              <ion-label>&nbsp;</ion-label>
+            </div>
+  
+            
+  
+          </div>
+          <hr>
+  
+          <div class="main-container bottom">
+            <div class="inner-container">
+            <ion-label class="inner-item" style="font-weight: bold;"><ion-icon class="ion-icon" name="card-outline"></ion-icon> : paid</ion-label>
+            <ion-label  class="inner-item" style="font-weight: bold;color:red">Order Status : </ion-label>
+            <ion-label   class="inner-item" style="font-weight: bold;color:green">Order Status : DELIVERED</ion-label>
+          </div>
+        </div>
+      </div>
+  
+        </ion-item>
+      </ion-list>
+ </div>
+
+</ion-content>

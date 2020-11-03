@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { config } from '../config';
+import { SearchResponse } from '../../interfaces/responseSearch';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,14 +12,19 @@ export class SearchMedecinService {
 
 
   searchProducts(products){
-    return new Promise((resolve,reject) => {
-      this.httpClient.post(this.url + 'crm/productsmanagement/searchproducts', products)
+    return new Promise((resolve, reject) => {
+      this.httpClient.post<SearchResponse>(this.url + 'crm/productsmanagement/searchproducts', products)
         .subscribe(result => {
-          console.log(result);
+          if (result && result.status === 200){
+            resolve(result.product);
+          }
+          else {
+            resolve(false);
+          }
         }, err => {
-          console.log(err);
+          reject(err);
         });
-    })
+    });
   }
 
 
