@@ -17,62 +17,79 @@
   </ion-toolbar>
   <ion-toolbar class="toolbar">
   </ion-toolbar>
-  <ion-searchbar 
-  class="search_bar-xyz" 
-  cancelButtonText="Custom Cancel" 
-  showCancelButton="focus"
-  animated
-  autocorrect="off"
-  inputmode="search"
-  (keyup.enter)="onInput(searchbar.value)"
-  placeholder="Medecin1,Medecin2,Med.."
-  #searchbar>
+  <ion-searchbar class="search_bar-xyz" cancelButtonText="Custom Cancel" showCancelButton="focus" animated
+    autocorrect="off" inputmode="search" (keyup.enter)="onInput(searchbar.value)" placeholder="Medecin1,Medecin2,Med.."
+    #searchbar>
 
-</ion-searchbar>
+  </ion-searchbar>
 </ion-header>
 
 <ion-content>
-  
-    <div class="main_content_div">
-      <ion-list class="list-orders" >
-        <ion-item lines="none" class="item-order"  *ngFor="let product of searchProduct" (click)="goPharmacyDetail(product)">
-          <div class="main-container">
-          <div class="container" style="width: 20%;">
-            <img class="avatar-icon" src="../../../assets/imgs/pharmacy.png"  width="50px" height="50px">
-        </div>
-          <div class="container">
-            <div class="container" style="text-align: center; width: 100%;">
-              <ion-label style="text-align: center; width: 100%;" class="inner-item" ><h1>name</h1></ion-label>
-  
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+      <ion-list class="list-orders">
+        <ion-card lines="none" class="card" *ngFor="let product of searchProduct"
+          (click)="goPharmacyDetail(product)">
+            <div class="main-container">
+              <div class="container" style="width: 20%;">
+                <img class="avatar-icon" *ngIf="product.pharmacy && product.pharmacy.imageUrl != '' "
+                  [src]="product.pharmacy.imageUrl" width="50px" height="50px">
+                <img class="avatar-icon" *ngIf="product.pharmacy && product.pharmacy.imageUrl == '' "
+                  src="../../../assets/imgs/pharmacy.png" width="50px" height="50px">
+              </div>
+              <div class="container-info">
+
+                <div class="header">
+                  <ion-label  class="label"
+                    *ngIf="product.pharmacy && product.pharmacy.username != ''">
+                    <h1>{{product.pharmacy.username}}</h1>
+                  </ion-label>
+                  <ion-label  class="label"
+                    *ngIf="product.pharmacy && product.pharmacy.username == ''">
+                    <h1>Pharmacy</h1>
+                  </ion-label>
+
+
+                </div>
+                <div class="address">
+                  <ion-label class="label">
+                    <ion-icon class="icon"  name="location-outline"></ion-icon> : {{product.pharmacy.address != null ? product.pharmacy.address : "Address"}}
+                  </ion-label>
+                </div>
+                <div class="address">
+                  <ion-label class="label">
+                    <ion-icon class="icon"  name="person-circle-outline"></ion-icon> : {{product.pharmacy.firstname != null ? product.pharmacy.firstname : "Name"}}
+                  </ion-label>
+                </div>
+                <div class="address">
+                  <ion-label class="label">
+                    <ion-icon class="icon"  name="mail-outline"></ion-icon> : {{product.pharmacy.email != null ? product.pharmacy.email : "Email"}}
+                  </ion-label>
+                </div>
+                
+
+
+
+              </div>
+              <hr>
+              
+
+              <div class="main-container bottom">
+                  <div class="price">
+                    <ion-label class="inner-item">
+                      <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{calculateTotal(product)}}
+                    </ion-label>
+                  </div>
             </div>
-            <div class="inner-container">
-  
-              <ion-label class="inner-item"><ion-icon class="ion-icon" name="time-outline"></ion-icon> : data </ion-label>  
-              <ion-label class="inner-item"><ion-icon class="ion-icon" name="cash-outline"></ion-icon> : €total</ion-label>
             </div>
-  
-            <div class="inner-container" >
-              <ion-label class="inner-item"><ion-icon class="ion-icon" name="document-outline"></ion-icon> : id</ion-label>
-              <ion-label class="inner-item"><ion-icon class="ion-icon" name="cash-outline"></ion-icon> : €total</ion-label>
-              <ion-label>&nbsp;</ion-label>
-            </div>
-  
-            
-  
-          </div>
-          <hr>
-  
-          <div class="main-container bottom">
-            <div class="inner-container">
-            <ion-label class="inner-item" style="font-weight: bold;"><ion-icon class="ion-icon" name="card-outline"></ion-icon> : paid</ion-label>
-            <ion-label  class="inner-item" style="font-weight: bold;color:red">Order Status : </ion-label>
-            <ion-label   class="inner-item" style="font-weight: bold;color:green">Order Status : DELIVERED</ion-label>
-          </div>
-        </div>
-      </div>
-  
-        </ion-item>
+        </ion-card>
+        
       </ion-list>
- </div>
+    </ion-col>
+
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

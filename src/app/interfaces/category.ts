@@ -7,8 +7,6 @@ export interface Category {
     pharmacy: string;
     imageUrl: string;
     products: {
-        product_id: {
-            product: Product;
-        };
+        product: [Product];
     };
 }

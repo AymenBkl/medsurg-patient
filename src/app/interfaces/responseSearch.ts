@@ -5,5 +5,5 @@ export interface SearchResponse {
     token: string;
     msg: string;
     status: number;
-    product: SearchProduct;
+    product: [SearchProduct];
 }
