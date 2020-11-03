@@ -5,8 +5,8 @@ import { NavController , ModalController } from '@ionic/angular';
 import { SearchMedecinService } from '../../services/search/search-medecin.service';
 import { InteractionService } from '../../services/interaction.service';
 import { SearchProduct } from 'src/app/interfaces/searchproduct';
-import { SearchResponse } from '../../interfaces/responseSearch';
-
+import * as underscore from 'underscore';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-search-medecin',
   templateUrl: './search-medecin.page.html',
@@ -15,7 +15,7 @@ import { SearchResponse } from '../../interfaces/responseSearch';
 export class SearchMedecinPage implements OnInit {
 
   currentUser: User;
-  searchProduct: SearchProduct;
+  searchProduct: any;
   constructor(private authService: AuthService,
               private searchService: SearchMedecinService,
               private interactionService: InteractionService) { }
@@ -45,8 +45,8 @@ export class SearchMedecinPage implements OnInit {
           .then((products: SearchProduct | any) => {
             this.interactionService.hide();
             if (products && products !== false){
-              console.log(products);
               this.searchProduct = products;
+              this.sortMedecins();
             }
             else {
               this.interactionService.createToast('Not Found', 'danger', 'bottom');
@@ -54,6 +54,7 @@ export class SearchMedecinPage implements OnInit {
           })
           .catch(err => {
             this.interactionService.hide();
+            console.log(err);
             this.interactionService.createToast('Something Went Wrong ! Try Again', 'danger', 'bottom');
           });
       });
@@ -63,15 +64,41 @@ export class SearchMedecinPage implements OnInit {
 
   }
 
-  calculateTotal(product: SearchProduct){
-    let total = 0;
-    product.pharmacy.categories.forEach(category => {
-      category.category.products.product.forEach(prod => {
-          total += prod.price;
-      });
+  calculateTotal(){
+    return new Observable((obvserver) => {
+      let total = 0;
+      // tslint:disable-next-line: forin
+      console.log(this.searchProduct.length);
+      for (var i = 0; i < this.searchProduct.length;i++){
+        console.log(i);
+        this.searchProduct[i].pharmacy.categories.forEach(category => {
+          category.category.products.product.forEach(prod => {
+              total += prod.price;
+          });
+        });
+        this.searchProduct[i].totalPrice = total;
+        total = 0;
+        if (i === (this.searchProduct.length - 1)){
+          setTimeout(() => {
+            obvserver.next(true);
+          }, 1000);
+        }
+      }
     });
-    console.log(total);
-    return total;
+  }
+
+  sortMedecins() {
+    this.calculateTotal()
+      .subscribe((result) => {
+        console.log(result);
+        if (result && result === true){
+          this.searchProduct.sort((a, b) => {
+            return a.totalPrice - b.totalPrice;
+          });
+          console.log(this.searchProduct);
+        }
+      });
+
   }
 
 }

@@ -18,6 +18,7 @@ import { ShareModule } from '../../components/share/share.module';
     LoginPageRoutingModule,
     ReactiveFormsModule,
     ShareModule
+    
   ],
   declarations: [LoginPage]
 })
