@@ -24,8 +24,6 @@ export class SearchMedecinPage implements OnInit {
 
   ngOnInit() {
     this.getCurrentUser();
-    this.realtimedatabase.getData();
-    this.realtimedatabase.addPost();
   }
 
 

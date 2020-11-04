@@ -14,10 +14,8 @@ export class RealtimedatabaseService {
               private storage: AngularFireStorage) {}
 
 
-  getData(){
-    return this.db.list('posts').valueChanges().subscribe(data => {
-      console.log(data);
-    });
+  getData(userId){
+    return this.db.list('posts/' + userId).valueChanges();
   }
 
   addPost(prescription: Prescription) {
@@ -32,6 +30,7 @@ export class RealtimedatabaseService {
       });
     });
   }
+
 
   uploadFile(file){
     const fileName = file.name;

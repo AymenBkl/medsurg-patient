@@ -65,3 +65,13 @@
     color : #2B91BF;
     transform: translate(-50%, -50%);
   }
+
+  .not-found{
+    position: fixed;
+    top: 50%;
+    text-align: center;
+    left: 50%;
+    width: 100%;
+    color: black;
+    transform: translate(-50%, -50%);
+  }
