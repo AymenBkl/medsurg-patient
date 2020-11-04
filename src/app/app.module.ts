@@ -38,6 +38,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(config.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   providers: [
     StatusBar,

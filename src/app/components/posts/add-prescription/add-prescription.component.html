@@ -16,15 +16,24 @@
             {{currentUser.firstname}} {{currentUser.lastname}}
           </ion-text>
           <ion-text class="date">
-            28/10/2024 13:00
+            
           </ion-text>
         </div>
         </ion-item>
         <ion-item class="description" lines="none">
-          <ion-text class="text">Medecin1,Medecin1Medecin1Medecin1Medecin1Medecin1Medecin1,Medecin1Medecin1Medecin1Medecin1Medecin1 </ion-text>
+          <ion-textarea class="text" placeHolder="Med1,Med2,Med2....." [(ngModel)]="prescription.description">
+
+          </ion-textarea>
         </ion-item>
         <ion-item line="none" class="prescription-holder">
-          <img src="../../../assets/imgs/doctor.png">
+          <div class="image-upload">
+            <label for="file-input">
+              <img src="../../../../assets/imgs/photo.png"/>
+            </label>
+          
+            <input id="file-input" type="file" (change)="selectedImage($event)"/>
+          </div>          
+          
         </ion-item>
       </ion-card>
     </ion-col>
@@ -34,4 +43,10 @@
 <div class="spin" *ngIf="!currentUser">
   <ion-spinner name="bubbles"></ion-spinner>
 </div>
+
+<ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="currentUser && prescription.description != ''">
+  <ion-fab-button (click)="addPresciption()" >
+    <ion-icon name="checkmark-circle-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 </ion-content>
