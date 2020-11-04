@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase , AngularFireList } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
 import * as firebase from 'firebase';
+import { Prescription } from 'src/app/interfaces/prescription';
+import { User } from 'src/app/interfaces/user';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,9 +11,7 @@ export class RealtimedatabaseService {
 
   postRef: AngularFireList<any>;
   constructor(private db: AngularFireDatabase,
-              private storage: AngularFireStorage) { 
-    this.postRef= this.db.list('posts');
-  }
+              private storage: AngularFireStorage) {}
 
 
   getData(){
@@ -20,10 +20,16 @@ export class RealtimedatabaseService {
     });
   }
 
-  addPost() {
-    this.postRef.push({
-      name: "aymenxyzbkl",
-      lastname:"xd"
+  addPost(prescription: Prescription) {
+    return new Promise((resolve, reject) => {
+    this.postRef = this.db.list('posts/' + prescription.user_id);
+    this.postRef.push(prescription)
+      .then(data => {
+        resolve(true);
+      })
+      .catch(err => {
+        reject(err);
+      });
     });
   }
 
@@ -33,7 +39,7 @@ export class RealtimedatabaseService {
     const metadata = { contentType: file.type};
     const uploadTask = fileRef.put(file, metadata);
     return new Promise((resolve, reject) => {
-      uploadTask.then( function (downloadURL) {
+      uploadTask.then(() => {
         fileRef.getDownloadURL().subscribe(url => {
           resolve(url);
         });

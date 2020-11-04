@@ -3,7 +3,7 @@ import { NavController, NavParams } from '@ionic/angular';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { User } from 'src/app/interfaces/user';
 import { RealtimedatabaseService } from '../../../services/firebase/realtimedatabase.service';
-
+import { InteractionService } from '../../../services/interaction.service';
 @Component({
   selector: 'app-add-prescription',
   templateUrl: './add-prescription.component.html',
@@ -15,7 +15,8 @@ export class AddPrescriptionComponent implements OnInit {
   prescription: Prescription;
   image: any;
   constructor(private navParam: NavParams,
-              private realTimeDatabase: RealtimedatabaseService) { }
+              private realTimeDatabase: RealtimedatabaseService,
+              private interactionService: InteractionService) { }
 
   ngOnInit() {
     this.getData();
@@ -38,12 +39,49 @@ export class AddPrescriptionComponent implements OnInit {
   }
 
   addPresciption(){
-    this.realTimeDatabase.uploadFile(this.image)
+    if (this.image == null){
+      this.interactionService.alertWithHandler('You didnt pick any image', 'Alert' , 'Pick' , 'Post')
+        .then((result) => {
+          if (result && result === true){
+            this.postPrescription();
+          }
+        });
+    }
+    else {
+      this.postImage();
+    }
+  }
+
+  postImage(){
+    this.interactionService.createLoading('Creating your prescription please wait')
+    .then(() => {
+      this.realTimeDatabase.uploadFile(this.image)
       .then((result: any) => {
         if (result){
           this.prescription.imageUrl = result;
-          console.log(this.prescription);
+          this.postPrescription();
         }
+        else {
+          this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
+        }
+      }).catch(err => {
+        this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
       });
+    });
+  }
+
+  postPrescription(){
+    this.realTimeDatabase.addPost(this.prescription)
+    .then(response => {
+      this.interactionService.hide();
+      if (response && response !== false){
+        this.interactionService.createToast('Your prescreption is created succesfully', 'success', 'bottom');
+      }
+      else {
+        this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
+      }
+    }).catch(err => {
+      this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
+    });
   }
 }
