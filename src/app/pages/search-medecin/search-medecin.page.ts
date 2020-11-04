@@ -7,6 +7,7 @@ import { InteractionService } from '../../services/interaction.service';
 import { SearchProduct } from 'src/app/interfaces/searchproduct';
 import * as underscore from 'underscore';
 import { Observable } from 'rxjs';
+import {  RealtimedatabaseService } from '../../services/firebase/realtimedatabase.service';
 @Component({
   selector: 'app-search-medecin',
   templateUrl: './search-medecin.page.html',
@@ -18,10 +19,13 @@ export class SearchMedecinPage implements OnInit {
   searchProduct: any;
   constructor(private authService: AuthService,
               private searchService: SearchMedecinService,
-              private interactionService: InteractionService) { }
+              private interactionService: InteractionService,
+              private realtimedatabase: RealtimedatabaseService) { }
 
   ngOnInit() {
     this.getCurrentUser();
+    this.realtimedatabase.getData();
+    this.realtimedatabase.addPost();
   }
 
 

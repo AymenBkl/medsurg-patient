@@ -21,7 +21,12 @@ import { ProccessHttpErrosService } from './services/proccess-http-erros.service
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { config } from './services/config';
+import { RealtimedatabaseService } from './services/firebase/realtimedatabase.service';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 
 @NgModule({
@@ -31,7 +36,8 @@ import { config } from './services/config';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(config.firebaseConfig),
   ],
   providers: [
     StatusBar,
@@ -44,6 +50,7 @@ import { config } from './services/config';
     SearchMedecinService,
     FileChooser,
     File,
+    RealtimedatabaseService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
