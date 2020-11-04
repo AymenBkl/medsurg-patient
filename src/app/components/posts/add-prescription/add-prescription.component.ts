@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController, NavParams } from '@ionic/angular';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-add-prescription',
@@ -7,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPrescriptionComponent implements OnInit {
 
-  constructor() { }
+  currentUser: User;
+  constructor(private navParam: NavParams) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getData();
+  }
 
+  getData(){
+    this.currentUser = this.navParam.get('user');
+  }
 }

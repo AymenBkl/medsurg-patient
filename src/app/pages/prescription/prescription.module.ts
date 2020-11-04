@@ -8,12 +8,14 @@ import { PrescriptionPageRoutingModule } from './prescription-routing.module';
 
 import { PrescriptionPage } from './prescription.page';
 
+import { ShareModule } from '../../components/share/share.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PrescriptionPageRoutingModule
+    PrescriptionPageRoutingModule,
+    ShareModule
   ],
   declarations: [PrescriptionPage]
 })

@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BannerComponent } from '../banner/banner.component';
 
 import { HeaderComponent } from '../header/header.component';
+import { AddPrescriptionComponent } from '../posts/add-prescription/add-prescription.component';
+import { EditPrescriptionComponent } from '../posts/edit-prescription/edit-prescription.component';
 
 
 
@@ -12,10 +14,14 @@ import { HeaderComponent } from '../header/header.component';
   declarations: [
     BannerComponent,
     HeaderComponent,
+    AddPrescriptionComponent,
+    EditPrescriptionComponent
   ],
   exports: [
     BannerComponent,
     HeaderComponent,
+    AddPrescriptionComponent,
+    EditPrescriptionComponent
   ],
   imports: [
     IonicModule,

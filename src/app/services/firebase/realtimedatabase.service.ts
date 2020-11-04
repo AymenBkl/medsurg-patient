@@ -5,20 +5,20 @@ import { AngularFireDatabase , AngularFireList } from '@angular/fire/database';
 })
 export class RealtimedatabaseService {
 
-  studentsRef: AngularFireList<any>;
+  postRef: AngularFireList<any>;
   constructor(private db: AngularFireDatabase) { 
-    this.studentsRef = this.db.list('messages');
+    this.postRef= this.db.list('posts');
   }
 
 
   getData(){
-    return this.db.list('messages').valueChanges().subscribe(data => {
+    return this.db.list('posts').valueChanges().subscribe(data => {
       console.log(data);
     });
   }
 
   addPost() {
-    this.studentsRef.push({
+    this.postRef.push({
       name: "aymenxyzbkl",
       lastname:"xd"
     });

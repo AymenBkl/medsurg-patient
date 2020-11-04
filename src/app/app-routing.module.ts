@@ -38,7 +38,8 @@ const routes: Routes = [
   },
   {
     path: 'prescription',
-    loadChildren: () => import('./pages/prescription/prescription.module').then( m => m.PrescriptionPageModule)
+    loadChildren: () => import('./pages/prescription/prescription.module').then( m => m.PrescriptionPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 
