@@ -8,6 +8,7 @@ import { HeaderComponent } from '../header/header.component';
 import { AddPrescriptionComponent } from '../posts/add-prescription/add-prescription.component';
 import { EditPrescriptionComponent } from '../posts/edit-prescription/edit-prescription.component';
 
+import { PrescriptionsComponent } from '../posts/prescriptions/prescriptions.component';
 
 
 @NgModule({
@@ -15,13 +16,15 @@ import { EditPrescriptionComponent } from '../posts/edit-prescription/edit-presc
     BannerComponent,
     HeaderComponent,
     AddPrescriptionComponent,
-    EditPrescriptionComponent
+    EditPrescriptionComponent,
+    PrescriptionsComponent
   ],
   exports: [
     BannerComponent,
     HeaderComponent,
     AddPrescriptionComponent,
-    EditPrescriptionComponent
+    EditPrescriptionComponent,
+    PrescriptionsComponent
   ],
   imports: [
     IonicModule,

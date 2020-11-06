@@ -1,27 +1,33 @@
-<div class="name" *ngIf="products && type == 'home'">
+<div class="name">
   <ion-title class="title home-title">
     Prescriptions
   </ion-title>
-  <ion-slides class="animate-item" [options]="sliderConfig">
-    <ion-slide *ngFor="let pre of pre" (click)="openEditProduct(product)">
+  <ion-slides class="animate-item" [options]="sliderConfig" *ngIf="prescriptions && prescriptions.length > 0">
+    <ion-slide *ngFor="let prescription of prescriptions" (click)="openEditPrescription(prescription)">
       <!-- For Real Products -->
       <ion-card  class="card no-padding">
-        <img *ngIf="product.imageUrl != ''" [src]="product.imageUrl"  />
-        <img *ngIf="product.imageUrl == ''" src="../../../assets/imgs/capsules.png"  /> 
+        <img *ngIf="prescription && prescription.imageUrl != ''" [src]="prescription.imageUrl"  />
+        <img *ngIf="!prescription || prescription.imageUrl == ''" src="../../../../assets/imgs/medical-prescription.png"  /> 
         
       </ion-card>
       <div class="text-content">
 
-        <h6 class="home">{{product.name}}</h6>
+        <h6 class="home">{{prescription.userFullName}}</h6>
       </div>
       <!-- For Skeleton -->
       
     </ion-slide>
   </ion-slides>
-
+  <div class="name" *ngIf="!prescriptions || prescriptions.length == 0  ">
+    <ion-title class="title">You don't have any prescriptions </ion-title>
+  </div>
+  <div class="spin" *ngIf="!prescriptions" >
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
 </div>
 
-<div class="name" *ngIf="!products && type == 'home'">
-  <ion-title class="title">You don't have any prescriptions </ion-title>
-</div>
+
+
+
+
 

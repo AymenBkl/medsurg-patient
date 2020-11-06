@@ -18,6 +18,11 @@ export class PrescriptionsComponent implements OnInit {
   currentUser: User;
   modalControllers: ModalControllers;
   prescriptions: Prescription[];
+  sliderConfig = {
+    slidesPerView: 2.2,
+    spaceBetween: 0,
+    autoplay: true
+  };
   constructor(private authService: AuthService,
               private modalController: ModalController,
               private realtimedatabase: RealtimedatabaseService,
