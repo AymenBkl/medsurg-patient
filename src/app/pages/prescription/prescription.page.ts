@@ -40,6 +40,10 @@ export class PrescriptionPage implements OnInit {
     this.modalControllers.addPrescription(this.currentUser);
   }
 
+  openEditPrescription(selectedPrescription: Prescription){
+    this.modalControllers.callEditPrescription(this.currentUser, selectedPrescription);
+  }
+
   getPrescription(){
     this.realtimedatabase.getData(this.currentUser._id)
       .subscribe((data: any) => {

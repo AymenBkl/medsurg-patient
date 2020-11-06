@@ -5,7 +5,7 @@
 
   <ion-grid>
     <ion-row *ngIf="currentUser && prescriptions &&  prescriptions.length > 0">
-      <ion-col size="12" size-md="8" offset-md="2" *ngFor="let prescription of prescriptions">
+      <ion-col size="12" size-md="8" offset-md="2" *ngFor="let prescription of prescriptions" (click)="openEditPrescription(prescription)">
         <ion-card class="card">
           <ion-item lines="none" class="profile-holder">
             <ion-avatar class="img">

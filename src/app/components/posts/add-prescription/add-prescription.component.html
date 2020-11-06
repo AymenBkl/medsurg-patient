@@ -28,7 +28,8 @@
         <ion-item line="none" class="prescription-holder">
           <div class="image-upload">
             <label for="file-input">
-              <img src="../../../../assets/imgs/photo.png"/>
+              <img *ngIf="!image || !image.url" src="../../../../assets/imgs/photo.png"/>
+              <img *ngIf="image && image.url" [src]="image.url"/>
             </label>
           
             <input id="file-input" type="file" (change)="selectedImage($event)"/>

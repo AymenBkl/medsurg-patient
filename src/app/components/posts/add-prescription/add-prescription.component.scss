@@ -16,8 +16,10 @@
 .name {
     font-weight: bold;
     font-size: 19px;
-    /* width: 100%; */
+    word-break: break-all;
     margin-left: 40px;
+    width: 100%;
+    white-space: nowrap;
 }
 
 .description {

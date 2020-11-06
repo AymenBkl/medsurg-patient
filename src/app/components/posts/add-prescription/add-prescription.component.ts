@@ -13,7 +13,7 @@ export class AddPrescriptionComponent implements OnInit {
 
   currentUser: User;
   prescription: Prescription;
-  image: any;
+  image: {url: any, file: any};
   constructor(private navParam: NavParams,
               private realTimeDatabase: RealtimedatabaseService,
               private interactionService: InteractionService) { }
@@ -35,7 +35,7 @@ export class AddPrescriptionComponent implements OnInit {
   }
 
   selectedImage(event) {
-    this.image = event.target.files[0];
+    this.preview(event.target.files);
   }
 
   addPresciption(){
@@ -55,7 +55,7 @@ export class AddPrescriptionComponent implements OnInit {
   postImage(){
     this.interactionService.createLoading('Creating your prescription please wait')
     .then(() => {
-      this.realTimeDatabase.uploadFile(this.image)
+      this.realTimeDatabase.uploadFile(this.image.file)
       .then((result: any) => {
         if (result){
           this.prescription.imageUrl = result;
@@ -83,5 +83,21 @@ export class AddPrescriptionComponent implements OnInit {
     }).catch(err => {
       this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
     });
+  }
+
+  preview(files) {
+    if (files.length === 0){
+        return;
+    }
+    const mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.interactionService.createToast('Only images are supported.', 'danger', 'bottom');
+      return;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = (event) => {
+      this.image = {url: reader.result, file : files[0]};
+    };
   }
 }
