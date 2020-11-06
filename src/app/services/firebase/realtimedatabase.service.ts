@@ -15,7 +15,7 @@ export class RealtimedatabaseService {
 
 
   getData(userId){
-    return this.db.list('posts/' + userId).valueChanges();
+    return this.db.list('posts/' + userId).snapshotChanges();
   }
 
   addPost(prescription: Prescription) {
@@ -28,6 +28,19 @@ export class RealtimedatabaseService {
       .catch(err => {
         reject(err);
       });
+    });
+  }
+
+  updatePost(prescription: Prescription){
+    return new Promise((resolve, reject) => {
+      this.db.object('posts/' + prescription.user_id + '/' + prescription.key).update(prescription)
+        .then(result => {
+          console.log(result);
+          resolve(true);
+        })
+        .catch(err => {
+          reject(err);
+        });
     });
   }
 

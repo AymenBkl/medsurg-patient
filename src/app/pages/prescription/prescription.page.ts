@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { RealtimedatabaseService } from '../../services/firebase/realtimedatabase.service';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { InteractionService } from '../../services/interaction.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-prescription',
@@ -32,7 +33,7 @@ export class PrescriptionPage implements OnInit {
     this.authService.getCurrentUser()
       .subscribe(user => {
         this.currentUser = user;
-        this.getPrescription();
+        this.buildPrescription();
       });
   }
 
@@ -45,15 +46,37 @@ export class PrescriptionPage implements OnInit {
   }
 
   getPrescription(){
-    this.realtimedatabase.getData(this.currentUser._id)
-      .subscribe((data: any) => {
+    return this.realtimedatabase.getData(this.currentUser._id)
+    .pipe(map( action => action
+      .map((a: any) => {
+        const val = a.payload.val();
+        const data = {
+        key: a.payload.key,
+        user_id: val.user_id,
+        userFullName: val.userFullName,
+        description: val.description,
+        date: val.date,
+        imageUrl: val.imageUrl
+        };
+        return  data;
+      })));
+  }
+
+
+
+  buildPrescription(){
+    this.getPrescription().
+    subscribe((data: any) => {
+      if (data.length === 0 ){
+        this.interactionService.createToast('No data found', 'primary', 'bottom');
+      }
+      else {
         this.prescriptions = data;
         this.prescriptions.sort((a, b) => {
-          return (new Date(a.date).getSeconds() - new Date(b.date).getSeconds());
+          return new Date(b.date).getUTCMilliseconds() - new Date(a.date).getUTCMilliseconds();
         });
-        console.log(this.prescriptions);
-      }, err => {
-        this.interactionService.createToast('Something went wrong', 'danger', 'bottom');
-      });
+      }
+    });
   }
+
 }

@@ -32,14 +32,9 @@ export class EditPrescriptionComponent implements OnInit {
     this.preview(event.target.files);
   }
 
-  addPresciption(){
+  editPresciption(){
     if (this.image == null){
-      this.interactionService.alertWithHandler('You didnt pick any image', 'Alert' , 'Pick' , 'Post')
-        .then((result) => {
-          if (result && result === true){
             this.postPrescription();
-          }
-        });
     }
     else {
       this.postImage();
@@ -47,7 +42,7 @@ export class EditPrescriptionComponent implements OnInit {
   }
 
   postImage(){
-    this.interactionService.createLoading('Creating your prescription please wait')
+    this.interactionService.createLoading('Updating your prescription please wait')
     .then(() => {
       this.realTimeDatabase.uploadFile(this.image.file)
       .then((result: any) => {
@@ -65,11 +60,11 @@ export class EditPrescriptionComponent implements OnInit {
   }
 
   postPrescription(){
-    this.realTimeDatabase.addPost(this.prescription)
+    this.realTimeDatabase.updatePost(this.prescription)
     .then(response => {
       this.interactionService.hide();
       if (response && response !== false){
-        this.interactionService.createToast('Your prescreption is created succesfully', 'success', 'bottom');
+        this.interactionService.createToast('Your prescreption is updated succesfully', 'success', 'bottom');
       }
       else {
         this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');

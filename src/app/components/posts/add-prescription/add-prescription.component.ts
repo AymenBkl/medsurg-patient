@@ -30,7 +30,8 @@ export class AddPrescriptionComponent implements OnInit {
       userImage : this.currentUser.imageUrl,
       user_id : this.currentUser._id,
       imageUrl : '',
-      date : new Date().toISOString()
+      date : new Date().toISOString(),
+      key : ''
     };
   }
 
