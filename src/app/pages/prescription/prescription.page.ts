@@ -7,7 +7,7 @@ import { RealtimedatabaseService } from '../../services/firebase/realtimedatabas
 import { Prescription } from 'src/app/interfaces/prescription';
 import { InteractionService } from '../../services/interaction.service';
 import { map } from 'rxjs/operators';
-
+import { Comment } from '../../interfaces/comment';
 @Component({
   selector: 'app-prescription',
   templateUrl: './prescription.page.html',
@@ -45,38 +45,38 @@ export class PrescriptionPage implements OnInit {
     this.modalControllers.callEditPrescription(this.currentUser, selectedPrescription);
   }
 
-  getPrescription(){
-    return this.realtimedatabase.getData(this.currentUser._id)
-    .pipe(map( action => action
-      .map((a: any) => {
-        const val = a.payload.val();
-        const data = {
-        key: a.payload.key,
-        user_id: val.user_id,
-        userFullName: val.userFullName,
-        description: val.description,
-        date: val.date,
-        imageUrl: val.imageUrl
-        };
-        return  data;
-      })));
-  }
+
 
 
 
   buildPrescription(){
-    this.getPrescription().
+    this.realtimedatabase.getData().
     subscribe((data: any) => {
+      const prescriptions = [];
       if (data.length === 0 ){
         this.interactionService.createToast('No data found', 'primary', 'bottom');
       }
       else {
-        this.prescriptions = data;
-        this.prescriptions.sort((a, b) => {
-          return new Date(b.date).getUTCMilliseconds() - new Date(a.date).getUTCMilliseconds();
+        data.map(post => {
+          post.map(presc => {
+            prescriptions.push(presc);
+          });
+        });
+        this.prescriptions = prescriptions.sort((a, b) => {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
         });
       }
     });
+  }
+
+  checkUserExistInComment(prescription: Prescription){
+    const presc = prescription.comments.filter(comment => this.currentUser._id === comment.user_id)[0];
+    if (presc && presc != null){
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
 }

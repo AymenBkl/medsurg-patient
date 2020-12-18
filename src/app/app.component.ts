@@ -47,6 +47,16 @@ export class AppComponent implements OnInit {
       auth : true,
     }
   ];
+
+  public appSupport = [
+    {
+      title: 'Contact Admin',
+      url: 'messages',
+      icon: 'chatbubble',
+      auth : true
+    },
+
+  ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(

@@ -40,6 +40,10 @@ const routes: Routes = [
     path: 'prescription',
     loadChildren: () => import('./pages/prescription/prescription.module').then( m => m.PrescriptionPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'messages',
+    loadChildren: () => import('./pages/messages/messages.module').then( m => m.MessagesPageModule)
   }
 ];
 

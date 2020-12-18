@@ -28,6 +28,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
+import { MessageService } from './services/messages/messages.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -54,6 +55,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     FileChooser,
     File,
     RealtimedatabaseService,
+    MessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

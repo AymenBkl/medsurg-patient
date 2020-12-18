@@ -10,6 +10,8 @@ import { EditPrescriptionComponent } from '../posts/edit-prescription/edit-presc
 
 import { PrescriptionsComponent } from '../posts/prescriptions/prescriptions.component';
 
+import { GetallmessagesComponent } from '../messages/getallmessages/getallmessages.component';
+import { SendmessageComponent } from '../messages/sendmessage/sendmessage.component';
 
 @NgModule({
   declarations: [
@@ -17,14 +19,18 @@ import { PrescriptionsComponent } from '../posts/prescriptions/prescriptions.com
     HeaderComponent,
     AddPrescriptionComponent,
     EditPrescriptionComponent,
-    PrescriptionsComponent
+    PrescriptionsComponent,
+    SendmessageComponent,
+    GetallmessagesComponent
   ],
   exports: [
     BannerComponent,
     HeaderComponent,
     AddPrescriptionComponent,
     EditPrescriptionComponent,
-    PrescriptionsComponent
+    PrescriptionsComponent,
+    SendmessageComponent,
+    GetallmessagesComponent
   ],
   imports: [
     IonicModule,

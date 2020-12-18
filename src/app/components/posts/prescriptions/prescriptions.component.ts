@@ -50,35 +50,25 @@ export class PrescriptionsComponent implements OnInit {
     this.modalControllers.callEditPrescription(this.currentUser, selectedPrescription);
   }
 
-  getPrescription(){
-    return this.realtimedatabase.getData(this.currentUser._id)
-    .pipe(map( action => action
-      .map((a: any) => {
-        const val = a.payload.val();
-        const data = {
-        key: a.payload.key,
-        user_id: val.user_id,
-        userFullName: val.userFullName,
-        description: val.description,
-        date: val.date,
-        imageUrl: val.imageUrl
-        };
-        return  data;
-      })));
-  }
 
 
 
   buildPrescription(){
-    this.getPrescription().
+    this.prescriptions = [];
+    this.realtimedatabase.getData().
     subscribe((data: any) => {
       if (data.length === 0 ){
         this.interactionService.createToast('No data found', 'primary', 'bottom');
       }
       else {
-        this.prescriptions = data;
+        data.map(post => {
+          post.map(presc => {
+            this.prescriptions.push(presc);
+          });
+        });
+        console.log(this.prescriptions);
         this.prescriptions.sort((a, b) => {
-          return new Date(b.date).getUTCMilliseconds() - new Date(a.date).getUTCMilliseconds();
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
         });
       }
     });

@@ -1,3 +1,5 @@
+import { Comment } from './comment';
+
 export interface Prescription {
     key: string;
     user_id: string;
@@ -6,4 +8,5 @@ export interface Prescription {
     description: string;
     imageUrl: string;
     date: string;
+    comments: Comment[];
 }

@@ -1,5 +1,5 @@
 .card {
-    min-height: 400px;
+    height: 200px;
     /* width: 100%; */
     border-radius: 22px;
 }
@@ -68,40 +68,11 @@
     transform: translate(-50%, -50%);
   }
 
-  .not-found{
-    position: fixed;
-    top: 50%;
-    text-align: center;
-    left: 50%;
-    width: 100%;
-    color: black;
-    transform: translate(-50%, -50%);
+  .image-upload>input {
+    display: none;
   }
 
 
-  .comment-holder {
-    text-align: left;
-    width: 100%;
-    display: inline;
-
+ion-fab {
+    color :#2B91BF;
 }
-
-.comment-holder h1 {
-    text-align: center;
-    color: gray;
-}
-
-.comment-holder .img {
-    
-    height: 50px;
-    width: 50px;
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  .add-comment {
-    display: inline-block;
-    width: 70%;
-    vertical-align: middle;
-    margin-left: 15px;
-  }
