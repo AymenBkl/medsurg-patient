@@ -53,11 +53,7 @@
 
 
                 </div>
-                <div class="address">
-                  <ion-label class="label">
-                    <ion-icon class="icon"  name="location-outline"></ion-icon> : {{product.pharmacy.address != null ? product.pharmacy.address : "Address"}}
-                  </ion-label>
-                </div>
+                
                 <div class="address">
                   <ion-label class="label">
                     <ion-icon class="icon"  name="person-circle-outline"></ion-icon> : {{product.pharmacy.firstname != null ? product.pharmacy.firstname : "Name"}}
@@ -81,6 +77,9 @@
                     <ion-label class="inner-item">
                       <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{product.totalPrice}}
                     </ion-label>
+                  </div>
+                  <div class="view">
+                    <ion-label>View Detail</ion-label>
                   </div>
             </div>
             </div>

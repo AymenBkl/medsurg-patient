@@ -1,3 +1,71 @@
-<p>
-  searsh-medecin-detail works!
-</p>
+<app-header [page]="'Medecins Detail'" [type]="'modal'"></app-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-title class="title-pharmacy">Pharmacy Details</ion-title>
+        <ion-item class="profile-holder">
+          <ion-avatar class="img">
+            <img *ngIf="!searchProduct.pharmacy || searchProduct.pharmacy.imageUrl == ''" src="../../../assets/imgs/pharmacy.png">
+            <img *ngIf="searchProduct.pharmacy && searchProduct.pharmacy.imageUrl != ''" [src]="searchProduct.pharmacy.imageUrl">
+          </ion-avatar>
+          <div class="header">
+          <ion-text class="name">
+            {{searchProduct.pharmacy.firstname}} {{searchProduct.pharmacy.lastname}}
+          </ion-text>
+        </div>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-title class="title-pharmacy">Medecins</ion-title>
+      <ion-col size="12" *ngFor="let product of searchProduct.pharmacy.products">
+      <div lines="none" class="product-holder" >
+        <ion-avatar class="product-img">
+          <img *ngIf="!product.imageUrl || product.imageUrl == ''" src="../../../assets/imgs/capsules.svg">
+          <img *ngIf="product.imageUrl && product.imageUrl != ''" [src]="product.imageUrl">
+        </ion-avatar>
+        <div class="holder">
+        <ion-title class="product-title">
+          {{product.mainProduct.name}}
+        </ion-title>
+        <ion-text class="product-detail">
+          CN : {{product.mainProduct.company_name}} 
+        </ion-text>
+        <ion-text class="product-detail">
+          Description : {{product.mainProduct.description}} 
+        </ion-text>
+        <ion-text class="product-detail">
+          IGST : {{product.mainProduct.igst}} 
+        </ion-text>
+        <ion-text class="product-detail">
+          CGST : {{product.mainProduct.cgst}} 
+        </ion-text>
+        <ion-text class="product-detail">
+          SGST : {{product.mainProduct.sgst}} 
+        </ion-text>
+        <ion-text class="product-detail">
+          PACKING : {{product.mainProduct.packing}} 
+        </ion-text>
+      </div>
+    </div>
+    </ion-col>
+    </ion-row>
+
+    <ion-row class="bottom-row">
+      <ion-col size="8" >
+        <ion-button shape="round" size="default" color="success"  expand="full"  >
+          <ion-text>CREATE ORDER</ion-text>
+        </ion-button>
+      </ion-col>
+      <ion-col size="4" >
+        <ion-button shape="round" size="default" color="light"  expand="full" >
+          <ion-icon name="document"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+</ion-content>
+

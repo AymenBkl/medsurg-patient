@@ -5,9 +5,9 @@ import { NavController , ModalController } from '@ionic/angular';
 import { SearchMedecinService } from '../../services/search/search-medecin.service';
 import { InteractionService } from '../../services/interaction.service';
 import { SearchProduct } from 'src/app/interfaces/searchproduct';
-import * as underscore from 'underscore';
 import { Observable } from 'rxjs';
 import {  RealtimedatabaseService } from '../../services/firebase/realtimedatabase.service';
+import { ModalControllerSearch } from '../../classes/modalController.searsh';
 @Component({
   selector: 'app-search-medecin',
   templateUrl: './search-medecin.page.html',
@@ -16,11 +16,15 @@ import {  RealtimedatabaseService } from '../../services/firebase/realtimedataba
 export class SearchMedecinPage implements OnInit {
 
   currentUser: User;
-  searchProduct: any;
+  searchProduct: SearchProduct[];
+  modalController: ModalControllerSearch;
   constructor(private authService: AuthService,
               private searchService: SearchMedecinService,
               private interactionService: InteractionService,
-              private realtimedatabase: RealtimedatabaseService) { }
+              private realtimedatabase: RealtimedatabaseService,
+              private modalCntrl: ModalController) {
+                this.modalController = new ModalControllerSearch(modalCntrl);
+               }
 
   ngOnInit() {
     this.getCurrentUser();
@@ -62,7 +66,8 @@ export class SearchMedecinPage implements OnInit {
       });
   }
 
-  goPharmacyDetail(product) {
+  goPharmacyDetail(selectedPharmacy: SearchProduct) {
+    this.modalController.callSearchDetail(selectedPharmacy)
 
   }
 
@@ -70,12 +75,12 @@ export class SearchMedecinPage implements OnInit {
     return new Observable((obvserver) => {
       let total = 0;
       // tslint:disable-next-line: forin
-      console.log(JSON.parse(this.searchProduct[0].pharmacy.products));
+      console.log(this.searchProduct[0].pharmacy.products);
       for (var i = 0; i < this.searchProduct.length;i++){
         console.log(i);
-        JSON.parse(this.searchProduct[i].pharmacy.products).forEach(product => {
-          console.log(product);
-          total += product.product.price;
+        
+        this.searchProduct[i].pharmacy.products.map(product => {
+          total += product.price;
 
         });
         this.searchProduct[i].totalPrice = total;
@@ -102,5 +107,7 @@ export class SearchMedecinPage implements OnInit {
       });
 
   }
+
+  
 
 }

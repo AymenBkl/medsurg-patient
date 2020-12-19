@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavParams } from '@ionic/angular';
+import { SearchProduct } from 'src/app/interfaces/searchproduct';
 
 @Component({
   selector: 'app-searsh-medecin-detail',
@@ -7,8 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearshMedecinDetailComponent implements OnInit {
 
-  constructor() { }
+  searchProduct: SearchProduct;
+  constructor(private navParams: NavParams) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getData();
+  }
+
+  getData() {
+    this.searchProduct = this.navParams.get('product');
+    console.log(this.searchProduct);
+  }
 
 }

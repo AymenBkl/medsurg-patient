@@ -8,12 +8,15 @@ import { SearchMedecinPageRoutingModule } from './search-medecin-routing.module'
 
 import { SearchMedecinPage } from './search-medecin.page';
 
+import { ShareModule } from '../../components/share/share.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SearchMedecinPageRoutingModule
+    SearchMedecinPageRoutingModule,
+    ShareModule
   ],
   declarations: [SearchMedecinPage]
 })

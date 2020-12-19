@@ -13,6 +13,7 @@ import { PrescriptionsComponent } from '../posts/prescriptions/prescriptions.com
 import { GetallmessagesComponent } from '../messages/getallmessages/getallmessages.component';
 import { SendmessageComponent } from '../messages/sendmessage/sendmessage.component';
 
+import { SearshMedecinDetailComponent } from '../searsh-medecin-detail/searsh-medecin-detail.component'
 @NgModule({
   declarations: [
     BannerComponent,
@@ -21,7 +22,8 @@ import { SendmessageComponent } from '../messages/sendmessage/sendmessage.compon
     EditPrescriptionComponent,
     PrescriptionsComponent,
     SendmessageComponent,
-    GetallmessagesComponent
+    GetallmessagesComponent,
+    SearshMedecinDetailComponent
   ],
   exports: [
     BannerComponent,
@@ -30,7 +32,8 @@ import { SendmessageComponent } from '../messages/sendmessage/sendmessage.compon
     EditPrescriptionComponent,
     PrescriptionsComponent,
     SendmessageComponent,
-    GetallmessagesComponent
+    GetallmessagesComponent,
+    SearshMedecinDetailComponent
   ],
   imports: [
     IonicModule,
