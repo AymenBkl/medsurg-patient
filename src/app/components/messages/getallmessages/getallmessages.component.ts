@@ -49,7 +49,6 @@ export class GetallmessagesComponent implements OnInit {
           })
           .catch(err => {
             this.interactionService.hide();
-            this.interactionService.hide();
             if (err.status == 404) {
               this.interactionService.createToast('No meesages Found !', 'warrning', 'bottom');
             }

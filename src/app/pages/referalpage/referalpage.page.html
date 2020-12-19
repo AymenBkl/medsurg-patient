@@ -1,0 +1,9 @@
+<app-header [page]="'Referals'" [type]="'page'"></app-header>
+
+
+<ion-content>
+  <app-add-referal *ngIf="currentUser && noRef == true"></app-add-referal>
+  <div class="spin" *ngIf="!currentUser && noRef != undefined">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+</ion-content>

@@ -29,6 +29,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { MessageService } from './services/messages/messages.service';
+import { ReferalService } from './services/crm/referal.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -55,6 +56,7 @@ import { MessageService } from './services/messages/messages.service';
     FileChooser,
     File,
     RealtimedatabaseService,
+    ReferalService,
     MessageService,
     {
       provide: HTTP_INTERCEPTORS,

@@ -41,6 +41,12 @@ export class AppComponent implements OnInit {
       auth : true
     },
     {
+      title: 'Referals',
+      url: 'referal',
+      icon: 'link',
+      auth : true
+    },
+    {
       title: 'Login',
       url: 'login',
       icon: 'log-in',

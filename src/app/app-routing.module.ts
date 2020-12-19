@@ -45,6 +45,11 @@ const routes: Routes = [
     path: 'messages',
     loadChildren: () => import('./pages/messages/messages.module').then( m => m.MessagesPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'referal',
+    loadChildren: () => import('./pages/referalpage/referalpage.module').then( m => m.ReferalpagePageModule),
+    canActivate: [AuthGuard]
   }
 ];
 
