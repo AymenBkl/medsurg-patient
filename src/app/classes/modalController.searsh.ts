@@ -10,11 +10,12 @@ export class ModalControllerSearch {
 
     }
 
-    public async callSearchDetail(searchProduct: SearchProduct){
+    public async callSearchDetail(searchProduct: SearchProduct,currentUser: User){
         const modal = await this.modalController.create({
             component : SearshMedecinDetailComponent,
             componentProps : {
-                product: searchProduct
+                product: searchProduct,
+                user: currentUser
             }
             
         });

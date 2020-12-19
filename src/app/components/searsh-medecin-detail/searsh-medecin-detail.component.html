@@ -20,8 +20,8 @@
     </ion-row>
     <ion-row>
       <ion-title class="title-pharmacy">Medecins</ion-title>
-      <ion-col size="12" *ngFor="let product of searchProduct.pharmacy.products">
-      <div lines="none" class="product-holder" >
+      <ion-col size="12" >
+      <div  class="product-holder" *ngFor="let product of searchProduct.pharmacy.products">
         <ion-avatar class="product-img">
           <img *ngIf="!product.imageUrl || product.imageUrl == ''" src="../../../assets/imgs/capsules.svg">
           <img *ngIf="product.imageUrl && product.imageUrl != ''" [src]="product.imageUrl">
@@ -49,6 +49,9 @@
           PACKING : {{product.mainProduct.packing}} 
         </ion-text>
       </div>
+      <div class="product-nav">
+        <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{product.price}}
+      </div>
     </div>
     </ion-col>
     </ion-row>
@@ -60,7 +63,7 @@
         </ion-button>
       </ion-col>
       <ion-col size="4" >
-        <ion-button shape="round" size="default" color="light"  expand="full" >
+        <ion-button shape="round" size="default" color="light"  expand="full" (click)="goAddPrescription()">
           <ion-icon name="document"></ion-icon>
         </ion-button>
       </ion-col>

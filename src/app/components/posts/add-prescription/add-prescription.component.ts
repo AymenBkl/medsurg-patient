@@ -26,7 +26,7 @@ export class AddPrescriptionComponent implements OnInit {
     this.currentUser = this.navParam.get('user');
     this.prescription = {
       userFullName : this.currentUser.firstname + ' ' + this.currentUser.lastname,
-      description : '',
+      description : this.checkProductNames(),
       userImage : this.currentUser.imageUrl,
       user_id : this.currentUser._id,
       imageUrl : '',
@@ -101,5 +101,15 @@ export class AddPrescriptionComponent implements OnInit {
     reader.onload = (event) => {
       this.image = {url: reader.result, file : files[0]};
     };
+  }
+
+  checkProductNames() {
+    let productNames = this.navParam.get('productsNames');
+    if (productNames.length != 0){
+      return productNames.join(',')
+    }
+    else {
+      return ''
+    }
   }
 }

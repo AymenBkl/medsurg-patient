@@ -12,11 +12,12 @@ export class ModalControllers {
 
     }
 
-    public async addPrescription(currentUser: User){
+    public async addPrescription(currentUser: User,productNames: string[]){
         const modal = await this.modalController.create({
             component : AddPrescriptionComponent,
             componentProps : {
-                user : currentUser
+                user : currentUser,
+                productsNames: productNames
             }
         });
         modal.onDidDismiss()

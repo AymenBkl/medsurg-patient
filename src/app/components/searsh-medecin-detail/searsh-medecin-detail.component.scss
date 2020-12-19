@@ -112,6 +112,10 @@ ion-fab {
     width: 100%;
 }
 
+.product-holder:last-child{
+    margin-bottom:80px;
+}
+
 .holder {
     width: 100%;
     display: inline-block;
@@ -130,8 +134,16 @@ ion-fab {
     border-top-right-radius: 25px;
     margin-bottom: 0% !important;
     width: 100%;
+    position: fixed;
     bottom: 0;
     left : 0px;
     min-height: 70px;
     background: #2B91BF !important;
+}
+
+.product-nav {
+        width: 100%;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
 }

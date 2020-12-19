@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { SearchProduct } from 'src/app/interfaces/searchproduct';
+import { User } from 'src/app/interfaces/user';
+import { ModalControllers } from '../../classes/modalController';
 
 @Component({
   selector: 'app-searsh-medecin-detail',
@@ -10,7 +12,12 @@ import { SearchProduct } from 'src/app/interfaces/searchproduct';
 export class SearshMedecinDetailComponent implements OnInit {
 
   searchProduct: SearchProduct;
-  constructor(private navParams: NavParams) { }
+  modalControllers: ModalControllers;
+  currentUser: User;
+  constructor(private navParams: NavParams,
+              private modalCntrl: ModalController) {
+                this.modalControllers = new ModalControllers(modalCntrl);
+              }
 
   ngOnInit() {
     this.getData();
@@ -18,7 +25,24 @@ export class SearshMedecinDetailComponent implements OnInit {
 
   getData() {
     this.searchProduct = this.navParams.get('product');
-    console.log(this.searchProduct);
+    this.currentUser = this.navParams.get('user');
+  }
+
+  goAddPrescription() {
+    this.openAddPrescription();
+  }
+
+  getProductNames() {
+    var productNames : string[] = [];
+    this.searchProduct.pharmacy.products.map(product => {
+      productNames.push(product.mainProduct.name);
+    })
+    return productNames;
+  }
+
+
+  openAddPrescription() {
+    this.modalControllers.addPrescription(this.currentUser,this.getProductNames());
   }
 
 }
