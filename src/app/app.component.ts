@@ -29,6 +29,18 @@ export class AppComponent implements OnInit {
       auth : true
     },
     {
+      title: 'Prescriptions',
+      url: 'prescription',
+      icon: 'document',
+      auth : true
+    },
+    {
+      title: 'Find Medecins',
+      url: 'search-medecin',
+      icon: 'search',
+      auth : true
+    },
+    {
       title: 'Login',
       url: 'login',
       icon: 'log-in',

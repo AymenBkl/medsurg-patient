@@ -70,13 +70,13 @@ export class SearchMedecinPage implements OnInit {
     return new Observable((obvserver) => {
       let total = 0;
       // tslint:disable-next-line: forin
-      console.log(this.searchProduct.length);
+      console.log(JSON.parse(this.searchProduct[0].pharmacy.products));
       for (var i = 0; i < this.searchProduct.length;i++){
         console.log(i);
-        this.searchProduct[i].pharmacy.categories.forEach(category => {
-          category.category.products.product.forEach(prod => {
-              total += prod.price;
-          });
+        JSON.parse(this.searchProduct[i].pharmacy.products).forEach(product => {
+          console.log(product);
+          total += product.product.price;
+
         });
         this.searchProduct[i].totalPrice = total;
         total = 0;
