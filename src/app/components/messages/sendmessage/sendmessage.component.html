@@ -8,7 +8,7 @@
       <ion-card class="card">
         <ion-item lines="none" class="profile-holder">
           <ion-avatar class="img">
-            <img *ngIf="!currentUser || currentUser.imageUrl == ''" src="../../../assets/imgs/pharmacy-user-img.png">
+            <img *ngIf="!currentUser || currentUser.imageUrl == ''" src="../../../assets/imgs/patient.svg">
             <img *ngIf="currentUser && currentUser.imageUrl != ''" [src]="currentUser.imageUrl">
           </ion-avatar>
           <div class="header">

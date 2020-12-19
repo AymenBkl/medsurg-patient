@@ -10,5 +10,6 @@ export const config = {
         messagingSenderId: '594595921902',
         appId: '1:594595921902:web:2dadf268c4c7e81332d8ff',
         measurementId: 'G-JLPRN130H3'
+
     }
 };

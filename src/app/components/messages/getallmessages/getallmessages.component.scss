@@ -4,6 +4,11 @@
     border-radius: 22px;
 }
 
+.card:last-child {
+    margin-bottom: 70px;
+}
+
+
 .profile-holder {
     padding: 20px;
     font-size: 15px;
@@ -75,4 +80,11 @@
 
 ion-fab {
     color :#2B91BF;
+}
+
+.segment-type {
+    position: fixed;
+    bottom: 0px;
+    --background:white;
+    z-index:999;
 }

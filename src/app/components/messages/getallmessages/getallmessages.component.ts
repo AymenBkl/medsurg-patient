@@ -14,6 +14,9 @@ export class GetallmessagesComponent implements OnInit {
 
   @Input('user') currentUser: User;
   messages: Message[] = [];
+  messagesTotalReceived: {sent: Message[],recieved: Message[]} = {sent: [],recieved: []};
+
+  currentSegmentType:string = 'sent';
 
   constructor(private messageService: MessageService,
               private interactionService: InteractionService) { }
@@ -30,13 +33,14 @@ export class GetallmessagesComponent implements OnInit {
         this.messageService.getMessages()
           .then((result: any) => {
             this.interactionService.hide();
-            if (result && result != false){
+            if (result && result != false) {
               this.messages = result;
-              if (this.messages.length != 0){
+              if (this.messages.length != 0) {3
+                this.filterMessages(result);
                 this.interactionService.createToast('Your Messages has been loaded !', 'success', 'bottom');
               }
               else {
-                this.interactionService.createToast('You dont have any messages !' , 'warning', 'bottom');
+                this.interactionService.createToast('You dont have any messages !', 'warning', 'bottom');
               }
             }
             else {
@@ -44,6 +48,7 @@ export class GetallmessagesComponent implements OnInit {
             }
           })
           .catch(err => {
+            this.interactionService.hide();
             this.interactionService.hide();
             if (err.status == 404) {
               this.interactionService.createToast('No meesages Found !', 'warrning', 'bottom');
@@ -59,7 +64,27 @@ export class GetallmessagesComponent implements OnInit {
     this.messageService.getMessagesSubject()
       .subscribe(messages => {
         this.messages = messages;
+        this.filterMessages(messages);
       })
+  }
+
+  filterMessages(messages: Message[]) {
+    this.messagesTotalReceived = {sent: [],recieved: []};
+
+    messages.map(message => {
+      if (message.from._id != this.currentUser._id){
+        this.messagesTotalReceived.recieved.push(message);
+      }
+      else {
+        this.messagesTotalReceived.sent.push(message);
+      }
+      
+    });
+    console.log(this.messagesTotalReceived);
+  }
+
+  segmentChanged(event){
+    this.currentSegmentType = event.detail.value;
   }
 
 }

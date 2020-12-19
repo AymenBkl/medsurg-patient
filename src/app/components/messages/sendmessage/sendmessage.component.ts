@@ -28,7 +28,7 @@ export class SendmessageComponent implements OnInit {
     this.message = {
       message: '',
       to : "5fdbc605e73da941505b1b9d",
-      from : this.currentUser._id,
+      from : this.currentUser
     };
   }
 

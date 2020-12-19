@@ -17,7 +17,7 @@ export class PrescriptionPage implements OnInit {
 
   currentUser: User;
   modalControllers: ModalControllers;
-  prescriptions: Prescription[];
+  prescriptions: Prescription[] = [];
   constructor(private authService: AuthService,
               private modalController: ModalController,
               private realtimedatabase: RealtimedatabaseService,
@@ -38,7 +38,7 @@ export class PrescriptionPage implements OnInit {
   }
 
   openAddPrescription() {
-    this.modalControllers.addPrescription(this.currentUser);
+    this.modalControllers.addPrescription(this.currentUser,[]);
   }
 
   openEditPrescription(selectedPrescription: Prescription){
@@ -53,6 +53,7 @@ export class PrescriptionPage implements OnInit {
     this.realtimedatabase.getData().
     subscribe((data: any) => {
       const prescriptions = [];
+      console.log("data");
       if (data.length === 0 ){
         this.interactionService.createToast('No data found', 'primary', 'bottom');
       }

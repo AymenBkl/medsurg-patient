@@ -76,3 +76,41 @@
 ion-fab {
     color :#2B91BF;
 }
+
+.comment-holder {
+    text-align: left;
+    width: 100%;
+    display: inline;
+    padding: 5px;
+    margin-bottom: 5px;
+
+}
+
+.comment-holder h1 {
+    text-align: center;
+    color: gray;
+}
+
+.comment-holder .img {
+    
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .add-comment {
+    display: inline-block;
+    width: 70%;
+    vertical-align: middle;
+    margin-left: 15px;
+  }
+
+
+  .text {
+    color: black;
+    font-weight: lighter;
+    word-wrap: break-word;         
+    overflow-wrap: break-word;     
+    width: 100%;
+  }

@@ -32,8 +32,8 @@
               <h1>Comments</h1>
             </div>
           </ion-item>
-          <ion-item line="none" class="comment-holder">
-            <div class="comment-holder" *ngFor="let comment of prescription.comments">
+          <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments">
+            <div class="comment-holder" >
               <ion-avatar class="img">
                 <img *ngIf="!comment || comment.userImage == '' " src="../../../assets/imgs/pharmacy-user-img.png">
                 <img *ngIf="comment && comment.userImage != ''" [src]="comment.userImage">
@@ -47,7 +47,6 @@
       </ion-col>
     </ion-row>
     <ion-row *ngIf="currentUser && prescriptions && prescriptions.length == 0" >
-      
       <ion-col size="12">
         <ion-text class="not-found"> You didn't post any prescriptions</ion-text>
       </ion-col>

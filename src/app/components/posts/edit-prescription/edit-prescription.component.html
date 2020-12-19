@@ -36,7 +36,24 @@
           </div>          
           
         </ion-item>
+        <ion-item line="none" class="comment-holder">
+          <div class="comment-holder">
+            <h1>Comments</h1>
+          </div>
+        </ion-item>
+        <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments">
+          <div class="comment-holder" >
+            <ion-avatar class="img">
+              <img *ngIf="!comment || comment.userImage == '' " src="../../../assets/imgs/pharmacy-user-img.png">
+              <img *ngIf="comment && comment.userImage != ''" [src]="comment.userImage">
+            </ion-avatar>
+            <ion-text class="text"  class="add-comment">
+              {{comment.comment}}
+            </ion-text>
+          </div>
+        </ion-item>
       </ion-card>
+      
     </ion-col>
   </ion-row>
 </ion-grid>

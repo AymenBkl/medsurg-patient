@@ -43,7 +43,7 @@ export class PrescriptionsComponent implements OnInit {
   }
 
   openAddPrescription() {
-    this.modalControllers.addPrescription(this.currentUser);
+    this.modalControllers.addPrescription(this.currentUser,[]);
   }
 
   openEditPrescription(selectedPrescription: Prescription){
@@ -58,7 +58,6 @@ export class PrescriptionsComponent implements OnInit {
     this.realtimedatabase.getData().
     subscribe((data: any) => {
       if (data.length === 0 ){
-        this.interactionService.createToast('No data found', 'primary', 'bottom');
       }
       else {
         data.map(post => {

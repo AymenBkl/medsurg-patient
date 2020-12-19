@@ -16,7 +16,7 @@
           <input id="files" type="file" style="visibility:hidden;" [(ngModel)]="image" (change)="selectedImage($event)" >
         </div>
         <ion-avatar class="img">
-          <img *ngIf="!currentUser || currentUser.imageUrl == '' " src="../../../assets/imgs/pharmacy-user-img.png">
+          <img *ngIf="!currentUser || currentUser.imageUrl == '' " src="../../../assets/imgs/patient.svg">
           <img *ngIf="currentUser && currentUser.imageUrl != ''" [src]="currentUser.imageUrl">
         </ion-avatar>
       </ion-col>
