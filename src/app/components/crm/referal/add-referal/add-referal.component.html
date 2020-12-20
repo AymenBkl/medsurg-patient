@@ -1,3 +1,25 @@
-<p>
-  add-referal works!
-</p>
+
+<ion-content>
+  <ion-slides class="center-row"  [options]='slideOpts' *ngIf='user ' #slides class="swiper-no-swiping slides" >
+    <ion-slide class="slide intro-slide" >
+       <ion-label class="intro">Add Your referal Code and earn more money !!!</ion-label>
+       <ion-button class="buttons" (click)='start()'>
+         <ion-label>Start</ion-label>
+       </ion-button>
+    </ion-slide>
+    <ion-slide class="slide">
+        <ion-item lines="none" class="ion-input">
+          <ion-icon name="link-outline"></ion-icon>          
+          <ion-input placeHolder="Referal code" [(ngModel)]="referal.code"></ion-input>
+        </ion-item>
+        
+        <ion-button class="buttons" [disabled]="referal.code == ''" (click)="addReferel()" shape="round" size="default" expand="full">
+          <ion-label *ngIf="!submitted">Add Referal</ion-label>
+          <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
+        </ion-button>
+     </ion-slide>
+  
+  </ion-slides>
+  
+  
+</ion-content>

@@ -4,7 +4,8 @@ import { User } from "./user";
 
 export interface Order {
     patient: User;
-    products: Product;
+    products: Product[];
     pharmacy: User;
     referal: Referal;
+    totalPrice: number;
 }

@@ -3,7 +3,7 @@ import { User } from "./user";
 
 export interface Referal {
     owner: User;
-    orders: Order;
+    orders: Order[];
     code: string;
     commision: number;
 }

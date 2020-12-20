@@ -25,13 +25,14 @@ export class ReferalpagePage implements OnInit {
     this.referalService.getReferal()
       .then((result: any) => {
         console.log(result,this.noRef);
-          if (result && result != false){
+          if (result != false){
             this.noRef = false;
             this.referal = result;
           }
           else {
             this.noRef = true;
           }
+          console.log(this.noRef);
       })
       .catch((err) => {
         console.log(err);
@@ -41,6 +42,16 @@ export class ReferalpagePage implements OnInit {
   getUser() {
     this.currentUser = this.authService.user;
     this.getReferal();
+  }
+
+  countTotalPrice() {
+    let totalPrice = 0;
+    if (this.referal){
+      this.referal.orders.map(order => {
+        totalPrice += order.totalPrice * this.referal.commision;
+      })
+    }
+    return totalPrice;
   }
 
 
