@@ -16,6 +16,10 @@ import { SendmessageComponent } from '../messages/sendmessage/sendmessage.compon
 import { SearshMedecinDetailComponent } from '../searsh-medecin-detail/searsh-medecin-detail.component';
 
 import { AddReferalComponent } from '../crm/referal/add-referal/add-referal.component';
+
+import { AddOrderComponent } from '../crm/orders/add-order/add-order.component';
+import { GetOrdersComponent } from '../crm/orders/get-orders/get-orders.component';
+
 @NgModule({
   declarations: [
     BannerComponent,
@@ -26,7 +30,8 @@ import { AddReferalComponent } from '../crm/referal/add-referal/add-referal.comp
     SendmessageComponent,
     GetallmessagesComponent,
     SearshMedecinDetailComponent,
-    AddReferalComponent
+    AddReferalComponent,
+    GetOrdersComponent
   ],
   exports: [
     BannerComponent,
@@ -37,7 +42,8 @@ import { AddReferalComponent } from '../crm/referal/add-referal/add-referal.comp
     SendmessageComponent,
     GetallmessagesComponent,
     SearshMedecinDetailComponent,
-    AddReferalComponent
+    AddReferalComponent,
+    GetOrdersComponent
   ],
   imports: [
     IonicModule,

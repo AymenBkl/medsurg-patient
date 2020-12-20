@@ -8,4 +8,6 @@ export interface Order {
     pharmacy: User;
     referal: Referal;
     totalPrice: number;
+    status: string;
+    method:string;
 }

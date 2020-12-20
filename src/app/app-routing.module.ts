@@ -50,6 +50,10 @@ const routes: Routes = [
     path: 'referal',
     loadChildren: () => import('./pages/referalpage/referalpage.module').then( m => m.ReferalpagePageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'orders',
+    loadChildren: () => import('./pages/orders/orders.module').then( m => m.OrdersPageModule)
   }
 ];
 

@@ -30,6 +30,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { MessageService } from './services/messages/messages.service';
 import { ReferalService } from './services/crm/referal.service';
+import { OrderService } from './services/crm/order.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -56,6 +57,7 @@ import { ReferalService } from './services/crm/referal.service';
     FileChooser,
     File,
     RealtimedatabaseService,
+    OrderService,
     ReferalService,
     MessageService,
     {
