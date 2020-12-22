@@ -60,6 +60,28 @@ export class ReferalService {
       });
   }
 
+  checkReferal(referalCode: string) {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post<ReferalResponse>(this.referalUrl + 'checkreferal',{code: referalCode})
+        .subscribe(response => {
+          console.log(response);
+          if (response.status === 200) {
+            resolve(response.message);
+          }
+          else {
+            resolve(false);
+          }
+        }, err => {
+          if (err.status == 404) {
+            resolve(false)
+          }
+          else {
+            reject(err);
+          }
+        });
+      });
+  }
+
 
   getReferalSubject() {
     this.referalSubject.next(this.referal);

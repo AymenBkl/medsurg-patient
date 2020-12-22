@@ -1,8 +1,11 @@
 import { NavController, ModalController } from '@ionic/angular';
+import { AddOrderComponent } from '../components/crm/orders/add-order/add-order.component';
 import { AddPrescriptionComponent } from '../components/posts/add-prescription/add-prescription.component';
 import { EditPrescriptionComponent } from '../components/posts/edit-prescription/edit-prescription.component';
+import { Pharmacy } from '../interfaces/pharmacy';
 import { Prescription } from '../interfaces/prescription';
 import { Product } from '../interfaces/product';
+import { SearchProduct } from '../interfaces/searchproduct';
 import { User } from '../interfaces/user';
 
 
@@ -41,4 +44,20 @@ export class ModalControllers {
             });
         return await modal.present();
     }
+
+    public async callAddOrder(currentUser: User,searchProduct: SearchProduct){
+        const modal = await this.modalController.create({
+            component : AddOrderComponent,
+            componentProps : {
+                user : currentUser,
+                searchProd: searchProduct
+            }
+        });
+        modal.onDidDismiss()
+            .then(data => {
+                console.log(data);
+            });
+        return await modal.present();
+    }
+
 }

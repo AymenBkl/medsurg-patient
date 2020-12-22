@@ -10,19 +10,19 @@ import { OrderResponse } from 'src/app/interfaces/orderResponse';
 export class OrderService {
 
   orderUrl = config.baseURL + "crm/orders/";
-  order: Order;
-  orderSubject: Subject<Order> = new Subject<Order>();
+  orders: Order[] = [];
+  orderSubject: Subject<Order[]> = new Subject<Order[]>();
   constructor(private httpClient: HttpClient) { }
 
 
   createOrder(order: Order) {
     return new Promise((resolve, reject) => {
-      this.httpClient.post<OrderResponse>(this.orderUrl + 'createorder', order)
+      this.httpClient.post<OrderResponse>(this.orderUrl + 'createreorder', order)
         .subscribe(response => {
           console.log(response);
           if (response.status === 200) {
-            this.order = response.message;
-            this.orderSubject.next(this.order);
+            this.orders.unshift(response.message);
+            this.orderSubject.next(this.orders);
             resolve(response.message);
           }
           else {
@@ -34,14 +34,14 @@ export class OrderService {
       });
   }
 
-  getorder(){
+  getOrders(){
     return new Promise((resolve, reject) => {
       this.httpClient.get<OrderResponse>(this.orderUrl + 'getorder')
         .subscribe(response => {
           console.log(response);
           if (response.status === 200) {
-            this.order = response.message;
-            this.orderSubject.next(this.order);
+            this.orders = response.message;
+            this.orderSubject.next(this.orders);
             resolve(response.message);
           }
           else {
@@ -59,8 +59,8 @@ export class OrderService {
   }
 
 
-  getorderSubject() {
-    this.orderSubject.next(this.order);
+  getOrderSubject() {
+    this.orderSubject.next(this.orders);
     return this.orderSubject;
   }
 }

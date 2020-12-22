@@ -45,4 +45,9 @@ export class SearshMedecinDetailComponent implements OnInit {
     this.modalControllers.addPrescription(this.currentUser,this.getProductNames());
   }
 
+  addOrder() {
+    this.modalControllers.callAddOrder(this.currentUser,this.searchProduct);
+    this.modalCntrl.dismiss();
+  }
+
 }

@@ -1,3 +1,55 @@
-<p>
-  add-order works!
-</p>
+<app-header [page]="'Create Order'" [type]="'modal'"></app-header>
+
+<ion-content>
+  <ion-slides class="center-row"  [options]='slideOpts'  #slides class="swiper-no-swiping slides"  >
+    <ion-slide class="slide intro-slide" >
+       <ion-label class="intro">Chooce Your payment Method !!!</ion-label>
+       <ion-item (click)="selectMethod('card')">
+        <ion-thumbnail slot="start">
+          <img src="../../../../../assets/imgs/visa.png" />
+        </ion-thumbnail>
+        <ion-label>Pay Now By Card</ion-label>
+        <ion-icon mode="ios" name="arrow-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+    
+    
+      <ion-item (click)="selectMethod('cod')">
+        <ion-thumbnail slot="start">
+          <img src="../../../../../assets/imgs/cod.png" />
+        </ion-thumbnail>
+        <ion-label>Cash on Delivery</ion-label>
+        <ion-icon mode="ios" name="arrow-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+    </ion-slide>
+    <ion-slide class="slide">
+        <ion-item lines="none" class="ion-input">
+          <ion-icon name="link-outline"></ion-icon>          
+          <ion-input placeHolder="Referal code" [(ngModel)]="referalCode"></ion-input>
+        </ion-item>
+        
+        <ion-button class="buttons" [hidden]="referalCode == ''" (click)="checkReferal()" shape="round" size="default" expand="full">
+          <ion-label *ngIf="!submitted">Check Referal</ion-label>
+          <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
+        </ion-button>
+     </ion-slide>
+
+     <ion-slide class="slide">
+      <ion-item lines="none" class="ion-input">
+        <ion-label class="intro">Create Your order now !!!</ion-label>
+      </ion-item>
+      
+      <ion-button class="buttons"  (click)="createOrder()" shape="round" size="default" expand="full">
+        <ion-label *ngIf="!submitted">Create</ion-label>
+        <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
+      </ion-button>
+   </ion-slide>
+  
+  </ion-slides>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="currentUser && currentSlide == 1 && referalCode == '' ">
+    <ion-fab-button (click)="nextSlide()" >
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

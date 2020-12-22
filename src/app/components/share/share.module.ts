@@ -31,7 +31,8 @@ import { GetOrdersComponent } from '../crm/orders/get-orders/get-orders.componen
     GetallmessagesComponent,
     SearshMedecinDetailComponent,
     AddReferalComponent,
-    GetOrdersComponent
+    GetOrdersComponent,
+    AddOrderComponent
   ],
   exports: [
     BannerComponent,
@@ -43,7 +44,8 @@ import { GetOrdersComponent } from '../crm/orders/get-orders/get-orders.componen
     GetallmessagesComponent,
     SearshMedecinDetailComponent,
     AddReferalComponent,
-    GetOrdersComponent
+    GetOrdersComponent,
+    AddOrderComponent
   ],
   imports: [
     IonicModule,

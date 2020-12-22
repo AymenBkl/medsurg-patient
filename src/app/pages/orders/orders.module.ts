@@ -8,12 +8,14 @@ import { OrdersPageRoutingModule } from './orders-routing.module';
 
 import { OrdersPage } from './orders.page';
 
+import { ShareModule } from '../../components/share/share.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OrdersPageRoutingModule
+    OrdersPageRoutingModule,
+    ShareModule
   ],
   declarations: [OrdersPage]
 })

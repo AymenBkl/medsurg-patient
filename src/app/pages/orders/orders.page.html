@@ -1,9 +1,51 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>orders</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [page]="'Orders'" [type]="'page'"></app-header>
+
 
 <ion-content>
 
+    <ion-list class="list-orders">
+        <ion-item lines="none" class="item-order"  *ngFor="let order of orders" (click)="goToOrderDetail(order)">
+          <div class="main-container">
+          <div class="container" style="width: 20%;">
+            <img class="avatar-icon" *ngIf="order.method == 'cod'" src="../../../assets/imgs/cod.png"  width="50px" height="50px">
+            <img class="avatar-icon" *ngIf="order.method == 'card'" src="../../../assets/imgs/visa.png"  width="50px" height="50px">
+  
+        </div>
+          <div class="container">
+            <div class="container" style="text-align: center; width: 100%;">
+              <ion-label style="text-align: center; width: 100%;" class="inner-item" ><h1>{{order.pharmacy.firstname}} {{order.pharmacy.lastname}}</h1></ion-label>
+  
+            </div>
+            <div class="inner-container">
+  
+              <ion-label class="inner-item"><ion-icon class="ion-icon" name="time-outline"></ion-icon> : {{order.createdAt}}</ion-label>
+              <ion-label  class="inner-item"><ion-icon class="ion-icon" name="location-outline" ></ion-icon> :Address</ion-label>
+  
+              <ion-label class="inner-item"><ion-icon class="ion-icon" name="cash-outline"></ion-icon> : €{{order.totalPrice}}</ion-label>
+            </div>
+  
+            <div class="inner-container" >
+              <ion-label class="inner-item"><ion-icon class="ion-icon" name="document-outline"></ion-icon> : {{order._id}}</ion-label>
+              <ion-label class="inner-item"><ion-icon class="ion-icon" name="link-outline"></ion-icon> : {{order.referal && order.referal.code ? order.referal.code : ''}}</ion-label>
+              <ion-label>&nbsp;</ion-label>
+            </div>
+  
+            
+  
+          </div>
+          <hr>
+  
+          <div class="main-container bottom">
+            <div class="inner-container">
+            <ion-label class="inner-item" style="font-weight: bold;"><ion-icon class="ion-icon" name="card-outline"></ion-icon> : {{order.method == "card" ? 'PAID' : 'NOT PAID'}}</ion-label>
+            <ion-label *ngIf="order.status == 'cancel' || order.status=='rejected'" class="inner-item" style="font-weight: bold;color:red">Order Status : {{order.status == 'cancel' ? 'CANCELED' : 'REJECTED'}}</ion-label>
+            <ion-label *ngIf="order.status == 'delivered'"  class="inner-item" style="font-weight: bold;color:green">Order Status : DELIVERED</ion-label>
+            <ion-label *ngIf="order.status == 'created'" class="inner-item" style="font-weight: bold;">Order Status : NEW ORDER</ion-label>
+          <ion-label *ngIf="order.status == 'accepted' || order.status == 'ongoing'" class="inner-item" style="font-weight: bold">Order Status : {{order.status == 'accepted' ? "ACCEPTED" : 'ONGOING' }}</ion-label>
+          </div>
+        </div>
+      </div>
+  
+        </ion-item>
+      </ion-list>
 </ion-content>

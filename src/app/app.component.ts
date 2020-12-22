@@ -47,6 +47,13 @@ export class AppComponent implements OnInit {
       auth : true
     },
     {
+      title: 'Orders',
+      url: 'orders',
+      icon: 'cart',
+      auth : true
+    },
+
+    {
       title: 'Login',
       url: 'login',
       icon: 'log-in',

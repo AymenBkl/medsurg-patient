@@ -3,6 +3,7 @@ import { Referal } from "./referal";
 import { User } from "./user";
 
 export interface Order {
+    _id: string;
     patient: User;
     products: Product[];
     pharmacy: User;
@@ -10,4 +11,5 @@ export interface Order {
     totalPrice: number;
     status: string;
     method:string;
+    createdAt:string;
 }
