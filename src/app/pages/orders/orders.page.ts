@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Order } from 'src/app/interfaces/order';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrderService } from 'src/app/services/crm/order.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { ModalControllersOrders } from 'src/app/classes/modalController.orders';
 
 @Component({
   selector: 'app-orders',
@@ -13,10 +15,15 @@ import { InteractionService } from 'src/app/services/interaction.service';
 export class OrdersPage implements OnInit {
 
   currentUser: User;
-  orders: Order[];
+  totalOrders: {created:Order[],accepted:Order[],canceled:Order[],rejected:Order[],delivered:Order[],all:Order[]} = {created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]};
+  currentSegmentType: string = 'all';
+  modalControllerOrder: ModalControllersOrders; 
   constructor(private ordersService: OrderService,
               private authService: AuthService,
-              private interactionService: InteractionService) { }
+              private interactionService: InteractionService,
+              private modalCntrl: ModalController) { 
+                this.modalControllerOrder = new ModalControllersOrders(this.modalCntrl);
+              }
 
   ngOnInit() {
     this.currentUser = this.authService.user;
@@ -32,9 +39,8 @@ export class OrdersPage implements OnInit {
           .then((result: any) => {
             this.interactionService.hide();
             if (result && result != false) {
-              this.orders = result;
-              console.log(this.orders);
-              if (this.orders.length != 0) {
+              this.filterOrders(result);
+              if (result.length != 0) {
                 this.interactionService.createToast('Your Orders has been loaded !', 'success', 'bottom');
               }
               else {
@@ -59,13 +65,27 @@ export class OrdersPage implements OnInit {
 
   subscribetoOrders() {
     this.ordersService.getOrderSubject()
-      .subscribe(messages => {
-        this.orders = messages;
+      .subscribe(orders => {
+        this.filterOrders(orders);
       })
   }
 
-  goToOrderDetail(order) {
+  goToOrderDetail(order: Order) {
+    this.modalControllerOrder.callEditOrder(this.currentUser,order)
+  }
 
+  filterOrders(orders: Order[]) {
+    this.totalOrders = {created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]}
+
+    orders.map(order => {
+      this.totalOrders[order.status].push(order);
+      this.totalOrders.all.push(order);
+      
+    });
+  }
+
+  segmentChanged(event){
+    this.currentSegmentType = event.detail.value;
   }
 
 

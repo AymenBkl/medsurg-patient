@@ -146,6 +146,18 @@ div.segment_div > *, div.card_div {
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 15px;
 }
+.item-order:first-child{
+    margin-top: 50px;
+}
+
+ion-segment-button {
+    min-width: auto !important;
+    font-size: 10px;
+}
+
+.segments {
+    --background: white;
+}
 
 .item-order-accepted {
     display: inline-block;
@@ -162,6 +174,74 @@ div.segment_div > *, div.card_div {
     background-color: lightgreen;
 
 }
+
+.item-order-created {
+    display: inline-block;
+    width: 98% !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    --ion-background-color: lightblue;
+    background-color: lightblue;
+}
+
+.item-order-accepted .item-native {
+    background-color: lightblue;
+
+}
+
+.item-order-canceled {
+    display: inline-block;
+    width: 98% !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    --ion-background-color:  lightcoral;
+    background-color: lightcoral;
+}
+
+.item-order-canceled .item-native {
+    background-color:  lightcoral;
+
+}
+
+.item-order-rejected {
+    display: inline-block;
+    width: 98% !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    --ion-background-color:  red;
+    background-color: red;
+}
+
+.item-order-rejected .item-native {
+    background-color:  red;
+
+}
+
+
+.item-order-delivered {
+    display: inline-block;
+    width: 98% !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    --ion-background-color:  greenyellow;
+    background-color: greenyellow;
+}
+
+.item-order-delivered .item-native {
+    background-color: greenyellow;
+
+}
+
+
+
 
 
 
@@ -246,6 +326,8 @@ div.segment_div > *, div.card_div {
 
 }
 
+
+
 .ion-icon {
     font-size : 17px;
     vertical-align: middle;
@@ -269,6 +351,10 @@ h1 {
         margin-top: 1%;
         margin-left: -15%
     }
+    ion-segment-button {
+        min-width: auto !important;
+        font-size: 15px;
+    }
   }
   
   /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
@@ -287,5 +373,9 @@ h1 {
         margin-top: 25px;
         margin-left: -50px
     
+    }
+    ion-segment-button {
+        min-width: auto !important;
+        font-size: 6px;
     }
   }

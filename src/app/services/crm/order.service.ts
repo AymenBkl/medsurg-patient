@@ -15,6 +15,24 @@ export class OrderService {
   constructor(private httpClient: HttpClient) { }
 
 
+  editOrder(orderId: string,newStatus: string) {
+    return new Promise((resolve, reject) => {
+      this.httpClient.put<OrderResponse>(this.orderUrl + 'updateorder/' + orderId, {status : newStatus})
+        .subscribe(response => {
+          console.log(response);
+          if (response.status === 200) {
+            console.log(this.orders.indexOf(response.message));
+            this.updateOrder(response.message);
+            resolve(response.message);
+          }
+          else {
+            resolve(false);
+          }
+        }, err => {
+          reject(err);
+        });
+      });
+  }
   createOrder(order: Order) {
     return new Promise((resolve, reject) => {
       this.httpClient.post<OrderResponse>(this.orderUrl + 'createreorder', order)
@@ -62,5 +80,11 @@ export class OrderService {
   getOrderSubject() {
     this.orderSubject.next(this.orders);
     return this.orderSubject;
+  }
+
+  updateOrder(order: Order){
+    const ord = this.orders.find(x => x._id == order._id);
+    this.orders[this.orders.indexOf(ord)].status = order.status;
+    this.orderSubject.next(this.orders);
   }
 }

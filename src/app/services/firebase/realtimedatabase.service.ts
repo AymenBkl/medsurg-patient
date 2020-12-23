@@ -15,8 +15,8 @@ export class RealtimedatabaseService {
               private storage: AngularFireStorage) { }
 
 
-  getData() {
-    return this.db.list('posts').snapshotChanges()
+  getData(userId) {
+    return this.db.list('posts/' + userId).snapshotChanges()
       .pipe(map(action => action
         .map(a => Object.keys(a.payload.val())
           .map(posts => {

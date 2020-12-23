@@ -55,7 +55,7 @@ export class PrescriptionsComponent implements OnInit {
 
   buildPrescription(){
     this.prescriptions = [];
-    this.realtimedatabase.getData().
+    this.realtimedatabase.getData(this.currentUser._id).
     subscribe((data: any) => {
       if (data.length === 0 ){
       }

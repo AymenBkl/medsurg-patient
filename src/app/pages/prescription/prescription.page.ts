@@ -50,7 +50,7 @@ export class PrescriptionPage implements OnInit {
 
 
   buildPrescription(){
-    this.realtimedatabase.getData().
+    this.realtimedatabase.getData(this.currentUser._id).
     subscribe((data: any) => {
       const prescriptions = [];
       console.log("data");
