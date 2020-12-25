@@ -1,0 +1,55 @@
+
+<ion-content>
+  <ion-grid *ngIf="products && products.length != 0">
+    <ion-row>
+      <ion-title class="title-pharmacy">Medecins Found </ion-title>
+      <ion-col size="12" >
+      <div  class="product-holder" *ngFor="let product of products;let i = index" (click)="selectProduct(i)" [class.selected]='selectedProduct == i'>
+        <ion-avatar class="product-img">
+          <img *ngIf="!product.imageUrl || product.imageUrl == ''" src="../../../assets/imgs/capsules.svg">
+          <img *ngIf="product.imageUrl && product.imageUrl != ''" [src]="product.imageUrl">
+        </ion-avatar>
+        <div class="holder">
+        <ion-title class="product-title">
+          {{product.name}}
+        </ion-title>
+        <ion-text class="product-detail">
+          CN : {{product.company_name}} 
+        </ion-text>
+        <ion-text class="product-detail">
+          Description : {{product.description}} 
+        </ion-text>
+        <ion-text class="product-detail">
+          IGST : {{product.igst}} 
+        </ion-text>
+        <ion-text class="product-detail">
+          CGST : {{product.cgst}} 
+        </ion-text>
+        <ion-text class="product-detail">
+          SGST : {{product.sgst}} 
+        </ion-text>
+        <ion-text class="product-detail">
+          PACKING : {{product.packing}} 
+        </ion-text>
+      </div>
+    </div>
+    </ion-col>
+    </ion-row>
+
+    
+  </ion-grid>
+  <ion-row class="bottom-row" >
+    <ion-col size="8" >
+      <ion-button shape="round" size="default" color="success"  expand="full" (click)="addToCart()" *ngIf="selectedProduct != null">
+        <ion-icon name="cart-outline"></ion-icon>
+        <ion-text>ADD TO CART</ion-text>
+      </ion-button>
+    </ion-col>
+    <ion-col size="4" >
+      <ion-button shape="round" size="default" color="light"  expand="full" *ngIf="cartProducts && cartProducts.length != 0 ">
+        <ion-text>VIEW CART</ion-text>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
+

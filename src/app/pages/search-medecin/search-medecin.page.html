@@ -18,15 +18,15 @@
   <ion-toolbar class="toolbar">
   </ion-toolbar>
   <ion-searchbar class="search_bar-xyz" cancelButtonText="Custom Cancel" showCancelButton="focus" animated
-    autocorrect="off" inputmode="search" (keyup.enter)="onInput(searchbar.value)" placeholder="Medecin1,Medecin2,Med.."
+    autocorrect="off" inputmode="search" (keyup.enter)="onInput(searchbar.value)" placeholder="Medecin1"
     #searchbar>
 
   </ion-searchbar>
 </ion-header>
 
 <ion-content>
-
-  <ion-grid>
+  <app-lsit *ngIf="currentUrl == 'findproduct' || currentUrl == undefined" [product]='products'></app-lsit>
+  <ion-grid *ngIf="currentUrl == 'buy' ">
     <ion-row>
       <ion-col size="12">
       <ion-list class="list-orders">

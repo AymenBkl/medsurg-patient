@@ -20,6 +20,9 @@ import { AddReferalComponent } from '../crm/referal/add-referal/add-referal.comp
 import { AddOrderComponent } from '../crm/orders/add-order/add-order.component';
 
 import {OrderDetailComponent} from '../crm/orders/order-detail/order-detail.component';
+
+import { LsitComponent } from '../crm/cart/lsit/lsit.component';
+import { CartComponent } from '../crm/cart/cart.component';
 @NgModule({
   declarations: [
     BannerComponent,
@@ -32,7 +35,9 @@ import {OrderDetailComponent} from '../crm/orders/order-detail/order-detail.comp
     SearshMedecinDetailComponent,
     AddReferalComponent,
     AddOrderComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    CartComponent,
+    LsitComponent
   ],
   exports: [
     BannerComponent,
@@ -45,7 +50,9 @@ import {OrderDetailComponent} from '../crm/orders/order-detail/order-detail.comp
     SearshMedecinDetailComponent,
     AddReferalComponent,
     AddOrderComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    CartComponent,
+    LsitComponent
   ],
   imports: [
     IonicModule,

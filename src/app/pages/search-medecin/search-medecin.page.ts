@@ -8,6 +8,13 @@ import { SearchProduct } from 'src/app/interfaces/searchproduct';
 import { Observable } from 'rxjs';
 import {  RealtimedatabaseService } from '../../services/firebase/realtimedatabase.service';
 import { ModalControllerSearch } from '../../classes/modalController.searsh';
+import { Product } from 'src/app/interfaces/product';
+import { ActivatedRoute, NavigationEnd, ParamMap, Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { MainProduct } from 'src/app/interfaces/mainProduct';
+import { StorageService } from 'src/app/services/storage.service';
+
+
 @Component({
   selector: 'app-search-medecin',
   templateUrl: './search-medecin.page.html',
@@ -18,16 +25,22 @@ export class SearchMedecinPage implements OnInit {
   currentUser: User;
   searchProduct: SearchProduct[];
   modalController: ModalControllerSearch;
+  products: MainProduct[] = [];
+  currentUrl: string;
+  cartProducts: MainProduct[];
   constructor(private authService: AuthService,
               private searchService: SearchMedecinService,
               private interactionService: InteractionService,
               private realtimedatabase: RealtimedatabaseService,
-              private modalCntrl: ModalController) {
+              private modalCntrl: ModalController,
+              private router: Router,
+              private storageService: StorageService) {
                 this.modalController = new ModalControllerSearch(modalCntrl);
                }
 
   ngOnInit() {
     this.getCurrentUser();
+    this.getCurrentRoute();
   }
 
 
@@ -39,9 +52,9 @@ export class SearchMedecinPage implements OnInit {
   }
 
   onInput(value){
-      const medecins = {products : value.split(',').map(med => {return ({ name : med });})};
-      console.log(medecins);
-      this.searchProducts(medecins);
+    const medecins = {products : { name : value }};
+    console.log(medecins);
+    this.findProducts(medecins);
   }
 
   searchProducts(medecins) {
@@ -61,6 +74,26 @@ export class SearchMedecinPage implements OnInit {
           .catch(err => {
             this.interactionService.hide();
             console.log(err);
+            this.interactionService.createToast('Something Went Wrong ! Try Again', 'danger', 'bottom');
+          });
+      });
+  }
+
+  findProducts(medecins) {
+    this.interactionService.createLoading('Getting your Result !')
+      .then(() => {
+        this.searchService.findProduct(medecins)
+          .then((products: SearchProduct | any) => {
+            this.interactionService.hide();
+            if (products && products !== false){
+              this.products = products
+            }
+            else {
+              this.interactionService.createToast('Not Found', 'danger', 'bottom');
+            }
+          })
+          .catch(err => {
+            this.interactionService.hide();            
             this.interactionService.createToast('Something Went Wrong ! Try Again', 'danger', 'bottom');
           });
       });
@@ -108,6 +141,16 @@ export class SearchMedecinPage implements OnInit {
 
   }
 
-  
 
+  getCurrentRoute(){
+    this.router.events.subscribe((val) => {
+      // see also 
+      if (val instanceof NavigationEnd) {
+        this.currentUrl = val.url.split('/')[3];
+      }
+  });
+  }
+
+  
+  
 }
