@@ -53,15 +53,12 @@ export class PrescriptionPage implements OnInit {
     this.realtimedatabase.getData(this.currentUser._id).
     subscribe((data: any) => {
       const prescriptions = [];
-      console.log("data");
       if (data.length === 0 ){
         this.interactionService.createToast('No data found', 'primary', 'bottom');
       }
       else {
-        data.map(post => {
-          post.map(presc => {
-            prescriptions.push(presc);
-          });
+        data.map(presc => {
+          prescriptions.push(presc);
         });
         this.prescriptions = prescriptions.sort((a, b) => {
           return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -70,14 +67,5 @@ export class PrescriptionPage implements OnInit {
     });
   }
 
-  checkUserExistInComment(prescription: Prescription){
-    const presc = prescription.comments.filter(comment => this.currentUser._id === comment.user_id)[0];
-    if (presc && presc != null){
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
 
 }

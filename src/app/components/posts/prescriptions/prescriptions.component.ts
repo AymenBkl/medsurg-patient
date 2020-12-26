@@ -24,11 +24,11 @@ export class PrescriptionsComponent implements OnInit {
     autoplay: true
   };
   constructor(private authService: AuthService,
-              private modalController: ModalController,
-              private realtimedatabase: RealtimedatabaseService,
-              private interactionService: InteractionService) {
-                this.modalControllers = new ModalControllers(modalController);
-              }
+    private modalController: ModalController,
+    private realtimedatabase: RealtimedatabaseService,
+    private interactionService: InteractionService) {
+    this.modalControllers = new ModalControllers(modalController);
+  }
 
   ngOnInit() {
     this.getCurrentUser();
@@ -41,12 +41,11 @@ export class PrescriptionsComponent implements OnInit {
         this.buildPrescription();
       });
   }
-
   openAddPrescription() {
-    this.modalControllers.addPrescription(this.currentUser,[]);
+    this.modalControllers.addPrescription(this.currentUser, []);
   }
 
-  openEditPrescription(selectedPrescription: Prescription){
+  openEditPrescription(selectedPrescription: Prescription) {
     this.modalControllers.callEditPrescription(this.currentUser, selectedPrescription);
   }
 
@@ -54,19 +53,17 @@ export class PrescriptionsComponent implements OnInit {
 
 
   buildPrescription(){
-    this.prescriptions = [];
     this.realtimedatabase.getData(this.currentUser._id).
     subscribe((data: any) => {
+      const prescriptions = [];
       if (data.length === 0 ){
+        this.interactionService.createToast('No data found', 'primary', 'bottom');
       }
       else {
-        data.map(post => {
-          post.map(presc => {
-            this.prescriptions.push(presc);
-          });
+        data.map(presc => {
+          prescriptions.push(presc);
         });
-        console.log(this.prescriptions);
-        this.prescriptions.sort((a, b) => {
+        this.prescriptions = prescriptions.sort((a, b) => {
           return new Date(b.date).getTime() - new Date(a.date).getTime();
         });
       }

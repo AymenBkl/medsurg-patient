@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
 import * as firebase from 'firebase';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { User } from 'src/app/interfaces/user';
@@ -12,34 +13,34 @@ export class RealtimedatabaseService {
 
   postRef: AngularFireList<any>;
   constructor(private db: AngularFireDatabase,
-              private storage: AngularFireStorage) { }
+    private storage: AngularFireStorage) { }
 
 
   getData(userId) {
     return this.db.list('posts/' + userId).snapshotChanges()
       .pipe(map(action => action
-        .map(a => Object.keys(a.payload.val())
-          .map(posts => {
-            const val = a.payload.val()[posts];
-            const data = {
-              key: posts,
-              user_id: val.user_id,
-              userFullName: val.userFullName,
-              description: val.description,
-              date: val.date,
-              userImage: val.userImage,
-              imageUrl: val.imageUrl,
-              comments: []
-            };
-            this.getComment(posts)
-              .then((comments: any) => {
-                console.log(comments);
-                data.comments = comments;
-              });
-            return data;
-          })
-        )));
+        .map((a: any) => {
+          const val = a.payload.val();
+          const data = {
+            key: a.payload.key,
+            user_id: val.user_id,
+            userFullName: val.userFullName,
+            description: val.description,
+            date: val.date,
+            userImage: val.userImage,
+            imageUrl: val.imageUrl,
+            comments: []
+          };
+          this.getComment(a.payload.key)
+            .subscribe((comments: any) => {
+              console.log(comments);
+              data.comments = comments;
+            });
+          return data;
+        })
+      ));
   }
+
 
   addPost(prescription: Prescription) {
     return new Promise((resolve, reject) => {
@@ -83,11 +84,11 @@ export class RealtimedatabaseService {
   }
 
   getComment(key) {
-    return new Promise((resolve, reject) => {
+    return new Observable((obvserver) => {
       this.db.list('comments/' + key)
         .valueChanges().subscribe(
           data => {
-            resolve(data);
+            obvserver.next(data);
           });
     });
   }
