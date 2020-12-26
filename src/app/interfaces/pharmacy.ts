@@ -1,5 +1,6 @@
-import { Product } from './product';
-import { User } from './user';
+
+import { OrderProduct } from './orderCart';
+
 
 export interface Pharmacy {
    _id: string;
@@ -12,5 +13,5 @@ export interface Pharmacy {
     imageUrl: string;
     setup: boolean;
     emailVerified: boolean;
-      products: Product[];
+    products: OrderProduct[];
 }

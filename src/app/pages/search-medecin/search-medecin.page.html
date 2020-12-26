@@ -26,8 +26,9 @@
 
 <ion-content>
   <app-lsit *ngIf="currentUrl == 'findproduct' || currentUrl == undefined" [product]='products'></app-lsit>
-  <ion-grid *ngIf="currentUrl == 'buy' ">
-    <ion-row>
+  <app-cart *ngIf="currentUrl == 'cart'"  ></app-cart>
+  <ion-grid *ngIf="currentUrl == 'buy'">
+    <ion-row >
       <ion-col size="12">
       <ion-list class="list-orders">
         <ion-card lines="none" class="card" *ngFor="let product of searchProduct"
@@ -90,5 +91,7 @@
 
     </ion-row>
   </ion-grid>
-
+  <div *ngIf="currentUrl == 'buy' && searchProduct == null">
+    HELLO
+  </div>
 </ion-content>

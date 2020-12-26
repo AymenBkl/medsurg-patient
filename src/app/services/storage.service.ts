@@ -44,13 +44,18 @@ export class StorageService {
     return await JSON.parse(localStorage.getItem('cartProducts'))
   }
 
-  async addToCart(products: CartProduct[],selectedProduct: MainProduct){
-    if (products.length ==0){
-      products = [{mainProduct:selectedProduct,quantity:1}];
-    }
-    else {
-      products.push({mainProduct:selectedProduct,quantity:1});
-    }
+  async addToCart(products: {}){
+    console.log(products);
     await localStorage.setItem('cartProducts',JSON.stringify(products));
+  }
+
+  async quntityModifiedCart(products: {}){
+    await localStorage.setItem('cartProducts',JSON.stringify(products));
+  }
+
+  async removeMedecin(cartProducts: {},selectedProduct: CartProduct){
+    console.log(cartProducts)
+    delete cartProducts[selectedProduct.mainProduct._id];
+    await localStorage.setItem('cartProducts',JSON.stringify(cartProducts));
   }
 }

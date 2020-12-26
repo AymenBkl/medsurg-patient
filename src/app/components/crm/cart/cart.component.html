@@ -1,3 +1,71 @@
-<p>
-  cart works!
-</p>
+<ion-content>
+  <ion-grid>
+    <ion-row *ngIf="cartProducts && cartProducts.length > 0">
+      <ion-title class="title-pharmacy">Your Cart</ion-title>
+      <ion-col size="12" *ngIf="cartProducts && cartProducts.length != 0">
+        <div class="product-holder" *ngFor="let cartProduct of cartProducts;let i = index">
+          <ion-avatar class="product-img">
+            <img *ngIf="!cartProduct || cartProduct.mainProduct.imageUrl == ''" src="../../../assets/imgs/capsules.svg">
+            <img *ngIf="cartProduct.mainProduct.imageUrl && cartProduct.mainProduct.imageUrl != ''"
+              [src]="cartProduct.mainProduct.imageUrl">
+          </ion-avatar>
+          <div class="holder">
+            <ion-title class="product-title">
+              {{cartProduct.mainProduct.name}}
+            </ion-title>
+            <ion-text class="product-detail">
+              CN : {{cartProduct.mainProduct.company_name}}
+            </ion-text>
+            <ion-text class="product-detail">
+              Description : {{cartProduct.mainProduct.description}}
+            </ion-text>
+            <ion-text class="product-detail">
+              IGST : {{cartProduct.mainProduct.igst}}
+            </ion-text>
+            <ion-text class="product-detail">
+              CGST : {{cartProduct.mainProduct.cgst}}
+            </ion-text>
+            <ion-text class="product-detail">
+              SGST : {{cartProduct.mainProduct.sgst}}
+            </ion-text>
+            <ion-text class="product-detail">
+              PACKING : {{cartProduct.mainProduct.packing}}
+            </ion-text>
+          </div>
+          <div class="button-ajust-holder">
+                <ion-button fill="clear" size="small" class="button-cart" (click)="remove(cartProduct)">
+                  <ion-icon name="remove"></ion-icon>
+                </ion-button>
+                <p class="qunitity">{{cartProduct.quantity}}</p>
+                <ion-button fill="clear" size="small" class="button-cart" (click)="add(cartProduct)">
+                  <ion-icon name="add"></ion-icon>
+                </ion-button>
+              </div>
+          <ion-button color="danger" expand="block" (click)="removeMedecin(cartProduct)">
+            <ion-icon name="trash-outline"></ion-icon>    
+            <ion-text>REMOVE</ion-text>      
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="cartProducts && cartProducts.length == 0">
+      <ion-col size="12">
+        <ion-title class="title-pharmacy">Cart Empty</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-row class="bottom-row" *ngIf="cartProducts && cartProducts.length > 0">
+    <ion-col size="8">
+      <ion-button shape="round" size="default" color="success" expand="full" (click)="findPharmacies()" >
+        <ion-icon name="cart-outline"></ion-icon>
+        <ion-text>Purchase Now</ion-text>
+      </ion-button>
+    </ion-col>
+    <ion-col size="4">
+      <ion-button shape="round" size="default" color="light" expand="full">
+        <ion-icon name="document-text-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

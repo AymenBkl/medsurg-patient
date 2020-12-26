@@ -1,5 +1,6 @@
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController, NavParams } from '@ionic/angular';
 import { CartProduct } from 'src/app/interfaces/cartProduct';
 import { MainProduct } from 'src/app/interfaces/mainProduct';
@@ -20,8 +21,8 @@ export class LsitComponent implements OnInit {
   modalControllers: ModalControllers;
   currentUser: User;
   selectedProduct: number;
-  cartProducts: CartProduct[];
-  constructor(private navParams: NavParams,
+  cartProducts: {} = {};
+  constructor(private router: Router,
               private storageService: StorageService) {
               }
 
@@ -29,11 +30,16 @@ export class LsitComponent implements OnInit {
     this.getAllCartProducts();
   }
 
+  ionViewDidEnter() {
+    this.getAllCartProducts();
+  }
+
  
 
   addToCart() {
-    this.storageService.addToCart(this.cartProducts,this.products[this.selectedProduct]);
-    this.cartProducts.push({mainProduct:this.products[this.selectedProduct],quantity:1});
+    this.cartProducts[this.products[this.selectedProduct]._id] = {mainProduct:this.products[this.selectedProduct],quantity:1};
+    this.storageService.addToCart(this.cartProducts);
+    this.selectedProduct = null;
     this.products = [];
   }
 
@@ -41,16 +47,17 @@ export class LsitComponent implements OnInit {
     this.selectedProduct = index;
   }
 
+  goToCart(){
+    this.router.navigate(['/search-medecin/search/cart'])
+  }
+
   getAllCartProducts(){
     this.storageService.getAllCartProduct()
       .then((cartProducts) => {
-        console.log(cartProducts);
-        if (cartProducts || cartProducts == null){
-          this.cartProducts = [];
-        }
-        else {
+        if (cartProducts != null){
           this.cartProducts = cartProducts;
         }
+        console.log(cartProducts);
       });
   }
 

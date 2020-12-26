@@ -37,7 +37,7 @@ import { CartComponent } from '../crm/cart/cart.component';
     AddOrderComponent,
     OrderDetailComponent,
     CartComponent,
-    LsitComponent
+    LsitComponent,
   ],
   exports: [
     BannerComponent,
@@ -52,7 +52,7 @@ import { CartComponent } from '../crm/cart/cart.component';
     AddOrderComponent,
     OrderDetailComponent,
     CartComponent,
-    LsitComponent
+    LsitComponent,
   ],
   imports: [
     IonicModule,
