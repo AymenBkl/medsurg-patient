@@ -36,7 +36,7 @@ export class OrderDetailComponent implements OnInit {
   getProductNames() {
     var productNames : string[] = [];
     this.order.products.map(product => {
-      productNames.push(product.mainProduct.name + '\n');
+      productNames.push(product.product.mainProduct.name + '\n');
     })
     return productNames;
   }
