@@ -38,10 +38,9 @@ export class SearchMedecinPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    console.log("entred");
-    setTimeout(() => {
-      console.log("user",this.searchProduct);
-    },3000)
+    if (this.currentUrl == 'buy' && this.searchProduct == null){
+      this.router.navigate(['/search-medecin/search/findproduct'])
+    }
   }
 
 
@@ -52,11 +51,13 @@ export class SearchMedecinPage implements OnInit {
       });
   }
 
-  onInput(value){
-    this.router.navigate(['/search-medecin/search/findproduct']);
+  goToFindProduct(){
     this.currentUrl = "findproduct";
+    this.router.navigate(['/search-medecin/search/findproduct']);
+  }
+
+  onInput(value){
     const medecins = {products : { name : value }};
-    console.log(medecins);
     this.findProducts(medecins);
   }
 
@@ -86,20 +87,55 @@ export class SearchMedecinPage implements OnInit {
   }
 
 
-  getCurrentRoute(){
+  async getCurrentRoute(){
     this.router.events.subscribe((val) => {
       // see also 
       if (val instanceof NavigationEnd) {
         this.currentUrl = val.url.split('/')[3];
-        if (this.currentUrl.split(';')){
+        if (this.currentUrl && this.currentUrl.split(';')){
           this.currentUrl = this.currentUrl.split(';')[0];
         }
         console.log(this.currentUrl);
       }
   });
-  this.route.paramMap.subscribe(paramMap => {
-    this.searchProduct = JSON.parse(paramMap.get('products'))
+  await this.route.paramMap.subscribe(paramMap => {
+    this.searchProduct = JSON.parse(paramMap.get('products'));
+    this.sortMedecins();
   })
+  }
+
+
+  sortMedecins() {
+    this.calculateTotal()
+      .subscribe((result) => {
+        if (result && result === true){
+          this.searchProduct.sort((a, b) => {
+            return a.totalPrice - b.totalPrice;
+          });
+        }
+      });
+
+  }
+
+  calculateTotal(){
+    return new Observable((obvserver) => {
+      let total = 0;
+      // tslint:disable-next-line: forin
+      console.log(this.searchProduct[0].pharmacy.products);
+      for (var i = 0; i < this.searchProduct.length;i++){
+        this.searchProduct[i].pharmacy.products.map(product => {
+          total += product.product.price * product.quantity;
+
+        });
+        this.searchProduct[i].totalPrice = total;
+        total = 0;
+        if (i === (this.searchProduct.length - 1)){
+          setTimeout(() => {
+            obvserver.next(true);
+          }, 1000);
+        }
+      }
+    });
   }
 
   

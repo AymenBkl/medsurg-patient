@@ -48,6 +48,7 @@ export class AddOrderComponent implements OnInit {
     this.currentSlide = 0;
     this.searchProduct = this.navParams.get('searchProd');
     this.currentUser = this.navParams.get('user');
+    
     this.order = {
       products : this.searchProduct.pharmacy.products,
       totalPrice: this.searchProduct.totalPrice,
@@ -57,6 +58,8 @@ export class AddOrderComponent implements OnInit {
       status: "created",
       referal: this.referalP,
     }
+    console.log(this.order);
+    console.log(this.searchProduct.pharmacy.products)
   }
   
 

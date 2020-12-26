@@ -1,5 +1,5 @@
 import { Component, Input, OnInit,} from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CartProduct } from 'src/app/interfaces/cartProduct';
 import { MainProduct } from 'src/app/interfaces/mainProduct';
@@ -33,12 +33,10 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCartProducts();
+    this.getCurrentRoute();
   }
-  ionViewDidEnter() {
-    this.getAllCartProducts();
-  }
-
   getAllCartProducts(){
+    
     this.storageService.getAllCartProduct()
       .then((cartProducts) => {
         this.cartProducts = Object.values(cartProducts);
@@ -94,7 +92,7 @@ export class CartComponent implements OnInit {
             this.interactionService.hide();
             if (products && products !== false){
               this.searchProduct = products;
-              this.sortMedecins();
+              this.addQuantity();
               this.router.navigate(['/search-medecin/search/buy',{products: JSON.stringify(this.searchProduct)}]);
             }
             else {
@@ -109,38 +107,23 @@ export class CartComponent implements OnInit {
       });
   }
 
-  sortMedecins() {
-    this.calculateTotal()
-      .subscribe((result) => {
-        if (result && result === true){
-          this.searchProduct.sort((a, b) => {
-            return a.totalPrice - b.totalPrice;
-          });
+
+  async addQuantity(){
+      await this.searchProduct.map(searchProd => {
+        searchProd.pharmacy.products.map(prod => {
+          prod.quantity = this.cartProduct[prod.product.mainProduct._id].quantity;
+        })
+      })
+    }
+
+  getCurrentRoute(){
+    this.router.events.subscribe((val) => {
+      // see also 
+      if (val instanceof NavigationEnd) {
+          this.getAllCartProducts();
         }
-      });
-
-  }
-
-  calculateTotal(){
-    return new Observable((obvserver) => {
-      let total = 0;
-      // tslint:disable-next-line: forin
-      console.log(this.searchProduct[0].pharmacy.products);
-      for (var i = 0; i < this.searchProduct.length;i++){
-        this.searchProduct[i].pharmacy.products.map(product => {
-          product.quantity = this.cartProduct[product.product.mainProduct._id].quantity;
-          total += product.product.price * product.quantity;
-
-        });
-        this.searchProduct[i].totalPrice = total;
-        total = 0;
-        if (i === (this.searchProduct.length - 1)){
-          setTimeout(() => {
-            obvserver.next(true);
-          }, 1000);
-        }
-      }
-    });
+      
+  });
   }
 
 }

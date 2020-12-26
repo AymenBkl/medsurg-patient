@@ -1,6 +1,6 @@
 
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { ModalController, NavParams } from '@ionic/angular';
 import { CartProduct } from 'src/app/interfaces/cartProduct';
 import { MainProduct } from 'src/app/interfaces/mainProduct';
@@ -28,11 +28,9 @@ export class LsitComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCartProducts();
+    this.getCurrentRoute();
   }
 
-  ionViewDidEnter() {
-    this.getAllCartProducts();
-  }
 
  
 
@@ -59,6 +57,16 @@ export class LsitComponent implements OnInit {
         }
         console.log(cartProducts);
       });
+  }
+
+  getCurrentRoute(){
+    this.router.events.subscribe((val) => {
+      // see also 
+      if (val instanceof NavigationEnd) {
+          this.getAllCartProducts();
+        }
+      
+  });
   }
 
 }

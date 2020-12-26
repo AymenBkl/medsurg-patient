@@ -27,6 +27,7 @@ export class OrderDetailComponent implements OnInit {
   getData() {
     this.order = this.navParams.get('order');
     this.currentUser = this.navParams.get('user');
+    console.log(this.order);
   }
 
   goAddPrescription() {
