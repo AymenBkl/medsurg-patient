@@ -32,7 +32,7 @@
               <h1>Comments</h1>
             </div>
           </ion-item>
-          <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments;let i = index" >
+          <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments;let i = index" [class.highlited]='comment.status == "accepted"' >
             <div class="comment-holder" >
               <ion-avatar class="img">
                 <img *ngIf="!comment || comment.userImage == '' " src="../../../assets/imgs/pharmacy-user-img.png">

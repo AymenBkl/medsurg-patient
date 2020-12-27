@@ -9,4 +9,5 @@ export interface Prescription {
     imageUrl: string;
     date: string;
     comments: Comment[];
+    status:string;
 }

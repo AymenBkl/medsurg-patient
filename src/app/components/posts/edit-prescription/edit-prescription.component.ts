@@ -100,7 +100,9 @@ export class EditPrescriptionComponent implements OnInit {
   }
 
   selectedComment(index: number){
-    this.commentSelected = index;
+    if (this.prescription.status != 'accepted'){
+      this.commentSelected = index;
+    }
   }
 
   addOrder() {

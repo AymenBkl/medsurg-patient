@@ -53,7 +53,7 @@ export class AddOfferComponent implements OnInit {
       pharmacyId: this.selectedComment.user_id,
       date : new Date().toISOString(),
       key : '',
-      commentId: this.selectedComment.postKey,
+      commentId: this.selectedComment.commentId,
       offer: this.selectedComment.comment,
       method:'cod',
       status:'created',
