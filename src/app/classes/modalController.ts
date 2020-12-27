@@ -7,6 +7,8 @@ import { Prescription } from '../interfaces/prescription';
 import { Product } from '../interfaces/product';
 import { SearchProduct } from '../interfaces/searchproduct';
 import { User } from '../interfaces/user';
+import { Comment } from '../interfaces/comment';
+import { AddOfferComponent } from '../components/crm/offers/add-offer/add-offer.component';
 
 
 export class ModalControllers {
@@ -62,14 +64,14 @@ export class ModalControllers {
     }
 
 
-    public async callAddOrderPrescription(currentUser: User,prescriptions: Prescription,pharmacyId:string){
+    public async callAddOrderPrescription(currentUser: User,prescriptions: Prescription,pharmacyComment:Comment){
         const modal = await this.modalController.create({
-            component : AddOrderComponent,
+            component : AddOfferComponent,
             componentProps : {
                 type:'prescription',
                 user : currentUser,
                 prescription: prescriptions,
-                idPharmacy: pharmacyId
+                comment: pharmacyComment
             }
         });
         modal.onDidDismiss()

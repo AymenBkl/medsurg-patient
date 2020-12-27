@@ -23,6 +23,8 @@ import {OrderDetailComponent} from '../crm/orders/order-detail/order-detail.comp
 
 import { LsitComponent } from '../crm/cart/lsit/lsit.component';
 import { CartComponent } from '../crm/cart/cart.component';
+
+import { AddOfferComponent } from '../crm/offers/add-offer/add-offer.component';
 @NgModule({
   declarations: [
     BannerComponent,
@@ -38,6 +40,7 @@ import { CartComponent } from '../crm/cart/cart.component';
     OrderDetailComponent,
     CartComponent,
     LsitComponent,
+    AddOfferComponent
   ],
   exports: [
     BannerComponent,
@@ -53,6 +56,7 @@ import { CartComponent } from '../crm/cart/cart.component';
     OrderDetailComponent,
     CartComponent,
     LsitComponent,
+    AddOfferComponent
   ],
   imports: [
     IonicModule,

@@ -4,6 +4,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Offer } from 'src/app/interfaces/offer';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { User } from 'src/app/interfaces/user';
 @Injectable({
@@ -80,6 +81,19 @@ export class RealtimedatabaseService {
           resolve(url);
         });
       });
+    });
+  }
+
+  createOffer(offer: Offer, currentUser:User){
+    return new Promise((resolve, reject) => {
+      this.postRef = this.db.list('offers/' + currentUser._id);
+      this.postRef.push(offer)
+        .then(data => {
+          resolve(true);
+        })
+        .catch(err => {
+          reject(err);
+        });
     });
   }
 

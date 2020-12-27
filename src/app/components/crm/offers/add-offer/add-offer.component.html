@@ -1,0 +1,38 @@
+<app-header [page]="'Create Offer'" [type]="'modal'"></app-header>
+
+<ion-content>
+  <ion-slides class="center-row"  [options]='slideOpts'  #slides class="swiper-no-swiping slides"  >
+    <ion-slide class="slide intro-slide" >
+       <ion-label class="intro">Chooce Your payment Method !!!</ion-label>
+       <ion-item (click)="selectMethod('card')">
+        <ion-thumbnail slot="start">
+          <img src="../../../../../assets/imgs/visa.png" />
+        </ion-thumbnail>
+        <ion-label>Pay Now By Card</ion-label>
+        <ion-icon mode="ios" name="arrow-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+    
+    
+      <ion-item (click)="selectMethod('cod')">
+        <ion-thumbnail slot="start">
+          <img src="../../../../../assets/imgs/cod.png" />
+        </ion-thumbnail>
+        <ion-label>Cash on Delivery</ion-label>
+        <ion-icon mode="ios" name="arrow-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+    </ion-slide>
+     <ion-slide class="slide">
+      <ion-item lines="none" class="ion-input">
+        <ion-label class="intro">Create Your Offer Now !!!</ion-label>
+      </ion-item>
+      
+      <ion-button class="buttons"  (click)="createOffer()" shape="round" size="default" expand="full">
+        <ion-label *ngIf="!submitted">Create</ion-label>
+        <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
+      </ion-button>
+   </ion-slide>
+  
+  </ion-slides>
+
+
+</ion-content>

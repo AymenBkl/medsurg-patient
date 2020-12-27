@@ -104,7 +104,7 @@ export class EditPrescriptionComponent implements OnInit {
   }
 
   addOrder() {
-    this.modalControllers.callAddOrderPrescription(this.currentUser, this.prescription,this.prescription.comments[this.commentSelected].user_id);
+    this.modalControllers.callAddOrderPrescription(this.currentUser, this.prescription,this.prescription.comments[this.commentSelected]);
     this.modalCntrl.dismiss();
   }
 
