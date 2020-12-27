@@ -38,7 +38,6 @@ export class RealtimedatabaseService {
           };
           this.getComment(a.payload.key)
             .subscribe((comments: any) => {
-              console.log(comments);
               data.comments = comments;
             });
           return data;
@@ -150,5 +149,31 @@ export class RealtimedatabaseService {
           }))).subscribe(data => {
               obvserver.next(data);
           })})
+}
+
+getOffers(userId:string){
+  return this.db.list('offers/' + userId )
+  .snapshotChanges()
+  .pipe(map(action => action
+    .map((a: any) => {
+      const val = a.payload.val();
+      let offer = {
+        commentId: val.commentId,
+        date: val.date,
+        key: a.key,
+        offer: val.offer,
+        method: val.method,
+        patient_id: val.patient_id,
+        pharmacyId: val.pharmacyId,
+        status:val.status,
+        prescriptionId:val.prescriptionId,
+        prescription: null
+      }
+      this.db.object('posts/' +  userId + '/' + val.prescriptionId).valueChanges()
+        .subscribe(prescription => {
+          offer.prescription = prescription;
+        })            
+      return offer;
+    })));
 }
 }

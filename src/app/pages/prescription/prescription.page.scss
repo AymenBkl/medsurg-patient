@@ -4,6 +4,10 @@
     border-radius: 22px;
 }
 
+.card:first-child {
+    margin-top: 75px;
+}
+
 .profile-holder {
     padding: 20px;
     font-size: 15px;
@@ -103,6 +107,12 @@
 .comment-holder.highlited {
     --background: #2dd36f;
 }
+
+.segments {
+    --background: white;
+    z-index: 9999;
+}
+
 
 
 

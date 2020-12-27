@@ -8,6 +8,7 @@ import { Prescription } from 'src/app/interfaces/prescription';
 import { InteractionService } from '../../services/interaction.service';
 import { map } from 'rxjs/operators';
 import { Comment } from '../../interfaces/comment';
+import { Offer } from 'src/app/interfaces/offer';
 @Component({
   selector: 'app-prescription',
   templateUrl: './prescription.page.html',
@@ -18,6 +19,8 @@ export class PrescriptionPage implements OnInit {
   currentUser: User;
   modalControllers: ModalControllers;
   prescriptions: Prescription[] = [];
+  currentSegmentType: string = 'prescriptions';
+  offers: Offer[] | any;
   constructor(private authService: AuthService,
               private modalController: ModalController,
               private realtimedatabase: RealtimedatabaseService,
@@ -34,6 +37,7 @@ export class PrescriptionPage implements OnInit {
       .subscribe(user => {
         this.currentUser = user;
         this.buildPrescription();
+        this.getOffers();
       });
   }
 
@@ -63,6 +67,17 @@ export class PrescriptionPage implements OnInit {
     });
   }
 
+
+  getOffers(){
+    this.realtimedatabase.getOffers(this.currentUser._id)
+      .subscribe(offers => {
+        this.offers = offers
+      });
+  }
+
+  segmentChanged(event){
+    this.currentSegmentType = event.detail.value;
+  }
   
 
 }
