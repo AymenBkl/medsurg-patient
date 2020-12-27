@@ -75,7 +75,7 @@ export class CartComponent implements OnInit {
   findPharmacies() {
     let productsname : {products: any[]} = {products: []};
     this.cartProducts.map(cartProduct => {
-      productsname.products.push({name: cartProduct.mainProduct.name});
+      productsname.products.push( cartProduct.mainProduct.name);
     })
     this.searchProducts(productsname);
   }

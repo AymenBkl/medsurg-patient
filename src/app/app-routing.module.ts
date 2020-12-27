@@ -5,13 +5,7 @@ import { AuthGuardService as AuthGuard} from './services/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-    canActivate : [AuthGuard]
-  },
-  {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
     path: 'register',
@@ -33,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'search-medecin',
-    loadChildren: () => import('./pages/search-medecin/search-medecin.module').then( m => m.SearchMedecinPageModule),
+    redirectTo:'tabs/search-medecin',
     canActivate : [AuthGuard]
   },
   {

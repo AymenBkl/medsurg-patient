@@ -39,7 +39,7 @@ export class SearchMedecinPage implements OnInit {
 
   ionViewDidEnter() {
     if (this.currentUrl == 'buy' && this.searchProduct == null){
-      this.router.navigate(['/search-medecin/search/findproduct'])
+      this.router.navigate(['/tabs/search-medecin/search/findproduct'])
     }
   }
 
@@ -53,7 +53,7 @@ export class SearchMedecinPage implements OnInit {
 
   goToFindProduct(){
     this.currentUrl = "findproduct";
-    this.router.navigate(['/search-medecin/search/findproduct']);
+    this.router.navigate(['/tabs/search-medecin/search/findproduct']);
   }
 
   onInput(value){
@@ -100,7 +100,10 @@ export class SearchMedecinPage implements OnInit {
   });
   await this.route.paramMap.subscribe(paramMap => {
     this.searchProduct = JSON.parse(paramMap.get('products'));
-    this.sortMedecins();
+    if (this.searchProduct){
+      console.log(this.searchProduct);
+      this.sortMedecins();
+    }
   })
   }
 
@@ -120,21 +123,27 @@ export class SearchMedecinPage implements OnInit {
   calculateTotal(){
     return new Observable((obvserver) => {
       let total = 0;
-      // tslint:disable-next-line: forin
-      console.log(this.searchProduct[0].pharmacy.products);
-      for (var i = 0; i < this.searchProduct.length;i++){
+      let i = 0;
+      while (i < this.searchProduct.length){
+        if(this.searchProduct[i] == null){
+          this.searchProduct.splice(i,1)
+          console.log(this.searchProduct);
+        }
+        else {
         this.searchProduct[i].pharmacy.products.map(product => {
           total += product.product.price * product.quantity;
 
         });
         this.searchProduct[i].totalPrice = total;
         total = 0;
+        i++;
         if (i === (this.searchProduct.length - 1)){
           setTimeout(() => {
             obvserver.next(true);
-          }, 1000);
+          }, 400);
         }
       }
+    }
     });
   }
 

@@ -1,7 +1,10 @@
 <ion-content>
   <ion-grid>
     <ion-row *ngIf="cartProducts && cartProducts.length > 0">
-      <ion-title class="title-pharmacy">Your Cart</ion-title>
+      <ion-title class="title-pharmacy">
+        <ion-text>Your Cart</ion-text>
+        <ion-icon src="../../../../assets/imgs/shopping-cart.svg" class="icon-cart" ></ion-icon>
+      </ion-title>
       <ion-col size="12" *ngIf="cartProducts && cartProducts.length != 0">
         <div class="product-holder" *ngFor="let cartProduct of cartProducts;let i = index">
           <ion-avatar class="product-img">
