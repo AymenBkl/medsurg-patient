@@ -45,10 +45,6 @@ export class PrescriptionPage implements OnInit {
     this.modalControllers.callEditPrescription(this.currentUser, selectedPrescription);
   }
 
-
-
-
-
   buildPrescription(){
     this.realtimedatabase.getData(this.currentUser._id).
     subscribe((data: any) => {
@@ -67,5 +63,6 @@ export class PrescriptionPage implements OnInit {
     });
   }
 
+  
 
 }

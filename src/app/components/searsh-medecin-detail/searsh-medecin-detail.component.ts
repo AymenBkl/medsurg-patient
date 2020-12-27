@@ -15,9 +15,9 @@ export class SearshMedecinDetailComponent implements OnInit {
   modalControllers: ModalControllers;
   currentUser: User;
   constructor(private navParams: NavParams,
-              private modalCntrl: ModalController) {
-                this.modalControllers = new ModalControllers(modalCntrl);
-              }
+    private modalCntrl: ModalController) {
+    this.modalControllers = new ModalControllers(modalCntrl);
+  }
 
   ngOnInit() {
     this.getData();
@@ -32,21 +32,29 @@ export class SearshMedecinDetailComponent implements OnInit {
     this.openAddPrescription();
   }
 
-  getProductNames() {
-    var productNames : string[] = [];
+  constructPrescription() {
+    var prescriptionDetails: string[] = [];
+    let index = 1;
     this.searchProduct.pharmacy.products.map(product => {
-      productNames.push(product.product.mainProduct.name + '\n');
+      prescriptionDetails.push(
+        index + ' - ' 
+        + product.product.mainProduct.name + ',IGST : ' 
+        + product.product.mainProduct.igst + ',SGST : ' 
+        + product.product.mainProduct.sgst + ', CGST:' 
+        + product.product.mainProduct.cgst + ' X ' 
+        + product.quantity + '\n');
+        index++;
     })
-    return productNames;
+    return prescriptionDetails;
   }
 
 
   openAddPrescription() {
-    this.modalControllers.addPrescription(this.currentUser,this.getProductNames());
+    this.modalControllers.addPrescription(this.currentUser, this.constructPrescription());
   }
 
   addOrder() {
-    this.modalControllers.callAddOrder(this.currentUser,this.searchProduct);
+    this.modalControllers.callAddOrder(this.currentUser, this.searchProduct);
     this.modalCntrl.dismiss();
   }
 

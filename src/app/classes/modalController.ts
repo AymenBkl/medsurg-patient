@@ -49,8 +49,27 @@ export class ModalControllers {
         const modal = await this.modalController.create({
             component : AddOrderComponent,
             componentProps : {
+                type:'normal',
                 user : currentUser,
                 searchProd: searchProduct
+            }
+        });
+        modal.onDidDismiss()
+            .then(data => {
+                console.log(data);
+            });
+        return await modal.present();
+    }
+
+
+    public async callAddOrderPrescription(currentUser: User,prescriptions: Prescription,pharmacyId:string){
+        const modal = await this.modalController.create({
+            component : AddOrderComponent,
+            componentProps : {
+                type:'prescription',
+                user : currentUser,
+                prescription: prescriptions,
+                idPharmacy: pharmacyId
             }
         });
         modal.onDidDismiss()

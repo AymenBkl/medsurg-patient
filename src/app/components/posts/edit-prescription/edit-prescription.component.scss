@@ -99,6 +99,10 @@ ion-fab {
     vertical-align: middle;
   }
 
+  .comment-holder.selected {
+    --background: #2B91BF;
+}
+
   .add-comment {
     display: inline-block;
     width: 70%;

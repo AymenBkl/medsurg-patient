@@ -21,9 +21,9 @@
         </div>
         </ion-item>
         <ion-item class="description" lines="none">
-          <ion-textarea class="text" placeHolder="Med1,Med2,Med2....." [(ngModel)]="prescription.description">
-
-          </ion-textarea>
+          <ion-text class="text" placeHolder="Med1,Med2,Med2.....">
+            {{prescription.description}}
+          </ion-text>
         </ion-item>
         <ion-item line="none" class="prescription-holder">
           <div class="image-upload">
@@ -41,7 +41,7 @@
             <h1>Comments</h1>
           </div>
         </ion-item>
-        <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments">
+        <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments;let i = index" (click)="selectedComment(i)" [class.selected]='commentSelected == i'>
           <div class="comment-holder" >
             <ion-avatar class="img">
               <img *ngIf="!comment || comment.userImage == '' " src="../../../assets/imgs/pharmacy-user-img.png">
@@ -65,6 +65,11 @@
 <ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="currentUser && prescription.description != ''">
   <ion-fab-button (click)="editPresciption()" >
     <ion-icon name="checkmark-circle-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="commentSelected != null">
+  <ion-fab-button (click)="addOrder()" >
+    <ion-icon name="cart-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>
 </ion-content>

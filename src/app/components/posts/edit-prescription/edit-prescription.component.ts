@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from '@ionic/angular';
+import { ModalController, NavController, NavParams } from '@ionic/angular';
+import { ModalControllers } from 'src/app/classes/modalController';
+import { ModalControllerSearch } from 'src/app/classes/modalController.searsh';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { User } from 'src/app/interfaces/user';
 import { RealtimedatabaseService } from '../../../services/firebase/realtimedatabase.service';
@@ -15,9 +17,16 @@ export class EditPrescriptionComponent implements OnInit {
   currentUser: User;
   prescription: Prescription;
   image: {url: any, file: any};
+  commentSelected: number;
+  modalControllers: ModalControllers;
+
+
   constructor(private navParam: NavParams,
               private realTimeDatabase: RealtimedatabaseService,
-              private interactionService: InteractionService) { }
+              private interactionService: InteractionService,
+              private modalCntrl: ModalController) { 
+                this.modalControllers = new ModalControllers(modalCntrl);
+              }
 
   ngOnInit() {
     this.getData();
@@ -89,5 +98,15 @@ export class EditPrescriptionComponent implements OnInit {
       this.image = {url: reader.result, file : files[0]};
     };
   }
+
+  selectedComment(index: number){
+    this.commentSelected = index;
+  }
+
+  addOrder() {
+    this.modalControllers.callAddOrderPrescription(this.currentUser, this.prescription,this.prescription.comments[this.commentSelected].user_id);
+    this.modalCntrl.dismiss();
+  }
+
 
 }
