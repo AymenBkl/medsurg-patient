@@ -47,7 +47,6 @@ ion-toggle {
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     margin-bottom: 0% !important;
-    position: absolute;
     width: 100%;
     bottom: 0;
     left : 0px;
@@ -67,6 +66,14 @@ ion-toggle {
 
 .second {
     --background : #e7063fd7;
+}
+
+.third {
+    --background : #29ffe283;
+}
+
+.fourth {
+    --background : #8a8787;
 }
 .img-icon {
     height: 50px;

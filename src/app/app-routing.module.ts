@@ -17,12 +17,12 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
+    redirectTo:'tabs/tab1',
     canActivate : [AuthGuard]
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+    redirectTo:'tabs/tab4',
     canActivate : [AuthGuard]
   },
   {
@@ -32,22 +32,22 @@ const routes: Routes = [
   },
   {
     path: 'prescription',
-    loadChildren: () => import('./pages/prescription/prescription.module').then( m => m.PrescriptionPageModule),
+    redirectTo:'tabs/tab4/prescription',
     canActivate: [AuthGuard]
   },
   {
     path: 'messages',
-    loadChildren: () => import('./pages/messages/messages.module').then( m => m.MessagesPageModule),
+    redirectTo:'tabs/tab4/messages',
     canActivate: [AuthGuard]
   },
   {
     path: 'referal',
-    loadChildren: () => import('./pages/referalpage/referalpage.module').then( m => m.ReferalpagePageModule),
+    redirectTo:'tabs/tab4/referal',
     canActivate: [AuthGuard]
   },
   {
     path: 'orders',
-    loadChildren: () => import('./pages/orders/orders.module').then( m => m.OrdersPageModule),
+    redirectTo:'tabs/tab3',
     canActivate: [AuthGuard]
   }
 ];

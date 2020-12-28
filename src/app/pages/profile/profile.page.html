@@ -58,32 +58,61 @@
       </form>
     </ion-row>
     <ion-row class="bottom-row" *ngIf="!toggle">
-      <ion-col size="6" class="card-holder">
+      <ion-col size="12" class="card-holder" [routerLink]="['/tabs/tab4/prescription']">
         <ion-card class="card">
           <ion-avatar class="img-icon">
-            <img src="../../../assets/imgs/pills.svg">
+            <img src="../../../assets/imgs/ordonnance.png">
           </ion-avatar>
           <div class="name-holder">
-            <ion-text class="card-title">Your Product</ion-text>
+            <ion-text class="card-title">See Your Prescriptions</ion-text>
           </div>
           <div class="name-holder">
-            <ion-text class="card-subtitle">15</ion-text>
           </div>
         </ion-card>
       </ion-col>
-      <ion-col size="6" class="card-holder">
+      <ion-col size="12" class="card-holder" [routerLink]="['/tabs/tab4/referal']">
         <ion-card class="card second">
           <ion-avatar class="img-icon">
-            <img src="../../../assets/imgs/patient.svg">
+            <img src="../../../assets/imgs/marketing.svg">
           </ion-avatar>
           <div class="name-holder">
-            <ion-text class="card-title">Patients</ion-text>
+            <ion-text class="card-title">Add Your own Referal</ion-text>
           </div>
           <div class="name-holder">
-            <ion-text class="card-subtitle">7</ion-text>
+            <ion-text class="card-subtitle"></ion-text>
           </div>
         </ion-card>
       </ion-col>
+      <ion-col size="12" class="card-holder" [routerLink]="['/tabs/search-medecin/search/cart']">
+        <ion-card class="card fourth">
+          <ion-avatar class="img-icon">
+            <img src="../../../assets/imgs/shopping-cart.svg">
+          </ion-avatar>
+          <div class="name-holder">
+            <ion-text class="card-title">See Your Cart</ion-text>
+          </div>
+          <div class="name-holder">
+            <ion-text class="card-subtitle"></ion-text>
+          </div>
+        </ion-card>
+        
+      </ion-col>
+      <ion-col size="12" class="card-holder" [routerLink]="['/tabs/tab4/messages']">
+        <ion-card class="card third">
+          <ion-avatar class="img-icon">
+            <img src="../../../assets/imgs/chatting.svg">
+          </ion-avatar>
+          <div class="name-holder">
+            <ion-text class="card-title">Contact Admin</ion-text>
+          </div>
+          <div class="name-holder">
+            <ion-text class="card-subtitle"></ion-text>
+          </div>
+        </ion-card>
+        
+      </ion-col>
+
+      
     </ion-row>
   </ion-grid>
 
