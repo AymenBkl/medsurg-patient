@@ -32,11 +32,8 @@ export class ProfilePage implements OnInit {
 
 
   getCurrentUser() {
-    this.authService.getCurrentUser()
-      .subscribe(user => {
-        this.currentUser = user;
-        this.buildReactiveForm();
-      });
+    this.currentUser = this.authService.user;
+    this.buildReactiveForm();
   }
 
   buildReactiveForm() {

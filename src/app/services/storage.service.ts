@@ -45,7 +45,6 @@ export class StorageService {
   }
 
   async addToCart(products: {}){
-    console.log(products);
     await localStorage.setItem('cartProducts',JSON.stringify(products));
   }
 
@@ -54,8 +53,13 @@ export class StorageService {
   }
 
   async removeMedecin(cartProducts: {},selectedProduct: CartProduct){
-    console.log(cartProducts)
     delete cartProducts[selectedProduct.mainProduct._id];
     await localStorage.setItem('cartProducts',JSON.stringify(cartProducts));
   }
+
+  async clearProductCart(){
+    await localStorage.removeItem('cartProducts');
+
+  }
+
 }

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from '../../services/auth.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { SearchMedecinService } from '../../services/search/search-medecin.service';
 import { InteractionService } from '../../services/interaction.service';
 import { SearchProduct } from 'src/app/interfaces/searchproduct';
@@ -28,7 +28,8 @@ export class SearchMedecinPage implements OnInit {
               private interactionService: InteractionService,
               private modalCntrl: ModalController,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private navCntrl: NavController) {
                 this.modalController = new ModalControllerSearch(modalCntrl);
                }
 
@@ -45,10 +46,7 @@ export class SearchMedecinPage implements OnInit {
 
 
   getCurrentUser() {
-    this.authService.getCurrentUser()
-      .subscribe(user => {
-        this.currentUser = user;
-      });
+    this.currentUser = this.authService.user;
   }
 
   goToFindProduct(){
@@ -91,7 +89,7 @@ export class SearchMedecinPage implements OnInit {
     this.router.events.subscribe((val) => {
       // see also 
       if (val instanceof NavigationEnd) {
-        this.currentUrl = val.url.split('/')[3];
+        this.currentUrl = val.url.split('/')[4];
         if (this.currentUrl && this.currentUrl.split(';')){
           this.currentUrl = this.currentUrl.split(';')[0];
         }
@@ -101,7 +99,6 @@ export class SearchMedecinPage implements OnInit {
   await this.route.paramMap.subscribe(paramMap => {
     this.searchProduct = JSON.parse(paramMap.get('products'));
     if (this.searchProduct){
-      console.log(this.searchProduct);
       this.sortMedecins();
     }
   })
@@ -127,7 +124,6 @@ export class SearchMedecinPage implements OnInit {
       while (i < this.searchProduct.length){
         if(this.searchProduct[i] == null){
           this.searchProduct.splice(i,1)
-          console.log(this.searchProduct);
         }
         else {
         this.searchProduct[i].pharmacy.products.map(product => {
@@ -145,6 +141,11 @@ export class SearchMedecinPage implements OnInit {
       }
     }
     });
+  }
+
+
+  back() {
+    this.navCntrl.back();
   }
 
   

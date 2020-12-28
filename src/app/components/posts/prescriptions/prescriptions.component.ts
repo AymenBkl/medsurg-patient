@@ -35,11 +35,8 @@ export class PrescriptionsComponent implements OnInit {
   }
 
   getCurrentUser() {
-    this.authService.getCurrentUser()
-      .subscribe(user => {
-        this.currentUser = user;
-        this.buildPrescription();
-      });
+    this.currentUser = this.authService.user;
+    this.buildPrescription();
   }
   openAddPrescription() {
     this.modalControllers.addPrescription(this.currentUser, []);

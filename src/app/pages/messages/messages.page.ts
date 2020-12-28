@@ -27,10 +27,7 @@ export class MessagesPage implements OnInit {
   }
 
   getUser() {
-    this.authService.getCurrentUser()
-    .subscribe(user => {
-      this.user = user;
-    });
+    this.user = this.authService.user;
   }
 
 }

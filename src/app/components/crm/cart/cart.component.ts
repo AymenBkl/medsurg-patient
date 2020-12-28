@@ -21,7 +21,7 @@ export class CartComponent implements OnInit {
   searchProduct: SearchProduct[];
   productsKeys: CartProduct[];
   modalControllers: ModalControllers;
-  currentUser: User;
+  @Input('user') currentUser: User;
   selectedProduct: number;
   cartProducts: CartProduct[];
   cartProduct: {};
@@ -36,11 +36,13 @@ export class CartComponent implements OnInit {
     this.getCurrentRoute();
   }
   getAllCartProducts(){
-    
     this.storageService.getAllCartProduct()
       .then((cartProducts) => {
-        this.cartProducts = Object.values(cartProducts);
-        this.cartProduct = cartProducts;
+        if (cartProducts != null){
+          this.cartProducts = Object.values(cartProducts);
+          this.cartProduct = cartProducts;
+        }
+        
       });
   }
 
@@ -126,6 +128,12 @@ export class CartComponent implements OnInit {
         }
       
   });
+  }
+
+  clearCart() {
+    this.storageService.clearProductCart();
+    this.cartProduct = {};
+    this.cartProducts = [];
   }
 
 }

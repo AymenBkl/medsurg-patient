@@ -19,9 +19,10 @@ export class LsitComponent implements OnInit {
 
   @Input('product') products: MainProduct[];
   modalControllers: ModalControllers;
-  currentUser: User;
+  @Input('user') currentUser: User;
   selectedProduct: number;
   cartProducts: {} = {};
+  emptyCartProduct:boolean;
   constructor(private router: Router,
               private storageService: StorageService) {
               }
@@ -39,6 +40,7 @@ export class LsitComponent implements OnInit {
     this.storageService.addToCart(this.cartProducts);
     this.selectedProduct = null;
     this.products = [];
+    this.emptyCartProduct = false;
   }
 
   selectProduct(index){
@@ -46,16 +48,19 @@ export class LsitComponent implements OnInit {
   }
 
   goToCart(){
-    this.router.navigate(['/search-medecin/search/cart'])
+    this.router.navigate(['/tabs/search-medecin/search/cart'])
   }
 
   getAllCartProducts(){
     this.storageService.getAllCartProduct()
       .then((cartProducts) => {
-        if (cartProducts != null){
+        if (cartProducts != null &&  Object.keys(cartProducts).length != 0){
+          this.emptyCartProduct = false;
           this.cartProducts = cartProducts;
         }
-        console.log(cartProducts);
+        else {
+          this.emptyCartProduct = true;
+        }
       });
   }
 

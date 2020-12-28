@@ -52,17 +52,23 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="cartProducts && cartProducts.length == 0">
+    <ion-row *ngIf="!cartProducts || cartProducts.length == 0">
       <ion-col size="12">
         <ion-title class="title-pharmacy">Cart Empty</ion-title>
       </ion-col>
     </ion-row>
   </ion-grid>
   <ion-row class="bottom-row" *ngIf="cartProducts && cartProducts.length > 0">
-    <ion-col size="12">
+    <ion-col size="9">
       <ion-button shape="round" size="default" color="success" expand="full" (click)="findPharmacies()" >
         <ion-icon name="cart-outline"></ion-icon>
         <ion-text>Purchase Now</ion-text>
+      </ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button shape="round" size="default" color="danger" expand="full" (click)="clearCart()" >
+        <ion-icon name="trash-outline"></ion-icon>
+        <ion-text>Clear</ion-text>
       </ion-button>
     </ion-col>
   </ion-row>

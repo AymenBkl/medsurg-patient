@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="toolbar0">
     <ion-buttons slot="start" class="button-header">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="/" (click)="back()"></ion-back-button>
     </ion-buttons>
     <ion-title class="title">
       <ion-text class="title1">
@@ -25,8 +25,8 @@
 </ion-header>
 
 <ion-content>
-  <app-lsit *ngIf="currentUrl == 'findproduct' || currentUrl == undefined" [product]='products'></app-lsit>
-  <app-cart *ngIf="currentUrl == 'cart'"  ></app-cart>
+  <app-lsit *ngIf="currentUrl == 'findproduct' || currentUrl == undefined" [product]='products' [user]="currentUser"></app-lsit>
+  <app-cart *ngIf="currentUrl == 'cart'"  [user]='currentUser'></app-cart>
   <ion-grid *ngIf="currentUrl == 'buy'">
     <ion-row >
       <ion-col size="12">
