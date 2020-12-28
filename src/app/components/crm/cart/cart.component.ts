@@ -95,7 +95,7 @@ export class CartComponent implements OnInit {
             if (products && products !== false){
               this.searchProduct = products;
               this.addQuantity();
-              this.router.navigate(['/search-medecin/search/buy',{products: JSON.stringify(this.searchProduct)}]);
+              this.router.navigate(['/tabs/search-medecin/search/buy',{products: JSON.stringify(this.searchProduct)}]);
             }
             else {
               this.interactionService.createToast('Not Found', 'danger', 'bottom');

@@ -88,7 +88,7 @@ export class AddOfferComponent implements OnInit {
               if (result && result != false){
                 this.interactionService.createToast('Offer created Successfully ', 'success', 'bottom');
                 setTimeout(() => {
-                  this.router.navigate(['/orders']);
+                  this.router.navigate(['/tabs/tab4/prescription']);
                   this.modalCntrl.dismiss();
                 },1000);
               }

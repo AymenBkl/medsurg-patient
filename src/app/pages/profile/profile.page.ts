@@ -5,6 +5,7 @@ import { User } from '../../interfaces/user';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { onValueChanged } from '../register/valueChanges';
 import { UserService } from '../../services/user/user.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -22,6 +23,7 @@ export class ProfilePage implements OnInit {
               private interactionService: InteractionService,
               private formBuilder: FormBuilder,
               private userService: UserService,
+              private router: Router,
               @Inject('bucketURL') public bucketURL,
               ) {
   }
@@ -94,6 +96,15 @@ export class ProfilePage implements OnInit {
       }).catch(err => {
         this.interactionService.hide();
         this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+      });
+  }
+
+  logOut(){
+    this.authService.logOut()
+      .then(() => {
+        this.router.navigate(['/login']);
+      }).catch(() => {
+        this.router.navigate(['/login']);
       });
   }
 

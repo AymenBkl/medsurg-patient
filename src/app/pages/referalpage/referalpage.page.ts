@@ -46,9 +46,11 @@ export class ReferalpagePage implements OnInit {
 
   countTotalPrice() {
     let totalPrice = 0;
-    if (this.referal){
+    if (this.referal ){
       this.referal.orders.map(order => {
-        totalPrice += order.totalPrice * this.referal.commision;
+        if (order.status == 'accepted'){
+          totalPrice = (order.totalPrice * this.referal.commision) / 100;
+        }
       })
     }
     return totalPrice;

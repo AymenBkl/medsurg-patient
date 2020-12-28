@@ -17,6 +17,9 @@
           <img *ngIf="!currentUser || currentUser.imageUrl == '' " src="../../../assets/imgs/patient.svg">
           <img *ngIf="currentUser && currentUser.imageUrl != ''" [src]="currentUser.imageUrl">
         </ion-avatar>
+        <ion-avatar class="img" (click)="logOut()">
+          <img src='../../../assets/imgs/log-out.svg' class='img'>
+        </ion-avatar>
       </ion-chip>
     </ion-title>
   </ion-toolbar>

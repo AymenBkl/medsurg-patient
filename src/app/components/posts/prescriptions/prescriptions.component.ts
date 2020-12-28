@@ -54,7 +54,6 @@ export class PrescriptionsComponent implements OnInit {
     subscribe((data: any) => {
       const prescriptions = [];
       if (data.length === 0 ){
-        this.interactionService.createToast('No data found', 'primary', 'bottom');
       }
       else {
         data.map(presc => {

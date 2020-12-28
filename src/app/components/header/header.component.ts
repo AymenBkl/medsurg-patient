@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from '../../services/auth.service';
 import { NavController , ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -15,7 +16,8 @@ export class HeaderComponent implements OnInit {
   currentUser: User;
   constructor(private authService: AuthService,
               private navCntrl: NavController,
-              private modalCntrl: ModalController) { }
+              private modalCntrl: ModalController,
+              private router: Router) { }
 
   ngOnInit() {
     this.getCurrentUser();
@@ -37,4 +39,14 @@ export class HeaderComponent implements OnInit {
   close(){
     this.modalCntrl.dismiss(null);
   } 
+
+  logOut(){
+    this.authService.logOut()
+      .then(() => {
+        this.router.navigate(['/login']);
+      }).catch(() => {
+        this.router.navigate(['/login']);
+      });
+  }
+
 }

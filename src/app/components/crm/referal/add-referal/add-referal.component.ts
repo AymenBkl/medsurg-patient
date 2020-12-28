@@ -58,7 +58,7 @@ export class AddReferalComponent implements OnInit {
             this.submitted = false;
             this.interactionService.hide();
               if (result && result != false){
-                this.interactionService.createToast('Your Message Posted seccusefully', 'success', 'bottom');
+                this.interactionService.createToast('Your Referal Created seccusefully', 'success', 'bottom');
                 setTimeout(() => {
                   this.router.navigate(['/referal']);
                 },1000)
