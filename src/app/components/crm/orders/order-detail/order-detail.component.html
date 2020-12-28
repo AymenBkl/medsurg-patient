@@ -4,15 +4,15 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        <ion-title class="title-patient">Patient Details</ion-title>
+        <ion-title class="title-patient">Pharmacy Details</ion-title>
         <ion-item class="profile-holder">
           <ion-avatar class="img">
-            <img *ngIf="!order.patient || order.patient.imageUrl == ''" src="../../../../../assets/imgs/patient.svg">
-            <img *ngIf="order.patient && order.patient.imageUrl != ''" [src]="order.patient.imageUrl">
+            <img *ngIf="!order.pharmacy || order.pharmacy.imageUrl == ''" src="../../../../../assets/imgs/pharmacy-user-img.png">
+            <img *ngIf="order.pharmacy && order.pharmacy.imageUrl != ''" [src]="order.pharmacy.imageUrl">
           </ion-avatar>
           <div class="header">
           <ion-text class="name">
-            {{order.patient.firstname}} {{order.patient.lastname}}
+            {{order.pharmacy.firstname}} {{order.pharmacy.lastname}}
           </ion-text>
         </div>
         </ion-item>

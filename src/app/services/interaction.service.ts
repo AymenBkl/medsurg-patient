@@ -16,7 +16,7 @@ export class InteractionService {
       message : msg,
       color : clr,
       position : pos,
-      duration : 3000,
+      duration : 1500,
       animated : true,
       cssClass : 'toast-customize',
     });
