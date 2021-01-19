@@ -89,6 +89,7 @@ export class CetegorieSearchPage implements OnInit {
               this.products = products
             }
             else {
+              this.products = [];
               this.interactionService.createToast('Not Found', 'danger', 'bottom');
             }
           })
