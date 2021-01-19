@@ -46,6 +46,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'categories',
+    redirectTo:'tabs/tab4/categories',
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'orders',
     redirectTo:'tabs/tab3',
     canActivate: [AuthGuard]

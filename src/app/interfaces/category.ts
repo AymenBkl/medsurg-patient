@@ -1,12 +1,10 @@
-import { Product } from './product';
+import { MainProduct } from './mainProduct';
 
 export interface Category {
     _id: string;
     name: string;
     description: string;
-    pharmacy: string;
+    Admin: string;
+    products: MainProduct[] | string[]
     imageUrl: string;
-    products: {
-        product: [Product];
-    };
 }

@@ -31,6 +31,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { MessageService } from './services/messages/messages.service';
 import { ReferalService } from './services/crm/referal.service';
 import { OrderService } from './services/crm/order.service';
+import { CategoryService } from './services/crm/category.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -61,6 +62,7 @@ import { OrderService } from './services/crm/order.service';
     ReferalService,
     MessageService,
     NavParams,
+    CategoryService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
