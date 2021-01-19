@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from '@ionic/angular';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { User } from 'src/app/interfaces/user';
+import { PrescriptionService } from 'src/app/services/prescription.service';
 import { RealtimedatabaseService } from '../../../services/firebase/realtimedatabase.service';
 import { InteractionService } from '../../../services/interaction.service';
 @Component({
@@ -16,7 +17,8 @@ export class AddPrescriptionComponent implements OnInit {
   image: {url: any, file: any};
   constructor(private navParam: NavParams,
               private realTimeDatabase: RealtimedatabaseService,
-              private interactionService: InteractionService) { }
+              private interactionService: InteractionService,
+              private prescriptionService: PrescriptionService) { }
 
   ngOnInit() {
     this.getData();
@@ -25,13 +27,11 @@ export class AddPrescriptionComponent implements OnInit {
   getData(){
     this.currentUser = this.navParam.get('user');
     this.prescription = {
-      userFullName : this.currentUser.firstname + ' ' + this.currentUser.lastname,
-      description : this.checkProductNames(),
-      userImage : this.currentUser.imageUrl,
-      user_id : this.currentUser._id,
+      patient : this.currentUser._id,
+      description:'',
       imageUrl : '',
       date : new Date().toISOString(),
-      key : '',
+      _id : null,
       comments : [],
       status:'created'
     };
@@ -58,10 +58,13 @@ export class AddPrescriptionComponent implements OnInit {
   postImage(){
     this.interactionService.createLoading('Creating your prescription please wait')
     .then(() => {
-      this.realTimeDatabase.uploadFile(this.image.file)
+      const formData = new FormData();
+      formData.append('file', this.image.file);
+      this.prescriptionService.postImage(formData)
       .then((result: any) => {
         if (result){
-          this.prescription.imageUrl = result;
+          console.log("here");
+          this.prescription.imageUrl = result.prescription;
           this.postPrescription();
         }
         else {
@@ -74,7 +77,8 @@ export class AddPrescriptionComponent implements OnInit {
   }
 
   postPrescription(){
-    this.realTimeDatabase.addPost(this.prescription)
+    console.log("here");
+    this.prescriptionService.createPrescription(this.prescription)
     .then(response => {
       this.interactionService.hide();
       if (response && response !== false){

@@ -32,6 +32,7 @@ import { MessageService } from './services/messages/messages.service';
 import { ReferalService } from './services/crm/referal.service';
 import { OrderService } from './services/crm/order.service';
 import { CategoryService } from './services/crm/category.service';
+import { PrescriptionService } from './services/prescription.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -63,6 +64,7 @@ import { CategoryService } from './services/crm/category.service';
     MessageService,
     NavParams,
     CategoryService,
+    PrescriptionService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

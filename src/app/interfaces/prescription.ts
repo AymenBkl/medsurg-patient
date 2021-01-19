@@ -1,10 +1,9 @@
 import { Comment } from './comment';
+import { User } from './user';
 
 export interface Prescription {
-    key: string;
-    user_id: string;
-    userFullName: string;
-    userImage: string;
+    _id: string;
+    patient: User | string,
     description: string;
     imageUrl: string;
     date: string;
