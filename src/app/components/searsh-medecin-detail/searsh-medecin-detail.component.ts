@@ -38,13 +38,11 @@ export class SearshMedecinDetailComponent implements OnInit {
     this.searchProduct.pharmacy.products.map(product => {
       prescriptionDetails.push(
         index + ' - ' 
-        + product.product.mainProduct.name + ',IGST : ' 
-        + product.product.mainProduct.igst + ',SGST : ' 
-        + product.product.mainProduct.sgst + ', CGST:' 
-        + product.product.mainProduct.cgst + ' X ' 
-        + product.quantity + '\n');
+        + product.product.mainProduct.name  
+        + product.quantity + '\n' );
         index++;
     })
+    prescriptionDetails.join()
     return prescriptionDetails;
   }
 

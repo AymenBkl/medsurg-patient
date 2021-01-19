@@ -13,6 +13,22 @@ export class PrescriptionService {
   constructor(private httpClient: HttpClient) { }
 
 
+  getAllPrescriptions() {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get<PrescriptionResponse>(this.prescriptionURL + 'prescription/allprescription')
+        .subscribe(response => {
+          console.log(response);
+          if (response.status === 200) {
+            resolve(response.prescription);
+          }
+          else {
+            resolve(false);
+          }
+        }, err => {
+          reject(err);
+        });
+      });
+    }
   createPrescription(prescription: Prescription) {
 
     return new Promise((resolve, reject) => {

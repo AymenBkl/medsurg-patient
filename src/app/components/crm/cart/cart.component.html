@@ -22,15 +22,7 @@
             <ion-text class="product-detail">
               Description : {{cartProduct.mainProduct.description}}
             </ion-text>
-            <ion-text class="product-detail">
-              IGST : {{cartProduct.mainProduct.igst}}
-            </ion-text>
-            <ion-text class="product-detail">
-              CGST : {{cartProduct.mainProduct.cgst}}
-            </ion-text>
-            <ion-text class="product-detail">
-              SGST : {{cartProduct.mainProduct.sgst}}
-            </ion-text>
+            
             <ion-text class="product-detail">
               PACKING : {{cartProduct.mainProduct.packing}}
             </ion-text>
@@ -69,6 +61,11 @@
       <ion-button shape="round" size="default" color="danger" expand="full" (click)="clearCart()" >
         <ion-icon name="trash-outline"></ion-icon>
         <ion-text>Clear</ion-text>
+      </ion-button>
+    </ion-col>
+    <ion-col size="12" >
+      <ion-button shape="round" size="default" color="light"  expand="full" (click)="addPrescription()">
+        <ion-icon name="document"></ion-icon>
       </ion-button>
     </ion-col>
   </ion-row>

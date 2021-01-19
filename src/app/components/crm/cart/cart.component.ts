@@ -1,5 +1,6 @@
 import { Component, Input, OnInit,} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { CartProduct } from 'src/app/interfaces/cartProduct';
 import { MainProduct } from 'src/app/interfaces/mainProduct';
@@ -28,7 +29,9 @@ export class CartComponent implements OnInit {
   constructor(private router: Router,
               private storageService: StorageService,
               private interactionService: InteractionService,
-              private searchService: SearchMedecinService) {
+              private searchService: SearchMedecinService,
+              private modalCntrl: ModalController) {
+                this.modalControllers = new ModalControllers(modalCntrl);
               }
 
   ngOnInit() {
@@ -83,6 +86,7 @@ export class CartComponent implements OnInit {
   }
 
   addPrescription(){
+    this.modalControllers.addPrescription(this.currentUser, this.constructPrescription());
 
   }
 
@@ -135,5 +139,21 @@ export class CartComponent implements OnInit {
     this.cartProduct = {};
     this.cartProducts = [];
   }
+
+  constructPrescription() {
+    var prescriptionDetails: string[] = [];
+    let index = 1;
+    this.cartProducts.map(product => {
+      prescriptionDetails.push(
+        index + ' - ' 
+        + product.mainProduct.name  
+        + '\n' + product.quantity + '\n' );
+        index++;
+    })
+    return prescriptionDetails;
+  }
+
+
+ 
 
 }

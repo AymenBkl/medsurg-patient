@@ -28,7 +28,7 @@ export class AddPrescriptionComponent implements OnInit {
     this.currentUser = this.navParam.get('user');
     this.prescription = {
       patient : this.currentUser._id,
-      description:'',
+      description:this.navParam.get('productsNames'),
       imageUrl : '',
       date : new Date().toISOString(),
       _id : null,

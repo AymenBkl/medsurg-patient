@@ -9,6 +9,7 @@ import { InteractionService } from '../../services/interaction.service';
 import { map } from 'rxjs/operators';
 import { Comment } from '../../interfaces/comment';
 import { Offer } from 'src/app/interfaces/offer';
+import { PrescriptionService } from 'src/app/services/prescription.service';
 @Component({
   selector: 'app-prescription',
   templateUrl: './prescription.page.html',
@@ -24,7 +25,8 @@ export class PrescriptionPage implements OnInit {
   constructor(private authService: AuthService,
               private modalController: ModalController,
               private realtimedatabase: RealtimedatabaseService,
-              private interactionService: InteractionService) {
+              private interactionService: InteractionService,
+              private prescriptionService: PrescriptionService) {
                 this.modalControllers = new ModalControllers(modalController);
               }
 
@@ -48,8 +50,8 @@ export class PrescriptionPage implements OnInit {
   }
 
   buildPrescription(){
-    this.realtimedatabase.getData(this.currentUser._id).
-    subscribe((data: any) => {
+    this.prescriptionService.getAllPrescriptions().
+    then((data: any) => {
       const prescriptions = [];
       if (data.length === 0 ){
         this.interactionService.createToast('No data found', 'primary', 'bottom');
