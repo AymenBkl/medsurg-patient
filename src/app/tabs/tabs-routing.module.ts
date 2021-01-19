@@ -44,6 +44,11 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'tab4/search-categorie',
+        loadChildren: () => import('../pages/cetegorie-search/cetegorie-search.module').then( m => m.CetegorieSearchPageModule),
+        canActivate: [AuthGuard]
+      },
+      {
         path: 'tab3',
         loadChildren: () => import('../pages/orders/orders.module').then( m => m.OrdersPageModule),
         canActivate: [AuthGuard]

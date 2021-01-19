@@ -6,7 +6,7 @@ import { CategoryService } from '../../services/crm/category.service';
 import { Category } from 'src/app/interfaces/category';
 import { NavController, ModalController } from '@ionic/angular';
 import { Subject } from 'rxjs';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 @Component({
   selector: 'app-category',
   templateUrl: './category.page.html',
@@ -55,6 +55,11 @@ ionViewDidEnter(){
 
 checkCategories(){
   this.getCategories();
+}
+
+goToSearchCategory(selectedCategory: string){
+  let navigationExtras: NavigationExtras = {state: {categorieId: selectedCategory} };
+  this.router.navigate(['/tabs/tab4/search-categorie'],navigationExtras);
 }
 
 ionViewDidLeave(){ 

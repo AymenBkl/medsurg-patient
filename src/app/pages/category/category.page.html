@@ -5,7 +5,7 @@
   <ion-grid class="ion-no-padding" >
     <ion-row class="ion-no-padding" *ngIf="user && categories">
       <ion-col *ngFor="let categorie of categories" class="animate-item ion-no-padding col" size="6" size-md="4" size-lg="3"
-         routerDirection="forward">
+         routerDirection="forward" (click)="goToSearchCategory(categorie._id)">
             <ion-card>
               <ion-thumbnail>
                 <img *ngIf="categorie.imageUrl != ''" [src]="categorie.imageUrl"  />

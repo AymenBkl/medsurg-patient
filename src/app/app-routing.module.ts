@@ -54,7 +54,12 @@ const routes: Routes = [
     path: 'orders',
     redirectTo:'tabs/tab3',
     canActivate: [AuthGuard]
-  }
+  },
+  {
+    path: 'cetegorie-search',
+    redirectTo: 'tabs/tab4/search-categorie',
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({
