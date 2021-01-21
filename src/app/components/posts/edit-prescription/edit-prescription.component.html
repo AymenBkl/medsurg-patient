@@ -28,7 +28,8 @@
         <ion-item line="none" class="prescription-holder">
           <div class="image-upload">
             <label for="file-input">
-              <img *ngIf="!image || !image.url" [src]="prescription.imageUrl"/>
+              <img *ngIf="prescription.imageUrl && (!image || !image.url)" [src]="prescription.imageUrl"/>
+              <img *ngIf="!prescription.imageUrl && (!image || !image.url)" src="../../../assets/imgs/photo.png">
               <img *ngIf="image && image.url" [src]="image.url"/>
             </label>
           

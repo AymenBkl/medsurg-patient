@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from '@ionic/angular';
+import { ModalController, NavController, NavParams } from '@ionic/angular';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { User } from 'src/app/interfaces/user';
 import { PrescriptionService } from 'src/app/services/prescription.service';
@@ -16,7 +16,8 @@ export class AddPrescriptionComponent implements OnInit {
   image: {url: any, file: any};
   constructor(private navParam: NavParams,
               private interactionService: InteractionService,
-              private prescriptionService: PrescriptionService) { }
+              private prescriptionService: PrescriptionService,
+              private modalCntrl: ModalController) { }
 
   ngOnInit() {
     this.getData();
@@ -55,14 +56,15 @@ export class AddPrescriptionComponent implements OnInit {
   }
 
   postImage(){
-    this.interactionService.createLoading('Creating your prescription please wait')
+    this.interactionService.createLoading('Uploading Image Please wait')
     .then(() => {
       const formData = new FormData();
       formData.append('file', this.image.file);
       this.prescriptionService.postImage(formData)
       .then((result: any) => {
         if (result){
-          console.log("here");
+          this.interactionService.createToast('Image Uploaded !', 'success', 'bottom');
+          this.interactionService.hide();
           this.prescription.imageUrl = result.prescription;
           this.postPrescription();
         }
@@ -70,6 +72,7 @@ export class AddPrescriptionComponent implements OnInit {
           this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
         }
       }).catch(err => {
+        this.interactionService.hide();
         this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
       });
     });
@@ -77,18 +80,23 @@ export class AddPrescriptionComponent implements OnInit {
 
   postPrescription(){
     console.log("here");
+    this.interactionService.createLoading('Uploading Image Please wait')
+    .then(() => {
     this.prescriptionService.createPrescription(this.prescription)
     .then(response => {
       this.interactionService.hide();
       if (response && response !== false){
+        this.modalCntrl.dismiss();
         this.interactionService.createToast('Your prescreption is created succesfully', 'success', 'bottom');
       }
       else {
         this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
       }
     }).catch(err => {
+      this.interactionService.hide();
       this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
     });
+  });
   }
 
   preview(files) {

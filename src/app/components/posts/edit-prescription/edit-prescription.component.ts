@@ -45,7 +45,7 @@ export class EditPrescriptionComponent implements OnInit {
 
   editPresciption(){
     if (this.image == null){
-            this.postPrescription();
+            this.editPrescription();
     }
     else {
       this.postImage();
@@ -53,39 +53,45 @@ export class EditPrescriptionComponent implements OnInit {
   }
 
   postImage(){
-    this.interactionService.createLoading('Creating your prescription please wait')
+    this.interactionService.createLoading('Uploading Image !! ')
     .then(() => {
       const formData = new FormData();
       formData.append('file', this.image.file);
       this.prescriptionService.postImage(formData)
       .then((result: any) => {
+        this.interactionService.hide();
         if (result){
-          console.log("here");
+          this.interactionService.createToast('Image Uploaded !', 'success', 'bottom');
           this.prescription.imageUrl = result.prescription;
-          this.postPrescription();
+          this.editPrescription();
         }
         else {
           this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
         }
       }).catch(err => {
+        this.interactionService.hide();
         this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
       });
     });
   }
 
-  postPrescription(){
-    /**this.realTimeDatabase.updatePost(this.prescription)
-    .then(response => {
-      this.interactionService.hide();
-      if (response && response !== false){
-        this.interactionService.createToast('Your prescreption is updated succesfully', 'success', 'bottom');
-      }
-      else {
+  editPrescription(){
+    this.interactionService.createLoading('Updating Your prescription !!')
+    this.prescriptionService.updatePrescription(this.prescription)
+      .then(result => {
+        this.interactionService.hide();
+        if (result && result != false){
+          this.interactionService.createToast('Prescription Updated!', 'success', 'bottom');
+          this.modalCntrl.dismiss();
+        }
+        else {
+          this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
+        }
+      })
+      .catch((err)=> {
+        this.interactionService.hide();
         this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
-      }
-    }).catch(err => {
-      this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
-    });**/
+      })
   }
 
   preview(files) {

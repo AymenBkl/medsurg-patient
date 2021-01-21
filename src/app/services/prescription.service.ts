@@ -60,6 +60,22 @@ export class PrescriptionService {
     });
   }
 
+  updatePrescription(prescription: Prescription){
+    return new Promise((resolve, reject) => {
+      this.httpClient.put<PrescriptionResponse>(this.prescriptionURL + 'prescription/updateprescription', {prescription: prescription})
+        .subscribe(response => {
+          if (response.status === 200) {
+            resolve(response);
+          }
+          else {
+            resolve(false);
+          }
+        }, err => {
+          reject(err);
+        });
+      });
+  }
+
   updateApprovedPrescription(commentId:string,prescriptionId:string){
     return new Promise((resolve, reject) => {
       this.httpClient.put<PrescriptionResponse>(this.prescriptionURL + 'prescription/approveprescription', {commentId:commentId,prescriptionId:prescriptionId})

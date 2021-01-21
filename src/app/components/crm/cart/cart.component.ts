@@ -147,7 +147,7 @@ export class CartComponent implements OnInit {
       prescriptionDetails.push(
         index + ' - ' 
         + product.mainProduct.name  
-        + '\n' + product.quantity + '\n' );
+        + product.quantity + '\n' );
         index++;
     })
     return prescriptionDetails;
