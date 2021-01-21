@@ -25,6 +25,7 @@ import { LsitComponent } from '../crm/cart/lsit/lsit.component';
 import { CartComponent } from '../crm/cart/cart.component';
 
 import { AddOfferComponent } from '../crm/offers/add-offer/add-offer.component';
+import { CategoriesComponent } from '../crm/categories/categories.component';
 @NgModule({
   declarations: [
     BannerComponent,
@@ -40,7 +41,8 @@ import { AddOfferComponent } from '../crm/offers/add-offer/add-offer.component';
     OrderDetailComponent,
     CartComponent,
     LsitComponent,
-    AddOfferComponent
+    AddOfferComponent,
+    CategoriesComponent
   ],
   exports: [
     BannerComponent,
@@ -56,7 +58,8 @@ import { AddOfferComponent } from '../crm/offers/add-offer/add-offer.component';
     OrderDetailComponent,
     CartComponent,
     LsitComponent,
-    AddOfferComponent
+    AddOfferComponent,
+    CategoriesComponent
   ],
   imports: [
     IonicModule,
