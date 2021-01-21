@@ -17,7 +17,7 @@
     </ion-card>
   </ion-slide>
   <ion-slide  class="animate-item">
-    <ion-card class="card" id="card-categorie" >
+    <ion-card class="card" id="card-categorie" (click)="goTo('/tabs/tab3')" >
       <ion-text>
         See the status of your orders ?
       </ion-text>
@@ -25,11 +25,20 @@
     </ion-card>
   </ion-slide>
   <ion-slide  class="animate-item">
-    <ion-card class="card" id="card-post">
+    <ion-card class="card" id="card-post" (click)="goTo('/tabs/tab4/categories')">
       <ion-text>
-        See Patietns Prescriptions
+        Want to find products in faster way ?
       </ion-text>
-        <img src="../../../assets/imgs/medical-prescription.png">
+        <img src="../../../assets/imgs/capsules.png">
+    </ion-card>
+  </ion-slide>
+
+  <ion-slide  class="animate-item">
+    <ion-card class="card" id="card-pharmacy" (click)="goTo('/tabs/tab4/referal')">
+      <ion-text>
+        Add More Referals and own more money 
+      </ion-text>
+        <img src="../../../assets/imgs/marketing.svg">
     </ion-card>
   </ion-slide>
 
