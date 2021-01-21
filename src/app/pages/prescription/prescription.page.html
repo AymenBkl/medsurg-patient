@@ -14,7 +14,7 @@
   <ion-grid>
     <ion-row *ngIf="currentUser && prescriptions &&  prescriptions.length > 0 && currentSegmentType == 'prescriptions'">
       <ion-col size="12" size-md="8" offset-md="2" *ngFor="let prescription of prescriptions" (click)="openEditPrescription(prescription)">
-        <ion-card class="card">
+        <ion-card class="card" *ngIf="prescription.status == 'created'">
           <ion-item lines="none" class="profile-holder">
             <ion-avatar class="img">
               <img *ngIf="!currentUser || currentUser.imageUrl == ''" src="../../../assets/imgs/patient.svg">
@@ -40,7 +40,49 @@
               <h1>Comments</h1>
             </div>
           </ion-item>
-          <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments;let i = index" [class.highlited]='comment.status == "accepted"' >
+          <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments;let i = index" [class.highlited]='comment.status == "approved"' >
+            <div class="comment-holder" >
+              <ion-avatar class="img">
+                <img *ngIf="!comment || comment.pharmacy.imageUrl == '' " src="../../../assets/imgs/pharmacy-user-img.png">
+                <img *ngIf="comment && comment.pharmacy.imageUrl  != ''" [src]="comment.pharmacy.imageUrl ">
+              </ion-avatar>
+              <ion-text class="text"  class="add-comment">
+                {{this.calculateCommentPrice(comment)}}
+              </ion-text>
+            </div>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="currentUser && prescriptions &&  prescriptions.length > 0 && currentSegmentType == 'offers'">
+      <ion-col size="12" size-md="8" offset-md="2" *ngFor="let prescription of prescriptions" (click)="openEditPrescription(prescription)">
+        <ion-card class="card" *ngIf="prescription.status == 'approved'">
+          <ion-item lines="none" class="profile-holder">
+            <ion-avatar class="img">
+              <img *ngIf="!currentUser || currentUser.imageUrl == ''" src="../../../assets/imgs/patient.svg">
+              <img *ngIf="currentUser && currentUser.imageUrl != ''" [src]="currentUser.imageUrl">
+            </ion-avatar>
+            <div class="header">
+            <ion-text class="name">
+              {{currentUser.firstname}} {{currentUser.lastname}}
+            </ion-text>
+            <ion-text class="date">
+              {{prescription.createdAt | date:'short'}}
+            </ion-text>
+          </div>
+          </ion-item>
+          <ion-item class="description" lines="none">
+            <ion-text class="text">{{prescription.description}} </ion-text>
+          </ion-item>
+          <ion-item line="none" class="prescription-holder">
+            <img *ngIf="prescription.imageUrl" [src]="prescription.imageUrl">
+          </ion-item>
+          <ion-item line="none" class="comment-holder">
+            <div class="comment-holder">
+              <h1>Comments</h1>
+            </div>
+          </ion-item>
+          <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments;let i = index" [class.highlited]='comment.status == "approved"' >
             <div class="comment-holder" >
               <ion-avatar class="img">
                 <img *ngIf="!comment || comment.pharmacy.imageUrl == '' " src="../../../assets/imgs/pharmacy-user-img.png">
@@ -60,48 +102,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="currentUser && offers &&  offers.length > 0 && currentSegmentType == 'offers'">
-      <ion-col size="12" size-md="8" offset-md="2" *ngFor="let offer of offers" (click)="openEditPrescription(offer.prescription)">
-        <ion-card class="card">
-          <ion-item lines="none" class="profile-holder">
-            <ion-avatar class="img">
-              <img *ngIf="!currentUser || currentUser.imageUrl == ''" src="../../../assets/imgs/patient.svg">
-              <img *ngIf="currentUser && currentUser.imageUrl != ''" [src]="currentUser.imageUrl">
-            </ion-avatar>
-            <div class="header">
-            <ion-text class="name">
-              {{currentUser.firstname}} {{currentUser.lastname}}
-            </ion-text>
-            <ion-text class="date">
-              {{offer.prescription.date | date:'short'}}
-            </ion-text>
-          </div>
-          </ion-item>
-          <ion-item class="description" lines="none">
-            <ion-text class="text">{{offer.prescription.description}} </ion-text>
-          </ion-item>
-          <ion-item line="none" class="prescription-holder">
-            <img *ngIf="offer.prescription.imageUrl" [src]="offer.prescription.imageUrl">
-          </ion-item>
-          <ion-item line="none" class="comment-holder">
-            <div class="comment-holder">
-              <h1>You have accepted this prescription</h1>
-            </div>
-          </ion-item>
-          <ion-item lines="none" class="comment-holder">
-            <div class="comment-holder" >
-              <ion-avatar class="img">
-                <img *ngIf="!currentUser || currentUser.imageUrl == ''" src="../../../assets/imgs/patient.svg">
-                <img *ngIf="currentUser && currentUser.imageUrl != ''" [src]="currentUser.imageUrl">
-              </ion-avatar>
-              <ion-text class="text"  class="add-comment">
-                {{offer.offer}}
-              </ion-text>
-            </div>
-          </ion-item>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+    
     <ion-row *ngIf="currentUser && prescriptions && prescriptions.length == 0" >
       <ion-col size="12">
         <ion-text class="not-found"> You didn't post any prescriptions</ion-text>

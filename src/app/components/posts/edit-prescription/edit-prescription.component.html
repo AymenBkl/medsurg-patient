@@ -32,7 +32,7 @@
               <img *ngIf="image && image.url" [src]="image.url"/>
             </label>
           
-            <input id="file-input" type="file" (change)="selectedImage($event)" *ngIf="prescription.status != 'accepted'"/>
+            <input id="file-input" type="file" (change)="selectedImage($event)" *ngIf="prescription.status != 'approved'"/>
           </div>          
           
         </ion-item>
@@ -41,7 +41,7 @@
             <h1>Comments</h1>
           </div>
         </ion-item>
-        <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments;let i = index" (click)="selectedComment(i)" [class.selected]='commentSelected == i' [class.highlited]='comment.status == "accepted"'>
+        <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments;let i = index" (click)="selectedComment(i)" [class.selected]='commentSelected == i' [class.highlited]='comment.status == "approved"'>
           <div class="comment-holder" >
             <ion-avatar class="img">
               <img *ngIf="!comment || comment.pharmacy.imageUrl == '' " src="../../../assets/imgs/pharmacy-user-img.png">
@@ -67,7 +67,7 @@
     <ion-icon name="checkmark-circle-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>
-<ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="commentSelected != null && prescription.status != 'accepted'">
+<ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="commentSelected != null && prescription.status != 'approved'">
   <ion-fab-button (click)="addOrder()" >
     <ion-icon name="cart-outline"></ion-icon>
   </ion-fab-button>
