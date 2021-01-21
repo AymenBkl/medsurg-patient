@@ -1,11 +1,13 @@
 .search_bar-xyz {
-  background: white;
-  border-radius: 50px;
-  color: black;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  --background: white;
+  --border-radius: 50px;
+  --color: black;
+  --icon-color : black;
+  --cancel-button-color : red;
+  --box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   text-align: center;
-  top : -25px;
-  width: 75%;
+  top : -35px;
+  width: 95%;
   margin: 0 auto;
   z-index: 99;
   padding: 15px;

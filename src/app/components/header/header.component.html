@@ -25,7 +25,9 @@
   </ion-toolbar>
   <ion-toolbar class="toolbar">
   </ion-toolbar>
-  <div class="search_bar-xyz">
-    {{page}}
-  </div>
+  <ion-searchbar class="search_bar-xyz" cancelButtonText="Custom Cancel" showCancelButton="focus" animated
+    autocorrect="off" inputmode="search" (click)="goToFindProduct()" placeholder="Medecin1"
+    #searchbar>
+
+  </ion-searchbar>
 </ion-header>

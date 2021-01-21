@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input('page') page:string;
   // tslint:disable-next-line: no-input-rename
   @Input('type') type:string;
   currentUser: User;
@@ -47,6 +46,10 @@ export class HeaderComponent implements OnInit {
       }).catch(() => {
         this.router.navigate(['/login']);
       });
+  }
+
+  goToFindProduct(){
+    this.router.navigate(['/tabs/search-medecin/search/findproduct']);
   }
 
 }
