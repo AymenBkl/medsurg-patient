@@ -1,4 +1,4 @@
-<div class="name">
+<div class="name" *ngIf="categories && categories.length > 0">
   <ion-title class="title">
     Categories
   </ion-title>
@@ -18,5 +18,10 @@
       
     </ion-slide>
   </ion-slides>
-
+  <div class="name" *ngIf="categories && categories.length == 0  ">
+    <ion-title class="title">You don't have any categories </ion-title>
+  </div>
+  <div class="spin" *ngIf="!categories" >
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
 </div>

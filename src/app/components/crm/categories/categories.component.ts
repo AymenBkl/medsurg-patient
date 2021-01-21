@@ -16,28 +16,35 @@ export class CategoriesComponent implements OnInit {
     spaceBetween: 0
   };
   constructor(private categoryService: CategoryService,
-              private router: Router) {
-              }
+    private router: Router) {
+  }
 
   ngOnInit() {
     this.getCategories();
   }
 
   getCategories() {
-        this.categoryService.getAllCategories()
-        .then((result: any) => {
-          if (result && result !== false){
-            this.categories = result;
-          }
-        })
-        .catch(err => {
-        });
+    setTimeout(() => {
+      this.categoryService.getAllCategories()
+      .then((result: any) => {
+        if (result && result !== false) {
+          this.categories = result;
+        }
+        else {
+          this.categories = [];
+        }
+      })
+      .catch(err => {
+        this.categories = [];
+      });
+    },3000)
+    
   }
 
 
-  goToSearchCategory(selectedCategory: string){
-    let navigationExtras: NavigationExtras = {state: {categorieId: selectedCategory} };
-    this.router.navigate(['/tabs/tab4/search-categorie'],navigationExtras);
+  goToSearchCategory(selectedCategory: string) {
+    let navigationExtras: NavigationExtras = { state: { categorieId: selectedCategory } };
+    this.router.navigate(['/tabs/tab4/search-categorie'], navigationExtras);
   }
 
 

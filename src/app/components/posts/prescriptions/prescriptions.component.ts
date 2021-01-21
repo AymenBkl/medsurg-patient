@@ -50,22 +50,26 @@ export class PrescriptionsComponent implements OnInit {
 
 
   buildPrescription(){
-    this.prescriptions = [];
-    this.prescriptionService.getAllPrescriptions().
-        then(async (data: any) => {
-          console.log(data);
-          if (data.length === 0 ){
-            this.interactionService.createToast('No data found', 'primary', 'bottom');
-          }
-          else {
-            this.prescriptions = data.sort((a, b) => {
-              return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-            });
-          }
-        })
-        .catch(err => {
-          this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
-        });
+    setTimeout(() => {
+      this.prescriptionService.getAllPrescriptions().
+      then(async (data: any) => {
+        console.log(data);
+        if (data.length === 0 ){
+          this.prescriptions = [];
+          this.interactionService.createToast('No data found', 'primary', 'bottom');
+        }
+        else {
+          this.prescriptions = data.sort((a, b) => {
+            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+          });
+        }
+      })
+      .catch(err => {
+        this.prescriptions = [];
+        this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+      });
+    },3000)
+    
   }
 
 }

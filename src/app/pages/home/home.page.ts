@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/interfaces/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  currentUser:User;
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+  }
+
+  getCurrentUser() {
+    this.currentUser = this.authService.user;
+  }
+
+  ionViewDidEnter(){
+    this.getCurrentUser();
   }
 
 }
