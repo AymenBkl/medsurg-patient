@@ -118,8 +118,7 @@ export class EditPrescriptionComponent implements OnInit {
       pharmacy : selectedComment.pharmacy,
       totalPrice: this.calculateCommentPrice(selectedComment)
     }
-    console.log(selectedPharmacy)
-    this.modalControllers.callSearchDetail(selectedPharmacy,this.currentUser);
+    this.modalControllers.callSearchDetail(selectedPharmacy,this.currentUser,{prescription:this.prescription._id,comment:selectedComment._id,type:'prescription'});
     this.modalCntrl.dismiss();
   }
 

@@ -8,6 +8,7 @@ import { User } from 'src/app/interfaces/user';
 import { OrderService } from 'src/app/services/crm/order.service';
 import { ReferalService } from 'src/app/services/crm/referal.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { PrescriptionService } from 'src/app/services/prescription.service';
 
 @Component({
   selector: 'app-add-order',
@@ -20,6 +21,7 @@ export class AddOrderComponent implements OnInit {
   searchProduct: SearchProduct | any;
   order: Order | any;
   referalP: Referal;
+  isPres: {prescription:string,comment:string,type:string} = null;
   @ViewChild('slides') slides: IonSlides;
 
   currentSlide = 0;
@@ -36,7 +38,8 @@ export class AddOrderComponent implements OnInit {
               private interactionService: InteractionService,
               private orderService: OrderService,
               private router: Router,
-              private modalCntrl: ModalController) { }
+              private modalCntrl: ModalController,
+              private prescriptionService: PrescriptionService) { }
 
   ngOnInit() {
     this.getData();
@@ -48,6 +51,8 @@ export class AddOrderComponent implements OnInit {
     this.currentSlide = 0;
     this.searchProduct = this.navParams.get('searchProd');
     this.currentUser = this.navParams.get('user');
+    this.isPres = this.navParams.get('isPres');
+    console.log(this.isPres);
     this.order = {
       products : this.searchProduct.pharmacy.products,
       totalPrice: this.searchProduct.totalPrice,
@@ -117,6 +122,7 @@ export class AddOrderComponent implements OnInit {
             .then((result) => {
               this.interactionService.hide();
               if (result && result != false){
+                this.modifyPres();
                 this.interactionService.createToast('Order created Successfully ', 'success', 'bottom');
                 setTimeout(() => {
                   this.router.navigate(['/orders']);
@@ -143,6 +149,17 @@ export class AddOrderComponent implements OnInit {
 
   ionModalWillDismiss(){
     console.log("dissmiss");
+  }
+
+  modifyPres(){
+    if (this.isPres){
+      if (this.isPres.type == 'prescription' ){
+        this.prescriptionService.updateApprovedPrescription(this.isPres.comment,this.isPres.prescription)
+          .then((result) => {
+
+          })
+      }
+    }
   }
 
 

@@ -47,13 +47,14 @@ export class ModalControllers {
         return await modal.present();
     }
 
-    public async callAddOrder(currentUser: User,searchProduct: SearchProduct){
+    public async callAddOrder(currentUser: User,searchProduct: SearchProduct,order:{prescription:string,comment:string,type:string} = null){
         const modal = await this.modalController.create({
             component : AddOrderComponent,
             componentProps : {
                 type:'normal',
                 user : currentUser,
-                searchProd: searchProduct
+                searchProd: searchProduct,
+                isPres:order
             }
         });
         modal.onDidDismiss()

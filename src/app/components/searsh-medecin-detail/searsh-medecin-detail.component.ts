@@ -14,6 +14,7 @@ export class SearshMedecinDetailComponent implements OnInit {
   searchProduct: SearchProduct;
   modalControllers: ModalControllers;
   currentUser: User;
+  isPres: {prescription:string,comment:string,type:string} = null;
   constructor(private navParams: NavParams,
     private modalCntrl: ModalController) {
     this.modalControllers = new ModalControllers(modalCntrl);
@@ -25,8 +26,9 @@ export class SearshMedecinDetailComponent implements OnInit {
 
   getData() {
     this.searchProduct = this.navParams.get('product');
-    console.log(this.searchProduct.pharmacy.products);
+    this.isPres = this.navParams.get('isPres');
     this.currentUser = this.navParams.get('user');
+    console.log(this.isPres);
   }
 
   goAddPrescription() {
@@ -53,7 +55,7 @@ export class SearshMedecinDetailComponent implements OnInit {
   }
 
   addOrder() {
-    this.modalControllers.callAddOrder(this.currentUser, this.searchProduct);
+    this.modalControllers.callAddOrder(this.currentUser, this.searchProduct,this.isPres);
     this.modalCntrl.dismiss();
   }
 

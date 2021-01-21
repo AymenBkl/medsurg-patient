@@ -30,7 +30,6 @@ export class PrescriptionService {
       });
     }
   createPrescription(prescription: Prescription) {
-
     return new Promise((resolve, reject) => {
     this.httpClient.post<PrescriptionResponse>(this.prescriptionURL + 'prescription/prescription', prescription)
       .subscribe(response => {
@@ -46,7 +45,6 @@ export class PrescriptionService {
     });
   }
   postImage(formData: FormData) {
-
     return new Promise((resolve, reject) => {
     this.httpClient.post<PrescriptionResponse>(this.prescriptionURL + 'prescriptionfiles/addimage', formData)
       .subscribe(response => {
@@ -60,5 +58,21 @@ export class PrescriptionService {
         reject(err);
       });
     });
+  }
+
+  updateApprovedPrescription(commentId:string,prescriptionId:string){
+    return new Promise((resolve, reject) => {
+      this.httpClient.put<PrescriptionResponse>(this.prescriptionURL + 'prescription/approveprescription', {commentId:commentId,prescriptionId:prescriptionId})
+        .subscribe(response => {
+          if (response.status === 200) {
+            resolve(response);
+          }
+          else {
+            resolve(false);
+          }
+        }, err => {
+          reject(err);
+        });
+      });
   }
 }
