@@ -3,7 +3,6 @@ import { User } from 'src/app/interfaces/user';
 import { AuthService } from '../../services/auth.service';
 import { ModalControllers } from '../../classes/modalController';
 import { ModalController } from '@ionic/angular';
-import { RealtimedatabaseService } from '../../services/firebase/realtimedatabase.service';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { InteractionService } from '../../services/interaction.service';
 import { map } from 'rxjs/operators';
@@ -24,7 +23,6 @@ export class PrescriptionPage implements OnInit {
   offers: Offer[] | any;
   constructor(private authService: AuthService,
               private modalController: ModalController,
-              private realtimedatabase: RealtimedatabaseService,
               private interactionService: InteractionService,
               private prescriptionService: PrescriptionService) {
                 this.modalControllers = new ModalControllers(modalController);
@@ -50,33 +48,52 @@ export class PrescriptionPage implements OnInit {
   }
 
   buildPrescription(){
-    this.prescriptionService.getAllPrescriptions().
-    then((data: any) => {
-      const prescriptions = [];
-      if (data.length === 0 ){
-        this.interactionService.createToast('No data found', 'primary', 'bottom');
-      }
-      else {
-        data.map(presc => {
-          prescriptions.push(presc);
+    this.interactionService.createLoading("Please Wait ! ")
+      .then(() => {
+        this.prescriptionService.getAllPrescriptions().
+        then(async (data: any) => {
+          console.log(data);
+          if (data.length === 0 ){
+            this.interactionService.createToast('No data found', 'primary', 'bottom');
+          }
+          else {
+            this.prescriptions = data.sort((a, b) => {
+              return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+            });
+            await this.sortComments();
+            this.interactionService.hide();
+          }
+        })
+        .catch(err => {
+          this.interactionService.hide();
+          this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
         });
-        this.prescriptions = prescriptions.sort((a, b) => {
-          return new Date(b.date).getTime() - new Date(a.date).getTime();
-        });
-      }
-    });
+      })
   }
 
 
   getOffers(){
-    this.realtimedatabase.getOffers(this.currentUser._id)
-      .subscribe(offers => {
-        this.offers = offers
-      });
   }
 
   segmentChanged(event){
     this.currentSegmentType = event.detail.value;
+  }
+
+
+  calculateCommentPrice(comment: Comment){
+    let commentPrice = 0;
+    comment.products.map(product => {
+      commentPrice += product.product.price * product.quantity;
+    })
+    return commentPrice;
+  }
+
+  async sortComments(){
+    await this.prescriptions.map(async (prescription) => {
+      await prescription.comments.sort((a,b) => {
+        return this.calculateCommentPrice(a) - this.calculateCommentPrice(b);
+      })
+    })
   }
   
 

@@ -1,10 +1,10 @@
+import { Product } from "./product";
+import { User } from "./user";
+
 export interface Comment {
-    commentId:string;
-    user_id: string;
-    userFullName: string;
-    userImage: string;
-    date: string;
-    comment: string;
-    postKey: string;
+    _id:string;
+    pharmacy: User,
+    createdAt: string;
     status:string;
+    products: {product: Product,quantity: number}[];
 }

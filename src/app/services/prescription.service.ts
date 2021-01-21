@@ -15,7 +15,7 @@ export class PrescriptionService {
 
   getAllPrescriptions() {
     return new Promise((resolve, reject) => {
-      this.httpClient.get<PrescriptionResponse>(this.prescriptionURL + 'prescription/allprescription')
+      this.httpClient.get<PrescriptionResponse>(this.prescriptionURL + 'prescription/allprescription/getallprescriptionpatient')
         .subscribe(response => {
           console.log(response);
           if (response.status === 200) {

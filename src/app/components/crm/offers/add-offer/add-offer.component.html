@@ -4,7 +4,7 @@
   <ion-slides class="center-row"  [options]='slideOpts'  #slides class="swiper-no-swiping slides"  >
     <ion-slide class="slide intro-slide" >
        <ion-label class="intro">Chooce Your payment Method !!!</ion-label>
-       <ion-item (click)="selectMethod('card')">
+       <ion-item >
         <ion-thumbnail slot="start">
           <img src="../../../../../assets/imgs/visa.png" />
         </ion-thumbnail>
@@ -13,7 +13,7 @@
       </ion-item>
     
     
-      <ion-item (click)="selectMethod('cod')">
+      <ion-item >
         <ion-thumbnail slot="start">
           <img src="../../../../../assets/imgs/cod.png" />
         </ion-thumbnail>
@@ -26,7 +26,7 @@
         <ion-label class="intro">Create Your Offer Now !!!</ion-label>
       </ion-item>
       
-      <ion-button class="buttons"  (click)="createOffer()" shape="round" size="default" expand="full">
+      <ion-button class="buttons"   shape="round" size="default" expand="full">
         <ion-label *ngIf="!submitted">Create</ion-label>
         <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
       </ion-button>

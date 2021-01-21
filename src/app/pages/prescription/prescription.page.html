@@ -25,7 +25,7 @@
               {{currentUser.firstname}} {{currentUser.lastname}}
             </ion-text>
             <ion-text class="date">
-              {{prescription.date | date:'short'}}
+              {{prescription.createdAt | date:'short'}}
             </ion-text>
           </div>
           </ion-item>
@@ -43,11 +43,11 @@
           <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments;let i = index" [class.highlited]='comment.status == "accepted"' >
             <div class="comment-holder" >
               <ion-avatar class="img">
-                <img *ngIf="!comment || comment.userImage == '' " src="../../../assets/imgs/pharmacy-user-img.png">
-                <img *ngIf="comment && comment.userImage != ''" [src]="comment.userImage">
+                <img *ngIf="!comment || comment.pharmacy.imageUrl == '' " src="../../../assets/imgs/pharmacy-user-img.png">
+                <img *ngIf="comment && comment.pharmacy.imageUrl  != ''" [src]="comment.pharmacy.imageUrl ">
               </ion-avatar>
               <ion-text class="text"  class="add-comment">
-                {{comment.comment}}
+                {{this.calculateCommentPrice(comment)}}
               </ion-text>
             </div>
           </ion-item>

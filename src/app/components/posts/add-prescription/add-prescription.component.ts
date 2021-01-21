@@ -3,7 +3,6 @@ import { NavController, NavParams } from '@ionic/angular';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { User } from 'src/app/interfaces/user';
 import { PrescriptionService } from 'src/app/services/prescription.service';
-import { RealtimedatabaseService } from '../../../services/firebase/realtimedatabase.service';
 import { InteractionService } from '../../../services/interaction.service';
 @Component({
   selector: 'app-add-prescription',
@@ -16,7 +15,6 @@ export class AddPrescriptionComponent implements OnInit {
   prescription: Prescription;
   image: {url: any, file: any};
   constructor(private navParam: NavParams,
-              private realTimeDatabase: RealtimedatabaseService,
               private interactionService: InteractionService,
               private prescriptionService: PrescriptionService) { }
 
@@ -27,14 +25,15 @@ export class AddPrescriptionComponent implements OnInit {
   getData(){
     this.currentUser = this.navParam.get('user');
     this.prescription = {
-      patient : this.currentUser._id,
+      patient : this.currentUser,
       description:this.navParam.get('productsNames'),
       imageUrl : '',
-      date : new Date().toISOString(),
+      createdAt : new Date().toISOString(),
       _id : null,
       comments : [],
       status:'created'
     };
+    delete this.prescription._id;
   }
 
   selectedImage(event) {

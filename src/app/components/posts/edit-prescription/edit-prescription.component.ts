@@ -4,7 +4,7 @@ import { ModalControllers } from 'src/app/classes/modalController';
 import { ModalControllerSearch } from 'src/app/classes/modalController.searsh';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { User } from 'src/app/interfaces/user';
-import { RealtimedatabaseService } from '../../../services/firebase/realtimedatabase.service';
+import { PrescriptionService } from 'src/app/services/prescription.service';
 import { InteractionService } from '../../../services/interaction.service';
 
 @Component({
@@ -22,9 +22,9 @@ export class EditPrescriptionComponent implements OnInit {
 
 
   constructor(private navParam: NavParams,
-              private realTimeDatabase: RealtimedatabaseService,
               private interactionService: InteractionService,
-              private modalCntrl: ModalController) { 
+              private modalCntrl: ModalController,
+              private prescriptionService: PrescriptionService) { 
                 this.modalControllers = new ModalControllers(modalCntrl);
               }
 
@@ -51,12 +51,15 @@ export class EditPrescriptionComponent implements OnInit {
   }
 
   postImage(){
-    this.interactionService.createLoading('Updating your prescription please wait')
+    this.interactionService.createLoading('Creating your prescription please wait')
     .then(() => {
-      this.realTimeDatabase.uploadFile(this.image.file)
+      const formData = new FormData();
+      formData.append('file', this.image.file);
+      this.prescriptionService.postImage(formData)
       .then((result: any) => {
         if (result){
-          this.prescription.imageUrl = result;
+          console.log("here");
+          this.prescription.imageUrl = result.prescription;
           this.postPrescription();
         }
         else {
@@ -69,7 +72,7 @@ export class EditPrescriptionComponent implements OnInit {
   }
 
   postPrescription(){
-    this.realTimeDatabase.updatePost(this.prescription)
+    /**this.realTimeDatabase.updatePost(this.prescription)
     .then(response => {
       this.interactionService.hide();
       if (response && response !== false){
@@ -80,7 +83,7 @@ export class EditPrescriptionComponent implements OnInit {
       }
     }).catch(err => {
       this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
-    });
+    });**/
   }
 
   preview(files) {

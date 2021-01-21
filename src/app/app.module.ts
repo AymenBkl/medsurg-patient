@@ -21,7 +21,6 @@ import { ProccessHttpErrosService } from './services/proccess-http-erros.service
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { config } from './services/config';
-import { RealtimedatabaseService } from './services/firebase/realtimedatabase.service';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -58,7 +57,6 @@ import { PrescriptionService } from './services/prescription.service';
     SearchMedecinService,
     FileChooser,
     File,
-    RealtimedatabaseService,
     OrderService,
     ReferalService,
     MessageService,
