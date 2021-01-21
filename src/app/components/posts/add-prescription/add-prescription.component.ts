@@ -87,7 +87,7 @@ export class AddPrescriptionComponent implements OnInit {
       this.interactionService.hide();
       if (response && response !== false){
         this.modalCntrl.dismiss();
-        this.interactionService.createToast('Your prescreption is created succesfully', 'success', 'bottom');
+        this.interactionService.createToast('Your prescreption has been created succesfully', 'success', 'bottom');
       }
       else {
         this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
