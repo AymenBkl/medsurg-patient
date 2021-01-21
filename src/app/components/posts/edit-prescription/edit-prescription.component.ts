@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController, NavParams } from '@ionic/angular';
 import { ModalControllers } from 'src/app/classes/modalController';
 import { ModalControllerSearch } from 'src/app/classes/modalController.searsh';
+import { Comment } from 'src/app/interfaces/comment';
 import { Prescription } from 'src/app/interfaces/prescription';
+import { SearchProduct } from 'src/app/interfaces/searchproduct';
 import { User } from 'src/app/interfaces/user';
 import { PrescriptionService } from 'src/app/services/prescription.service';
 import { InteractionService } from '../../../services/interaction.service';
@@ -18,14 +20,14 @@ export class EditPrescriptionComponent implements OnInit {
   prescription: Prescription;
   image: {url: any, file: any};
   commentSelected: number;
-  modalControllers: ModalControllers;
+  modalControllers: ModalControllerSearch;
 
 
   constructor(private navParam: NavParams,
               private interactionService: InteractionService,
               private modalCntrl: ModalController,
               private prescriptionService: PrescriptionService) { 
-                this.modalControllers = new ModalControllers(modalCntrl);
+                this.modalControllers = new ModalControllerSearch(modalCntrl);
               }
 
   ngOnInit() {
@@ -109,8 +111,30 @@ export class EditPrescriptionComponent implements OnInit {
   }
 
   addOrder() {
-    this.modalControllers.callAddOrderPrescription(this.currentUser, this.prescription,this.prescription.comments[this.commentSelected]);
+    let selectedComment: any = this.prescription.comments[this.commentSelected];
+    selectedComment.pharmacy.products = selectedComment.products;
+    let selectedPharmacy : SearchProduct = {
+      pharmacy_id: selectedComment.pharmacy._id,
+      pharmacy : selectedComment.pharmacy,
+      totalPrice: this.calculateCommentPrice(selectedComment)
+    }
+    console.log(selectedPharmacy)
+    this.modalControllers.callSearchDetail(selectedPharmacy,this.currentUser);
     this.modalCntrl.dismiss();
+  }
+
+  calculateCommentPrice(comment: Comment){
+    let commentPrice = 0;
+    comment.products.map(product => {
+      commentPrice += product.product.price * product.quantity;
+    })
+    return commentPrice;
+  }
+
+  async sortComments(){
+      await this.prescription.comments.sort((a,b) => {
+        return this.calculateCommentPrice(a) - this.calculateCommentPrice(b);
+      })
   }
 
 

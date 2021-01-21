@@ -25,6 +25,7 @@ export class SearshMedecinDetailComponent implements OnInit {
 
   getData() {
     this.searchProduct = this.navParams.get('product');
+    console.log(this.searchProduct.pharmacy.products);
     this.currentUser = this.navParams.get('user');
   }
 

@@ -80,6 +80,7 @@ export class SearchMedecinPage implements OnInit {
   }
 
   goPharmacyDetail(selectedPharmacy: SearchProduct) {
+    console.log(selectedPharmacy);
     this.modalController.callSearchDetail(selectedPharmacy,this.currentUser)
 
   }

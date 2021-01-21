@@ -18,7 +18,6 @@ export class SearchMedecinService {
       this.httpClient.post<SearchResponse>(this.url + 'crm/productsmanagement/searchproducts', products)
         .subscribe(result => {
           if (result && result.status === 200){
-            console.log(result.product[0].pharmacy);
             resolve(result.product);
           }
           else {

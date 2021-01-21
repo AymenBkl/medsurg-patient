@@ -48,6 +48,7 @@
               <img *ngIf="comment && comment.pharmacy.imageUrl != ''" [src]="comment.pharmacy.imageUrl">
             </ion-avatar>
             <ion-text class="text"  class="add-comment">
+              {{calculateCommentPrice(comment)}}
             </ion-text>
           </div>
         </ion-item>
