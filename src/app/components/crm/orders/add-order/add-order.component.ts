@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonSlides, ModalController, NavParams } from '@ionic/angular';
+import { Address } from 'src/app/interfaces/address';
+
 import { Order } from 'src/app/interfaces/order';
 import { Referal } from 'src/app/interfaces/referal';
 import { SearchProduct } from 'src/app/interfaces/searchproduct';
 import { User } from 'src/app/interfaces/user';
+import { AddressesPage } from 'src/app/pages/addresses/addresses.page';
 import { OrderService } from 'src/app/services/crm/order.service';
 import { ReferalService } from 'src/app/services/crm/referal.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -19,7 +22,7 @@ export class AddOrderComponent implements OnInit {
 
   currentUser: User;
   searchProduct: SearchProduct | any;
-  order: Order | any;
+  order: Order;
   referalP: Referal;
   isPres: {prescription:string,comment:string,type:string} = null;
   @ViewChild('slides') slides: IonSlides;
@@ -61,7 +64,11 @@ export class AddOrderComponent implements OnInit {
       method: this.selectedMethod,
       status: "created",
       referal: this.referalP,
+      address:null,
+      _id:null,
+      createdAt : new Date().toISOString(),
     }
+    delete this.order._id
   }
   
 
@@ -75,10 +82,25 @@ export class AddOrderComponent implements OnInit {
   }
 
 
-  selectMethod(type: string) {
+  async selectMethod(type: string) {
     this.selectedMethod = type;
     this.order.method = type;
-    this.nextSlide();
+    const modal = await this.modalCntrl.create({
+      component : AddressesPage,
+      backdropDismiss:true,
+      componentProps:{
+        order:true
+      }
+  });
+  modal.onDidDismiss()
+      .then((data) => {
+        if (data && data.data){
+          this.order.address = data.data;
+          this.nextSlide();
+        }
+      });
+  return await modal.present();
+    
   }
 
   checkReferal() {

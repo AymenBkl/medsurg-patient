@@ -1,11 +1,12 @@
-<app-header  [type]="'page'"></app-header>
+<app-header *ngIf="!isOrder" [type]="'page'"></app-header>
+<app-header *ngIf="isOrder" [type]="'modal'"></app-header>
 
 
 <ion-content>
   <ion-grid *ngIf="currentUser">
     <ion-row *ngIf="!addAddress">
-      <ion-col class="col" size="12" *ngFor="let address of currentUser.addresses">
-        <ion-card lines="none" class="card" >
+      <ion-col class="col" size="12" *ngFor="let address of currentUser.addresses;let i = index">
+        <ion-card lines="none" class="card" [class.selected]="i + 1 == selectedAddress" (click)="selectAddress(i)">
           <div class="main-container">
             <div class="container-info">  
               <div class="address">
@@ -48,6 +49,11 @@
       <ion-col size="12" >
         <ion-button shape="round" size="default" color="success"  expand="full" (click)="goToAddAddress()" >
           <ion-text>Add Address</ion-text>
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" *ngIf="selectedAddress" >
+        <ion-button shape="round" size="default" color="primary"  expand="full" (click)="selectedAddressOrder()" >
+          <ion-text>Select Address</ion-text>
         </ion-button>
       </ion-col>
     </ion-row>

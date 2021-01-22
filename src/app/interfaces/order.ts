@@ -1,3 +1,4 @@
+import { Address } from "cluster";
 import { OrderProduct } from "./orderCart";
 import { Referal } from "./referal";
 import { User } from "./user";
@@ -12,4 +13,5 @@ export interface Order {
     status: string;
     method:string;
     createdAt:string;
+    address:Address;
 }

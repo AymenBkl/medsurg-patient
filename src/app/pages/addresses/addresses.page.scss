@@ -98,6 +98,10 @@
     min-height: 160px;
 }
 
+.card.selected {
+    background-color: #2B91BF;
+}
+
 .avatar-icon {
     display: inline-block;
     //width: 25%;
