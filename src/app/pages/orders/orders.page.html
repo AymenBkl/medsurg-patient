@@ -40,7 +40,13 @@
             <div class="inner-container">
   
               <ion-label class="inner-item"><ion-icon class="ion-icon" name="time-outline"></ion-icon> : {{order.createdAt | date:'short'}}</ion-label>
-              <ion-label  class="inner-item"><ion-icon class="ion-icon" name="location-outline" ></ion-icon> :Address</ion-label>
+              <ion-label  class="inner-item" *ngIf="order.address != null"><ion-icon class="ion-icon" name="location-outline"></ion-icon> : Address : 
+                {{order.address.city}},
+                {{order.address.streetName1}},
+                {{order.address.streetName2}},
+                {{order.address.buildingNumber}},
+                {{order.address.postalCode}}
+              </ion-label>
   
               <ion-label class="inner-item"><ion-icon class="ion-icon" name="cash-outline"></ion-icon> : €{{order.totalPrice}}</ion-label>
             </div>

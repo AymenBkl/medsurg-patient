@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './services/auth.service';
 import { User } from './interfaces/user';
 import { Router } from '@angular/router';
+import { CashfreeService } from './services/cashfree.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -90,7 +91,12 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private authService: AuthService,
     private router: Router,
+    private cashfree: CashfreeService
   ) {
+    this.cashfree.createToken(150)
+      .then((result) => {
+        console.log(result)
+      })
     this.initializeApp();
   }
 

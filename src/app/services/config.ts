@@ -11,5 +11,10 @@ export const config = {
         appId: '1:594595921902:web:2dadf268c4c7e81332d8ff',
         measurementId: 'G-JLPRN130H3'
 
+    },
+    cashfree: {
+        url: 'https://api.cashfree.com/api/v2/',
+        appId: '9531832d9f196694e8e2dccad81359',
+        appKey: 'd52051d0b97842049dcdf5a3a873497484032a58'
     }
 };

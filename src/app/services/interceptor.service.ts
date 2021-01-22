@@ -9,44 +9,69 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class InterceptorService implements HttpInterceptor {
-
+  valid: ValidRequest;
+  urlNotToUse: string[] = ['https://test.cashfree.com/','https://api.cashfree.com/api/v2/'];
   constructor(private inj: Injector,
-              private storageService: StorageService) { }
+              private storageService: StorageService) { 
+                this.valid = new ValidRequest();
+              }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authService = this.inj.get(AuthService);
-    // Get the auth header from the service.
     const authToken = this.storageService.getToken();
-    // console.log("Interceptor: " + authToken);
-    // Clone the request to add the new header.
-    console.log(authToken);
-    const authReq = req.clone({ headers: req.headers.set('Authorization', 'bearer ' + authToken) });
-
-    // Pass on the cloned request instead of the original request.
-    return next.handle(authReq);
+    if (this.valid.isValidRequestForInterceptor(req.url,this.urlNotToUse)){
+      const authReq = req.clone({ headers: req.headers.set('Authorization', 'bearer ' + authToken) });
+      return next.handle(authReq);
+    }
+    else {
+      return next.handle(req);
+    }
+    
   }
 }
 
 @Injectable()
 export class UnauthorizedInterceptor implements HttpInterceptor {
+  valid: ValidRequest;
+  urlNotToUse: string[] = ['https://test.cashfree.com','https://api.cashfree.com/api/v2/'];
   constructor(private inj: Injector,
-              private storageService: StorageService) { }
+              private storageService: StorageService) { 
+                this.valid = new ValidRequest();
+              }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authService = this.inj.get(AuthService);
     const authToken = this.storageService.getToken();
-
-    return next
+    if (this.valid.isValidRequestForInterceptor(req.url,this.urlNotToUse)){
+      return next
       .handle(req)
       .pipe(tap((event: HttpEvent<any>) => {
         // do nothing
       }, (err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401 && authToken) {
-            console.log('Unauthorized Interceptor: ', err);
             authService.checkJWT();
           }
         }
       }));
+    }
+    else {
+      return next.handle(req);
+    }
+    
   }
 }
+
+class ValidRequest {
+   isValidRequestForInterceptor(requestUrl: string,urlsToNotUse: string[]): boolean {
+    let valid: boolean = true;
+     urlsToNotUse.map(url => {
+      if (requestUrl.includes(url)){
+        valid = false;
+      }
+    })
+    return valid;
+  }
+}
+
+

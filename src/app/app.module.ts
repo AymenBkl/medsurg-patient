@@ -32,6 +32,7 @@ import { ReferalService } from './services/crm/referal.service';
 import { OrderService } from './services/crm/order.service';
 import { CategoryService } from './services/crm/category.service';
 import { PrescriptionService } from './services/prescription.service';
+import { CashfreeService } from './services/cashfree.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -63,10 +64,12 @@ import { PrescriptionService } from './services/prescription.service';
     NavParams,
     CategoryService,
     PrescriptionService,
+    CashfreeService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
-      multi: true
+      multi: true,
+      
     },
     {
       provide: HTTP_INTERCEPTORS,
