@@ -1,3 +1,5 @@
+import { Address } from "cluster";
+
 export interface User {
     _id: string;
     firstname: string;
@@ -9,4 +11,5 @@ export interface User {
     imageUrl: string;
     setup: boolean;
     emailVerified: boolean;
+    addresses:Address[];
 }
