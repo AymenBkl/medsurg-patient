@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { InteractionService } from 'src/app/services/interaction.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { onValueChanged } from './valueChanges';
 
@@ -13,8 +14,10 @@ export class AddAddressComponent implements OnInit {
   addressForm: FormGroup;
   formErrors: any;
   submitted = false;
+  @Output() addressAdded: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService) { }
+              private userService: UserService,
+              private interactionService:InteractionService) { }
 
   ngOnInit() {
     this.buildReactiveForm();
@@ -38,10 +41,25 @@ export class AddAddressComponent implements OnInit {
 
 
   addAddress() {
+    this.submitted = true;
     this.userService.addAddress(this.addressForm.value)
-      .then((result) => {
-        console.log(result);
+      .then((result: any) => {
+        this.submitted = false;
+        if (result && result != false){
+          this.interactionService.createToast("Address Has Been Added Succesfully", 'success', "bottom");
+          this.back();
+        }
+        else {
+          this.interactionService.createToast("Something Went Wrong !", 'danger', "bottom");
+        }
       })
+      .catch(err => {
+        this.interactionService.createToast("Something Went Wrong !", 'danger', "bottom");
+      })
+  }
+
+  back(){
+    this.addressAdded.emit(false);
   }
 
 }

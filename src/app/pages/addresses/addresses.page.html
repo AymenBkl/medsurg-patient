@@ -1,9 +1,59 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>addresses</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header  [type]="'page'"></app-header>
+
 
 <ion-content>
-  <app-add-address></app-add-address>
+  <ion-grid *ngIf="currentUser">
+    <ion-row *ngIf="!addAddress">
+      <ion-col size="12" *ngFor="let address of currentUser.addresses">
+        <ion-card lines="none" class="card" >
+          <div class="main-container">
+            <div class="container-info">  
+              <div class="address">
+                <ion-label class="label">
+                  <ion-icon class="icon"  src="/../../../assets/imgs/street-name.svg"></ion-icon> City : {{address.city}}
+                </ion-label>
+              </div>
+              <div class="address">
+                <ion-label class="label">
+                  <ion-icon class="icon"  src="../../../assets/imgs/street-name.svg"></ion-icon> StreetName {{address.streetName1}}
+                </ion-label>
+              </div>
+              <div class="address">
+                <ion-label class="label">
+                  <ion-icon class="icon"  src="../../../assets/imgs/street-name.svg"></ion-icon> StreetName1 {{address.streetName2}}
+                </ion-label>
+              </div>
+              <div class="address">
+                <ion-label class="label">
+                  <ion-icon class="icon"  src="../../../assets/imgs/mailbox.svg"></ion-icon> PostalCode {{address.postalCode}}
+                </ion-label>
+              </div>
+              <div class="address">
+                <ion-label class="label">
+                  <ion-icon class="icon"  src="../../../assets/imgs/building.svg"></ion-icon> BuildingNumber {{address.buildingNumber}}
+                </ion-label>
+              </div>
+            </div>
+            <hr>
+          </div>
+      </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="addAddress">
+      <ion-col size="12" >
+        <app-add-address (addressAdded)="addressAdded($event)"></app-add-address>
+      </ion-col>
+    </ion-row>
+    <ion-row class="bottom-row" *ngIf="!addAddress">
+      <ion-col size="12" >
+        <ion-button shape="round" size="default" color="success"  expand="full" (click)="goToAddAddress()" >
+          <ion-text>Add Address</ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <div class="spin" *ngIf="!currentUser">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
 </ion-content>

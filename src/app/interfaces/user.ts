@@ -1,4 +1,4 @@
-import { Address } from "cluster";
+import { Address } from "./address";
 
 export interface User {
     _id: string;
