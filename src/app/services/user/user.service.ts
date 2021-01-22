@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthResponse } from '../../interfaces/response';
 import { ProccessHttpErrosService } from '../proccess-http-erros.service';
 import { AuthService } from '../auth.service';
+import { Address } from '../../interfaces/address';
 @Injectable({
   providedIn: 'root'
 })
@@ -119,6 +120,23 @@ export class UserService {
           else {
             reject(err);
           }
+        });
+    });
+  }
+
+  addAddress(address: Address) {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post<AuthResponse>(this.userUrl + 'addaddress',{address: address})
+        .subscribe(response => {
+          if (response.status === 200){
+            this.authService.userUpdated(response.user);
+            resolve(response.user);
+          }
+          else {
+            resolve(false);
+          }
+        }, err => {
+          reject(err);
         });
     });
   }

@@ -62,7 +62,8 @@ const routes: Routes = [
   },
   {
     path: 'addresses',
-    loadChildren: () => import('./pages/addresses/addresses.module').then( m => m.AddressesPageModule)
+    redirectTo: 'tabs/tab4/addresses',
+    canActivate: [AuthGuard]
   },
 ];
 

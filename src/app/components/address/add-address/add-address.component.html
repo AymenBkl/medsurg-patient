@@ -1,3 +1,44 @@
-<p>
-  add-address works!
-</p>
+<ion-grid data-aos="fade-up">
+  <ion-row class="ion-align-items-center" data-aos="fade-up">
+    <ion-col size="12" size-md="8" offset-md="2" data-aos="fade-up">
+ <form novalidate  [formGroup]="addressForm"  class="form" (ngSubmit)="addAddress()" data-aos="fade-up">
+    <ion-item lines="none" class="ion-input" data-aos="fade-up" data-aos-duration="3000">
+      <ion-icon src="../../../../assets/imgs/street-name.svg"></ion-icon>
+      <ion-input placeHolder="City" formControlName="city"></ion-input>
+    </ion-item>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.city">*{{formErrors.city}}</ion-label>
+
+    <ion-item lines="none" class="ion-input">
+      <ion-icon src="../../../../assets/imgs/street-name.svg"></ion-icon>
+      <ion-input placeHolder="StreetName" formControlName="streetName"></ion-input>
+    </ion-item>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.streetName">*{{formErrors.streetName}}</ion-label>
+
+    <ion-item lines="none" class="ion-input">
+      <ion-icon src="../../../../assets/imgs/street-name.svg"></ion-icon>
+      <ion-input placeHolder="StreetName1" formControlName="streetName1"></ion-input>
+    </ion-item>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.streetName1">*{{formErrors.streetName1}}</ion-label>
+
+    <ion-item lines="none" class="ion-input">
+      <ion-icon src="../../../../assets/imgs/mailbox.svg"></ion-icon>
+      <ion-input type="number" placeHolder="PostalCode" formControlName="postalCode"></ion-input>
+    </ion-item>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.postalCode">*{{formErrors.postalCode}}</ion-label>
+
+    <ion-item lines="none" class="ion-input">
+      <ion-icon src="../../../../assets/imgs/building.svg"></ion-icon>
+      <ion-input type="number" placeHolder="BuildingNumber" formControlName="buildingNumber"></ion-input>
+    </ion-item>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.buildingNumber">*{{formErrors.buildingNumber}}</ion-label>
+
+
+    <ion-button class="buttons" [disabled]="addressForm.invalid || submitted" (click)="addAddress()" shape="round" size="default" expand="full">
+      <ion-label *ngIf="!submitted">Add Address </ion-label>
+      <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
+    </ion-button>
+   
+ </form>
+</ion-col>
+</ion-row>
+</ion-grid>

@@ -49,6 +49,11 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'tab4/addresses',
+        loadChildren: () => import('../pages/addresses/addresses.module').then( m => m.AddressesPageModule),
+        canActivate: [AuthGuard]
+      },
+      {
         path: 'tab3',
         loadChildren: () => import('../pages/orders/orders.module').then( m => m.OrdersPageModule),
         canActivate: [AuthGuard]
