@@ -60,6 +60,10 @@ const routes: Routes = [
     redirectTo: 'tabs/tab4/search-categorie',
     canActivate: [AuthGuard]
   },
+  {
+    path: 'addresses',
+    loadChildren: () => import('./pages/addresses/addresses.module').then( m => m.AddressesPageModule)
+  },
 ];
 
 @NgModule({
