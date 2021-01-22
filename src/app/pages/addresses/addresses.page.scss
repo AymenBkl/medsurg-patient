@@ -113,6 +113,10 @@
     vertical-align: middle;
 }
 
+.col:last-child{
+    margin-bottom: 80px;
+}
+
 .container-info {
   text-align: center;
   display: inline-block;

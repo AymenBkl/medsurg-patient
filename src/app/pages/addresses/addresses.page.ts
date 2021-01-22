@@ -29,6 +29,7 @@ export class AddressesPage implements OnInit {
   addressAdded(event) {
     console.log(event);
     this.addAddress = event;
+    this.getCurrentUser();
   }
 
 }

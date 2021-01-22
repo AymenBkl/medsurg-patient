@@ -129,6 +129,7 @@ export class AuthService {
   userUpdated(user) {
     user.token = this.user.token;
     this.user = user;
+    console.log(user);
     this.currentUser.next(user);
   }
 

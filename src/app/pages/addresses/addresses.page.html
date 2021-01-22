@@ -4,7 +4,7 @@
 <ion-content>
   <ion-grid *ngIf="currentUser">
     <ion-row *ngIf="!addAddress">
-      <ion-col size="12" *ngFor="let address of currentUser.addresses">
+      <ion-col class="col" size="12" *ngFor="let address of currentUser.addresses">
         <ion-card lines="none" class="card" >
           <div class="main-container">
             <div class="container-info">  
