@@ -35,7 +35,7 @@ export class CashfreeService {
     })
   }
 
-  createOrder(token) {
+  createOrder(orderId: string) {
 
     return new Promise((resolve,reject) => {
       const header = {
@@ -45,7 +45,7 @@ export class CashfreeService {
       let paramForm= new URLSearchParams();
       paramForm.append('appId',config.cashfree.appId);
       paramForm.append('secretKey',config.cashfree.appKey);
-      paramForm.append('orderId','ODER-1045452');
+      paramForm.append('orderId',orderId);
       paramForm.append('orderAmount','150');
       paramForm.append('orderNote','test');
       paramForm.append('customerName','xyz');
@@ -53,6 +53,46 @@ export class CashfreeService {
       paramForm.append('customerEmail','sada@sada.dz');
       paramForm.append('returnUrl','http://localhost:8100/');
         this.httpClient.post('https://test.cashfree.com/api/v1/order/create',paramForm.toString(),header)
+          .subscribe(data => {
+            resolve(data)
+          },err => {
+            reject(err);
+          })
+      })
+  }
+
+
+  checkLink(orderId: string) {
+    return new Promise((resolve,reject) => {
+      const header = {
+        headers: new HttpHeaders()
+          .set("Content-Type", "application/x-www-form-urlencoded")
+      };
+      let paramForm= new URLSearchParams();
+      paramForm.append('appId',config.cashfree.appId);
+      paramForm.append('secretKey',config.cashfree.appKey);
+      paramForm.append('orderId',orderId);
+        this.httpClient.post('https://test.cashfree.com/api/v1/order/info/link',paramForm.toString(),header)
+          .subscribe(data => {
+            resolve(data)
+          },err => {
+            reject(err);
+          })
+      })
+  }
+
+
+  paymentStatus(orderId: string) {
+    return new Promise((resolve,reject) => {
+      const header = {
+        headers: new HttpHeaders()
+          .set("Content-Type", "application/x-www-form-urlencoded")
+      };
+      let paramForm= new URLSearchParams();
+      paramForm.append('appId',config.cashfree.appId);
+      paramForm.append('secretKey',config.cashfree.appKey);
+      paramForm.append('orderId',orderId);
+        this.httpClient.post('https://test.cashfree.com/api/v1/order/info/status',paramForm.toString(),header)
           .subscribe(data => {
             resolve(data)
           },err => {

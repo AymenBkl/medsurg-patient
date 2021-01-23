@@ -103,9 +103,17 @@ export class AppComponent implements OnInit {
         this.cashfree.createToken(150)
         .then((result:any) => {
           console.log(result);
-          this.cashfree.createOrder(result)
+          this.cashfree.createOrder('ODER-10454521')
             .then(result => {
               console.log(result);
+              this.cashfree.checkLink('ODER-10454521')
+                .then(result => {
+                  console.log(result);
+                  this.cashfree.paymentStatus('ODER-10454521')
+                    .then(result => {
+                      console.log(result)
+                    })
+                })
             })
             .catch(err => {
               console.log(err);
