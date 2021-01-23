@@ -83,8 +83,8 @@
       "cashfree_pg_sdk_cordova": {}
     },
     "platforms": [
-      "browser",
-      "android"
+      "android",
+      "browser"
     ]
   }
 }

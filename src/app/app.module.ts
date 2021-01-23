@@ -69,7 +69,7 @@ import { CashfreeService } from './services/cashfree.service';
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true,
-      
+
     },
     {
       provide: HTTP_INTERCEPTORS,

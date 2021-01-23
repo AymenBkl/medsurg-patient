@@ -7,6 +7,7 @@ import { AuthService } from './services/auth.service';
 import { User } from './interfaces/user';
 import { Router } from '@angular/router';
 import { CashfreeService } from './services/cashfree.service';
+import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -93,15 +94,23 @@ export class AppComponent implements OnInit {
     private router: Router,
     private cashfree: CashfreeService
   ) {
-    this.cashfree.createToken(150)
-      .then((result) => {
-        console.log(result)
-      })
+    
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
+        this.cashfree.createToken(150)
+        .then((result:any) => {
+          console.log(result);
+          this.cashfree.createOrder(result)
+            .then(result => {
+              console.log(result);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        })
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -140,4 +149,22 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/login']);
       });
   }
+
+  createPayment(token){
+    return new Promise((resolve,reject) => {
+      var params = {
+        "appId":'50006e87c113551af7cd2573960005',
+        "orderId":'sadadada',
+        "orderAmount":'150',
+        "orderNote":'test',
+        "customerName":'xyz',
+        "customerPhone":'+91770915544',
+        "customerEmail":'sada@sada.dz',
+        "orderCurrency":'INR',
+        "stage":"TEST/PROD",
+        "tokenData":token} 
+    })
+  }
+
+  
 }

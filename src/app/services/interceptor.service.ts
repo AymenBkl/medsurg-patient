@@ -33,7 +33,7 @@ export class InterceptorService implements HttpInterceptor {
 @Injectable()
 export class UnauthorizedInterceptor implements HttpInterceptor {
   valid: ValidRequest;
-  urlNotToUse: string[] = ['https://test.cashfree.com','https://api.cashfree.com/api/v2/'];
+  urlNotToUse: string[] = ['https://test.cashfree.com','https://api.cashfree.com/'];
   constructor(private inj: Injector,
               private storageService: StorageService) { 
                 this.valid = new ValidRequest();
@@ -67,6 +67,7 @@ class ValidRequest {
     let valid: boolean = true;
      urlsToNotUse.map(url => {
       if (requestUrl.includes(url)){
+        console.log("hello",requestUrl)
         valid = false;
       }
     })
