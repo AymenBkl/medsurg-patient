@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -8,6 +8,7 @@ import { User } from './interfaces/user';
 import { Router } from '@angular/router';
 import { CashfreeService } from './services/cashfree.service';
 import { HttpParams } from '@angular/common/http';
+import { config } from './services/config';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -22,56 +23,56 @@ export class AppComponent implements OnInit {
       title: 'Home',
       url: 'home',
       icon: 'home',
-      auth : true
+      auth: true
     },
     {
       title: 'Profile',
       url: 'profile',
       icon: 'people-circle',
-      auth : true
+      auth: true
     },
     {
       title: 'Prescriptions',
       url: 'prescription',
       icon: 'document',
-      auth : true
+      auth: true
     },
     {
       title: 'Find Medecins',
       url: 'search-medecin',
       icon: 'search',
-      auth : true
+      auth: true
     },
     {
       title: 'Referals',
       url: 'referal',
       icon: 'link',
-      auth : true
+      auth: true
     },
     {
       title: 'Orders',
       url: 'orders',
       icon: 'cart',
-      auth : true
+      auth: true
     },
 
     {
       title: 'Login',
       url: 'login',
       icon: 'log-in',
-      auth : false
+      auth: false
     },
     {
       title: 'Register',
       url: 'register',
       icon: 'document-text',
-      auth : false
+      auth: false
     },
     {
       title: 'Logout',
       url: 'log-out',
       icon: 'log-out',
-      auth : true,
+      auth: true,
     }
   ];
 
@@ -80,12 +81,26 @@ export class AppComponent implements OnInit {
       title: 'Contact Admin',
       url: 'messages',
       icon: 'chatbubble',
-      auth : true
+      auth: true
     },
 
   ];
-  // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
+  data = {
+    "appId": config.cashfree.appId,
+    "orderId": 'ORDER-15326',
+    "orderAmount": "150",
+    "orderCurrency": 'INR',
+    "orderNote": "TEST",
+    "customerName": "AYMEN BKL",
+    "customerPhone": '9177091554',
+    "customerEmail": 'sada@sada.dz',
+    "returnUrl": 'http://localhost:8100/orders',
+    "notifyUrl": 'http://localhost:8100/orders',
+  };
+  @ViewChild('redirectForm') form: ElementRef;
+  // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  sign: any;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -94,22 +109,26 @@ export class AppComponent implements OnInit {
     private router: Router,
     private cashfree: CashfreeService
   ) {
-    
+
     this.initializeApp();
   }
 
+
+
   initializeApp() {
     this.platform.ready().then(() => {
-      this.cashfree.getCards()
-                        .then(result => {
-                          console.log(result);
-                        })
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
 
   ngOnInit() {
+    this.sign = this.sortData();
+    console.log(this.sign);
+    console.log(this.data);
+    setTimeout(() => {
+      this.form.nativeElement.submit();
+    }, 1500)
     this.authService.checkJWT();
     this.menuItems();
     this.getCurrentUser();
@@ -118,8 +137,11 @@ export class AppComponent implements OnInit {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
   }
+  ionViewDidEnter() {
+    console.log(this.form);
+  }
 
-  menuItems(){
+  menuItems() {
     this.isAuth = this.authService.user ? true : false;
     this.authService.authenticated
       .subscribe(authenticated => {
@@ -134,7 +156,7 @@ export class AppComponent implements OnInit {
       });
   }
 
-  logOut(){
+  logOut() {
     this.authService.logOut()
       .then(() => {
         this.router.navigate(['/login']);
@@ -143,21 +165,25 @@ export class AppComponent implements OnInit {
       });
   }
 
-  createPayment(token){
-    return new Promise((resolve,reject) => {
-      var params = {
-        "appId":'50006e87c113551af7cd2573960005',
-        "orderId":'sadadada',
-        "orderAmount":'150',
-        "orderNote":'test',
-        "customerName":'xyz',
-        "customerPhone":'+91770915544',
-        "customerEmail":'sada@sada.dz',
-        "orderCurrency":'INR',
-        "stage":"TEST/PROD",
-        "tokenData":token} 
-    })
+
+
+  sortData() {
+    var tuples = [];
+
+    for (var key in this.data) tuples.push([key, this.data[key]]);
+
+    tuples.sort(function (a, b) {
+      a = a[0];
+      b = b[0];
+
+      return a < b ? -1 : (a > b ? 1 : 0);
+    });
+    let newData = {}
+    for (var i = 0; i < tuples.length; i++) {
+      newData[tuples[i][0]] = tuples[i][1] ;
+    }
+    return this.cashfree.generateSignatuer(newData);
   }
 
-  
+
 }
