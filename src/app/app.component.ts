@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -7,8 +7,7 @@ import { AuthService } from './services/auth.service';
 import { User } from './interfaces/user';
 import { Router } from '@angular/router';
 import { CashfreeService } from './services/cashfree.service';
-import { HttpParams } from '@angular/common/http';
-import { config } from './services/config';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -86,19 +85,7 @@ export class AppComponent implements OnInit {
 
   ];
 
-  data = {
-    "appId": config.cashfree.appId,
-    "orderId": 'ORDER-15326',
-    "orderAmount": "150",
-    "orderCurrency": 'INR',
-    "orderNote": "TEST",
-    "customerName": "AYMEN BKL",
-    "customerPhone": '9177091554',
-    "customerEmail": 'sada@sada.dz',
-    "returnUrl": 'http://localhost:8100/orders',
-    "notifyUrl": 'http://localhost:8100/orders',
-  };
-  @ViewChild('redirectForm') form: ElementRef;
+  
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   sign: any;
   constructor(
@@ -107,7 +94,7 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private authService: AuthService,
     private router: Router,
-    private cashfree: CashfreeService
+    private cashfree: CashfreeService,
   ) {
 
     this.initializeApp();
@@ -123,12 +110,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sign = this.sortData();
-    console.log(this.sign);
-    console.log(this.data);
-    setTimeout(() => {
+    /**setTimeout(() => {
       this.form.nativeElement.submit();
-    }, 1500)
+    }, 1500)**/
     this.authService.checkJWT();
     this.menuItems();
     this.getCurrentUser();
@@ -138,7 +122,6 @@ export class AppComponent implements OnInit {
     }
   }
   ionViewDidEnter() {
-    console.log(this.form);
   }
 
   menuItems() {
@@ -167,23 +150,9 @@ export class AppComponent implements OnInit {
 
 
 
-  sortData() {
-    var tuples = [];
+  
 
-    for (var key in this.data) tuples.push([key, this.data[key]]);
-
-    tuples.sort(function (a, b) {
-      a = a[0];
-      b = b[0];
-
-      return a < b ? -1 : (a > b ? 1 : 0);
-    });
-    let newData = {}
-    for (var i = 0; i < tuples.length; i++) {
-      newData[tuples[i][0]] = tuples[i][1] ;
-    }
-    return this.cashfree.generateSignatuer(newData);
-  }
+  
 
 
 }

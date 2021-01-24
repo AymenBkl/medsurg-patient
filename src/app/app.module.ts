@@ -33,6 +33,7 @@ import { OrderService } from './services/crm/order.service';
 import { CategoryService } from './services/crm/category.service';
 import { PrescriptionService } from './services/prescription.service';
 import { CashfreeService } from './services/cashfree.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -65,6 +66,7 @@ import { CashfreeService } from './services/cashfree.service';
     CategoryService,
     PrescriptionService,
     CashfreeService,
+    InAppBrowser,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
