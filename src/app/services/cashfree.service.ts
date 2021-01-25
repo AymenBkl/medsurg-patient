@@ -46,7 +46,7 @@ export class CashfreeService {
       paramForm.append('customerName',order.patient.firstname + ' ' + order.patient.lastname);
       paramForm.append('customerPhone','9177091554');
       paramForm.append('customerEmail',order.patient.email);
-      paramForm.append('returnUrl','http://localhost:8100/tabs/tab3');
+      paramForm.append('returnUrl','http://192.168.1.104:8080/');
         this.httpClient.post('https://test.cashfree.com/api/v1/order/create',paramForm.toString(),header)
           .subscribe(data => {
             resolve(data)

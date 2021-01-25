@@ -18,6 +18,15 @@ export class ProccessHttpErrosService {
       errMsg = `Email already exists`;
       errCode = 0;
     }
+    else if (error.error && error.error.err && error.error.err.message === 'User validation failed: phoneNumber: Phone already exists' ){
+      errMsg = `Phone Number already exists`;
+      errCode = 12;
+    }
+
+    else if (error.error && error.error.err && error.error.err.message === 'User validation failed: phoneNumber: Phone already exists, email: Email already exists' ){
+      errMsg = `Exists`;
+      errCode = 13;
+    }
     else if (error.error && error.error.err && error.error.err.message === 'A user with the given username is already registered'){
       errMsg = `Username is already registered`;
       errCode = 1;

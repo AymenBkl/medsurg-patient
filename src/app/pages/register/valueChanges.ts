@@ -6,6 +6,7 @@ let formErrors = {
     firstname: '',
     lastname: '',
     email: '',
+    phoneNumber: '',
     password: '',
     confirmPassword: ''
 };
@@ -30,6 +31,11 @@ let validationMessages = {
     email: {
         required: 'Email is required.',
         email : 'Please enter a valid format'
+    },
+    phoneNumber: {
+        required: 'PhoneNumber is required.',
+        minlength: 'PhoneNumber must be at least 10 characters long.',
+        maxlength : 'PhoneNumber must be at most 10 characters long.'
     },
     password : {
         required: 'Password is required.',

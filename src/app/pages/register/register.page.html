@@ -29,8 +29,14 @@
       <ion-input placeHolder="Email" formControlName="email"></ion-input>
     </ion-item>
     <ion-label class="label-error" *ngIf="formErrors && formErrors.email">*{{formErrors.email}}</ion-label>
-    <ion-label class="label-error" *ngIf="validationErrors && validationErrors.errcode == 0">*{{validationErrors.errmsg}}</ion-label>
+    <ion-label class="label-error" *ngIf="validationErrors && (validationErrors.errcode == 0 || validationErrors.errcode == 13 )">*{{validationErrors.errmsg}}</ion-label>
 
+    <ion-item lines="none" class="ion-input">
+      <ion-icon name="call"></ion-icon>
+      <ion-input  placeHolder="Phone Number" formControlName="phoneNumber" (keypress)="numberOnlyValidation($event)"></ion-input>
+    </ion-item>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.phoneNumber">*{{formErrors.phoneNumber}}</ion-label>
+    <ion-label class="label-error" *ngIf="validationErrors && (validationErrors.errcode == 12 || validationErrors.errcode == 13 )">*{{validationErrors.errmsg}}</ion-label>
     <ion-item lines="none" class="ion-input">
       <ion-icon name="lock-closed"></ion-icon>
       <ion-input placeHolder="Password" formControlName="password"></ion-input>

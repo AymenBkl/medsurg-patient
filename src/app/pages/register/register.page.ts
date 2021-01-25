@@ -37,6 +37,7 @@ export class RegisterPage implements OnInit {
       firstname : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
       lastname : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
       email : ['', [Validators.required, Validators.email]],
+      phoneNumber : ['', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]],
       password : ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword : ['', [Validators.required, Validators.minLength(6)]],
       role : 'patient',
@@ -93,5 +94,16 @@ export class RegisterPage implements OnInit {
 
   ionViewDidEnter() {
     this.submitted = false;
+  }
+
+
+  numberOnlyValidation(event: any) {
+    const pattern = /[0-9.,]/;
+    let inputChar = String.fromCharCode(event.charCode);
+
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
+    }
   }
 }
