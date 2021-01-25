@@ -194,6 +194,7 @@ export class AddOrderComponent implements OnInit {
       .then((orderCreated: any) => {
         console.log(orderCreated);
         if (orderCreated && orderCreated.paymentLink) {
+          this.createOrder();
           this.inAppBrowser(orderCreated.paymentLink);
         }
       })

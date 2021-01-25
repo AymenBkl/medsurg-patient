@@ -44,9 +44,9 @@ export class CashfreeService {
       paramForm.append('orderAmount',order.totalPrice.toString());
       paramForm.append('orderNote','This order is made by' + order.patient.firstname + ' ' + order.patient.lastname);
       paramForm.append('customerName',order.patient.firstname + ' ' + order.patient.lastname);
-      paramForm.append('customerPhone','9177091554');
+      paramForm.append('customerPhone',order.patient.phoneNumber.toString());
       paramForm.append('customerEmail',order.patient.email);
-      paramForm.append('returnUrl','http://192.168.1.104:8080/');
+      paramForm.append('returnUrl','');
         this.httpClient.post('https://test.cashfree.com/api/v1/order/create',paramForm.toString(),header)
           .subscribe(data => {
             resolve(data)

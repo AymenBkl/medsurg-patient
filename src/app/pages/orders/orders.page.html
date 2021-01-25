@@ -27,7 +27,7 @@
     
   </ion-segment>
     <ion-list class="list-orders">
-        <ion-item lines="none" class="item-order"  *ngFor="let order of totalOrders[currentSegmentType]" (click)="goToOrderDetail(order)" [ngClass]="'item-order-' + order.status ">
+        <ion-item lines="none" class="item-order"  *ngFor="let order of totalOrders[currentSegmentType];let i = index" (click)="goToOrderDetail(order)" [ngClass]="'item-order-' + order.status ">
           <div class="main-container">
           <div class="container" style="width: 20%;">
             <img class="avatar-icon" *ngIf="order.method == 'cod'" src="../../../assets/imgs/cod.png"  width="50px" height="50px">
@@ -64,8 +64,10 @@
           <hr>
   
           <div class="main-container bottom">
-            <div class="inner-container">
-            <ion-label class="inner-item" style="font-weight: bold;"><ion-icon class="ion-icon" name="card-outline"></ion-icon> : {{order.method == "card" ? 'PAID' : 'NOT PAID'}}</ion-label>
+            <div class="inner-container" >
+            <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'cod'"><ion-icon class="ion-icon" name="card-outline" ></ion-icon> : NOT PAID</ion-label>
+            <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'card'"><ion-icon class="ion-icon" name="card-outline" ></ion-icon> : {{paymentStatus[currentSegmentType][i].txStatus}}</ion-label>
+
             <ion-label *ngIf="order.status == 'canceled' || order.status=='rejected'" class="inner-item" style="font-weight: bold;color:red">Order Status : {{order.status == 'cancel' ? 'CANCELED' : 'REJECTED'}}</ion-label>
             <ion-label *ngIf="order.status == 'delivered'"  class="inner-item" style="font-weight: bold;color:green">Order Status : DELIVERED</ion-label>
             <ion-label *ngIf="order.status == 'created'" class="inner-item" style="font-weight: bold;">Order Status : NEW ORDER</ion-label>

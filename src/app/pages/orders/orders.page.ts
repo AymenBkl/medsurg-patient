@@ -8,6 +8,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { ModalControllersOrders } from 'src/app/classes/modalController.orders';
 import { config } from 'src/app/services/config';
 import { CashfreeService } from 'src/app/services/cashfree.service';
+import { PaymentStatus } from 'src/app/interfaces/paymentStatus';
 
 @Component({
   selector: 'app-orders',
@@ -20,7 +21,7 @@ export class OrdersPage implements OnInit {
   totalOrders: {created:Order[],accepted:Order[],canceled:Order[],rejected:Order[],delivered:Order[],all:Order[]} = {created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]};
   currentSegmentType: string = 'all';
   modalControllerOrder: ModalControllersOrders; 
-
+  paymentStatus:{created:PaymentStatus[],accepted:PaymentStatus[],canceled:PaymentStatus[],rejected:PaymentStatus[],delivered:PaymentStatus[],all:PaymentStatus[]} = {created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]};
   constructor(private ordersService: OrderService,
               private authService: AuthService,
               private interactionService: InteractionService,
@@ -82,6 +83,8 @@ export class OrdersPage implements OnInit {
     this.totalOrders = {created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]}
 
     orders.map(order => {
+      console.log("lol",order.status,order._id);
+      order.method === 'card' ? this.checkPaymentStatus(order.status,order._id) : '';
       this.totalOrders[order.status].push(order);
       this.totalOrders.all.push(order);
       
@@ -90,6 +93,16 @@ export class OrdersPage implements OnInit {
 
   segmentChanged(event){
     this.currentSegmentType = event.detail.value;
+  }
+
+  checkPaymentStatus(orderStatus:string,orderId:string){
+    this.cashfree.paymentStatus(orderId)
+      .then((paymentStatus:PaymentStatus) => {
+        console.log(paymentStatus);
+        this.paymentStatus[orderStatus].push(paymentStatus);
+        this.paymentStatus.all.push(paymentStatus);
+        console.log(this.paymentStatus)
+      })
   }
 
 
