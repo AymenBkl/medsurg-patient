@@ -31,7 +31,6 @@ export class HomePage implements OnInit {
               private cashfree: CashfreeService) { }
 
   ngOnInit() {
-    this.inAppBrowser();
   }
 
   getCurrentUser() {
@@ -68,7 +67,7 @@ export class HomePage implements OnInit {
           })
   }
 
-  injectForm() {
+  /**injectForm() {
     let data = {
       "appId": config.cashfree.appId,
       "orderId": 'ORDER-15326',
@@ -122,6 +121,6 @@ export class HomePage implements OnInit {
       newData[tuples[i][0]] = tuples[i][1];
     }
     return this.cashfree.generateSignatuer(newData);
-  }
+  }**/
 
 }

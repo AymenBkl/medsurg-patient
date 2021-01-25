@@ -5,7 +5,9 @@ import { AuthGuardService as AuthGuard} from './services/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    redirectTo:'cashfree', 
+    pathMatch:'full'
+    //loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
     path: 'register',
@@ -64,6 +66,10 @@ const routes: Routes = [
     path: 'addresses',
     redirectTo: 'tabs/tab4/addresses',
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'cashfree',
+    loadChildren: () => import('./pages/cashfree/cashfree.module').then( m => m.CashfreePageModule)
   },
 ];
 

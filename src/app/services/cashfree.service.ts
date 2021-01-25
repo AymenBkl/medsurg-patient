@@ -12,7 +12,7 @@ export class CashfreeService {
   constructor(private httpClient: HttpClient) { 
   }
 
-  createToken(amount:number){
+  createToken(order:any){
     return new Promise((resolve,reject) => {
     const header = {
       headers: new HttpHeaders()
@@ -20,12 +20,6 @@ export class CashfreeService {
         .set("x-client-id",config.cashfree.appId)
         .set("x-client-secret", config.cashfree.appKey)
     };
-
-    const order = {
-      "orderId": "sasdsadkjaldjsaj",
-      "orderAmount":amount,
-      "orderCurrency": "INR"
-     }
       this.httpClient.post(this.cashfreeURL + 'cftoken/order',order,header)
         .subscribe(data => {
           resolve(data)
@@ -196,7 +190,7 @@ export class CashfreeService {
     return new Promise((resolve,reject) => {
       const header = {
         headers: new HttpHeaders()
-          .set("Content-Type", "application/form-data")
+          .set("Content-Type", "application/json")
       };
       let data = {
         "appId" : config.cashfree.appId,
@@ -221,7 +215,7 @@ export class CashfreeService {
       paramForm.append('customerEmail',data.customerEmail);
       paramForm.append('returnUrl',data.returnUrl);
       paramForm.append('notifyUrl',data.notifyUrl);
-      paramForm.append('signature',this.generateSignatuer(data));
+      paramForm.append('signature',this.sortData(data));
       /**paramForm.append('paymentOption',"card");
       paramForm.append("card_number","4444333322221111");
       paramForm.append("card_holder","John Doe");
@@ -253,6 +247,25 @@ export class CashfreeService {
     let signatuer = CryptoJS.HmacSHA256(signatuerData,secretKey).toString(CryptoJS.enc.Base64);
     console.log(signatuer);
     return signatuer;
+  }
+
+
+  sortData(data) {
+    var tuples = [];
+
+    for (var key in data) tuples.push([key, data[key]]);
+
+    tuples.sort(function (a, b) {
+      a = a[0];
+      b = b[0];
+
+      return a < b ? -1 : (a > b ? 1 : 0);
+    });
+    let newData = {}
+    for (var i = 0; i < tuples.length; i++) {
+      newData[tuples[i][0]] = tuples[i][1];
+    }
+    return this.generateSignatuer(newData);
   }
 
 

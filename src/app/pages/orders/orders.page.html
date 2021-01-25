@@ -1,16 +1,4 @@
-<form id="redirectForm" #redirectForm method="post" action="https://test.cashfree.com/billpay/checkout/post/submit">
-  <input type="hidden" name="appId" [value]="data.appId"/>
-  <input type="hidden" name="orderId" [value]="data.orderId"/>
-  <input type="hidden" name="orderAmount" [value]="data.orderAmount"/>
-  <input type="hidden" name="orderCurrency" [value]="data.orderCurrency"/>
-  <input type="hidden" name="orderNote" [value]="data.orderNote"/>
-  <input type="hidden" name="customerName" [value]="data.customerName"/>
-  <input type="hidden" name="customerEmail" [value]="data.customerEmail"/>
-  <input type="hidden" name="customerPhone" [value]="data.customerPhone"/>
-  <input type="hidden" name="returnUrl" [value]="data.returnUrl"/>
-  <input type="hidden" name="signature" [value]="sign"/>
-  <input type="submit" value="Pay">
-</form>
+
 
 <app-header  [type]="'page'"></app-header>
 

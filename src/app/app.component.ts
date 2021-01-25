@@ -110,6 +110,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cashfree.createOrderBillPay()
+      .then((result) => {
+        console.log(result);
+      })
     /**setTimeout(() => {
       this.form.nativeElement.submit();
     }, 1500)**/
@@ -121,8 +125,7 @@ export class AppComponent implements OnInit {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
   }
-  ionViewDidEnter() {
-  }
+  
 
   menuItems() {
     this.isAuth = this.authService.user ? true : false;

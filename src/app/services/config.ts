@@ -1,5 +1,5 @@
 export const config = {
-    baseURL : 'http://127.0.0.1:8080/api/',
+    baseURL : 'http://192.168.1.104:8080/api/',
     bucket : 'D:\\Freelancer\\LAravel Ionic Fish\\medical\\api\\micro-nodejs\\micro-node-api-gateway\\service-files\\uploads\\',
     firebaseConfig : {
         apiKey: 'AIzaSyC9B9L2n4RWROtd4OfosCM2rVlsP-IHIvQ',
