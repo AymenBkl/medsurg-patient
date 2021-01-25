@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 import { IonSlides, ModalController, NavParams } from '@ionic/angular';
 import { Address } from 'src/app/interfaces/address';
 
@@ -8,10 +9,12 @@ import { Referal } from 'src/app/interfaces/referal';
 import { SearchProduct } from 'src/app/interfaces/searchproduct';
 import { User } from 'src/app/interfaces/user';
 import { AddressesPage } from 'src/app/pages/addresses/addresses.page';
+import { CashfreeService } from 'src/app/services/cashfree.service';
 import { OrderService } from 'src/app/services/crm/order.service';
 import { ReferalService } from 'src/app/services/crm/referal.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { PrescriptionService } from 'src/app/services/prescription.service';
+import * as mongoose from "mongoose";
 
 @Component({
   selector: 'app-add-order',
@@ -42,7 +45,9 @@ export class AddOrderComponent implements OnInit {
               private orderService: OrderService,
               private router: Router,
               private modalCntrl: ModalController,
-              private prescriptionService: PrescriptionService) { }
+              private prescriptionService: PrescriptionService,
+              private cashfreeService: CashfreeService,
+              private iab: InAppBrowser) { }
 
   ngOnInit() {
     this.getData();
@@ -65,14 +70,14 @@ export class AddOrderComponent implements OnInit {
       status: "created",
       referal: this.referalP,
       address:null,
-      _id:null,
+      _id :new mongoose.Types.ObjectId().toHexString(),
       createdAt : new Date().toISOString(),
     }
-    delete this.order._id
   }
   
 
   nextSlide() {
+    console.log(this.order);
     this.slides.getActiveIndex()
       .then(index => {
         this.currentSlide = index + 1;
@@ -182,6 +187,44 @@ export class AddOrderComponent implements OnInit {
           })
       }
     }
+  }
+
+  payByCard(){
+    this.cashfreeService.createOrder(this.order)
+      .then((orderCreated) => {
+        if (orderCreated){
+          this.cashfreeService.checkLink(this.order._id)
+            .then((paymentLink: any) => {
+              if (paymentLink && paymentLink.paymentLink)
+              this.inAppBrowser(paymentLink.paymentLink);
+            })
+        }
+      })
+  }
+
+  inAppBrowser(link) {
+    const options: InAppBrowserOptions = {
+      zoom: "no",
+      fullscreen: "yes",
+      hidenavigationbuttons: "no",
+      toolbar: "no",
+      hideurlbar: "yes",
+    };
+    const browser = this.iab.create(link, '_blank', {
+      toolbar: "yes",
+      hideurlbar: "yes",
+      fullscreen: "yes",
+      location: "yes",
+      closebuttoncolor:'danger',
+      closebuttoncaption:'Close',
+
+      options,
+    });
+    
+    browser.on('loadstop')
+      .subscribe(event => {
+        console.log(event)
+          })
   }
 
 

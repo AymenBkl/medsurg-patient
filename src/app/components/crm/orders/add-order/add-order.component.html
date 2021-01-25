@@ -37,9 +37,12 @@
       <ion-item lines="none" class="ion-input">
         <ion-label class="intro">Create Your order now !!!</ion-label>
       </ion-item>
-      
-      <ion-button class="buttons"  (click)="createOrder()" shape="round" size="default" expand="full">
+      <ion-button class="buttons" *ngIf="order.method == 'cod'"  (click)="createOrder()" shape="round" size="default" expand="full">
         <ion-label *ngIf="!submitted">Create</ion-label>
+        <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
+      </ion-button>
+      <ion-button class="buttons" *ngIf="order.method == 'card'"  (click)="payByCard()" shape="round" size="default" expand="full">
+        <ion-label *ngIf="!submitted">Pay And Create</ion-label>
         <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
       </ion-button>
    </ion-slide>

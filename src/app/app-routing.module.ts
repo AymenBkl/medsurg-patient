@@ -5,9 +5,7 @@ import { AuthGuardService as AuthGuard} from './services/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo:'cashfree', 
-    pathMatch:'full'
-    //loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
     path: 'register',

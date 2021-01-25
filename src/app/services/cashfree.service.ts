@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { config } from './config';
 import * as CryptoJS from 'crypto-js';
+import { Order } from '../interfaces/order';
 
 @Injectable({
   providedIn: 'root',
@@ -29,33 +30,24 @@ export class CashfreeService {
     })
   }
 
-  createOrder() {
+  createOrder(order: Order) {
 
     return new Promise((resolve,reject) => {
       const header = {
         headers: new HttpHeaders()
+          .set('cache-control','no-cache')
           .set("Content-Type", "application/x-www-form-urlencoded")
       };
       let paramForm= new URLSearchParams();
       paramForm.append('appId',config.cashfree.appId);
       paramForm.append('secretKey',config.cashfree.appKey);
-      paramForm.append('orderId','ORDER-153265555');
-      paramForm.append('orderAmount','150');
-      paramForm.append('orderNote','test');
-      paramForm.append('customerName','xyz');
+      paramForm.append('orderId',order._id);
+      paramForm.append('orderAmount',order.totalPrice.toString());
+      paramForm.append('orderNote','This order is made by' + order.patient.firstname + ' ' + order.patient.lastname);
+      paramForm.append('customerName',order.patient.firstname + ' ' + order.patient.lastname);
       paramForm.append('customerPhone','9177091554');
-      paramForm.append('customerEmail','sada@sada.dz');
-      paramForm.append('returnUrl','http://localhost:8100/');
-      paramForm.append('paymentModes','cc');
-      paramForm.append('paymentOption',"card");
-      paramForm.append("card_number","4444333322221111");
-      paramForm.append("card_holder","John Doe");
-      paramForm.append("card_expiryMonth","09");
-      paramForm.append("card_expiryYear","2020");
-      paramForm.append("card_expiryYear","2020");
-      paramForm.append("card_cvv","123");
-      paramForm.append("card_save","1");
-      paramForm.append("phone",'9177091554');
+      paramForm.append('customerEmail',order.patient.email);
+      paramForm.append('returnUrl','http://localhost:8100/tabs/tab3');
         this.httpClient.post('https://test.cashfree.com/api/v1/order/create',paramForm.toString(),header)
           .subscribe(data => {
             resolve(data)
@@ -114,9 +106,9 @@ export class CashfreeService {
       let paramForm= new URLSearchParams();
       paramForm.append('appId',config.cashfree.appId);
       paramForm.append('secretKey',config.cashfree.appKey);
-      paramForm.append('referenceId',referencedId);
-      paramForm.append('idemKey',referencedId + 'aymenxyz');
-      paramForm.append('captureAmount','150');
+      paramForm.append('referenceId','697888');
+      paramForm.append('idemKey','697888' + 'aymenxyz');
+      paramForm.append('captureAmount','80');
         this.httpClient.post('https://test.cashfree.com/api/v1/order/capture',paramForm.toString(),header)
           .subscribe(data => {
             resolve(data)

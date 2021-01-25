@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -7,6 +7,7 @@ import { AuthService } from './services/auth.service';
 import { User } from './interfaces/user';
 import { Router } from '@angular/router';
 import { CashfreeService } from './services/cashfree.service';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-root',
@@ -85,7 +86,7 @@ export class AppComponent implements OnInit {
 
   ];
 
-  
+
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   sign: any;
   constructor(
@@ -95,6 +96,7 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private cashfree: CashfreeService,
+    private iab: InAppBrowser
   ) {
 
     this.initializeApp();
@@ -110,8 +112,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cashfree.createOrderBillPay()
-      .then((result) => {
+    this.cashfree.checkLink('ORDER-153265555555')
+      .then((result: any) => {
         console.log(result);
       })
     /**setTimeout(() => {
@@ -125,7 +127,7 @@ export class AppComponent implements OnInit {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
   }
-  
+
 
   menuItems() {
     this.isAuth = this.authService.user ? true : false;
@@ -152,10 +154,43 @@ export class AppComponent implements OnInit {
   }
 
 
+  inAppBrowser(link) {
+    const options: InAppBrowserOptions = {
+      zoom: "no",
+      fullscreen: "yes",
+      hidenavigationbuttons: "no",
+      toolbar: "no",
+      hideurlbar: "yes",
+    };
+    const browser = this.iab.create(link, '_blank', {
+      toolbar: "yes",
+      hideurlbar: "yes",
+      fullscreen: "yes",
+      location: "no",
+      closebuttoncolor: 'danger',
+      closebuttoncaption: 'close',
 
-  
+      options,
+    });
 
-  
+    browser.on('loadstop')
+      .subscribe(event => {
+        console.log(event)
+        browser.show();
+      })
+    browser.on('loadstart')
+      .subscribe(event => {
+        console.log(event)
+        browser.show();
+
+      })
+  }
+
+
+
+
+
+
 
 
 }
