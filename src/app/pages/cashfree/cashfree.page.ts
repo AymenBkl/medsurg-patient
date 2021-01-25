@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { DomSanitizer } from '@angular/platform-browser';
+import { NavParams, Platform } from '@ionic/angular';
 import { CashfreeService } from 'src/app/services/cashfree.service';
 import { config } from 'src/app/services/config';
-declare var cordova: any;
+
 
 @Component({
   selector: 'app-cashfree',
@@ -25,12 +26,16 @@ export class CashfreePage implements OnInit {
   };
   @ViewChild('redirectForm') form: ElementRef;
   sign: any;
+  cashfreePaymentURL: any;
   constructor(private cashfree: CashfreeService,
-              private platform: Platform) { }
+              private platform: Platform,
+              private navParams: NavParams,
+              private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
 
-    this.startPayment();
+    this.getData();
+    console.log(this.cashfreePaymentURL);
   }
 
   ionViewDidEnter() {
@@ -38,7 +43,7 @@ export class CashfreePage implements OnInit {
 
   }
 
-  startPayment(){
+  /**startPayment(){
     this.platform.ready().then(() => {
       console.log("ready");
       var params = {
@@ -69,6 +74,14 @@ export class CashfreePage implements OnInit {
      
     })
     
+  }**/
+
+  getData(){
+    this.cashfreePaymentURL= this.navParams.get('url');
+    if (this.cashfreePaymentURL != null && this.cashfreePaymentURL != ''){
+      this.cashfreePaymentURL = this.sanitizer.bypassSecurityTrustResourceUrl(this.cashfreePaymentURL);
+    }
+
   }
 
 }

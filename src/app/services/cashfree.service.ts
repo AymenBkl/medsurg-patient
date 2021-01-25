@@ -35,7 +35,6 @@ export class CashfreeService {
     return new Promise((resolve,reject) => {
       const header = {
         headers: new HttpHeaders()
-          .set('cache-control','no-cache')
           .set("Content-Type", "application/x-www-form-urlencoded")
       };
       let paramForm= new URLSearchParams();

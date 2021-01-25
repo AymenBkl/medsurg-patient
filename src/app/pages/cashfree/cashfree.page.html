@@ -1,4 +1,4 @@
-<form id="redirectForm" #redirectForm method="post" action="https://test.cashfree.com/billpay/checkout/post/submit">
+<!--<form id="redirectForm" #redirectForm method="post" action="https://test.cashfree.com/billpay/checkout/post/submit">
   <input type="hidden" name="appId" [value]="data.appId"/>
   <input type="hidden" name="orderId" [value]="data.orderId"/>
   <input type="hidden" name="orderAmount" [value]="data.orderAmount"/>
@@ -10,4 +10,7 @@
   <input type="hidden" name="returnUrl" [value]="data.returnUrl"/>
   <input type="hidden" name="signature" [value]="sign"/>
   <input type="submit" value="Pay">
-</form>
+</form>-->
+<ion-content>
+  <iframe width="100%" height="100%" [src]="cashfreePaymentURL" frameborder="0" allowfullscreen></iframe>
+</ion-content>

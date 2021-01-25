@@ -27,7 +27,7 @@ export class AddOrderComponent implements OnInit {
   searchProduct: SearchProduct | any;
   order: Order;
   referalP: Referal;
-  isPres: {prescription:string,comment:string,type:string} = null;
+  isPres: { prescription: string, comment: string, type: string } = null;
   @ViewChild('slides') slides: IonSlides;
 
   currentSlide = 0;
@@ -37,17 +37,17 @@ export class AddOrderComponent implements OnInit {
     onlyExternal: false
   };
   submitted = false;
-  selectedMethod:string;
-  referalCode:string;
+  selectedMethod: string;
+  referalCode: string;
   constructor(private navParams: NavParams,
-              private referalService: ReferalService,
-              private interactionService: InteractionService,
-              private orderService: OrderService,
-              private router: Router,
-              private modalCntrl: ModalController,
-              private prescriptionService: PrescriptionService,
-              private cashfreeService: CashfreeService,
-              private iab: InAppBrowser) { }
+    private referalService: ReferalService,
+    private interactionService: InteractionService,
+    private orderService: OrderService,
+    private router: Router,
+    private modalCntrl: ModalController,
+    private prescriptionService: PrescriptionService,
+    private cashfreeService: CashfreeService,
+    private iab: InAppBrowser) { }
 
   ngOnInit() {
     this.getData();
@@ -62,28 +62,28 @@ export class AddOrderComponent implements OnInit {
     this.isPres = this.navParams.get('isPres');
     console.log(this.isPres);
     this.order = {
-      products : this.searchProduct.pharmacy.products,
+      products: this.searchProduct.pharmacy.products,
       totalPrice: this.searchProduct.totalPrice,
       patient: this.currentUser,
       pharmacy: this.searchProduct.pharmacy,
       method: this.selectedMethod,
       status: "created",
       referal: this.referalP,
-      address:null,
-      _id :new mongoose.Types.ObjectId().toHexString(),
-      createdAt : new Date().toISOString(),
+      address: null,
+      _id: new mongoose.Types.ObjectId().toHexString(),
+      createdAt: new Date().toISOString(),
     }
   }
-  
+
 
   nextSlide() {
     console.log(this.order);
     this.slides.getActiveIndex()
       .then(index => {
         this.currentSlide = index + 1;
-        console.log(index,this.currentSlide)
+        console.log(index, this.currentSlide)
         this.slides.slideTo(this.currentSlide);
-        });
+      });
   }
 
 
@@ -91,21 +91,21 @@ export class AddOrderComponent implements OnInit {
     this.selectedMethod = type;
     this.order.method = type;
     const modal = await this.modalCntrl.create({
-      component : AddressesPage,
-      backdropDismiss:true,
-      componentProps:{
-        order:true
+      component: AddressesPage,
+      backdropDismiss: true,
+      componentProps: {
+        order: true
       }
-  });
-  modal.onDidDismiss()
+    });
+    modal.onDidDismiss()
       .then((data) => {
-        if (data && data.data){
+        if (data && data.data) {
           this.order.address = data.data;
           this.nextSlide();
         }
       });
-  return await modal.present();
-    
+    return await modal.present();
+
   }
 
   checkReferal() {
@@ -113,10 +113,10 @@ export class AddOrderComponent implements OnInit {
     this.referalService.checkReferal(this.referalCode)
       .then((result: any) => {
         this.submitted = false;
-        if (result && result != false){
+        if (result && result != false) {
           this.referalP = result;
           this.order.referal = result;
-          if (this.referalP.owner._id != this.currentUser._id){
+          if (this.referalP.owner._id != this.currentUser._id) {
             this.interactionService.createToast('Referal Added', 'success', 'bottom');
             this.nextSlide();
           }
@@ -132,7 +132,7 @@ export class AddOrderComponent implements OnInit {
           this.referalCode = '';
         }
       })
-      .catch((err)=> {
+      .catch((err) => {
         this.referalP = null;
         this.referalCode = '';
         this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
@@ -140,21 +140,21 @@ export class AddOrderComponent implements OnInit {
       })
   }
 
-  createOrder(){
-    if (this.currentSlide == 2){
+  createOrder() {
+    if (this.currentSlide == 2) {
       console.log(this.order);
       this.interactionService.createLoading("Creating your Order Please wait")
         .then(() => {
           this.orderService.createOrder(this.order)
             .then((result) => {
               this.interactionService.hide();
-              if (result && result != false){
+              if (result && result != false) {
                 this.modifyPres();
                 this.interactionService.createToast('Order created Successfully ', 'success', 'bottom');
                 setTimeout(() => {
                   this.router.navigate(['/orders']);
                   this.modalCntrl.dismiss();
-                },1000);
+                }, 1000);
               }
               else {
                 this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
@@ -168,20 +168,20 @@ export class AddOrderComponent implements OnInit {
     }
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     console.log('entered');
     this.getData();
   }
 
 
-  ionModalWillDismiss(){
+  ionModalWillDismiss() {
     console.log("dissmiss");
   }
 
-  modifyPres(){
-    if (this.isPres){
-      if (this.isPres.type == 'prescription' ){
-        this.prescriptionService.updateApprovedPrescription(this.isPres.comment,this.isPres.prescription)
+  modifyPres() {
+    if (this.isPres) {
+      if (this.isPres.type == 'prescription') {
+        this.prescriptionService.updateApprovedPrescription(this.isPres.comment, this.isPres.prescription)
           .then((result) => {
 
           })
@@ -189,15 +189,12 @@ export class AddOrderComponent implements OnInit {
     }
   }
 
-  payByCard(){
+  payByCard() {
     this.cashfreeService.createOrder(this.order)
-      .then((orderCreated) => {
-        if (orderCreated){
-          this.cashfreeService.checkLink(this.order._id)
-            .then((paymentLink: any) => {
-              if (paymentLink && paymentLink.paymentLink)
-              this.inAppBrowser(paymentLink.paymentLink);
-            })
+      .then((orderCreated: any) => {
+        console.log(orderCreated);
+        if (orderCreated && orderCreated.paymentLink) {
+          this.inAppBrowser(orderCreated.paymentLink);
         }
       })
   }
@@ -210,22 +207,23 @@ export class AddOrderComponent implements OnInit {
       toolbar: "no",
       hideurlbar: "yes",
     };
-    const browser = this.iab.create(link, '_blank', {
+    const browser = this.iab.create(link, '_system', {
       toolbar: "yes",
-      hideurlbar: "yes",
+      hideurlbar: "no",
       fullscreen: "yes",
       location: "yes",
-      closebuttoncolor:'danger',
-      closebuttoncaption:'Close',
+      closebuttoncolor: 'danger',
+      closebuttoncaption: 'Close',
 
       options,
     });
-    
-    browser.on('loadstop')
+    browser.on('loadstart')
       .subscribe(event => {
         console.log(event)
-          })
+      })
   }
+
+  
 
 
 }
