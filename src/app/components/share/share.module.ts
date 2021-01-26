@@ -28,6 +28,7 @@ import { AddOfferComponent } from '../crm/offers/add-offer/add-offer.component';
 import { CategoriesComponent } from '../crm/categories/categories.component';
 
 import { AddAddressComponent } from '../address/add-address/add-address.component';
+import { RefundComponent } from '../crm/orders/refund/refund.component';
 @NgModule({
   declarations: [
     BannerComponent,
@@ -45,7 +46,8 @@ import { AddAddressComponent } from '../address/add-address/add-address.componen
     LsitComponent,
     AddOfferComponent,
     CategoriesComponent,
-    AddAddressComponent
+    AddAddressComponent,
+    RefundComponent
   ],
   exports: [
     BannerComponent,
@@ -63,7 +65,8 @@ import { AddAddressComponent } from '../address/add-address/add-address.componen
     LsitComponent,
     AddOfferComponent,
     CategoriesComponent,
-    AddAddressComponent
+    AddAddressComponent,
+    RefundComponent
   ],
   imports: [
     IonicModule,

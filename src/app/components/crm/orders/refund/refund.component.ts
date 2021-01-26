@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 import { ModalController, NavParams } from '@ionic/angular';
-import { ModalControllersOrders } from 'src/app/classes/modalController.orders';
 import { Order } from 'src/app/interfaces/order';
 import { User } from 'src/app/interfaces/user';
 import { CashfreeService } from 'src/app/services/cashfree.service';
@@ -9,28 +8,24 @@ import { OrderService } from 'src/app/services/crm/order.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
 @Component({
-  selector: 'app-order-detail',
-  templateUrl: './order-detail.component.html',
-  styleUrls: ['./order-detail.component.scss'],
+  selector: 'app-refund',
+  templateUrl: './refund.component.html',
+  styleUrls: ['./refund.component.scss'],
 })
-export class OrderDetailComponent implements OnInit {
+export class RefundComponent implements OnInit {
 
   order: Order;
   currentUser: User;
-  modalControllerOder: ModalControllersOrders;
-  isValidRefund:boolean = true;
   constructor(private navParams: NavParams,
     private modalCntrl: ModalController,
     private orderService: OrderService,
     private interactionService: InteractionService,
     private cashfree: CashfreeService,
     private iab: InAppBrowser) {
-      this.modalControllerOder = new ModalControllersOrders(modalCntrl);
   }
 
   ngOnInit() {
     this.getData();
-    this.checkOrderDate();
   }
 
   getData() {
@@ -125,24 +120,4 @@ export class OrderDetailComponent implements OnInit {
       })
   }
 
-  callRefund(){
-    if (this.isValidRefund){
-      this.modalControllerOder.callRefund(this.currentUser,this.order);
-    }
-  }
-
-  checkOrderDate(){
-    const orderDate = (new Date(this.order.createdAt).getTime() / 1000) + 7*24*36000;
-    const finish = (new Date().getTime() / 1000);
-    this.isValidRefund = orderDate > finish;
-  }
-
-
-
-
-
-
 }
-
-
-
