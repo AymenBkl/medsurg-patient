@@ -44,7 +44,7 @@ export class OrdersPage implements OnInit {
           .then((result: any) => {
             this.interactionService.hide();
             if (result && result != false) {
-              this.filterOrders(result);
+              console.log(result);
               if (result.length != 0) {
                 this.interactionService.createToast('Your Orders has been loaded !', 'success', 'bottom');
               }
@@ -81,13 +81,10 @@ export class OrdersPage implements OnInit {
 
   filterOrders(orders: Order[]) {
     this.totalOrders = {created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]}
-
     orders.map(async (order) => {
-      console.log("lol",order.status,order._id);
       order.method === 'card' ? await this.checkPaymentStatus(order) : '';
       this.totalOrders[order.status].push(order);
       this.totalOrders.all.push(order);
-      
     });
   }
 
@@ -99,11 +96,24 @@ export class OrdersPage implements OnInit {
     if (order.method == 'card'){
       await this.cashfree.paymentStatus(order._id)
       .then(async (paymentStatus:PaymentStatus) => {
-        console.log(paymentStatus);
+        if (paymentStatus.txStatus == "FAILED" && order.status == 'created'){
+          this.updateOrder('canceled',order._id);
+        }
+        if (paymentStatus.txStatus == "SUCCESS" && order.status == 'created'){
+          this.updateOrder('accepted',order._id);
+        }
         order.paymentStatus = paymentStatus;
       })
     }
     
+  }
+
+  updateOrder(status: string,orderId:string){
+        this.ordersService.editOrder(orderId,status)
+          .then((result: any) => {
+          })
+          .catch(err => {
+          })
   }
 
 
