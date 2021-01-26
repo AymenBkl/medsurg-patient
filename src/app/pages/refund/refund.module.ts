@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { RefundPageRoutingModule } from './refund-routing.module';
 
 import { RefundPage } from './refund.page';
+import { ShareModule } from 'src/app/components/share/share.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RefundPageRoutingModule
+    RefundPageRoutingModule,
+    ShareModule
   ],
   declarations: [RefundPage]
 })

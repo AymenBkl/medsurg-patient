@@ -17,29 +17,17 @@ export class RefundDetailComponent implements OnInit {
 
   order: Order;
   currentUser: User;
-  modalControllerOder: ModalControllersOrders;
-  isValidRefund:boolean = true;
-  constructor(private navParams: NavParams,
-    private modalCntrl: ModalController,
-    private orderService: OrderService,
-    private interactionService: InteractionService,
-    private cashfree: CashfreeService,
-    private iab: InAppBrowser) {
-      this.modalControllerOder = new ModalControllersOrders(modalCntrl);
+  constructor(private navParams: NavParams) {
   }
 
   ngOnInit() {
     this.getData();
-    this.checkOrderDate();
   }
 
   getData() {
     this.order = this.navParams.get('order');
     this.currentUser = this.navParams.get('user');
     }
-
-  goAddPrescription() {
-  }
 
   getProductNames() {
     var productNames: string[] = [];
@@ -49,92 +37,9 @@ export class RefundDetailComponent implements OnInit {
     return productNames;
   }
 
-
-
-  updateOrder(status: string) {
-    this.interactionService.createLoading('Updating your order status ! Please Wait')
-      .then(() => {
-        this.orderService.editOrder(this.order._id, status)
-          .then((result: any) => {
-            this.interactionService.hide();
-            if (result && result != false) {
-              this.interactionService.createToast('Your Order Has been Updated !', 'success', 'bottom');
-              setTimeout(() => {
-                this.modalCntrl.dismiss(null);
-              }, 1500);
-            }
-            else {
-              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
-            }
-          })
-          .catch(err => {
-            this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
-          })
-      })
-  }
-
-  checkStatus() {
-    if (this.order.status == 'created') {
-      this.updateOrder('canceled');
-    }
-    else {
-
-    }
-  }
-
   ionViewDidEnter() {
-    console.log("entered")
     this.getData();
   }
 
-
-  getPaymentLink() {
-    console.log("here",this.order);
-    if ((this.order.paymentStatus.txStatus == "PENDING" || this.order.paymentStatus.txStatus == "FAILED ") && this.order.status == 'created') {
-      this.cashfree.checkLink(this.order._id)
-        .then((payment:any) => {
-          this.inAppBrowser(payment.paymentLink);
-        })
-        .catch(err => {
-        })
-    }
-  }
-
-
-  inAppBrowser(link) {
-    const options: InAppBrowserOptions = {
-      zoom: "no",
-      fullscreen: "yes",
-      hidenavigationbuttons: "no",
-      toolbar: "no",
-      hideurlbar: "yes",
-    };
-    const browser = this.iab.create(link, '_system', {
-      toolbar: "yes",
-      hideurlbar: "no",
-      fullscreen: "yes",
-      location: "yes",
-      closebuttoncolor: 'danger',
-      closebuttoncaption: 'Close',
-
-      options,
-    });
-    browser.on('loadstart')
-      .subscribe(event => {
-        console.log(event)
-      })
-  }
-
-  callRefund(){
-    if (this.isValidRefund){
-      this.modalControllerOder.callRefund(this.currentUser,this.order);
-    }
-  }
-
-  checkOrderDate(){
-    const orderDate = (new Date(this.order.createdAt).getTime() / 1000) + 7*24*36000;
-    const finish = (new Date().getTime() / 1000);
-    this.isValidRefund = orderDate > finish;
-  }
 
 }

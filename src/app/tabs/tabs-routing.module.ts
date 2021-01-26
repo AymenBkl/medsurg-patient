@@ -54,6 +54,11 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'tab4/refund',
+        loadChildren: () => import('../pages/refund/refund.module').then( m => m.RefundPageModule),
+        canActivate: [AuthGuard]
+      },
+      {
         path: 'tab3',
         loadChildren: () => import('../pages/orders/orders.module').then( m => m.OrdersPageModule),
         canActivate: [AuthGuard]

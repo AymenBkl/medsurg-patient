@@ -67,10 +67,13 @@ const routes: Routes = [
   },
   {
     path: 'cashfree',
-    loadChildren: () => import('./pages/cashfree/cashfree.module').then( m => m.CashfreePageModule)
-  },  {
+    loadChildren: () => import('./pages/cashfree/cashfree.module').then( m => m.CashfreePageModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'refund',
-    loadChildren: () => import('./pages/refund/refund.module').then( m => m.RefundPageModule)
+    redirectTo: 'tabs/tab4/refund'   , 
+    canActivate: [AuthGuard]
   },
 
 ];
