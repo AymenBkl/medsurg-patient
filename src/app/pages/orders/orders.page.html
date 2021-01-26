@@ -65,8 +65,8 @@
   
           <div class="main-container bottom">
             <div class="inner-container" >
-            <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'cod'"><ion-icon class="ion-icon" name="card-outline" ></ion-icon> : NOT PAID</ion-label>
-            <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'card'"><ion-icon class="ion-icon" name="card-outline" ></ion-icon> : {{paymentStatus[currentSegmentType][i].txStatus}}</ion-label>
+            <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'cod'"><ion-icon class="ion-icon" name="card-outline" ></ion-icon> : NOT PAID</ion-label> 
+            <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'card'"><ion-icon class="ion-icon" name="card-outline" ></ion-icon> : {{order.paymentStatus.txStatus}}</ion-label>
 
             <ion-label *ngIf="order.status == 'canceled' || order.status=='rejected'" class="inner-item" style="font-weight: bold;color:red">Order Status : {{order.status == 'cancel' ? 'CANCELED' : 'REJECTED'}}</ion-label>
             <ion-label *ngIf="order.status == 'delivered'"  class="inner-item" style="font-weight: bold;color:green">Order Status : DELIVERED</ion-label>

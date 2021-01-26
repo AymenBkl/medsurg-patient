@@ -72,7 +72,9 @@ export class AddOrderComponent implements OnInit {
       address: null,
       _id: new mongoose.Types.ObjectId().toHexString(),
       createdAt: new Date().toISOString(),
+      paymentStatus:null,
     }
+    delete this.order.paymentStatus;
   }
 
 

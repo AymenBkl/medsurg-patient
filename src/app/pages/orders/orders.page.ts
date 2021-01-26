@@ -82,9 +82,9 @@ export class OrdersPage implements OnInit {
   filterOrders(orders: Order[]) {
     this.totalOrders = {created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]}
 
-    orders.map(order => {
+    orders.map(async (order) => {
       console.log("lol",order.status,order._id);
-      order.method === 'card' ? this.checkPaymentStatus(order.status,order._id) : '';
+      order.method === 'card' ? await this.checkPaymentStatus(order) : '';
       this.totalOrders[order.status].push(order);
       this.totalOrders.all.push(order);
       
@@ -95,14 +95,15 @@ export class OrdersPage implements OnInit {
     this.currentSegmentType = event.detail.value;
   }
 
-  checkPaymentStatus(orderStatus:string,orderId:string){
-    this.cashfree.paymentStatus(orderId)
-      .then((paymentStatus:PaymentStatus) => {
+  async checkPaymentStatus(order:Order){
+    if (order.method == 'card'){
+      await this.cashfree.paymentStatus(order._id)
+      .then(async (paymentStatus:PaymentStatus) => {
         console.log(paymentStatus);
-        this.paymentStatus[orderStatus].push(paymentStatus);
-        this.paymentStatus.all.push(paymentStatus);
-        console.log(this.paymentStatus)
+        order.paymentStatus = paymentStatus;
       })
+    }
+    
   }
 
 
