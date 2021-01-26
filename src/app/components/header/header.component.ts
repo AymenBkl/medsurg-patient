@@ -48,6 +48,10 @@ export class HeaderComponent implements OnInit {
       });
   }
 
+  goToCart(){
+    this.router.navigate(['/tabs/search-medecin/search/cart']);
+  }
+
   goToFindProduct(){
     this.router.navigate(['/tabs/search-medecin/search/findproduct']);
   }
