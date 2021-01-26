@@ -96,9 +96,6 @@ export class OrdersPage implements OnInit {
     if (order.method == 'card'){
       await this.cashfree.paymentStatus(order._id)
       .then(async (paymentStatus:PaymentStatus) => {
-        if (paymentStatus.txStatus == "FAILED" && order.status == 'created'){
-          this.updateOrder('canceled',order._id);
-        }
         if (paymentStatus.txStatus == "SUCCESS" && order.status == 'created'){
           this.updateOrder('accepted',order._id);
         }

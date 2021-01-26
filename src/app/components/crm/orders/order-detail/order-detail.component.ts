@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 import { ModalController, NavParams } from '@ionic/angular';
 import { Order } from 'src/app/interfaces/order';
 import { User } from 'src/app/interfaces/user';
+import { CashfreeService } from 'src/app/services/cashfree.service';
 import { OrderService } from 'src/app/services/crm/order.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
@@ -15,10 +17,12 @@ export class OrderDetailComponent implements OnInit {
   order: Order;
   currentUser: User;
   constructor(private navParams: NavParams,
-              private modalCntrl: ModalController,
-              private orderService: OrderService,
-              private interactionService: InteractionService) {
-              }
+    private modalCntrl: ModalController,
+    private orderService: OrderService,
+    private interactionService: InteractionService,
+    private cashfree: CashfreeService,
+    private iab: InAppBrowser) {
+  }
 
   ngOnInit() {
     this.getData();
@@ -27,14 +31,13 @@ export class OrderDetailComponent implements OnInit {
   getData() {
     this.order = this.navParams.get('order');
     this.currentUser = this.navParams.get('user');
-    console.log(this.order);
-  }
+    }
 
   goAddPrescription() {
   }
 
   getProductNames() {
-    var productNames : string[] = [];
+    var productNames: string[] = [];
     this.order.products.map(product => {
       productNames.push(product.product.mainProduct.name + '\n');
     })
@@ -43,17 +46,17 @@ export class OrderDetailComponent implements OnInit {
 
 
 
-  updateOrder(status: string){
+  updateOrder(status: string) {
     this.interactionService.createLoading('Updating your order status ! Please Wait')
       .then(() => {
-        this.orderService.editOrder(this.order._id,status)
+        this.orderService.editOrder(this.order._id, status)
           .then((result: any) => {
             this.interactionService.hide();
-            if (result && result != false){
+            if (result && result != false) {
               this.interactionService.createToast('Your Order Has been Updated !', 'success', 'bottom');
               setTimeout(() => {
                 this.modalCntrl.dismiss(null);
-              },1500);
+              }, 1500);
             }
             else {
               this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
@@ -65,8 +68,8 @@ export class OrderDetailComponent implements OnInit {
       })
   }
 
-  checkStatus(){
-    if (this.order.status == 'created'){
+  checkStatus() {
+    if (this.order.status == 'created') {
       this.updateOrder('canceled');
     }
     else {
@@ -74,14 +77,53 @@ export class OrderDetailComponent implements OnInit {
     }
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     console.log("entered")
     this.getData();
   }
 
 
+  getPaymentLink() {
+    console.log("here",this.order);
+    if ((this.order.paymentStatus.txStatus == "PENDING" || this.order.paymentStatus.txStatus == "FAILED") && this.order.status == 'created') {
+      this.cashfree.checkLink(this.order._id)
+        .then((payment:any) => {
+          this.inAppBrowser(payment.paymentLink);
+        })
+        .catch(err => {
+        })
+    }
+  }
 
-  
+
+  inAppBrowser(link) {
+    const options: InAppBrowserOptions = {
+      zoom: "no",
+      fullscreen: "yes",
+      hidenavigationbuttons: "no",
+      toolbar: "no",
+      hideurlbar: "yes",
+    };
+    const browser = this.iab.create(link, '_system', {
+      toolbar: "yes",
+      hideurlbar: "no",
+      fullscreen: "yes",
+      location: "yes",
+      closebuttoncolor: 'danger',
+      closebuttoncaption: 'Close',
+
+      options,
+    });
+    browser.on('loadstart')
+      .subscribe(event => {
+        console.log(event)
+      })
+  }
+
+
+
+
+
 
 }
 
