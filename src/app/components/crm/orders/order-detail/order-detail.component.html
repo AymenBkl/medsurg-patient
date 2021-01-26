@@ -93,7 +93,7 @@
 
     <ion-row class="bottom-row">
       <ion-col size="12" >
-        <ion-button shape="round" size="default" color="success"  expand="full" *ngIf="(order.paymentStatus && order.paymentStatus.txStatus && order.method == 'card' && order.status == 'created') && (order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED' ) && order.status == 'created'" (click)="getPaymentLink()" >
+        <ion-button shape="round" size="default" color="success"  expand="full" *ngIf="((order.paymentStatus.txStatus && (order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED')) || ((!order.paymentStatus.txStatus && order.paymentStatus.orderStatus == 'ACTIVE'))) && order.status == 'created'" (click)="getPaymentLink()" >
           <ion-text>CONFIRM YOUR PAYMENT NOW</ion-text>
         </ion-button>
       </ion-col>

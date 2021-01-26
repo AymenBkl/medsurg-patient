@@ -18,8 +18,18 @@ import { PaymentStatus } from 'src/app/interfaces/paymentStatus';
 export class OrdersPage implements OnInit {
 
   currentUser: User;
-  totalOrders: {created:Order[],accepted:Order[],canceled:Order[],rejected:Order[],delivered:Order[],all:Order[]} = {created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]};
+  allOrder: {PENDING:{created:Order[],accepted:Order[],canceled:Order[],rejected:Order[],delivered:Order[],all:Order[]},
+            ACCEPTED:{created:Order[],accepted:Order[],canceled:Order[],rejected:Order[],delivered:Order[],all:Order[]},
+            FAILED:{created:Order[],accepted:Order[],canceled:Order[],rejected:Order[],delivered:Order[],all:Order[]},
+            ALL:{created:Order[],accepted:Order[],canceled:Order[],rejected:Order[],delivered:Order[],all:Order[]},
+            ACTIVE:{created:Order[],accepted:Order[],canceled:Order[],rejected:Order[],delivered:Order[],all:Order[]}} = 
+            {PENDING:{created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]},
+            ACCEPTED:{created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]},
+            FAILED:{created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]},
+            ALL:{created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]},
+            ACTIVE:{created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]}}
   currentSegmentType: string = 'all';
+  currentSegmentTypePayment:string = 'ALL'
   modalControllerOrder: ModalControllersOrders; 
   paymentStatus:{created:PaymentStatus[],accepted:PaymentStatus[],canceled:PaymentStatus[],rejected:PaymentStatus[],delivered:PaymentStatus[],all:PaymentStatus[]} = {created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]};
   constructor(private ordersService: OrderService,
@@ -80,16 +90,21 @@ export class OrdersPage implements OnInit {
   }
 
   filterOrders(orders: Order[]) {
-    this.totalOrders = {created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]}
     orders.map(async (order) => {
-      order.method === 'card' ? await this.checkPaymentStatus(order) : '';
-      this.totalOrders[order.status].push(order);
-      this.totalOrders.all.push(order);
+      order.method == 'card' ? await this.checkPaymentStatus(order) : '';
+      this.allOrder.ALL.all.push(order);
+      this.allOrder.ALL[order.status].push(order);
+      console.log(this.allOrder)
     });
   }
 
   segmentChanged(event){
     this.currentSegmentType = event.detail.value;
+    console.log(this.currentSegmentType,this.currentSegmentTypePayment)
+  }
+
+  segmentChangedPayment(event){
+    this.currentSegmentTypePayment = event.detail.value;
   }
 
   async checkPaymentStatus(order:Order){
@@ -100,6 +115,12 @@ export class OrdersPage implements OnInit {
           this.updateOrder('accepted',order._id);
         }
         order.paymentStatus = paymentStatus;
+        if (order.paymentStatus && order.paymentStatus.txStatus){
+          this.allOrder[order.paymentStatus.txStatus][order.status].push(order);
+        }
+        else if (order.paymentStatus && !order.paymentStatus.txStatus){
+          this.allOrder[order.paymentStatus.orderStatus][order.status].push(order);
+        }
       })
     }
     
