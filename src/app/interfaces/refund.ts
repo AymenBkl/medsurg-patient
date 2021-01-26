@@ -5,4 +5,5 @@ export interface Refund {
     patient: User;
     order: Order;
     payedByAdmin:string;
+    refundPrice:number;
 }

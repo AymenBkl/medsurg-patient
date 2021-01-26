@@ -9,11 +9,11 @@ import { OrderService } from 'src/app/services/crm/order.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
 @Component({
-  selector: 'app-order-detail',
-  templateUrl: './order-detail.component.html',
-  styleUrls: ['./order-detail.component.scss'],
+  selector: 'app-refund-detail',
+  templateUrl: './refund-detail.component.html',
+  styleUrls: ['./refund-detail.component.scss'],
 })
-export class OrderDetailComponent implements OnInit {
+export class RefundDetailComponent implements OnInit {
 
   order: Order;
   currentUser: User;
@@ -29,16 +29,17 @@ export class OrderDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getData();
+    this.checkOrderDate();
   }
 
   getData() {
     this.order = this.navParams.get('order');
     this.currentUser = this.navParams.get('user');
-    if (this.order.refund){
-      this.order.totalPrice -= this.order.refund.refundPrice;
-    }
     }
 
+  goAddPrescription() {
+  }
 
   getProductNames() {
     var productNames: string[] = [];
@@ -82,9 +83,8 @@ export class OrderDetailComponent implements OnInit {
   }
 
   ionViewDidEnter() {
+    console.log("entered")
     this.getData();
-    this.checkOrderDate();
-
   }
 
 
@@ -137,16 +137,4 @@ export class OrderDetailComponent implements OnInit {
     this.isValidRefund = orderDate > finish;
   }
 
-  callRefundDetail(){
-    this.modalControllerOder.callRefundDetail(this.currentUser,this.order);
-  }
-
-
-
-
-
-
 }
-
-
-

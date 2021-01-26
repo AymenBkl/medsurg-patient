@@ -2,6 +2,7 @@ import { Address } from "./address";
 import { OrderProduct } from "./orderCart";
 import { PaymentStatus } from "./paymentStatus";
 import { Referal } from "./referal";
+import { Refund } from "./refund";
 import { User } from "./user";
 
 export interface Order {
@@ -16,4 +17,5 @@ export interface Order {
     createdAt:string;
     address:Address;
     paymentStatus:PaymentStatus;
+    refund: Refund;
 }

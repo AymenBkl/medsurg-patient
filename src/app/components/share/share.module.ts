@@ -29,6 +29,7 @@ import { CategoriesComponent } from '../crm/categories/categories.component';
 
 import { AddAddressComponent } from '../address/add-address/add-address.component';
 import { RefundComponent } from '../crm/orders/refund/refund.component';
+import { RefundDetailComponent } from '../crm/refund-detail/refund-detail.component';
 @NgModule({
   declarations: [
     BannerComponent,
@@ -47,7 +48,8 @@ import { RefundComponent } from '../crm/orders/refund/refund.component';
     AddOfferComponent,
     CategoriesComponent,
     AddAddressComponent,
-    RefundComponent
+    RefundComponent,
+    RefundDetailComponent
   ],
   exports: [
     BannerComponent,
@@ -66,7 +68,8 @@ import { RefundComponent } from '../crm/orders/refund/refund.component';
     AddOfferComponent,
     CategoriesComponent,
     AddAddressComponent,
-    RefundComponent
+    RefundComponent,
+    RefundDetailComponent
   ],
   imports: [
     IonicModule,
