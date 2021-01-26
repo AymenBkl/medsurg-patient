@@ -88,12 +88,12 @@
 
     <ion-row class="bottom-row">
       <ion-col size="12" >
-        <ion-button shape="round" size="default" color="success"  expand="full" *ngIf="order.paymentStatus.txStatus && (order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED' ) && order.status == 'created'" (click)="getPaymentLink()" >
+        <ion-button shape="round" size="default" color="success"  expand="full" *ngIf="(order.paymentStatus && order.paymentStatus.txStatus && order.method == 'card' && order.status == 'created') && (order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED' ) && order.status == 'created'" (click)="getPaymentLink()" >
           <ion-text>CONFIRM YOUR PAYMENT NOW</ion-text>
         </ion-button>
       </ion-col>
       <ion-col size="12" >
-        <ion-button shape="round" size="default" color="danger"  expand="full" *ngIf="(!order.paymentStatus.txStatus && order.status == 'created') || (order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED' ) " (click)="checkStatus()" >
+        <ion-button shape="round" size="default" color="danger"  expand="full" *ngIf="(order.paymentStatus && (!order.paymentStatus.txStatus && order.status == 'created') || order.method == 'cod') || (order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED' ) " (click)="checkStatus()" >
           <ion-text>CANCEL ORDER</ion-text>
         </ion-button>
       </ion-col>
