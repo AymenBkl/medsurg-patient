@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 import { ModalController, NavParams } from '@ionic/angular';
 import { Order } from 'src/app/interfaces/order';
+import { OrderProduct } from 'src/app/interfaces/orderCart';
 import { User } from 'src/app/interfaces/user';
 import { CashfreeService } from 'src/app/services/cashfree.service';
 import { OrderService } from 'src/app/services/crm/order.service';
@@ -16,6 +17,7 @@ export class RefundComponent implements OnInit {
 
   order: Order;
   currentUser: User;
+  refundPrice:any = 0;
   constructor(private navParams: NavParams,
     private modalCntrl: ModalController,
     private orderService: OrderService,
@@ -82,42 +84,44 @@ export class RefundComponent implements OnInit {
     this.getData();
   }
 
-
-  getPaymentLink() {
-    console.log("here",this.order);
-    if ((this.order.paymentStatus.txStatus == "PENDING" || this.order.paymentStatus.txStatus == "FAILED ") && this.order.status == 'created') {
-      this.cashfree.checkLink(this.order._id)
-        .then((payment:any) => {
-          this.inAppBrowser(payment.paymentLink);
-        })
-        .catch(err => {
-        })
+  remove(product: OrderProduct){
+    if (product.refundedQuantity > 0){
+      product.refundedQuantity -= 1;
+      this.refundPrice -= product.product.price;
     }
   }
 
-
-  inAppBrowser(link) {
-    const options: InAppBrowserOptions = {
-      zoom: "no",
-      fullscreen: "yes",
-      hidenavigationbuttons: "no",
-      toolbar: "no",
-      hideurlbar: "yes",
-    };
-    const browser = this.iab.create(link, '_system', {
-      toolbar: "yes",
-      hideurlbar: "no",
-      fullscreen: "yes",
-      location: "yes",
-      closebuttoncolor: 'danger',
-      closebuttoncaption: 'Close',
-
-      options,
-    });
-    browser.on('loadstart')
-      .subscribe(event => {
-        console.log(event)
-      })
+  add(product: OrderProduct){
+    if (product.refundedQuantity < product.quantity){
+      product.refundedQuantity += 1;
+      this.refundPrice += product.product.price;
+    }
   }
+
+ makeRefund(){
+  this.interactionService.createLoading('Creating your refund ! Please Wait')
+  .then(() => {
+    this.orderService.createRefund(this.order._id,this.order.products,this.refundPrice)
+      .then((result: any) => {
+        this.interactionService.hide();
+        if (result && result != false) {
+          this.interactionService.createToast('Creating your refund Has been Created !', 'success', 'bottom');
+          setTimeout(() => {
+            this.modalCntrl.dismiss(null);
+          }, 1500);
+        }
+        else {
+          this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+        }
+      })
+      .catch(err => {
+        this.interactionService.hide();
+        this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+      })
+  })
+ }
+
+
+  
 
 }

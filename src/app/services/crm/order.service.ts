@@ -4,6 +4,7 @@ import { config } from '../config';
 import { Subject } from 'rxjs';
 import { Order } from 'src/app/interfaces/order';
 import { OrderResponse } from 'src/app/interfaces/orderResponse';
+import { OrderProduct } from 'src/app/interfaces/orderCart';
 @Injectable({
   providedIn: 'root'
 })
@@ -76,6 +77,25 @@ export class OrderService {
       });
   }
 
+  createRefund(orderId:string,products:OrderProduct[],refundPrice:Number){
+    return new Promise((resolve, reject) => {
+      this.httpClient.post<OrderResponse>(this.orderUrl + 'createrefund', {orderId:orderId,products:products,refundPrice:refundPrice})
+        .subscribe(response => {
+          console.log(response);
+          if (response.status === 200) {
+            console.log(response.message);
+            this.orderSubject.next(this.orders);
+            resolve(response.message);
+          }
+          else {
+            resolve(false);
+          }
+        }, err => {
+          reject(err);
+        });
+      });
+  }
+
 
   getOrderSubject() {
     this.orderSubject.next(this.orders);
@@ -87,4 +107,6 @@ export class OrderService {
     this.orders[this.orders.indexOf(ord)].status = order.status;
     this.orderSubject.next(this.orders);
   }
+
+
 }

@@ -34,7 +34,7 @@
     <ion-row>
       <ion-col size="12">
         <ion-item  class="profile-holder" >
-          <ion-title class="title-patient">This Order is {{order.status | uppercase}}</ion-title>
+          <ion-title class="title-patient">REFUND OF ORDER</ion-title>
         </ion-item>
       </ion-col>
       <ion-col size="12" *ngIf="order.method == 'card' && order.paymentStatus.txStatus">
@@ -50,51 +50,54 @@
     </ion-row>
     <ion-row>
       <ion-title class="title-patient">Medecins</ion-title>
-      <ion-col size="12" >
-      <div  class="product-holder" *ngFor="let product of order.products">
-        <ion-avatar class="product-img">
-          <img *ngIf="!product.product.imageUrl || product.product.imageUrl == ''" src="../../../assets/imgs/capsules.svg">
-          <img *ngIf="product.product.imageUrl && product.product.imageUrl != ''" [src]="product.product.imageUrl">
-        </ion-avatar>
-        <div class="holder">
-        <ion-title class="product-title">
-          {{product.product.mainProduct.name}}
-        </ion-title>
-        <ion-text class="product-detail">
-          CN : {{product.product.mainProduct.company_name}} 
-        </ion-text>
-        <ion-text class="product-detail">
-          Description : {{product.product.mainProduct.description}} 
-        </ion-text>
-        <ion-text class="product-detail">
-          PACKING : {{product.product.mainProduct.packing}} 
-        </ion-text>
-      </div>
-      <div class="product-nav">
-        <ion-text>Quantity</ion-text> : {{product.quantity}}
-      </div>
-    </div>
-    </ion-col>
+      <ion-col size="12" *ngIf="order && order.products.length != 0">
+        <div class="product-holder" *ngFor="let product of order.products;let i = index">
+          <ion-avatar class="product-img">
+            <img *ngIf="!product.product || product.product.imageUrl == ''" src="../../../assets/imgs/capsules.svg">
+            <img *ngIf="product.product.imageUrl && product.product.imageUrl != ''"
+              [src]="product.product.imageUrl">
+          </ion-avatar>
+          <div class="holder">
+            <ion-title class="product-title">
+              {{product.product.mainProduct.name}}
+            </ion-title>
+            <ion-text class="product-detail">
+              CN : {{product.product.mainProduct.company_name}}
+            </ion-text>
+            <ion-text class="product-detail">
+              Description : {{product.product.mainProduct.description}}
+            </ion-text>
+            
+            <ion-text class="product-detail">
+              PACKING : {{product.product.mainProduct.packing}}
+            </ion-text>
+          </div>
+          <div class="button-ajust-holder">
+                <ion-button fill="clear" size="small" class="button-cart" (click)="remove(product)">
+                  <ion-icon name="remove"></ion-icon>
+                </ion-button>
+                <p class="qunitity">{{product.refundedQuantity}}</p>
+                <ion-button fill="clear" size="small" class="button-cart" (click)="add(product)">
+                  <ion-icon name="add"></ion-icon>
+                </ion-button>
+              </div>
+        </div>
+      </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col size="12">
-        <ion-title class="title-patient">Total Price</ion-title>
+        <ion-title class="title-patient">Refunded Price</ion-title>
         <div  class="total-price-holder">
-          <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{order.totalPrice}}
+          <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{refundPrice}}
         </div>
       </ion-col>
     </ion-row>
 
     <ion-row class="bottom-row">
       <ion-col size="12" >
-        <ion-button shape="round" size="default" color="success"  expand="full" *ngIf="(order.paymentStatus && order.paymentStatus.txStatus && order.method == 'card' && order.status == 'created') && (order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED' ) && order.status == 'created'" (click)="getPaymentLink()" >
-          <ion-text>CONFIRM YOUR PAYMENT NOW</ion-text>
-        </ion-button>
-      </ion-col>
-      <ion-col size="12" >
-        <ion-button shape="round" size="default" color="danger"  expand="full" *ngIf="(order.paymentStatus && (!order.paymentStatus.txStatus && order.status == 'created') || order.method == 'cod') || (order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED' ) " (click)="checkStatus()" >
-          <ion-text>CANCEL ORDER</ion-text>
+        <ion-button shape="round" size="default" color="success"  expand="full"  *ngIf="refundPrice > 0" (click)="makeRefund()" >
+          <ion-text>Make A Refund</ion-text>
         </ion-button>
       </ion-col>
     </ion-row>
