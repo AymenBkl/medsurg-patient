@@ -85,7 +85,7 @@ export class OrderDetailComponent implements OnInit {
 
   getPaymentLink() {
     console.log("here",this.order);
-    if ((this.order.paymentStatus.txStatus == "PENDING" || this.order.paymentStatus.txStatus == "FAILED") && this.order.status == 'created') {
+    if ((this.order.paymentStatus.txStatus == "PENDING" || this.order.paymentStatus.txStatus == "FAILED ") && this.order.status == 'created') {
       this.cashfree.checkLink(this.order._id)
         .then((payment:any) => {
           this.inAppBrowser(payment.paymentLink);

@@ -37,6 +37,16 @@
           <ion-title class="title-patient">This Order is {{order.status | uppercase}}</ion-title>
         </ion-item>
       </ion-col>
+      <ion-col size="12" *ngIf="order.method == 'card' && order.paymentStatus.txStatus">
+        <ion-item  class="profile-holder" >
+          <ion-title class="title-patient">Payment is {{order.paymentStatus.txStatus | uppercase}}</ion-title>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" *ngIf="order.method == 'card' && !order.paymentStatus.txStatus">
+        <ion-item  class="profile-holder" >
+          <ion-title class="title-patient">Payment is {{order.paymentStatus.orderStatus | uppercase}}</ion-title>
+        </ion-item>
+      </ion-col>
     </ion-row>
     <ion-row>
       <ion-title class="title-patient">Medecins</ion-title>
@@ -78,12 +88,12 @@
 
     <ion-row class="bottom-row">
       <ion-col size="12" >
-        <ion-button shape="round" size="default" color="success"  expand="full" *ngIf="(order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED' ) && order.status == 'created'" (click)="getPaymentLink()" >
+        <ion-button shape="round" size="default" color="success"  expand="full" *ngIf="order.paymentStatus.txStatus && (order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED' ) && order.status == 'created'" (click)="getPaymentLink()" >
           <ion-text>CONFIRM YOUR PAYMENT NOW</ion-text>
         </ion-button>
       </ion-col>
       <ion-col size="12" >
-        <ion-button shape="round" size="default" color="danger"  expand="full" *ngIf="(order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED' ) && order.status == 'created'" (click)="checkStatus()" >
+        <ion-button shape="round" size="default" color="danger"  expand="full" *ngIf="(!order.paymentStatus.txStatus && order.status == 'created') || (order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED' ) " (click)="checkStatus()" >
           <ion-text>CANCEL ORDER</ion-text>
         </ion-button>
       </ion-col>
