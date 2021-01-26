@@ -36,4 +36,21 @@ export class CategoryService {
         });
       });
     }
+
+    getCategory(categoryId: string) {
+      return new Promise((resolve, reject) => {
+        this.httpClient.get<CategoryResponse>(this.categoryUrl + 'category/getcategory/' + categoryId)
+          .subscribe(response => {
+            console.log(response);
+            if (response.status === 200) {
+              resolve(response.category);
+            }
+            else {
+              resolve(false);
+            }
+          }, err => {
+            reject(err);
+          });
+      });
+    }
 }

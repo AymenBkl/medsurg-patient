@@ -17,7 +17,7 @@
   </ion-toolbar>
   <ion-toolbar class="toolbar">
   </ion-toolbar>
-  <ion-searchbar class="search_bar-xyz" cancelButtonText="Custom Cancel" showCancelButton="focus" animated
+  <ion-searchbar class="search_bar-xyz" cancelButtonText="Custom Cancel" showCancelButton="focus" animated (ionCancel)="findProducts('')"
     autocorrect="off" inputmode="search" (keyup.enter)="onInput(searchbar.value)" placeholder="Medecin1"
     #searchbar>
 
@@ -26,11 +26,11 @@
 
 <ion-content>
 
-  <ion-grid *ngIf="products && products.length != 0">
+  <ion-grid *ngIf="searchProduct && searchProduct.length != 0">
     <ion-row>
       <ion-title class="title-pharmacy">Medecins Found </ion-title>
       <ion-col size="12" >
-      <div  class="product-holder" *ngFor="let product of products;let i = index" (click)="selectProduct(i)" [class.selected]='selectedProduct == i'>
+      <div  class="product-holder" *ngFor="let product of searchProduct;let i = index" (click)="selectProduct(i)" [class.selected]='selectedProduct == i'>
         <ion-avatar class="product-img">
           <img *ngIf="!product.imageUrl || product.imageUrl == ''" src="../../../assets/imgs/capsules.svg">
           <img *ngIf="product.imageUrl && product.imageUrl != ''" [src]="product.imageUrl">
@@ -44,15 +44,6 @@
         </ion-text>
         <ion-text class="product-detail">
           Description : {{product.description}} 
-        </ion-text>
-        <ion-text class="product-detail">
-          IGST : {{product.igst}} 
-        </ion-text>
-        <ion-text class="product-detail">
-          CGST : {{product.cgst}} 
-        </ion-text>
-        <ion-text class="product-detail">
-          SGST : {{product.sgst}} 
         </ion-text>
         <ion-text class="product-detail">
           PACKING : {{product.packing}} 
