@@ -10,7 +10,10 @@ import { AuthService } from 'src/app/services/auth.service';
 export class PaymentDetailPage implements OnInit {
 
   currentUser: User;
+  update:boolean= false;
   constructor(private authService: AuthService) { }
+
+
 
   ngOnInit() {
     this.getUser();
@@ -22,6 +25,12 @@ export class PaymentDetailPage implements OnInit {
 
   paymentDetailAdded($event){
     this.getUser();
+    this.update = false;
+    console.log(this.update,this.currentUser);
+  }
+
+  updatePaymentDetail(){
+    this.update = true;
   }
 
 }

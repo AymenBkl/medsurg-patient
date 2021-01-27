@@ -95,8 +95,6 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private authService: AuthService,
     private router: Router,
-    private cashfree: CashfreeService,
-    private iab: InAppBrowser
   ) {
 
     this.initializeApp();
@@ -112,13 +110,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cashfree.checkLink('ORDER-153265555555')
-      .then((result: any) => {
-        console.log(result);
-      })
-    /**setTimeout(() => {
-      this.form.nativeElement.submit();
-    }, 1500)**/
     this.authService.checkJWT();
     this.menuItems();
     this.getCurrentUser();
@@ -154,37 +145,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  inAppBrowser(link) {
-    const options: InAppBrowserOptions = {
-      zoom: "no",
-      fullscreen: "yes",
-      hidenavigationbuttons: "no",
-      toolbar: "no",
-      hideurlbar: "yes",
-    };
-    const browser = this.iab.create(link, '_blank', {
-      toolbar: "yes",
-      hideurlbar: "yes",
-      fullscreen: "yes",
-      location: "no",
-      closebuttoncolor: 'danger',
-      closebuttoncaption: 'close',
 
-      options,
-    });
-
-    browser.on('loadstop')
-      .subscribe(event => {
-        console.log(event)
-        browser.show();
-      })
-    browser.on('loadstart')
-      .subscribe(event => {
-        console.log(event)
-        browser.show();
-
-      })
-  }
 
 
 

@@ -7,6 +7,7 @@ import { StorageService } from './storage.service';
 import { ProccessHttpErrosService } from './proccess-http-erros.service';
 import { AuthResponse} from '../interfaces/response';
 import { catchError } from 'rxjs/operators';
+import { PaymentDetail } from '../interfaces/paymentDetail';
 
 @Injectable({
   providedIn: 'root'
@@ -131,6 +132,11 @@ export class AuthService {
     this.user = user;
     console.log(user);
     this.currentUser.next(user);
+  }
+
+  paymentUpdated(paymentDetail: PaymentDetail){
+    this.user.paymentDetail = paymentDetail;
+    console.log(this.user);
   }
 
 }

@@ -19,11 +19,17 @@
       <ion-input placeHolder="ACCOUNT HOLDER NAME" formControlName="ACCOUNTHOLDERNAME"></ion-input>
     </ion-item>
     <ion-label class="label-error" *ngIf="formErrors && formErrors.ACCOUNTHOLDERNAME">*{{formErrors.ACCOUNTHOLDERNAME}}</ion-label>
-    <ion-button class="buttons" [disabled]="paymentForm.invalid || submitted" (click)="addPaymentDetail()" shape="round" size="default" expand="full">
+    <ion-button class="buttons" [disabled]="paymentForm.invalid || submitted" (click)="addPaymentDetail()" shape="round" size="default" expand="full" *ngIf="!update">
       <ion-label *ngIf="!submitted">Add Payment </ion-label>
       <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
     </ion-button>
-   
+    <ion-button class="buttons" [disabled]="paymentForm.invalid || submitted" (click)="updatePaymentDetail()" shape="round" size="default" expand="full" *ngIf="update">
+      <ion-label *ngIf="!submitted">Update Payment </ion-label>
+      <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
+    </ion-button>
+    <ion-button class="buttons" [disabled]="submitted" (click)="back()" color="success" shape="round" size="default" expand="full" *ngIf="update">
+      <ion-label>Back</ion-label>
+    </ion-button>
  </form>
 </ion-col>
 </ion-row>

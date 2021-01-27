@@ -67,7 +67,6 @@ class ValidRequest {
     let valid: boolean = true;
      urlsToNotUse.map(url => {
       if (requestUrl.includes(url)){
-        console.log("hello",requestUrl)
         valid = false;
       }
     })

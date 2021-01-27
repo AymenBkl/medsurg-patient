@@ -158,4 +158,22 @@ export class UserService {
         });
     });
   }
+
+  updatePaymentDetail(paymentDetail: PaymentDetail,paymentId:string){
+    return new Promise((resolve, reject) => {
+      this.httpClient.put<AuthResponse>(this.userUrl + 'updatepaymentdetail/' + paymentId, {paymentDetail: paymentDetail})
+        .subscribe((response:any) => {
+          if (response.status === 200){
+            console.log(response)
+            this.authService.paymentUpdated(response.user);
+            resolve(response.user);
+          }
+          else {
+            resolve(false);
+          }
+        }, err => {
+          reject(err);
+        });
+    });
+  }
 }
