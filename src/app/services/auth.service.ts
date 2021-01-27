@@ -136,7 +136,6 @@ export class AuthService {
 
   paymentUpdated(paymentDetail: PaymentDetail){
     this.user.paymentDetail = paymentDetail;
-    console.log(this.user);
   }
 
 }
