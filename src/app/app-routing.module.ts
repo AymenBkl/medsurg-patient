@@ -75,6 +75,12 @@ const routes: Routes = [
     redirectTo: 'tabs/tab4/refund'   , 
     canActivate: [AuthGuard]
   },
+  {
+    path: 'payment-detail',
+    redirectTo: 'tabs/tab4/payment-detail'   , 
+    canActivate: [AuthGuard]
+  },
+
 
 ];
 

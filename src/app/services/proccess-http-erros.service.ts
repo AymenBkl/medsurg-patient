@@ -58,3 +58,6 @@ export class ProccessHttpErrosService {
     return {errmsg : errMsg, errcode : errCode};
   }
 }
+
+
+

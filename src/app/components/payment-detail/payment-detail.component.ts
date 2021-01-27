@@ -5,16 +5,16 @@ import { UserService } from 'src/app/services/user/user.service';
 import { onValueChanged } from './valueChanges';
 
 @Component({
-  selector: 'app-add-address',
-  templateUrl: './add-address.component.html',
-  styleUrls: ['./add-address.component.scss'],
+  selector: 'app-payment-detail-component',
+  templateUrl: './payment-detail.component.html',
+  styleUrls: ['./payment-detail.component.scss'],
 })
-export class AddAddressComponent implements OnInit {
+export class PaymentDetailComponent implements OnInit {
 
-  addressForm: FormGroup;
+  paymentForm: FormGroup;
   formErrors: any;
   submitted = false;
-  @Output() addressAdded: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() paymentDetailAdded: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
               private interactionService:InteractionService) { }
@@ -25,28 +25,27 @@ export class AddAddressComponent implements OnInit {
 
 
   buildReactiveForm() {
-    this.addressForm = this.formBuilder.group({
-      city : ['', [Validators.required, Validators.minLength(4)]],
-      streetName : ['', [Validators.required, Validators.minLength(4)]],
-      streetName1 : [''],
-      postalCode : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(6)]],
-      buildingNumber : ['', [Validators.required]]
+    this.paymentForm = this.formBuilder.group({
+      bankAccountNumber : ['', [Validators.required, Validators.minLength(4)]],
+      IFSCCODE : ['', [Validators.required, Validators.minLength(4)]],
+      ACCOUNTHOLDERNAME : ['',[Validators.required,Validators.minLength(4)]],
     });
-    this.addressForm.valueChanges
+    this.paymentForm.valueChanges
       .subscribe(address => {
-        this.formErrors = onValueChanged(address, this.addressForm);
+        
+        this.formErrors = onValueChanged(address, this.paymentForm);
         console.log(this.formErrors);
       });
   }
 
 
-  addAddress() {
+  addPaymentDetail() {
     this.submitted = true;
-    this.userService.addAddress(this.addressForm.value)
+    this.userService.addPaymentDetail(this.paymentForm.value)
       .then((result: any) => {
         this.submitted = false;
         if (result && result != false){
-          this.interactionService.createToast("Address Has Been Added Succesfully", 'success', "bottom");
+          this.interactionService.createToast("PaymentDetail Has Been Added Succesfully", 'success', "bottom");
           this.back();
         }
         else {
@@ -60,7 +59,7 @@ export class AddAddressComponent implements OnInit {
   }
 
   back(){
-    this.addressAdded.emit(false);
+    this.paymentDetailAdded.emit(false);
   }
 
 }

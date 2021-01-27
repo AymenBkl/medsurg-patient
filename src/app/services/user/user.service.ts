@@ -5,6 +5,7 @@ import { AuthResponse } from '../../interfaces/response';
 import { ProccessHttpErrosService } from '../proccess-http-erros.service';
 import { AuthService } from '../auth.service';
 import { Address } from '../../interfaces/address';
+import { PaymentDetail } from 'src/app/interfaces/paymentDetail';
 @Injectable({
   providedIn: 'root'
 })
@@ -127,6 +128,23 @@ export class UserService {
   addAddress(address: Address) {
     return new Promise((resolve, reject) => {
       this.httpClient.post<AuthResponse>(this.userUrl + 'addaddress',{address: address})
+        .subscribe(response => {
+          if (response.status === 200){
+            this.authService.userUpdated(response.user);
+            resolve(response.user);
+          }
+          else {
+            resolve(false);
+          }
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
+  addPaymentDetail(paymentDetail: PaymentDetail) {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post<AuthResponse>(this.userUrl + 'addpaymentdetail',{paymentDetail: paymentDetail})
         .subscribe(response => {
           if (response.status === 200){
             this.authService.userUpdated(response.user);

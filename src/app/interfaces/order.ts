@@ -18,4 +18,5 @@ export interface Order {
     address:Address;
     paymentStatus:PaymentStatus;
     refund: Refund;
+    payedByAdmin:string;
 }

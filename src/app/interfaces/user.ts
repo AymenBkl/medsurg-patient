@@ -1,4 +1,5 @@
 import { Address } from "./address";
+import { PaymentDetail } from "./paymentDetail";
 
 export interface User {
     _id: string;
@@ -13,4 +14,5 @@ export interface User {
     emailVerified: boolean;
     phoneNumber:number;
     addresses:Address[];
+    paymentDetail: PaymentDetail;
 }
