@@ -81,7 +81,14 @@
     </div>
     </ion-col>
     </ion-row>
-
+    <ion-row *ngIf="order.refund && order.refund.refund && order.refund.payedByAdmin == 'PAID'">
+      <ion-col size="12">
+        <ion-title class="title-patient">Commission: {{order.refund.commissionApplied}}%</ion-title>
+        <div  class="total-price-holder1">
+          <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{order.refund.refund.refundPrice -  (order.refund.refund.refundPrice*order.refund.commissionApplied)/100 }}
+        </div>
+      </ion-col>
+    </ion-row>
     <ion-row>
       <ion-col size="12">
         <ion-title class="title-patient">Total Price</ion-title>
@@ -90,6 +97,7 @@
         </div>
       </ion-col>
     </ion-row>
+    
 
     <ion-row class="bottom-row">
       <ion-col size="12" >
@@ -108,7 +116,7 @@
         </ion-button>
       </ion-col>
       <ion-col size="12" >
-        <ion-button shape="round" size="default" color="primary"  expand="full" *ngIf="isValidRefund" (click)="callRefund()" >
+        <ion-button shape="round" size="default" color="primary"  expand="full" *ngIf="isValidRefund && order.refund.payedByAdmin != 'PAID'" (click)="callRefund()" >
           <ion-text>Refund Medecins</ion-text>
         </ion-button>
       </ion-col>

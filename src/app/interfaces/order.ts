@@ -10,13 +10,13 @@ export interface Order {
     patient: User;
     products: OrderProduct[];
     pharmacy: User;
-    referal: Referal;
+    referal: {referal: Referal,payedByAdmin:string,commissionApplied:number};
     totalPrice: number;
     status: string;
     method:string;
     createdAt:string;
     address:Address;
     paymentStatus:PaymentStatus;
-    refund: Refund;
+    refund: {refund: Refund,payedByAdmin:string,commissionApplied:number};
     payedByAdmin:string;
 }

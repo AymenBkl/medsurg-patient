@@ -60,21 +60,23 @@ export class AddOrderComponent implements OnInit {
     this.searchProduct = this.navParams.get('searchProd');
     this.currentUser = this.navParams.get('user');
     this.isPres = this.navParams.get('isPres');
-    console.log(this.isPres);
     this.order = {
+      refund:null,
+      payedByAdmin:'NOT PAIED',
       products: this.searchProduct.pharmacy.products,
       totalPrice: this.searchProduct.totalPrice,
       patient: this.currentUser,
       pharmacy: this.searchProduct.pharmacy,
       method: this.selectedMethod,
       status: "created",
-      referal: this.referalP,
+      referal: {referal:this.referalP,payedByAdmin:'NOT PAIED',commissionApplied:0},
       address: null,
       _id: new mongoose.Types.ObjectId().toHexString(),
       createdAt: new Date().toISOString(),
       paymentStatus:null,
     }
     delete this.order.paymentStatus;
+    delete this.order.refund;
   }
 
 

@@ -34,8 +34,8 @@ export class OrderDetailComponent implements OnInit {
   getData() {
     this.order = this.navParams.get('order');
     this.currentUser = this.navParams.get('user');
-    if (this.order.refund){
-      this.order.totalPrice -= this.order.refund.refundPrice;
+    if (this.order.refund && this.order.refund.refund){
+      this.order.totalPrice -= this.order.refund.refund.refundPrice;
     }
     }
 
@@ -134,7 +134,7 @@ export class OrderDetailComponent implements OnInit {
   checkOrderDate(){
     const orderDate = (new Date(this.order.createdAt).getTime() / 1000) + 7*24*36000;
     const finish = (new Date().getTime() / 1000);
-    this.isValidRefund = orderDate > finish;
+    this.isValidRefund = orderDate > finish && this.order.status == 'delivered' && ((this.order.method == 'card' && this.order.paymentStatus && this.order.paymentStatus.txStatus == "SUCCESS") || this.order.method == 'cod');
   }
 
   callRefundDetail(){
