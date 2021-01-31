@@ -16,21 +16,6 @@
       <ion-input placeHolder="Lastname" formControlName="lastname"></ion-input>
     </ion-item>
     <ion-label class="label-error" *ngIf="formErrors && formErrors.lastname">*{{formErrors.lastname}}</ion-label>
-
-    <ion-item lines="none" class="ion-input">
-      <ion-icon name="people-circle"></ion-icon>
-      <ion-input placeHolder="Username" formControlName="username"></ion-input>
-    </ion-item>
-    <ion-label class="label-error" *ngIf="formErrors && formErrors.username">*{{formErrors.username}}</ion-label>
-    <ion-label class="label-error" *ngIf="validationErrors && validationErrors.errcode == 1">*{{validationErrors.errmsg}}</ion-label>
-
-    <ion-item lines="none" class="ion-input">
-      <ion-icon name="mail"></ion-icon>
-      <ion-input placeHolder="Email" formControlName="email"></ion-input>
-    </ion-item>
-    <ion-label class="label-error" *ngIf="formErrors && formErrors.email">*{{formErrors.email}}</ion-label>
-    <ion-label class="label-error" *ngIf="validationErrors && (validationErrors.errcode == 0 || validationErrors.errcode == 13 )">*{{validationErrors.errmsg}}</ion-label>
-
     <ion-item lines="none" class="ion-input">
       <ion-icon name="call"></ion-icon>
       <ion-input  placeHolder="Phone Number" formControlName="phoneNumber" (keypress)="numberOnlyValidation($event)"></ion-input>

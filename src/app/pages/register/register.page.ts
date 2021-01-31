@@ -33,10 +33,8 @@ export class RegisterPage implements OnInit {
 
   buildReactiveForm() {
     this.registerForm = this.formBuilder.group({
-      username : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
       firstname : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
       lastname : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-      email : ['', [Validators.required, Validators.email]],
       phoneNumber : ['', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]],
       password : ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword : ['', [Validators.required, Validators.minLength(6)]],
