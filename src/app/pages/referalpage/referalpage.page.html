@@ -55,7 +55,7 @@
             <div class="main-container bottom">
                 <div class="price">
                   <ion-label class="inner-item">
-                    <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{countTotalPrice()}}
+                    <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{'PAID:' + countTotalPrice(referal).PAID + ' , UNPAID:' + countTotalPrice(referal).NPAID}}
                   </ion-label>
                 </div>
           </div>
