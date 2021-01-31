@@ -14,18 +14,6 @@ import { CashfreeService } from 'src/app/services/cashfree.service';
 export class HomePage implements OnInit {
 
   currentUser:User;
-  data = {
-    "appId": config.cashfree.appId,
-    "orderId": 'ORDER-15326',
-    "orderAmount": "150",
-    "orderCurrency": 'INR',
-    "orderNote": "TEST",
-    "customerName": "AYMEN BKL",
-    "customerPhone": '9177091554',
-    "customerEmail": 'sada@sada.dz',
-    "returnUrl": 'http://localhost:8100/orders',
-    "notifyUrl": 'http://localhost:8100/orders',
-  };
   constructor(private authService: AuthService,
               private iab: InAppBrowser,
               private cashfree: CashfreeService) { }

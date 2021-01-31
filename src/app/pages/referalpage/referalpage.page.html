@@ -19,7 +19,7 @@
               <div class="header">
                 <ion-label  class="label"
                   *ngIf="currentUser && currentUser.firstname != ''">
-                  <h1>{{currentUser.firstname}}</h1>
+                  <h1>{{currentUser.firstname}} {{currentUser.lastname}}</h1>
                 </ion-label>
                 <ion-label  class="label"
                   *ngIf="currentUser.username && currentUser.username == ''">
@@ -37,11 +37,6 @@
               <div class="address">
                 <ion-label class="label">
                   <ion-icon class="icon"  name="pricetags-outline"></ion-icon> : Commision {{referal.commision != null ? referal.code : "Referal Code"}}
-                </ion-label>
-              </div>
-              <div class="address">
-                <ion-label class="label">
-                  <ion-icon class="icon"  name="mail-outline"></ion-icon> : {{currentUser.email != null ? currentUser.email : "Email"}}
                 </ion-label>
               </div>
               

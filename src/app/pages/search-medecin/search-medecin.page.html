@@ -44,8 +44,8 @@
 
                 <div class="header">
                   <ion-label  class="label"
-                    *ngIf="product.pharmacy && product.pharmacy.username != ''">
-                    <h1>{{product.pharmacy.username}}</h1>
+                    *ngIf="product.pharmacy && product.pharmacy.firstname != ''">
+                    <h1>{{product.pharmacy.firstname && product.pharmacy.lastname}}</h1>
                   </ion-label>
                   <ion-label  class="label"
                     *ngIf="product.pharmacy && product.pharmacy.username == ''">
@@ -57,18 +57,9 @@
                 
                 <div class="address">
                   <ion-label class="label">
-                    <ion-icon class="icon"  name="person-circle-outline"></ion-icon> : {{product.pharmacy.firstname != null ? product.pharmacy.firstname : "Name"}}
+                    <ion-icon class="icon"  name="person-circle-outline"></ion-icon> : {{product.pharmacy.firstname}} {{product.pharmacy.lastname}}
                   </ion-label>
                 </div>
-                <div class="address">
-                  <ion-label class="label">
-                    <ion-icon class="icon"  name="mail-outline"></ion-icon> : {{product.pharmacy.email != null ? product.pharmacy.email : "Email"}}
-                  </ion-label>
-                </div>
-                
-
-
-
               </div>
               <hr>
               
