@@ -45,9 +45,7 @@ export class OrdersPage implements OnInit {
   }
 
   ngOnInit() {
-    this.currentUser = this.authService.user;
-    this.subscribetoOrders();
-    this.getAllOrders();
+    
   }
 
 
@@ -139,6 +137,13 @@ export class OrdersPage implements OnInit {
       .catch(err => {
       })
   }
+
+  ionViewDidEnter(){
+    this.currentUser = this.authService.user;
+    this.subscribetoOrders();
+    this.getAllOrders();
+  }
+
 
 
 

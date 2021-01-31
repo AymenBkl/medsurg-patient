@@ -22,6 +22,10 @@ export class GetallmessagesComponent implements OnInit {
               private interactionService: InteractionService) { }
 
   ngOnInit() {
+    
+  }
+
+  ionViewDidEnter(){
     this.subscribetoMessages();
     this.getAllMessages();
   }

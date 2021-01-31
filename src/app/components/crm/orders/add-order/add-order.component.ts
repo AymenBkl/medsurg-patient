@@ -119,7 +119,7 @@ export class AddOrderComponent implements OnInit {
         this.submitted = false;
         if (result && result != false) {
           this.referalP = result;
-          this.order.referal = result;
+          this.order.referal = {referal:result,commissionApplied:0,payedByAdmin:'NOT PAIED'};
           if (this.referalP.owner._id != this.currentUser._id) {
             this.interactionService.createToast('Referal Added', 'success', 'bottom');
             this.nextSlide();

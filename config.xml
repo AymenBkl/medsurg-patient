@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MyApp</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://localhost:8101" />
+<widget android-versionCode="1" id="com.medsurg.patient" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>PATIENT MEDSURG</name>
+    <description>PATIENT MEDSURG</description>
+    <author email="aymenxyz6@gmail.com" href="">Aymen Abdelmoumen Boukhelkhal</author>
+    <content original-src="index.html" src="http://localhost:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -98,7 +98,8 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-    <allow-navigation href="http://localhost:8100" sessionid="be0c10bb" />
+    <allow-navigation href="http://medsurgcompany.in" sessionid="be0c10bb" />
     <allow-navigation href="http://localhost:8102" sessionid="64d5d28f" />
     <allow-navigation href="http://localhost:8101" sessionid="168f1db1" />
+    <allow-navigation href="http://localhost:8100" sessionid="acd5fed1" />
 </widget>

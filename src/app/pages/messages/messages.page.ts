@@ -18,6 +18,9 @@ export class MessagesPage implements OnInit {
    }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter(){
     this.getUser();
   }
 

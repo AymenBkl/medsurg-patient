@@ -29,7 +29,7 @@ export class PrescriptionPage implements OnInit {
               }
 
   ngOnInit() {
-    this.getCurrentUser();
+    
   }
 
   getCurrentUser() {
@@ -94,6 +94,10 @@ export class PrescriptionPage implements OnInit {
         return this.calculateCommentPrice(a) - this.calculateCommentPrice(b);
       })
     })
+  }
+
+  ionViewDidEnter(){
+    this.getCurrentUser();
   }
   
 

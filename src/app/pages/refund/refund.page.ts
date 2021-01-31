@@ -31,9 +31,14 @@ export class RefundPage implements OnInit {
               }
 
   ngOnInit() {
+    
+  }
+
+  ionViewDidEnter(){
     this.currentUser = this.authService.user;
     this.getAllRefunds();
   }
+
 
 
   getAllRefunds(){
