@@ -40,8 +40,8 @@
     </ion-row>
     <ion-row>
       <ion-title class="title-patient">Medecins</ion-title>
-      <ion-col size="12" >
-      <div  class="product-holder" *ngFor="let product of order.products">
+      <ion-col size="12" *ngFor="let product of order.products">
+      <div  class="product-holder" *ngIf="product.refundedQuantity > 0">
         <ion-avatar class="product-img" *ngIf="product.refundedQuantity > 0">
           <img *ngIf="!product.product.imageUrl || product.product.imageUrl == ''" src="../../../assets/imgs/capsules.svg">
           <img *ngIf="product.product.imageUrl && product.product.imageUrl != ''" [src]="product.product.imageUrl">

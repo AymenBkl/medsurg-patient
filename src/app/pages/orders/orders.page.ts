@@ -140,6 +140,13 @@ export class OrdersPage implements OnInit {
   }
 
   ionViewDidEnter(){
+    this.allOrder = {
+      PENDING: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+      SUCCESS: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+      FAILED: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+      ALL: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+      ACTIVE: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] }
+    };
     this.currentUser = this.authService.user;
     this.getAllOrders();
   }

@@ -45,7 +45,7 @@ export class CashfreeService {
       paramForm.append('orderNote','This order is made by' + order.patient.firstname + ' ' + order.patient.lastname);
       paramForm.append('customerName',order.patient.firstname + ' ' + order.patient.lastname);
       paramForm.append('customerPhone',order.patient.phoneNumber.toString());
-      paramForm.append('customerEmail',order.patient.email);
+      paramForm.append('customerEmail','test@test.dz');
       paramForm.append('returnUrl','');
       console.log(order);
         this.httpClient.post('https://test.cashfree.com/api/v1/order/create',paramForm.toString(),header)
