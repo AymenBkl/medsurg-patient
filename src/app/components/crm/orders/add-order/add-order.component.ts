@@ -212,7 +212,7 @@ export class AddOrderComponent implements OnInit {
       toolbar: "no",
       hideurlbar: "yes",
     };
-    const browser = this.iab.create(link, '_system', {
+    const browser = this.iab.create(link, '_blank', {
       toolbar: "yes",
       hideurlbar: "no",
       fullscreen: "yes",
