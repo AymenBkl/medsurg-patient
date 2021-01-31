@@ -58,6 +58,7 @@ export class OrdersPage implements OnInit {
             if (result && result != false) {
               console.log(result);
               if (result.length != 0) {
+                this.filterOrders(result);
                 this.interactionService.createToast('Your Orders has been loaded !', 'success', 'bottom');
               }
               else {
@@ -140,7 +141,6 @@ export class OrdersPage implements OnInit {
 
   ionViewDidEnter(){
     this.currentUser = this.authService.user;
-    this.subscribetoOrders();
     this.getAllOrders();
   }
 

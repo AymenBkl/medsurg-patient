@@ -30,7 +30,7 @@ export class LoginPage implements OnInit {
 
   buildLoginForm() {
     this.loginForm = this.formBuilder.group({
-      username : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      phoneNumber : ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       password : ['', [Validators.required, Validators.minLength(6)]],
       remember : false
     });
@@ -43,6 +43,7 @@ export class LoginPage implements OnInit {
 
   logIn() {
     this.submitted = true;
+    console.log(this.loginForm.value);
     this.authService.logIn(this.loginForm.value)
       .then((result: any) => {
         console.log(result);

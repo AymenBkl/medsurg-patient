@@ -81,7 +81,7 @@ export class AuthService {
   logIn(user: any) {
     return new Promise((resolve, reject) => {
       this.destroyUserCredentials();
-      this.httpClient.post<AuthResponse>(this.authURL + 'login', {username : user.username , password : user.password})
+      this.httpClient.post<AuthResponse>(this.authURL + 'login', {phoneNumber : user.phoneNumber , password : user.password})
         .subscribe(response => {
           if (response.status === 200){
             if (user.remember === false){
