@@ -8,16 +8,17 @@ import { AuthService } from './auth.service';
 export class AuthGuardService implements CanActivate {
 
   constructor(private router: Router,
-              private authService: AuthService) { }
+    private authService: AuthService) { }
 
-  canActivate(): boolean {
-    if (this.authService.isAuthenticated)
-    {
-      return true;
+  async canActivate(): Promise<boolean> {
+    await Promise.resolve(this.authService.checkJWT());
+    if (this.authService.isAuthenticated) {
+      return Promise.resolve(true);
     }
-       else {
-        this.router.navigate(['/login']);
-        return false;
-      }
+    else {
+      this.router.navigate(['/login']);
+      return Promise.resolve(false);
+    }
   }
 }
+

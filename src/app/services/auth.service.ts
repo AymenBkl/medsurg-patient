@@ -27,27 +27,34 @@ export class AuthService {
                }
 
   checkJWT() {
-    const token = this.storageService.getToken();
-    if (token){
-      console.log(token);
-      this.httpClient.get<AuthResponse>(this.authURL + 'jwt')
-      .subscribe(response => {
-        console.log(response);
-        if (response.token === 'TOKEN VALID' && response.status === 200){
-          response.user.token = token;
-          this.setUserCredentials(response.user);
-        }
-        else {
+    return new Promise((resolve,reject) => {
+      const token = this.storageService.getToken();
+      if (token){
+        console.log(token);
+        this.httpClient.get<AuthResponse>(this.authURL + 'jwt')
+        .subscribe(response => {
+          console.log(response);
+          if (response.token === 'TOKEN VALID' && response.status === 200){
+            response.user.token = token;
+            this.setUserCredentials(response.user);
+            resolve(true);
+          }
+          else {
+            this.destroyUserCredentials();
+            resolve(false);
+          }
+        }, err => {
+          console.log(err);
+          reject(err);
           this.destroyUserCredentials();
-        }
-      }, err => {
-        console.log(err);
-        this.destroyUserCredentials();
-      });
+        });
+      }
+    else {
+      resolve(false);
+      this.destroyUserCredentials();
     }
-  else {
-    this.destroyUserCredentials();
-  }
+    })
+    
 }
 
   signUp(user: User) {
