@@ -24,6 +24,7 @@ export class InterceptorService implements HttpInterceptor {
       return next.handle(authReq);
     }
     else {
+      console.log(req.headers.keys(),req.headers)
       return next.handle(req);
     }
     

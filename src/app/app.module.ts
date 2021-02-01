@@ -35,6 +35,9 @@ import { PrescriptionService } from './services/prescription.service';
 import { CashfreeService } from './services/cashfree.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
+import { HTTP } from '@ionic-native/http/ngx';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -67,6 +70,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     PrescriptionService,
     CashfreeService,
     InAppBrowser,
+    HTTP,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

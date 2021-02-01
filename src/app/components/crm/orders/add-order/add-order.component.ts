@@ -196,8 +196,10 @@ export class AddOrderComponent implements OnInit {
   payByCard() {
     this.cashfreeService.createOrder(this.order)
       .then((orderCreated: any) => {
-        console.log(orderCreated);
+        console.log('obj',JSON.stringify(orderCreated));
+        console.log('obj',JSON.stringify(orderCreated));
         if (orderCreated && orderCreated.paymentLink) {
+          console.log('here')
           this.createOrder();
           this.inAppBrowser(orderCreated.paymentLink);
         }
@@ -205,6 +207,7 @@ export class AddOrderComponent implements OnInit {
   }
 
   inAppBrowser(link) {
+    console.log(link);
     const options: InAppBrowserOptions = {
       zoom: "no",
       fullscreen: "yes",

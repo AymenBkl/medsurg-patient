@@ -103,6 +103,7 @@ export class OrderDetailComponent implements OnInit {
 
 
   inAppBrowser(link) {
+    console.log(link);
     const options: InAppBrowserOptions = {
       zoom: "no",
       fullscreen: "yes",

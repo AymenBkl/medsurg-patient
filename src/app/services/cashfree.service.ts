@@ -1,8 +1,10 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import {HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { config } from './config';
 import * as CryptoJS from 'crypto-js';
 import { Order } from '../interfaces/order';
+import { HTTP } from '@ionic-native/http/ngx';
+
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,7 @@ import { Order } from '../interfaces/order';
 export class CashfreeService {
 
   cashfreeURL: string = config.cashfree.url;
-  constructor(private httpClient: HttpClient) { 
+  constructor(private http:HTTP) { 
   }
 
   createToken(order:any){
@@ -21,8 +23,8 @@ export class CashfreeService {
         .set("x-client-id",config.cashfree.appId)
         .set("x-client-secret", config.cashfree.appKey)
     };
-      this.httpClient.post(this.cashfreeURL + 'cftoken/order',order,header)
-        .subscribe(data => {
+      this.http.post(this.cashfreeURL + 'cftoken/order',order,header)
+        .then(data => {
           resolve(data)
         },err => {
           reject(err);
@@ -32,11 +34,7 @@ export class CashfreeService {
 
   createOrder(order: Order) {
 
-    return new Promise((resolve,reject) => {
-      const header = {
-        headers: new HttpHeaders()
-          .set("Content-Type", "application/x-www-form-urlencoded")
-      };
+    return new Promise((resolve,reject) => { 
       let paramForm= new URLSearchParams();
       paramForm.append('appId',config.cashfree.appId);
       paramForm.append('secretKey',config.cashfree.appKey);
@@ -47,10 +45,20 @@ export class CashfreeService {
       paramForm.append('customerPhone',order.patient.phoneNumber.toString());
       paramForm.append('customerEmail','test@test.dz');
       paramForm.append('returnUrl','');
-      console.log(order);
-        this.httpClient.post('https://test.cashfree.com/api/v1/order/create',paramForm.toString(),header)
-          .subscribe(data => {
-            resolve(data)
+      let option = {
+        appId:config.cashfree.appId,
+        secretKey:config.cashfree.appKey,
+        orderId:order._id,
+        orderAmount:order.totalPrice.toString(),
+        orderNote:'This order is made by' + order.patient.firstname + ' ' + order.patient.lastname,
+        customerName:order.patient.firstname + ' ' + order.patient.lastname,
+        customerPhone:order.patient.phoneNumber.toString(),
+        customerEmail:'test@test.dz',
+        returnUrl:''
+      }
+        this.http.post('https://test.cashfree.com/api/v1/order/create',option,{'Content-Type': 'application/x-www-form-urlencoded'})
+          .then(data => {
+            resolve(data.data)
           },err => {
             reject(err);
           })
@@ -63,13 +71,14 @@ export class CashfreeService {
       const header = {
         headers: new HttpHeaders()
           .set("Content-Type", "application/x-www-form-urlencoded")
+          .set('Access-Control-Allow-Origin', '*')
       };
       let paramForm= new URLSearchParams();
       paramForm.append('appId',config.cashfree.appId);
       paramForm.append('secretKey',config.cashfree.appKey);
       paramForm.append('orderId',orderId);
-        this.httpClient.post('https://test.cashfree.com/api/v1/order/info/link',paramForm.toString(),header)
-          .subscribe(data => {
+        this.http.post('https://test.cashfree.com/api/v1/order/info/link',paramForm.toString(),header)
+          .then(data => {
             resolve(data)
           },err => {
             reject(err);
@@ -88,8 +97,8 @@ export class CashfreeService {
       paramForm.append('appId',config.cashfree.appId);
       paramForm.append('secretKey',config.cashfree.appKey);
       paramForm.append('orderId',orderId);
-        this.httpClient.post('https://test.cashfree.com/api/v1/order/info/status',paramForm.toString(),header)
-          .subscribe(data => {
+        this.http.post('https://test.cashfree.com/api/v1/order/info/status',paramForm.toString(),header)
+          .then(data => {
             resolve(data)
           },err => {
             reject(err);
@@ -109,8 +118,8 @@ export class CashfreeService {
       paramForm.append('referenceId','697888');
       paramForm.append('idemKey','697888' + 'aymenxyz');
       paramForm.append('captureAmount','80');
-        this.httpClient.post('https://test.cashfree.com/api/v1/order/capture',paramForm.toString(),header)
-          .subscribe(data => {
+        this.http.post('https://test.cashfree.com/api/v1/order/capture',paramForm.toString(),header)
+          .then(data => {
             resolve(data)
           },err => {
             reject(err);
@@ -145,8 +154,8 @@ export class CashfreeService {
       paramForm.append("phone",'9177091554');
 
 
-        this.httpClient.post('https://test.cashfree.com/billpay/checkout/post/submit',paramForm.toString(),header)
-          .subscribe(data => {
+        this.http.post('https://test.cashfree.com/billpay/checkout/post/submit',paramForm.toString(),header)
+          .then(data => {
             resolve(data)
           },err => {
             reject(err);
@@ -168,8 +177,8 @@ export class CashfreeService {
       paramForm.append("phone",'9177091554');
 
 
-        this.httpClient.post('https://test.cashfree.com/api/v1/vault/cards/getCards',paramForm.toString(),header)
-          .subscribe(data => {
+        this.http.post('https://test.cashfree.com/api/v1/vault/cards/getCards',paramForm.toString(),header)
+          .then(data => {
             resolve(data)
           },err => {
             reject(err);
@@ -219,8 +228,8 @@ export class CashfreeService {
       paramForm.append("phone",'9177091554');**/
 
 
-        this.httpClient.post('https://test.cashfree.com/billpay/checkout/post/submit',paramForm,header)
-          .subscribe(data => {
+        this.http.post('https://test.cashfree.com/billpay/checkout/post/submit',paramForm,header)
+          .then(data => {
             resolve(data)
           },err => {
             reject(err);
