@@ -68,6 +68,7 @@ export class RefundComponent implements OnInit {
             }
           })
           .catch(err => {
+            this.interactionService.hide();
             this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
           })
       })

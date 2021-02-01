@@ -94,9 +94,17 @@ export class OrdersPage implements OnInit {
 
   filterOrders(orders: Order[]) {
     orders.map(async (order) => {
-      order.method == 'card' ? await this.checkPaymentStatus(order) : '';
-      this.allOrder.ALL.all.push(order);
-      this.allOrder.ALL[order.status].push(order);
+      if (order.method == 'cod') {
+        this.allOrder.ALL.all.push(order);
+        this.allOrder.SUCCESS[order.status].push(order);
+        this.allOrder.SUCCESS.all.push(order);
+
+      }
+      else {
+        await this.checkPaymentStatus(order);
+        this.allOrder.ALL.all.push(order);
+        this.allOrder.ALL[order.status].push(order);
+      }
       console.log(this.allOrder)
     });
   }

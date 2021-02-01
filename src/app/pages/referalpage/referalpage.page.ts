@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Commission } from 'src/app/interfaces/commission';
+import { Order } from 'src/app/interfaces/order';
 import { Referal } from 'src/app/interfaces/referal';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -37,6 +38,7 @@ export class ReferalpagePage implements OnInit {
           if (result != false){
             this.noRef = false;
             this.referal = result;
+            this.countTotalPrice(this.referal);
           }
           else {
             this.noRef = true;
@@ -54,21 +56,35 @@ export class ReferalpagePage implements OnInit {
   }
 
   countTotalPrice(referal: Referal) {
-    let totalPrice:{PAID: number,NPAID:number} = {PAID:0,NPAID:0};
     if (referal){
       referal.orders.map(order => {
         if (order.status == 'delivered'){
-          if (order.referal.payedByAdmin == 'PAID'){
-            totalPrice.PAID += order.totalPrice - (order.totalPrice*order.referal.commissionApplied)/100;
+          if (order.referal.payedByAdmin == 'PAID' && this.checkOrderDate(order)){
+            if (order.refund.refund){
+              order.totalPrice -= order.refund.refund.refundPrice;
+              this.totalPrice.PAID += order.totalPrice - (order.totalPrice*order.referal.commissionApplied)/100;
+            }
+            else {
+              this.totalPrice.PAID += order.totalPrice - (order.totalPrice*order.referal.commissionApplied)/100;
+            }
           }
           else {
-            totalPrice.NPAID += order.totalPrice - (order.totalPrice*this.comission.commission)/100;
+            console.log(referal);
+            if (order.refund.refund != null){
+              order.totalPrice -= order.refund.refund.refundPrice;
+            }
+            this.totalPrice.NPAID += order.totalPrice - (order.totalPrice*this.comission.commission)/100;
           }
           
         }
       })
     }
-    return totalPrice;
+  }
+
+  checkOrderDate(order: Order){
+    const orderDate = (new Date(order.createdAt).getTime() / 1000) + 60;
+    const finish = (new Date().getTime() / 1000);
+    return orderDate > finish && order.status == 'delivered' && ((order.method == 'card' && order.paymentStatus && order.paymentStatus.txStatus == "SUCCESS") || order.method == 'cod');
   }
 
   getReferalCommission(){

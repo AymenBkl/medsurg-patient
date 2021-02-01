@@ -67,6 +67,7 @@ export class OrderDetailComponent implements OnInit {
             }
           })
           .catch(err => {
+            this.interactionService.hide();
             this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
           })
       })
@@ -138,7 +139,7 @@ export class OrderDetailComponent implements OnInit {
   }
 
   checkOrderDate(){
-    const orderDate = (new Date(this.order.createdAt).getTime() / 1000) + 7*24*36000;
+    const orderDate = (new Date(this.order.createdAt).getTime() / 1000) + 60;
     const finish = (new Date().getTime() / 1000);
     this.isValidRefund = orderDate > finish && this.order.status == 'delivered' && ((this.order.method == 'card' && this.order.paymentStatus && this.order.paymentStatus.txStatus == "SUCCESS") || this.order.method == 'cod');
   }

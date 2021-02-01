@@ -80,7 +80,8 @@
   
           <div class="main-container bottom">
             <div class="inner-container" >
-            <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'cod'"><ion-icon class="ion-icon" name="card-outline" ></ion-icon> : NOT PAID</ion-label> 
+              <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'cod' && order.status != 'delivered'"><ion-icon class="ion-icon" name="card-outline" ></ion-icon> : NOT PAID</ion-label> 
+              <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'cod' && order.status == 'delivered'"><ion-icon class="ion-icon" name="card-outline" ></ion-icon> : PAID</ion-label> 
             <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'card' && order.paymentStatus.txStatus"><ion-icon class="ion-icon" name="card-outline" ></ion-icon> : {{order.paymentStatus.txStatus}}</ion-label>
             <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'card' && !order.paymentStatus.txStatus"> <ion-icon class="ion-icon" name="card-outline" ></ion-icon> : {{order.paymentStatus.orderStatus}}</ion-label>
 

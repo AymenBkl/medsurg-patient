@@ -68,8 +68,10 @@ export class AddReferalComponent implements OnInit {
               }
         }   );
         }).catch(err => {
-          this.submitted = true;
+          console.log(err);
+          this.submitted = false;
           this.interactionService.hide();
+
           this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
         });
   }

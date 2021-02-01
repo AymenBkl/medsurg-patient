@@ -31,7 +31,8 @@ export class ReferalService {
             resolve(false);
           }
         }, err => {
-          reject(err);
+          console.log(err);
+          resolve(false)
         });
       });
   }

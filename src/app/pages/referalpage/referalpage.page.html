@@ -31,12 +31,12 @@
               
               <div class="address">
                 <ion-label class="label">
-                  <ion-icon class="icon"  name="link-outline"></ion-icon> : Code : {{referal.code != null ? referal.commision : "Referal Code"}}
+                  <ion-icon class="icon"  name="link-outline"></ion-icon> : Code : {{referal.code}}
                 </ion-label>
               </div>
               <div class="address">
                 <ion-label class="label">
-                  <ion-icon class="icon"  name="pricetags-outline"></ion-icon> : Commision {{referal.commision != null ? referal.code : "Referal Code"}}
+                  <ion-icon class="icon"  name="pricetags-outline"></ion-icon> : Commision {{comission.commission}}
                 </ion-label>
               </div>
               
@@ -50,7 +50,7 @@
             <div class="main-container bottom">
                 <div class="price">
                   <ion-label class="inner-item">
-                    <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{'PAID:' + countTotalPrice(referal).PAID + ' , UNPAID:' + countTotalPrice(referal).NPAID}}
+                    <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{'PAID:' + totalPrice.PAID + ' , UNPAID:' + totalPrice.NPAID}}
                   </ion-label>
                 </div>
           </div>
