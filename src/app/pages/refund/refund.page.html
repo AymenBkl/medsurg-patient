@@ -5,10 +5,23 @@
 
 <ion-content>
 
-
+  <ion-segment (ionChange)="segmentChanged($event)"  value="all"   slot="fixed"  class="segments segment-type">
+    <ion-segment-button value="all">
+      <ion-label>All</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="NOT PAIED">
+      <ion-label>WAITING</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="PICKUP">
+      <ion-label>PICKUP</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="PAID">
+      <ion-label>PAID</ion-label>
+    </ion-segment-button>
+  </ion-segment>
     
     <ion-list class="list-orders">
-        <ion-item lines="none" class="item-order"  *ngFor="let refund of refunds;let i = index" (click)="goToRefundDetail(refund)" [ngClass]="'item-order-' + refund.order.status ">
+        <ion-item lines="none" class="item-order"  *ngFor="let refund of refunds[currentSegmentType];let i = index" (click)="goToRefundDetail(refund)" [ngClass]="'item-order-' + refund.order.status ">
           <div class="main-container">
           <div class="container" style="width: 20%;">
             <img class="avatar-icon" *ngIf="refund.order.method == 'cod'" src="../../../assets/imgs/cod.png"  width="50px" height="50px">

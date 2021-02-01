@@ -19,9 +19,10 @@ import { Refund } from 'src/app/interfaces/refund';
 export class RefundPage implements OnInit {
 
   currentUser: User;
-  refunds: Refund[];
+  refunds: {all:Refund[],PICKUP:Refund[],'NOT PAIED':Refund[],PAID:Refund[]} = {all:[],PICKUP:[],'NOT PAIED':[],PAID:[]};
+
   modalControllerOrder: ModalControllersOrders; 
-  paymentStatus:{created:PaymentStatus[],accepted:PaymentStatus[],canceled:PaymentStatus[],rejected:PaymentStatus[],delivered:PaymentStatus[],all:PaymentStatus[]} = {created:[],accepted:[],canceled:[],rejected:[],delivered:[],all:[]};
+  currentSegmentType: string = 'all';
   constructor(private ordersService: OrderService,
               private authService: AuthService,
               private interactionService: InteractionService,
@@ -39,6 +40,10 @@ export class RefundPage implements OnInit {
     this.getAllRefunds();
   }
 
+  segmentChanged(event){
+    this.currentSegmentType = event.detail.value;
+  }
+
 
 
   getAllRefunds(){
@@ -48,7 +53,7 @@ export class RefundPage implements OnInit {
           .then((result: any) => {
             this.interactionService.hide();
             if (result && result != false) {
-              this.refunds = result;
+              this.filterRefunds(result);
               if (result.length != 0) {
                 this.interactionService.createToast('Your Refunds has been loaded !', 'success', 'bottom');
               }
@@ -70,6 +75,13 @@ export class RefundPage implements OnInit {
             }
           });
       })
+  }
+
+  filterRefunds(refunds: Refund[]){
+    refunds.map(refund => {
+      this.refunds[refund.order.refund.payedByAdmin].push(refund);
+      this.refunds.all.push(refund);
+    })
   }
 
 
