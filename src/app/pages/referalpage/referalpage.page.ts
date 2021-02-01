@@ -59,7 +59,7 @@ export class ReferalpagePage implements OnInit {
     if (referal){
       referal.orders.map(order => {
         if (order.status == 'delivered'){
-          if (order.referal.payedByAdmin == 'PAID' && this.checkOrderDate(order)){
+          if (order.referal.payedByAdmin == 'PAID'){
             if (order.refund.refund){
               order.totalPrice -= order.refund.refund.refundPrice;
               this.totalPrice.PAID += order.totalPrice - (order.totalPrice*order.referal.commissionApplied)/100;
@@ -81,11 +81,6 @@ export class ReferalpagePage implements OnInit {
     }
   }
 
-  checkOrderDate(order: Order){
-    const orderDate = (new Date(order.createdAt).getTime() / 1000) + 60;
-    const finish = (new Date().getTime() / 1000);
-    return orderDate > finish && order.status == 'delivered' && ((order.method == 'card' && order.paymentStatus && order.paymentStatus.txStatus == "SUCCESS") || order.method == 'cod');
-  }
 
   getReferalCommission(){
     this.orderService.getCommision()
