@@ -118,6 +118,7 @@ export class CartComponent implements OnInit {
       await this.searchProduct.map(searchProd => {
         if (searchProd != null){
           searchProd.pharmacy.products.map(prod => {
+            
             prod.quantity = this.cartProduct[prod.product.mainProduct._id].quantity;
           })}
         })
