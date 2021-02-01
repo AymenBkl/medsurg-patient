@@ -111,13 +111,18 @@
         </ion-button>
       </ion-col>
       <ion-col size="12" >
-        <ion-button shape="round" size="default" color="danger"  expand="full" *ngIf="order.method == 'cod'" (click)="checkStatus()" >
+        <ion-button shape="round" size="default" color="danger"  expand="full" *ngIf="order.method == 'cod' && order.status != 'delivered'" (click)="checkStatus()" >
           <ion-text>CANCEL ORDER</ion-text>
         </ion-button>
       </ion-col>
       <ion-col size="12" >
-        <ion-button shape="round" size="default" color="primary"  expand="full" *ngIf="isValidRefund && order.refund.payedByAdmin != 'PAID'" (click)="callRefund()" >
+        <ion-button shape="round" size="default" color="primary"  expand="full" *ngIf="isValidRefund && order.refund.payedByAdmin != 'PICKUP' && order.refund.refund == null" (click)="callRefund()" >
           <ion-text>Refund Medecins</ion-text>
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" >
+        <ion-button shape="round" size="default" color="primary"  expand="full" *ngIf="isValidRefund && order.refund.payedByAdmin != 'PICKUP' && order.refund.refund != null" (click)="callRefund()" >
+          <ion-text>Update Refund</ion-text>
         </ion-button>
       </ion-col>
     </ion-row>

@@ -131,6 +131,12 @@ export class OrderDetailComponent implements OnInit {
     }
   }
 
+  updateRefund(){
+    if (this.isValidRefund){
+      this.modalControllerOder.callRefund(this.currentUser,this.order);
+    }
+  }
+
   checkOrderDate(){
     const orderDate = (new Date(this.order.createdAt).getTime() / 1000) + 7*24*36000;
     const finish = (new Date().getTime() / 1000);

@@ -18,7 +18,6 @@ export class OrderService {
 
   constructor(private httpClient: HttpClient) {
     this.getCommision();
-
   }
 
 
@@ -108,6 +107,24 @@ export class OrderService {
   createRefund(orderId: string, products: OrderProduct[], refundPrice: Number) {
     return new Promise((resolve, reject) => {
       this.httpClient.post<OrderResponse>(this.orderUrl + 'createrefund', { orderId: orderId, products: products, refundPrice: refundPrice })
+        .subscribe(response => {
+          console.log(response);
+          if (response.status === 200) {
+            this.orderSubject.next(this.orders);
+            resolve(response.message);
+          }
+          else {
+            resolve(false);
+          }
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
+  updateRefund(orderId: string, products: OrderProduct[], refundPrice: Number,refundId:string) {
+    return new Promise((resolve, reject) => {
+      this.httpClient.put<OrderResponse>(this.orderUrl + 'updaterefund', { orderId: orderId, products: products, refundPrice: refundPrice,refundId:refundId })
         .subscribe(response => {
           console.log(response);
           if (response.status === 200) {

@@ -33,6 +33,9 @@ export class RefundComponent implements OnInit {
   getData() {
     this.order = this.navParams.get('order');
     this.currentUser = this.navParams.get('user');
+    if (this.order.refund.refund){
+      this.refundPrice = this.order.refund.refund.refundPrice;
+    }
     }
 
   goAddPrescription() {
@@ -120,6 +123,31 @@ export class RefundComponent implements OnInit {
       })
   })
  }
+
+ updateRefund(){
+  this.interactionService.createLoading('Updating your refund ! Please Wait')
+  .then(() => {
+    this.orderService.updateRefund(this.order._id,this.order.products,this.refundPrice,this.order.refund.refund._id)
+      .then((result: any) => {
+        this.interactionService.hide();
+        if (result && result != false) {
+          this.interactionService.createToast('Updating your refund Has been Created !', 'success', 'bottom');
+          setTimeout(() => {
+            this.modalCntrl.dismiss(null);
+          }, 1500);
+        }
+        else {
+          this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+        }
+      })
+      .catch(err => {
+        this.interactionService.hide();
+        this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+      })
+  })
+ }
+
+
 
 
   

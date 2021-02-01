@@ -96,8 +96,13 @@
 
     <ion-row class="bottom-row">
       <ion-col size="12" >
-        <ion-button shape="round" size="default" color="success"  expand="full"  *ngIf="refundPrice > 0" (click)="makeRefund()" >
+        <ion-button shape="round" size="default" color="success"  expand="full"  *ngIf="refundPrice > 0 && order.refund.refund == null" (click)="makeRefund()" >
           <ion-text>Make A Refund</ion-text>
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" >
+        <ion-button shape="round" size="default" color="success"  expand="full"  *ngIf="order.refund.refund != null && order.refund.payedByAdmin != 'PICKUP'" (click)="updateRefund()" >
+          <ion-text>Update Refund</ion-text>
         </ion-button>
       </ion-col>
     </ion-row>
