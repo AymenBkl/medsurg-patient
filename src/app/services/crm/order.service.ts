@@ -104,9 +104,9 @@ export class OrderService {
     });
   }
 
-  createRefund(orderId: string, products: OrderProduct[], refundPrice: Number) {
+  createRefund(orderId: string, products: OrderProduct[], refundPrice: Number,pharmacyId:string) {
     return new Promise((resolve, reject) => {
-      this.httpClient.post<OrderResponse>(this.orderUrl + 'createrefund', { orderId: orderId, products: products, refundPrice: refundPrice })
+      this.httpClient.post<OrderResponse>(this.orderUrl + 'createrefund', { orderId: orderId, products: products, refundPrice: refundPrice,pharmacyId:pharmacyId })
         .subscribe(response => {
           console.log(response);
           if (response.status === 200) {
