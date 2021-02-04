@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { MustMatch } from '../register/must-matchValdiator';
 import { onValueChanged } from './valueChanges';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-reset-password',
@@ -17,6 +18,10 @@ export class ResetPasswordPage implements OnInit {
   formErrors: any;
   submitted = false;
   validationErrors: { errmsg, errcode };
+  recaptchaVerifier;
+  confirmationResult : any;
+  verificationNumber : string = '';
+  step:string = 'add phoneNumber';
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private interactionService: InteractionService,
@@ -25,6 +30,7 @@ export class ResetPasswordPage implements OnInit {
   }
 
   ngOnInit() {
+    this.recaptchaVerifier = new firebase.default.auth.RecaptchaVerifier('recaptcha-container',{'size' : 'invisible'}); 
   }
 
   buildResetPasswordForm() {
@@ -75,6 +81,63 @@ export class ResetPasswordPage implements OnInit {
           });
       })
 
+  }
+
+
+  sendToPhone() {
+    this.submitted = true;
+    this.interactionService.createLoading("Sending Code")
+      .then(() => {
+        this.authService.verifyPhoneNumber(this.resetPasswordForm.value.phoneNumber)
+        .then(result => {
+          this.interactionService.hide();
+          this.submitted = false;
+          console.log("otp",result);
+          if (result){
+            this.confirmationResult = result;
+            this.step = 'confirm OTP';
+            console.log(this.confirmationResult);
+            this.interactionService.createToast('CODE HAS BEEN SENT', 'success', 'bottom');
+          }
+          else {
+            this.interactionService.createToast('Something Went Wrong ! Try Again', 'danger', 'bottom');
+          }
+        })
+        .catch(err => {
+          this.submitted = false;
+          console.log(err);
+          this.interactionService.hide();
+          this.interactionService.createToast('Something Went Wrong ! Try Again', 'danger', 'bottom');
+        })
+      })
+  }
+
+  confirmOTP() {
+    this.submitted = true;
+    this.interactionService.createLoading("Confirming OTP")
+      .then(() => {
+        this.authService.verifyOTP(this.confirmationResult,this.verificationNumber)
+        .then(result => {
+          this.submitted = false;
+          this.interactionService.hide();
+          if (result && result == true){
+            this.interactionService.createToast('OTP VERIFIED', 'success', 'bottom');
+          }
+          else {
+            this.interactionService.createToast('Enter A Valid Number ! Try Again', 'danger', 'bottom');
+          }
+        })
+        .catch(err => {
+          this.submitted = false;
+          this.interactionService.hide();
+          this.interactionService.createToast('Something Went Wrong ! Try Again', 'danger', 'bottom');
+        })
+      })
+    
+  }
+
+  back(step: string){
+    this.step = step;
   }
 
 

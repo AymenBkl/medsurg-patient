@@ -8,6 +8,7 @@ import { ProccessHttpErrosService } from './proccess-http-erros.service';
 import { AuthResponse} from '../interfaces/response';
 import { catchError } from 'rxjs/operators';
 import { PaymentDetail } from '../interfaces/paymentDetail';
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,8 @@ export class AuthService {
   isAuthenticated = false;
   constructor(private httpClient: HttpClient,
               private storageService: StorageService,
-              private httpErrorHandler: ProccessHttpErrosService) {
+              private httpErrorHandler: ProccessHttpErrosService,
+              private firebaseAuthentication: FirebaseAuthentication) {
                }
 
   checkJWT() {
@@ -121,6 +123,32 @@ export class AuthService {
           reject(this.httpErrorHandler.handleError(err));
         });
     });
+  }
+
+  verifyPhoneNumber(phone) {  
+    return new Promise((resolve, reject) => {
+      this.firebaseAuthentication.verifyPhoneNumber("+" + '213' + phone, 60)
+      .then(result => {
+        resolve(result);
+      })
+      .catch(err=>{
+        console.log(err);
+        reject(err);
+      })
+    })
+  }
+
+  public verifyOTP(confirmationResult, verificationNumber) {
+    return new Promise((resolve, reject) => {
+      confirmationResult(verificationNumber)
+        .then(() => {
+          console.log("here");
+          resolve(true);
+        })
+        .catch(err => {
+          reject(err);
+        })
+    })
   }
 
 
