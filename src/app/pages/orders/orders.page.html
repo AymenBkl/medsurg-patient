@@ -41,7 +41,7 @@
       <ion-label>Delivered</ion-label>
     </ion-segment-button>
   </ion-segment>
-    <ion-list class="list-orders">
+    <ion-list class="list-orders" *ngIf='allOrder'>
         <ion-item lines="none" class="item-order"  *ngFor="let order of allOrder[currentSegmentTypePayment][currentSegmentType];let i = index" (click)="goToOrderDetail(order)" [ngClass]="'item-order-' + order.status ">
           <div class="main-container">
           <div class="container" style="width: 20%;">

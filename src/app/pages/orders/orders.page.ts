@@ -93,6 +93,13 @@ export class OrdersPage implements OnInit {
   }
 
   filterOrders(orders: Order[]) {
+    this.allOrder = {
+      PENDING: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+      SUCCESS: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+      FAILED: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+      ALL: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+      ACTIVE: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] }
+    };
     orders.map(async (order) => {
       if (order.method == 'cod') {
         this.allOrder.ALL.all.push(order);
@@ -122,6 +129,7 @@ export class OrdersPage implements OnInit {
     if (order.method == 'card') {
       await this.cashfree.paymentStatus(order._id)
         .then(async (paymentStatus: PaymentStatus) => {
+          console.log(paymentStatus);
           if (paymentStatus.txStatus == "SUCCESS" && order.status == 'created') {
             this.updateOrder('accepted', order._id);
           }
