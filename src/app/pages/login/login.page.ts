@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { InteractionService } from '../../services/interaction.service';
 import { Router} from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { ResetPasswordPage } from '../reset-password/reset-password.page';
 
 @Component({
   selector: 'app-login',
@@ -108,5 +109,15 @@ export class LoginPage implements OnInit {
     this.interactionService.createToast('You are not allowed', 'danger', 'bottom');
   }
 
+  async resetPassword(){
+    const modal = await this.modalController.create({
+      component : ResetPasswordPage,
+  });
+  modal.onDidDismiss()
+      .then(data => {
+          console.log(data);
+      });
+  return await modal.present();
+  }
 
 }
