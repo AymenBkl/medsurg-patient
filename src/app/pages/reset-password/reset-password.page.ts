@@ -7,6 +7,7 @@ import { MustMatch } from '../register/must-matchValdiator';
 import { onValueChanged } from './valueChanges';
 import * as firebase from 'firebase';
 
+
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.page.html',
@@ -21,7 +22,7 @@ export class ResetPasswordPage implements OnInit {
   recaptchaVerifier;
   confirmationResult : any;
   verificationNumber : string = '';
-  step:string = 'confirm OTP';
+  step:string = 'add phoneNumber';
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private interactionService: InteractionService,

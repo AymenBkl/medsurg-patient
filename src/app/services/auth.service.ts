@@ -127,7 +127,7 @@ export class AuthService {
 
   verifyPhoneNumber(phone) {  
     return new Promise((resolve, reject) => {
-      this.firebaseAuthentication.verifyPhoneNumber("+" + '91' + phone, 60)
+      this.firebaseAuthentication.verifyPhoneNumber("+" + '213' + '770979284', 60)
       .then(result => {
         resolve(result);
       })

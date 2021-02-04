@@ -47,7 +47,7 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(config.firebaseConfig),
+    AngularFireModule.initializeApp(config.firebaseConfig), 
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule
@@ -89,4 +89,5 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {}
