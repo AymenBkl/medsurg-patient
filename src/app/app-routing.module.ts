@@ -79,7 +79,11 @@ const routes: Routes = [
     path: 'payment-detail',
     redirectTo: 'tabs/tab4/payment-detail'   , 
     canActivate: [AuthGuard]
+  },  {
+    path: 'reset-password',
+    loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   },
+
 
 
 ];
