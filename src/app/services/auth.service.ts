@@ -109,6 +109,7 @@ export class AuthService {
       this.destroyUserCredentials();
       this.httpClient.post<AuthResponse>(this.authURL + 'login/resetpassword', {phoneNumber : phoneNumber , password : password})
         .subscribe(response => {
+          console.log(response);
           if (response.status === 200){
             resolve(true);
           }
