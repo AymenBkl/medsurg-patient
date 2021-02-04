@@ -21,7 +21,7 @@ export class ResetPasswordPage implements OnInit {
   recaptchaVerifier;
   confirmationResult : any;
   verificationNumber : string = '';
-  step:string = 'add phoneNumber';
+  step:string = 'confirm OTP';
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private interactionService: InteractionService,
@@ -119,6 +119,7 @@ export class ResetPasswordPage implements OnInit {
         this.authService.verifyOTP(this.confirmationResult,this.verificationNumber)
         .then(result => {
           this.submitted = false;
+          this.step = 'reset-password'
           this.interactionService.hide();
           if (result && result == true){
             this.interactionService.createToast('OTP VERIFIED', 'success', 'bottom');
@@ -138,6 +139,17 @@ export class ResetPasswordPage implements OnInit {
 
   back(step: string){
     this.step = step;
+  }
+
+
+  numberOnlyValidation(event: any) {
+    const pattern = /[0-9.,]/;
+    let inputChar = String.fromCharCode(event.charCode);
+
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
+    }
   }
 
 
