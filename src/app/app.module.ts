@@ -37,7 +37,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { HTTP } from '@ionic-native/http/ngx';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
-
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -72,6 +72,7 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
     CashfreeService,
     InAppBrowser,
     FirebaseAuthentication,
+    FirebaseX,
     HTTP,
     {
       provide: HTTP_INTERCEPTORS,

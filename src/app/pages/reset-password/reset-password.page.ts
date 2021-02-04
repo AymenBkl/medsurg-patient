@@ -6,6 +6,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { MustMatch } from '../register/must-matchValdiator';
 import { onValueChanged } from './valueChanges';
 import * as firebase from 'firebase';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Component({
@@ -26,12 +27,16 @@ export class ResetPasswordPage implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private interactionService: InteractionService,
-    private modalController: ModalController) {
+    private modalController: ModalController,
+    private angularFireAuth: AngularFireAuth) {
     this.buildResetPasswordForm();
   }
 
   ngOnInit() {
-    this.recaptchaVerifier = new firebase.default.auth.RecaptchaVerifier('recaptcha-container',{'size' : 'invisible'}); 
+  }
+
+  ionViewDidEnter() {
+      this.recaptchaVerifier = new firebase.default.auth.RecaptchaVerifier('recaptcha-container',{'size' : 'invisible'}); 
   }
 
   buildResetPasswordForm() {
@@ -89,7 +94,8 @@ export class ResetPasswordPage implements OnInit {
     this.submitted = true;
     this.interactionService.createLoading("Sending Code")
       .then(() => {
-        this.authService.verifyPhoneNumber(this.resetPasswordForm.value.phoneNumber)
+        console.log(this.resetPasswordForm.value.phoneNumber);
+        this.authService.verifyPhoneNumber(this.resetPasswordForm.value.phoneNumber,this.recaptchaVerifier)
         .then(result => {
           this.interactionService.hide();
           this.submitted = false;
@@ -97,7 +103,6 @@ export class ResetPasswordPage implements OnInit {
           if (result){
             this.confirmationResult = result;
             this.step = 'confirm OTP';
-            console.log(this.confirmationResult);
             this.interactionService.createToast('CODE HAS BEEN SENT', 'success', 'bottom');
           }
           else {
@@ -120,9 +125,9 @@ export class ResetPasswordPage implements OnInit {
         this.authService.verifyOTP(this.confirmationResult,this.verificationNumber)
         .then(result => {
           this.submitted = false;
-          this.step = 'reset-password'
           this.interactionService.hide();
           if (result && result == true){
+            this.step = 'reset-password';
             this.interactionService.createToast('OTP VERIFIED', 'success', 'bottom');
           }
           else {
@@ -132,7 +137,7 @@ export class ResetPasswordPage implements OnInit {
         .catch(err => {
           this.submitted = false;
           this.interactionService.hide();
-          this.interactionService.createToast('Something Went Wrong ! Try Again', 'danger', 'bottom');
+          this.interactionService.createToast('Enter A Valid Number ! Try Again', 'danger', 'bottom');
         })
       })
     

@@ -6,9 +6,9 @@ import { config } from './config';
 import { StorageService } from './storage.service';
 import { ProccessHttpErrosService } from './proccess-http-erros.service';
 import { AuthResponse} from '../interfaces/response';
-import { catchError } from 'rxjs/operators';
 import { PaymentDetail } from '../interfaces/paymentDetail';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,12 @@ export class AuthService {
   constructor(private httpClient: HttpClient,
               private storageService: StorageService,
               private httpErrorHandler: ProccessHttpErrosService,
-              private firebaseAuthentication: FirebaseAuthentication) {
+              private angularFireAuth: AngularFireAuth,
+              private firebaseAuthentication: FirebaseAuthentication,) {
+                this.firebaseAuthentication.onAuthStateChanged() 
+                  .subscribe((data) => {
+                    console.log(data);
+                  })
                }
 
   checkJWT() {
@@ -125,14 +130,17 @@ export class AuthService {
     });
   }
 
-  verifyPhoneNumber(phone) {  
+  verifyPhoneNumber(phone,recaptha) {  
     return new Promise((resolve, reject) => {
-      this.firebaseAuthentication.verifyPhoneNumber("+" + '213' + '770979284', 60)
+      console.log(phone)
+      
+      this.angularFireAuth.signInWithPhoneNumber('+213770979283', recaptha)
       .then(result => {
+        console.log("result",result);
         resolve(result);
       })
       .catch(err=>{
-        console.log(err);
+        console.log("rr",err);
         reject(err);
       })
     })
@@ -140,12 +148,13 @@ export class AuthService {
 
   public verifyOTP(confirmationResult, verificationNumber) {
     return new Promise((resolve, reject) => {
-      confirmationResult(verificationNumber)
+      confirmationResult.confirm(verificationNumber)
         .then(() => {
           console.log("here");
           resolve(true);
         })
         .catch(err => {
+          console.log(err)
           reject(err);
         })
     })
