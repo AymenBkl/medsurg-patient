@@ -104,6 +104,26 @@ export class AuthService {
     });
   }
 
+  resetPassword(password: string,phoneNumber: string) {
+    return new Promise((resolve, reject) => {
+      this.destroyUserCredentials();
+      this.httpClient.post<AuthResponse>(this.authURL + 'login/resetpassword', {phoneNumber : phoneNumber , password : password})
+        .subscribe(response => {
+          if (response.status === 200){
+            resolve(true);
+          }
+          else {
+            resolve(false);
+          }
+        }, err => {
+
+          reject(this.httpErrorHandler.handleError(err));
+        });
+    });
+  }
+
+
+
   logOut(){
     return new Promise((resolve, reject) => {
         this.destroyUserCredentials();

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { InteractionService } from 'src/app/services/interaction.service';
 import { MustMatch } from '../register/must-matchValdiator';
 import { onValueChanged } from './valueChanges';
 
@@ -14,7 +16,9 @@ export class ResetPasswordPage implements OnInit {
   formErrors: any;
   submitted = false;
   validationErrors: {errmsg , errcode};
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private interactionService:InteractionService) {
       this.buildResetPasswordForm();
    }
 
@@ -23,6 +27,7 @@ export class ResetPasswordPage implements OnInit {
 
   buildResetPasswordForm() {
     this.resetPasswordForm = this.formBuilder.group({
+      phoneNumber : ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       password : ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword : ['', [Validators.required, Validators.minLength(6)]],
     },
@@ -37,7 +42,32 @@ export class ResetPasswordPage implements OnInit {
   }
 
   resetPassword(){
-    console.log(this.resetPasswordForm.value);
+    this.interactionService.createLoading("Reseting your password !!")
+      .then(() => {
+        this.submitted = true;
+        console.log(this.resetPasswordForm.value.phoneNumber,this.resetPasswordForm.value.password);
+        this.authService.resetPassword(this.resetPasswordForm.value.password,this.resetPasswordForm.value.phoneNumber)
+          .then((result: any) => {
+            this.interactionService.hide();
+            if (result && result !== false){
+              this.interactionService.createToast('PASSOWRD HAS BEEN RESET', 'success', 'bottom');
+              console.log(result);                
+            }
+            else {
+              this.interactionService.createToast('Something Went Wrong ! Try Again', 'danger', 'bottom');
+              this.submitted = false;
+            }
+          })
+          .catch(err => {
+            this.submitted = false;
+            this.validationErrors = err;
+            this.interactionService.hide();
+            this.interactionService.createToast(this.validationErrors.errmsg, 'danger', 'bottom')
+              .then(() => {
+              });
+          });
+      })
+    
   }
 
 

@@ -2,12 +2,18 @@ import { FormGroup } from '@angular/forms';
 
 // tslint:disable-next-line: prefer-const
 let formErrors = {
+    phoneNumber: '',
     password: '',
     confirmPassword: ''
 };
 
 // tslint:disable-next-line: prefer-const
 let validationMessages = {
+    phoneNumber: {
+        required: 'PhoneNumber is required.',
+        minlength: 'PhoneNumber must be at least 10 characters long.',
+        maxlength : 'PhoneNumber must be at most 10 characters long.'
+    },
     password : {
         required: 'Password is required.',
         minlength: 'Password must be at least 6 characters long.',
