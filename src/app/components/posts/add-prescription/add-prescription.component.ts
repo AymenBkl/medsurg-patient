@@ -79,7 +79,7 @@ export class AddPrescriptionComponent implements OnInit {
     .then(() => {
       const formData = new FormData();
       this.files.map(file => {
-        formData.append('file',file);
+        formData.append('file',file,"new");
       })
       this.prescriptionService.postImage(formData)
       .then((result: any) => {

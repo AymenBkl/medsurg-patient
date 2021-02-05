@@ -19,7 +19,7 @@ export class EditPrescriptionComponent implements OnInit {
   currentUser: User;
   prescription: Prescription;
   images: {url: any}[] = [];
-  files: {file:any,index:number}[] = [];
+  files: {file:Blob,index:string}[] = [];
   commentSelected: number;
   modalControllers: ModalControllerSearch;
   @ViewChild('slides') slides: IonSlides;
@@ -64,7 +64,7 @@ export class EditPrescriptionComponent implements OnInit {
   initImages(){
     this.prescription.imageUrl.map((imageURL,i) => {
       this.images.push({url:imageURL});
-      this.files.push({file:null,index:i})
+      this.files.push({file:new Blob(),index:imageURL})
     })
     this.addImageHolderPrescription();
   }
@@ -79,8 +79,13 @@ export class EditPrescriptionComponent implements OnInit {
     this.interactionService.createLoading('Uploading Image !! ')
     .then(() => {
       const formData = new FormData();
+      console.log(this.files);
       this.files.map(file => {
-        formData.append('file',file.file);
+        if (file.file != null){
+          console.log("wow");
+          formData.append('file',file.file,file.index);
+          console.log(formData);
+        }
       })
       this.prescriptionService.postImage(formData)
       .then((result: any) => {
@@ -135,13 +140,7 @@ export class EditPrescriptionComponent implements OnInit {
         this.addImageHolderPrescription();
       }
       this.images[index] = {url: reader.result}
-      if (files[index] == null){
-        this.files.push({file:files[0],index:0});
-      }
-      else {
-        this.files[index].file = files[0];
-        this.files[index].index = index;
-      }
+      this.files[index] = {file:files[0],index:'new'};
     };
   }
 

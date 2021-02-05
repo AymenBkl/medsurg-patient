@@ -60,6 +60,7 @@ export class PrescriptionPage implements OnInit {
       .then(() => {
         this.prescriptionService.getAllPrescriptions().
         then(async (data: any) => {
+          this.interactionService.hide();
           console.log(data);
           if (data.length === 0 ){
             this.interactionService.createToast('No data found', 'primary', 'bottom');
