@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController, NavParams } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonSlides, ModalController, NavController, NavParams } from '@ionic/angular';
 import { ModalControllers } from 'src/app/classes/modalController';
 import { ModalControllerSearch } from 'src/app/classes/modalController.searsh';
 import { Comment } from 'src/app/interfaces/comment';
@@ -18,10 +18,18 @@ export class EditPrescriptionComponent implements OnInit {
 
   currentUser: User;
   prescription: Prescription;
-  image: {url: any, file: any};
+  images: {url: any}[] = [];
+  files: {file:any,index:number}[] = [];
   commentSelected: number;
   modalControllers: ModalControllerSearch;
+  @ViewChild('slides') slides: IonSlides;
 
+  currentSlide = 0;
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    onlyExternal: false
+  };
 
   constructor(private navParam: NavParams,
               private interactionService: InteractionService,
@@ -32,6 +40,7 @@ export class EditPrescriptionComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
+    this.initImages();
   }
 
   getData(){
@@ -39,16 +48,30 @@ export class EditPrescriptionComponent implements OnInit {
     this.prescription = this.navParam.get('prescriptions');
   }
 
-  selectedImage(event) {
-    this.preview(event.target.files);
+  selectedImage(event,index:number) {
+    this.preview(event.target.files,index);
   }
 
   editPresciption(){
-    if (this.image == null){
-            this.editPrescription();
+    if (this.files.length == 0){
+          this.editPrescription();
     }
     else {
       this.postImage();
+    }
+  }
+
+  initImages(){
+    this.prescription.imageUrl.map((imageURL,i) => {
+      this.images.push({url:imageURL});
+      this.files.push({file:null,index:i})
+    })
+    this.addImageHolderPrescription();
+  }
+
+  addImageHolderPrescription(){
+    if (this.images.length < 7){
+      this.images.push({url:null});
     }
   }
 
@@ -56,7 +79,9 @@ export class EditPrescriptionComponent implements OnInit {
     this.interactionService.createLoading('Uploading Image !! ')
     .then(() => {
       const formData = new FormData();
-      formData.append('file', this.image.file);
+      this.files.map(file => {
+        formData.append('file',file.file);
+      })
       this.prescriptionService.postImage(formData)
       .then((result: any) => {
         this.interactionService.hide();
@@ -94,7 +119,7 @@ export class EditPrescriptionComponent implements OnInit {
       })
   }
 
-  preview(files) {
+  preview(files,index) {
     if (files.length === 0){
         return;
     }
@@ -106,7 +131,17 @@ export class EditPrescriptionComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = (event) => {
-      this.image = {url: reader.result, file : files[0]};
+      if (this.images[index].url == null){
+        this.addImageHolderPrescription();
+      }
+      this.images[index] = {url: reader.result}
+      if (files[index] == null){
+        this.files.push({file:files[0],index:0});
+      }
+      else {
+        this.files[index].file = files[0];
+        this.files[index].index = index;
+      }
     };
   }
 

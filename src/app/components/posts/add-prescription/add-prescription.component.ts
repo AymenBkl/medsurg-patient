@@ -38,7 +38,7 @@ export class AddPrescriptionComponent implements OnInit {
     this.prescription = {
       patient : this.currentUser,
       description:this.navParam.get('productsNames'),
-      imageUrl : '',
+      imageUrl : null,
       createdAt : new Date().toISOString(),
       _id : null,
       comments : [],
@@ -122,7 +122,6 @@ export class AddPrescriptionComponent implements OnInit {
   }
 
   preview(files,index:number) {
-    console.log(files,index);
     if (files.length === 0){
         return;
     }
@@ -134,14 +133,13 @@ export class AddPrescriptionComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = (event) => {
+      if (this.images[index].url == null){
+        this.addImageHolderPrescription();
+      }
       this.images[index] = {url: reader.result}
-      if (files[index] == null){
-        this.files.push(files[0]);
-      }
-      else {
-        this.files[index] = files[0];
-      }
-      this.addImageHolderPrescription();
+      this.files[index] = files[0];
+      
+      
     };
   }
 

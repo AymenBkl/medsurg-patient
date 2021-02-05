@@ -25,18 +25,21 @@
             {{prescription.description}}
           </ion-text>
         </ion-item>
-        <ion-item line="none" class="prescription-holder">
-          <div class="image-upload">
-            <label for="file-input">
-              <img *ngIf="prescription.imageUrl && (!image || !image.url)" [src]="prescription.imageUrl"/>
-              <img *ngIf="!prescription.imageUrl && (!image || !image.url)" src="../../../assets/imgs/photo.png">
-              <img *ngIf="image && image.url" [src]="image.url"/>
-            </label>
-          
-            <input id="file-input" type="file" (change)="selectedImage($event)" *ngIf="prescription.status != 'approved'"/>
-          </div>          
-          
-        </ion-item>
+        <ion-slides class="center-row"  [options]='slideOpts'  #slides>
+          <ion-slide class="slide intro-slide" *ngFor="let image of images;let i = index">
+            <ion-item line="none" class="prescription-holder">
+              <div class="image-upload">
+                <label for="file-input + {{i}}">
+                  <img *ngIf="prescription.imageUrl[i] && !image" [src]="prescription.imageUrl[i]"/>
+                  <img *ngIf="!prescription.imageUrl[i] && !image.url" src="../../../assets/imgs/photo.png">
+                  <img *ngIf="prescription.imageUrl[i] && image.url" [src]="image.url"/>
+                  <img *ngIf="!prescription.imageUrl[i] && image.url" [src]="image.url"/>
+                </label>
+                <input id="file-input + {{i}}" type="file" (change)="selectedImage($event,i)" *ngIf="prescription.status != 'approved'"/>
+              </div>          
+            </ion-item> 
+          </ion-slide>
+        </ion-slides>
         <ion-item line="none" class="comment-holder">
           <div class="comment-holder">
             <h1>Comments</h1>
