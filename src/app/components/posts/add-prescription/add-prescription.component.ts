@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController, NavParams } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonSlides, ModalController, NavController, NavParams } from '@ionic/angular';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { User } from 'src/app/interfaces/user';
 import { PrescriptionService } from 'src/app/services/prescription.service';
@@ -13,7 +13,16 @@ export class AddPrescriptionComponent implements OnInit {
 
   currentUser: User;
   prescription: Prescription;
-  image: {url: any, file: any};
+  images: {url: any}[] = [];
+  files: any[] = [];
+  @ViewChild('slides') slides: IonSlides;
+
+  currentSlide = 0;
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    onlyExternal: false
+  };
   constructor(private navParam: NavParams,
               private interactionService: InteractionService,
               private prescriptionService: PrescriptionService,
@@ -21,6 +30,7 @@ export class AddPrescriptionComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
+    this.addImageHolderPrescription();
   }
 
   getData(){
@@ -37,12 +47,21 @@ export class AddPrescriptionComponent implements OnInit {
     delete this.prescription._id;
   }
 
-  selectedImage(event) {
-    this.preview(event.target.files);
+  selectedImage(event,index: number) {
+    console.log(index);
+    this.preview(event.target.files,index);
+  }
+
+
+
+  addImageHolderPrescription(){
+    if (this.images.length < 7){
+      this.images.push({url:null});
+    }
   }
 
   addPresciption(){
-    if (this.image == null){
+    if (this.images[0].url == null){
       this.interactionService.alertWithHandler('You didnt pick any image', 'Alert' , 'Pick' , 'Post')
         .then((result) => {
           if (result && result === true){
@@ -59,7 +78,9 @@ export class AddPrescriptionComponent implements OnInit {
     this.interactionService.createLoading('Uploading Image Please wait')
     .then(() => {
       const formData = new FormData();
-      formData.append('file', this.image.file);
+      this.files.map(file => {
+        formData.append('file',file);
+      })
       this.prescriptionService.postImage(formData)
       .then((result: any) => {
         if (result){
@@ -77,6 +98,7 @@ export class AddPrescriptionComponent implements OnInit {
       });
     });
   }
+
 
   postPrescription(){
     console.log("here");
@@ -99,7 +121,8 @@ export class AddPrescriptionComponent implements OnInit {
   });
   }
 
-  preview(files) {
+  preview(files,index:number) {
+    console.log(files,index);
     if (files.length === 0){
         return;
     }
@@ -111,7 +134,14 @@ export class AddPrescriptionComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = (event) => {
-      this.image = {url: reader.result, file : files[0]};
+      this.images[index] = {url: reader.result}
+      if (files[index] == null){
+        this.files.push(files[0]);
+      }
+      else {
+        this.files[index] = files[0];
+      }
+      this.addImageHolderPrescription();
     };
   }
 

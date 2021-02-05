@@ -25,17 +25,22 @@
 
           </ion-textarea>
         </ion-item>
-        <ion-item line="none" class="prescription-holder">
-          <div class="image-upload">
-            <label for="file-input">
-              <img *ngIf="!image || !image.url" src="../../../../assets/imgs/photo.png"/>
-              <img *ngIf="image && image.url" [src]="image.url"/>
-            </label>
-          
-            <input id="file-input" type="file" (change)="selectedImage($event)"/>
-          </div>          
-          
-        </ion-item>
+       
+
+        <ion-slides class="center-row"  [options]='slideOpts'  #slides>
+          <ion-slide class="slide intro-slide" *ngFor="let image of images;let i = index">
+            <ion-item line="none" class="prescription-holder">
+              <div class="image-upload">
+                <label for="file-input + {{i}}">
+                  <img *ngIf="!image || !image.url" src="../../../../assets/imgs/photo.png"/>
+                  <img *ngIf="image && image.url" [src]="image.url"/>
+                </label>
+                <input id="file-input + {{i}}" type="file" (change)="selectedImage($event,i)"/>
+              </div>          
+            </ion-item> 
+          </ion-slide>
+        </ion-slides>
+
       </ion-card>
     </ion-col>
   </ion-row>

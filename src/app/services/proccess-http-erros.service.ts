@@ -28,7 +28,7 @@ export class ProccessHttpErrosService {
       errCode = 13;
     }
     else if (error.error && error.error.err && error.error.err.message === 'A user with the given username is already registered'){
-      errMsg = `Username is already registered`;
+      errMsg = `Phone Number is already registered`;
       errCode = 1;
     }
     else if (error.error && error.error.err && error.error.err.message === 'Password or username is incorrect'){
