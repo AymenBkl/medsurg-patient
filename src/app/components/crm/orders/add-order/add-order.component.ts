@@ -53,6 +53,16 @@ export class AddOrderComponent implements OnInit {
     this.getData();
   }
 
+  ngAfterViewInit() {
+    setTimeout(
+      ()=>{
+        if(this.slides){
+          this.slides.update();
+        }
+      },300
+    );
+  }
+
   getData() {
     this.selectedMethod = 'cod';
     this.referalCode = '';
