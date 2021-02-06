@@ -124,7 +124,7 @@ export class AddOrderComponent implements OnInit {
 
   checkReferal() {
     if (this.order.method == 'cod'){
-      this.order.status = 'delivered';
+      this.order.status = 'accepted';
     }
     this.submitted = true;
     this.referalService.checkReferal(this.referalCode)

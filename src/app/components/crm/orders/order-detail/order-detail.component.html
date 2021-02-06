@@ -111,6 +111,11 @@
         </ion-button>
       </ion-col>
       <ion-col size="12" >
+        <ion-button shape="round" size="default" color="danger"  expand="full" *ngIf="order.paymentStatus && (((order.paymentStatus.txStatus && (order.paymentStatus.txStatus == 'SUCCESS')) || ((!order.paymentStatus.txStatus && order.paymentStatus.orderStatus == 'PAID'))) && order.status == 'accepted')" (click)="cancelOrder()" >
+          <ion-text>cancel and claim refund</ion-text>
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" >
         <ion-button shape="round" size="default" color="danger"  expand="full" *ngIf="order.method == 'cod' && order.status != 'delivered'" (click)="checkStatus()" >
           <ion-text>CANCEL ORDER</ion-text>
         </ion-button>

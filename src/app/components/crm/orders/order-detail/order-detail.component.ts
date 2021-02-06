@@ -77,8 +77,8 @@ export class OrderDetailComponent implements OnInit {
     if (this.order.status == 'created') {
       this.updateOrder('canceled');
     }
-    else {
-
+    else if (this.order.paymentStatus && (((this.order.paymentStatus.txStatus && (this.order.paymentStatus.txStatus == 'SUCCESS')) || ((!this.order.paymentStatus.txStatus && this.order.paymentStatus.orderStatus == 'PAID'))) && this.order.status == 'accepted')){
+      this.updateOrder('canceled');
     }
   }
 
@@ -140,13 +140,59 @@ export class OrderDetailComponent implements OnInit {
   }
 
   checkOrderDate(){
-    const orderDate = (new Date(this.order.createdAt).getTime() / 1000) + 60;
+    const orderDate = (new Date(this.order.createdAt).getTime() / 1000) + 15*60;
     const finish = (new Date().getTime() / 1000);
     this.isValidRefund = orderDate > finish && this.order.status == 'delivered' && ((this.order.method == 'card' && this.order.paymentStatus && this.order.paymentStatus.txStatus == "SUCCESS") || this.order.method == 'cod');
   }
 
   callRefundDetail(){
     this.modalControllerOder.callRefundDetail(this.currentUser,this.order);
+  }
+
+
+  async cancelOrder(){
+    await this.order.products.map(product => {
+      product.refundedQuantity = product.quantity;
+    })
+    this.interactionService.createLoading('Creating your refund ! Please Wait')
+  .then(() => {
+    this.orderService.createRefund(this.order._id,this.order.products,this.order.totalPrice,this.order.pharmacy._id)
+      .then((result: any) => {
+        this.interactionService.hide();
+        if (result && result != false) {
+          this.interactionService.createToast('Creating your refund Has been Created !', 'success', 'bottom');
+          this.pickUp(this.order._id,result.refund.refund);
+          setTimeout(() => {
+            this.modalCntrl.dismiss(null);
+          }, 1500);
+        }
+        else {
+          this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+        }
+      })
+      .catch(err => {
+        this.interactionService.hide();
+        this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+      })
+  })
+  }
+
+
+  pickUp(orderId: string,refundId:string){
+    console.log(refundId);
+    this.orderService.payPickUp(orderId,refundId)
+      .then((result) => {
+        if (result && result != false){
+          this.interactionService.createToast('Your Order Has been Updated !', 'success', 'bottom');
+          this.checkStatus();
+        }
+        else {
+          this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+        }
+      })
+      .catch(err => {
+        this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+      })
   }
 
 

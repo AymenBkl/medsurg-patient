@@ -39,6 +39,23 @@ export class OrderService {
         });
     });
   }
+
+  payPickUp(orderId:string,refundId:string){
+    return new Promise((resolve, reject) => {
+      this.httpClient.put<OrderResponse>(this.orderUrl + 'pickuprefund/' + orderId, {payedByAdmin : 'PICKUP',refundId:refundId})
+        .subscribe(response => {
+          console.log(response);
+          if (response.status === 200) {
+            resolve(response.message);
+          }
+          else {
+            resolve(false);
+          }
+        }, err => {
+          reject(err);
+        });
+      });
+  }
   createOrder(order: Order) {
     return new Promise((resolve, reject) => {
       this.httpClient.post<OrderResponse>(this.orderUrl + 'createreorder', order)
