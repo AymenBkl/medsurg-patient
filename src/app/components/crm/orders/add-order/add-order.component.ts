@@ -123,6 +123,9 @@ export class AddOrderComponent implements OnInit {
   }
 
   checkReferal() {
+    if (this.order.method == 'cod'){
+      this.order.status = 'delivered';
+    }
     this.submitted = true;
     this.referalService.checkReferal(this.referalCode)
       .then((result: any) => {
@@ -206,9 +209,7 @@ export class AddOrderComponent implements OnInit {
   payByCard() {
     this.cashfreeService.createOrder(this.order)
       .then((orderCreated: any) => {
-        console.log('obj',JSON.stringify(orderCreated));
         if (orderCreated && orderCreated.paymentLink) {
-          console.log('here')
           this.createOrder();
           this.inAppBrowser(orderCreated.paymentLink);
         }
