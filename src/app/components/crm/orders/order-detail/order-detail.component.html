@@ -85,7 +85,7 @@
       <ion-col size="12">
         <ion-title class="title-patient">Commission: {{order.refund.commissionApplied}}%</ion-title>
         <div  class="total-price-holder1">
-          <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{order.refund.refund.refundPrice -  (order.refund.refund.refundPrice*order.refund.commissionApplied)/100 }}
+          <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : ₹{{order.refund.refund.refundPrice -  (order.refund.refund.refundPrice*order.refund.commissionApplied)/100 }}
         </div>
       </ion-col>
     </ion-row>
@@ -93,7 +93,7 @@
       <ion-col size="12">
         <ion-title class="title-patient">Total Price</ion-title>
         <div  class="total-price-holder">
-          <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{order.totalPrice}}
+          <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : ₹{{order.totalPrice}}
         </div>
       </ion-col>
     </ion-row>
