@@ -128,7 +128,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       console.log(phone)
       
-      this.angularFireAuth.signInWithPhoneNumber('+213770979283', recaptha)
+      this.angularFireAuth.signInWithPhoneNumber('+91' + phone, recaptha)
       .then(result => {
         console.log("result",result);
         resolve(result);
