@@ -7,7 +7,6 @@ import { StorageService } from './storage.service';
 import { ProccessHttpErrosService } from './proccess-http-erros.service';
 import { AuthResponse} from '../interfaces/response';
 import { PaymentDetail } from '../interfaces/paymentDetail';
-import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
@@ -25,12 +24,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient,
               private storageService: StorageService,
               private httpErrorHandler: ProccessHttpErrosService,
-              private angularFireAuth: AngularFireAuth,
-              private firebaseAuthentication: FirebaseAuthentication,) {
-                this.firebaseAuthentication.onAuthStateChanged() 
-                  .subscribe((data) => {
-                    console.log(data);
-                  })
+              private angularFireAuth: AngularFireAuth,) {
                }
 
   checkJWT() {

@@ -54,7 +54,7 @@
                 <img *ngIf="comment && comment.pharmacy.imageUrl  != ''" [src]="comment.pharmacy.imageUrl ">
               </ion-avatar>
               <ion-text class="text"  class="add-comment">
-                {{this.calculateCommentPrice(comment)}}
+                ₹{{this.calculateCommentPrice(comment)}}
               </ion-text>
             </div>
           </ion-item>
@@ -103,7 +103,7 @@
                 <img *ngIf="comment && comment.pharmacy.imageUrl  != ''" [src]="comment.pharmacy.imageUrl ">
               </ion-avatar>
               <ion-text class="text"  class="add-comment">
-                {{this.calculateCommentPrice(comment)}}
+                ₹{{this.calculateCommentPrice(comment)}}
               </ion-text>
             </div>
           </ion-item>

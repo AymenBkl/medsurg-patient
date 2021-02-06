@@ -36,7 +36,6 @@ import { CashfreeService } from './services/cashfree.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { HTTP } from '@ionic-native/http/ngx';
-import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 @NgModule({
@@ -71,7 +70,6 @@ import { FirebaseX } from '@ionic-native/firebase-x/ngx';
     PrescriptionService,
     CashfreeService,
     InAppBrowser,
-    FirebaseAuthentication,
     FirebaseX,
     HTTP,
     {
