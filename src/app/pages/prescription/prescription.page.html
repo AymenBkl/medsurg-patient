@@ -35,14 +35,13 @@
           <ion-slides class="center-row"  [options]='slideOpts'  #slides pager>
             <ion-slide class="slide intro-slide" *ngFor="let image of prescription.imageUrl;let i = index">
               <ion-item line="none" class="prescription-holder">
-                <img *ngIf="image" [src]="image">
-                <img *ngIf="!image" src="../../../assets/imgs/photo.png">
+                <img  [src]="image">
               </ion-item>
             </ion-slide>
-
           </ion-slides>
-
-          
+          <ion-item line="none" class="prescription-holder">
+            <img *ngIf="prescription.imageUrl.length == 0" src="../../../assets/imgs/photo.png">
+          </ion-item>
           <ion-item line="none" class="comment-holder">
             <div class="comment-holder">
               <h1>Comments</h1>
@@ -85,12 +84,13 @@
           <ion-slides class="center-row"  [options]='slideOpts'  #slides pager>
             <ion-slide class="slide intro-slide" *ngFor="let image of prescription.imageUrl;let i = index">
               <ion-item line="none" class="prescription-holder">
-                <img *ngIf="image" [src]="image">
-                <img *ngIf="!image" src="../../../assets/imgs/photo.png">
+                <img  [src]="image">
               </ion-item>
             </ion-slide>
-
           </ion-slides>
+          <ion-item line="none" class="prescription-holder">
+            <img *ngIf="prescription.imageUrl.length == 0" src="../../../assets/imgs/photo.png">
+          </ion-item>
           <ion-item line="none" class="comment-holder">
             <div class="comment-holder">
               <h1>Comments</h1>

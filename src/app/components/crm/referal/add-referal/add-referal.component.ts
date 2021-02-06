@@ -40,6 +40,16 @@ export class AddReferalComponent implements OnInit {
         });
   }
 
+  ngAfterViewInit() {
+    setTimeout(
+      () => {
+        if (this.slides) {
+          this.slides.update();
+        }
+      }, 300
+    );
+  }
+
   initReferal() {
     this.referal = {
       code:'',

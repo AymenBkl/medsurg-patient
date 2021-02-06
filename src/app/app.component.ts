@@ -6,8 +6,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './services/auth.service';
 import { User } from './interfaces/user';
 import { Router } from '@angular/router';
-import { CashfreeService } from './services/cashfree.service';
-import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-root',

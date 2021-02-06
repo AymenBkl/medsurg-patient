@@ -37,6 +37,16 @@ export class AddOfferComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngAfterViewInit() {
+    setTimeout(
+      () => {
+        if (this.slides) {
+          this.slides.update();
+        }
+      }, 300
+    );
+  }
+
  
   
 

@@ -52,6 +52,16 @@ export class AddPrescriptionComponent implements OnInit {
     this.preview(event.target.files,index);
   }
 
+  ngAfterViewInit() {
+    setTimeout(
+      () => {
+        if (this.slides) {
+          this.slides.update();
+        }
+      }, 300
+    );
+  }
+
 
 
   addImageHolderPrescription(){

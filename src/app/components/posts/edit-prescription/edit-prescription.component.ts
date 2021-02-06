@@ -43,6 +43,16 @@ export class EditPrescriptionComponent implements OnInit {
     this.initImages();
   }
 
+  ngAfterViewInit() {
+    setTimeout(
+      () => {
+        if (this.slides) {
+          this.slides.update();
+        }
+      }, 300
+    );
+  }
+
   getData(){
     this.currentUser = this.navParam.get('user');
     this.prescription = this.navParam.get('prescriptions');
