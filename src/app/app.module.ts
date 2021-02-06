@@ -37,7 +37,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { HTTP } from '@ionic-native/http/ngx';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
-
+import { SMS } from '@ionic-native/sms/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -71,6 +71,7 @@ import { FirebaseX } from '@ionic-native/firebase-x/ngx';
     CashfreeService,
     InAppBrowser,
     FirebaseX,
+    SMS,
     HTTP,
     {
       provide: HTTP_INTERCEPTORS,

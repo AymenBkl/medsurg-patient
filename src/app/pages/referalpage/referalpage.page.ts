@@ -6,6 +6,7 @@ import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrderService } from 'src/app/services/crm/order.service';
 import { ReferalService } from 'src/app/services/crm/referal.service';
+import { SMS } from '@ionic-native/sms/ngx';
 
 @Component({
   selector: 'app-referalpage',
@@ -21,7 +22,8 @@ export class ReferalpagePage implements OnInit {
   totalPrice:{PAID: number,NPAID:number} = {PAID:0,NPAID:0};
   constructor(private referalService: ReferalService,
               private authService: AuthService,
-              private orderService: OrderService) { }
+              private orderService: OrderService,
+              private SMS: SMS) { }
 
   ngOnInit() {
     this.getReferalCommission();
@@ -88,6 +90,7 @@ export class ReferalpagePage implements OnInit {
         this.comission = result.filter(commission => {return commission.name == 'Referal'})[0];
       })
   }
+
 
 
 
