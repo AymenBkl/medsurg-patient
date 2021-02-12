@@ -38,6 +38,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { SMS } from '@ionic-native/sms/ngx';
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -73,6 +75,7 @@ import { SMS } from '@ionic-native/sms/ngx';
     FirebaseX,
     SMS,
     HTTP,
+    FirebaseAuthentication,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

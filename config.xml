@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget android-versionCode="1" id="com.medsurg.patient" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MEDSURG</name>
+    <name>PATIENT MEDSURG</name>
     <description>PATIENT MEDSURG</description>
     <author email="aymenxyz6@gmail.com" href="">Aymen Abdelmoumen Boukhelkhal</author>
     <content src="index.html" />

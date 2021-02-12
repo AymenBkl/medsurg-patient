@@ -50,7 +50,6 @@ export class LoginPage implements OnInit {
         console.log(result);
         if (result && result !== false) {
           this.interactionService.createToast('WELCOM', 'success', 'bottom');
-          console.log(result);
           if (result.role === 'patient') {
             if (result.emailVerified === false || result.emailVerified == null) {
               this.goToHome();
