@@ -17,11 +17,14 @@
   </ion-toolbar>
   <ion-toolbar class="toolbar">
   </ion-toolbar>
-  <ion-searchbar class="search_bar-xyz" cancelButtonText="Custom Cancel" showCancelButton="focus" animated
+  <ion-searchbar *ngIf="currentUrl == 'findproduct'" class="search_bar-xyz" cancelButtonText="Custom Cancel" showCancelButton="focus" animated
     autocorrect="off" inputmode="search" (click)="goToFindProduct()"(keyup.enter)="onInput(searchbar.value)" placeholder="Medecin1"
     #searchbar>
-
   </ion-searchbar>
+  <div class="search_bar-xyz-cart-buy" (click)="goToFindProduct()" *ngIf="currentUrl == 'cart' || currentUrl == 'buy'">
+    <ion-icon name="search-outline" class="icon"></ion-icon>
+    Search
+  </div>
 </ion-header>
 
 <ion-content>

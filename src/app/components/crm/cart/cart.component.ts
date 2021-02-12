@@ -1,4 +1,4 @@
-import { Component, Input, OnInit,} from '@angular/core';
+import { Component, Input, OnInit, } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
@@ -27,65 +27,65 @@ export class CartComponent implements OnInit {
   cartProducts: CartProduct[];
   cartProduct: {};
   constructor(private router: Router,
-              private storageService: StorageService,
-              private interactionService: InteractionService,
-              private searchService: SearchMedecinService,
-              private modalCntrl: ModalController) {
-                this.modalControllers = new ModalControllers(modalCntrl);
-              }
+    private storageService: StorageService,
+    private interactionService: InteractionService,
+    private searchService: SearchMedecinService,
+    private modalCntrl: ModalController) {
+    this.modalControllers = new ModalControllers(modalCntrl);
+  }
 
   ngOnInit() {
     this.getAllCartProducts();
     this.getCurrentRoute();
   }
-  getAllCartProducts(){
+  getAllCartProducts() {
     this.storageService.getAllCartProduct()
       .then((cartProducts) => {
-        if (cartProducts != null){
+        if (cartProducts != null) {
           this.cartProducts = Object.values(cartProducts);
           this.cartProduct = cartProducts;
         }
-        
+
       });
   }
 
-  add(cartProduct: CartProduct){
+  add(cartProduct: CartProduct) {
     cartProduct.quantity += 1;
     this.cartProduct[cartProduct.mainProduct._id] = cartProduct;
     this.storageService.quntityModifiedCart(this.cartProduct);
   }
 
-  remove(cartProduct: CartProduct){
-    if (cartProduct.quantity > 1){
-      cartProduct.quantity -= 1 ;
+  remove(cartProduct: CartProduct) {
+    if (cartProduct.quantity > 1) {
+      cartProduct.quantity -= 1;
       this.cartProduct[cartProduct.mainProduct._id] = cartProduct;
       this.storageService.quntityModifiedCart(this.cartProduct);
     }
-    else if (cartProduct.quantity == 1){
+    else if (cartProduct.quantity == 1) {
       this.removeMedecin(cartProduct)
     }
-    
+
   }
 
-  removeMedecin(cartProduct: CartProduct){
+  removeMedecin(cartProduct: CartProduct) {
     this.interactionService.alertWithHandler('Do you want to delete this medecin from cart', 'ALERT', 'KEEP', 'DELETE')
       .then((result) => {
-        if (result && result == true){
-          this.storageService.removeMedecin(this.cartProduct,cartProduct);
-          this.cartProducts.splice(this.cartProducts.indexOf(cartProduct),1) 
+        if (result && result == true) {
+          this.storageService.removeMedecin(this.cartProduct, cartProduct);
+          this.cartProducts.splice(this.cartProducts.indexOf(cartProduct), 1)
         }
       })
   }
 
   findPharmacies() {
-    let productsname : {products: any[]} = {products: []};
+    let productsname: { products: any[] } = { products: [] };
     this.cartProducts.map(cartProduct => {
-      productsname.products.push( cartProduct.mainProduct.name);
+      productsname.products.push(cartProduct.mainProduct.name);
     })
     this.searchProducts(productsname);
   }
 
-  addPrescription(){
+  addPrescription() {
     this.modalControllers.addPrescription(this.currentUser, this.constructPrescription());
 
   }
@@ -96,10 +96,10 @@ export class CartComponent implements OnInit {
         this.searchService.searchProducts(medecins)
           .then((products: SearchProduct | any) => {
             this.interactionService.hide();
-            if (products && products !== false){
+            if (products && products !== false) {
               this.searchProduct = products;
               this.addQuantity();
-              this.router.navigate(['/tabs/search-medecin/search/buy',{products: JSON.stringify(this.searchProduct)}]);
+              this.router.navigate(['/tabs/search-medecin/search/buy', { products: JSON.stringify(this.searchProduct) }]);
             }
             else {
               this.interactionService.createToast('Not Found', 'danger', 'bottom');
@@ -114,31 +114,38 @@ export class CartComponent implements OnInit {
   }
 
 
-  async addQuantity(){
-      await this.searchProduct.map(searchProd => {
-        if (searchProd != null){
-          searchProd.pharmacy.products.map(prod => {
-            
-            prod.quantity = this.cartProduct[prod.product.mainProduct._id].quantity;
-          })}
-        })
-        
-    }
+  async addQuantity() {
+    await this.searchProduct.map(searchProd => {
+      if (searchProd != null) {
+        searchProd.pharmacy.products.map(prod => {
 
-  getCurrentRoute(){
+          prod.quantity = this.cartProduct[prod.product.mainProduct._id].quantity;
+        })
+      }
+    })
+
+  }
+
+  getCurrentRoute() {
     this.router.events.subscribe((val) => {
       // see also 
       if (val instanceof NavigationEnd) {
-          this.getAllCartProducts();
-        }
-      
-  });
+        this.getAllCartProducts();
+      }
+
+    });
   }
 
   clearCart() {
-    this.storageService.clearProductCart();
-    this.cartProduct = {};
-    this.cartProducts = [];
+    this.interactionService.alertWithHandler('Do you want to clear All Medecins from cart', 'ALERT', 'KEEP', 'CLEAR')
+      .then((result) => {
+        if (result && result == true) {
+          this.storageService.clearProductCart();
+          this.cartProduct = {};
+          this.cartProducts = [];
+        }
+      })
+
   }
 
   constructPrescription() {
@@ -146,15 +153,15 @@ export class CartComponent implements OnInit {
     let index = 1;
     this.cartProducts.map(product => {
       prescriptionDetails.push(
-        index + ' - ' 
-        + product.mainProduct.name  
-        + product.quantity + '\n' );
-        index++;
+        index + ' - '
+        + product.mainProduct.name
+        + product.quantity + '\n');
+      index++;
     })
     return prescriptionDetails;
   }
 
 
- 
+
 
 }
