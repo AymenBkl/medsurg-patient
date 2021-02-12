@@ -35,7 +35,7 @@
                   <img *ngIf="prescription.imageUrl[i] && image.url" [src]="image.url"/>
                   <img *ngIf="!prescription.imageUrl[i] && image.url" [src]="image.url"/>
                 </label>
-                <input id="file-input + {{i}}" type="file" (change)="selectedImage($event,i)" *ngIf="prescription.status != 'approved'"/>
+                <input id="file-input + {{i}}" type="file" (change)="selectedImage($event,i)" *ngIf="prescription.status != 'approved'" accept=".png, .jpeg"/>
               </div>          
             </ion-item> 
           </ion-slide>

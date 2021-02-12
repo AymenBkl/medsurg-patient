@@ -89,7 +89,6 @@ export class EditPrescriptionComponent implements OnInit {
     this.interactionService.createLoading('Uploading Image !! ')
     .then(() => {
       const formData = new FormData();
-      console.log(this.files);
       this.files.map(file => {
         if (file.file != null){
           console.log("wow");
