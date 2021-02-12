@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
 
   // tslint:disable-next-line: no-input-rename
   @Input('type') type:string;
+  @Input('page') page:string;
   currentUser: User;
   constructor(private authService: AuthService,
               private navCntrl: NavController,

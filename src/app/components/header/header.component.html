@@ -24,9 +24,11 @@
   </ion-toolbar>
   <ion-toolbar class="toolbar">
   </ion-toolbar>
-  <ion-searchbar class="search_bar-xyz" cancelButtonText="Custom Cancel" showCancelButton="focus" animated
-    autocorrect="off" inputmode="search" (click)="goToFindProduct()" placeholder="Search"
-    #searchbar>
-
-  </ion-searchbar>
+  <div class="search_bar-xyz" (click)="goToFindProduct()" *ngIf="type == 'page'">
+  <ion-icon name="search-circle-outline" class="icon" *ngIf="page != 'Login' && page != 'Register'"></ion-icon>
+  {{page == 'Login' || page == 'Register' ? page : 'Search'}}
+</div>
+<div class="search_bar-xyz" (click)="goToFindProduct()" *ngIf="type == 'modal'">
+  {{page}}
+</div>
 </ion-header>
