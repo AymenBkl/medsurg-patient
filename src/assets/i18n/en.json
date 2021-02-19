@@ -40,7 +40,16 @@
     "DHAVE_ACCOUNT":"You don't have an account ? Register",
     "SCODE":"Send Code",
     "CODESENT":"Code sent to +91",
-    "CONFIRM_OTP":"Confirm OTP"
+    "CONFIRM_OTP":"Confirm OTP",
+    "CITY":"City",
+    "STREET_NAME":"Street Name",
+    "STREET_NAME1":"Street Name1",
+    "POSTALCODE":"POSTAL CODE",
+    "BUILDING_NUMBER":"Building Number",
+    "ADD_ADDRESS":"Add Address",
+    "SELECT_ADDRESS":"Select Address",
+    "ADDRESS":"Address"
+
 
 
 

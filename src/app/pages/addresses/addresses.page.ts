@@ -3,6 +3,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { Address } from 'src/app/interfaces/address';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-addresses',
@@ -17,7 +18,8 @@ export class AddressesPage implements OnInit {
   selectedAddress: number;
   constructor(private authService: AuthService,
               private navParams: NavParams,
-              private modalCntrl: ModalController) { }
+              private modalCntrl: ModalController,
+              public translateService: TranslateMedsurgService) { }
 
   ngOnInit() {
     this.checkIfIsOrder();

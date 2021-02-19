@@ -1,5 +1,5 @@
 <app-header *ngIf="!isOrder" [type]="'page'"></app-header>
-<app-header *ngIf="isOrder" [page]="'Address'" [type]="'modal'"></app-header>
+<app-header *ngIf="isOrder" [page]="translateService.translate('ADDRESS')" [type]="'modal'"></app-header>
 
 
 <ion-content>
@@ -11,27 +11,27 @@
             <div class="container-info">  
               <div class="address">
                 <ion-label class="label">
-                  <ion-icon class="icon"  src="/../../../assets/imgs/street-name.svg"></ion-icon> City : {{address.city}}
+                  <ion-icon class="icon"  src="/../../../assets/imgs/street-name.svg"></ion-icon> {{translateService.translate("CITY")}} : {{address.city}}
                 </ion-label>
               </div>
               <div class="address">
                 <ion-label class="label">
-                  <ion-icon class="icon"  src="../../../assets/imgs/street-name.svg"></ion-icon> StreetName {{address.streetName1}}
+                  <ion-icon class="icon"  src="../../../assets/imgs/street-name.svg"></ion-icon> {{translateService.translate("STREET_NAME")}} {{address.streetName1}}
                 </ion-label>
               </div>
               <div class="address">
                 <ion-label class="label">
-                  <ion-icon class="icon"  src="../../../assets/imgs/street-name.svg"></ion-icon> StreetName1 {{address.streetName2}}
+                  <ion-icon class="icon"  src="../../../assets/imgs/street-name.svg"></ion-icon> {{translateService.translate("STREET_NAME1")}} {{address.streetName2}}
                 </ion-label>
               </div>
               <div class="address">
                 <ion-label class="label">
-                  <ion-icon class="icon"  src="../../../assets/imgs/mailbox.svg"></ion-icon> PostalCode {{address.postalCode}}
+                  <ion-icon class="icon"  src="../../../assets/imgs/mailbox.svg"></ion-icon> {{translateService.translate("POSTALCODE")}} {{address.postalCode}}
                 </ion-label>
               </div>
               <div class="address">
                 <ion-label class="label">
-                  <ion-icon class="icon"  src="../../../assets/imgs/building.svg"></ion-icon> BuildingNumber {{address.buildingNumber}}
+                  <ion-icon class="icon"  src="../../../assets/imgs/building.svg"></ion-icon> {{translateService.translate("BUILDING_NUMBER")}} {{address.buildingNumber}}
                 </ion-label>
               </div>
             </div>
@@ -48,12 +48,12 @@
     <ion-row class="bottom-row" *ngIf="!addAddress">
       <ion-col size="12" >
         <ion-button shape="round" size="default" color="success"  expand="full" (click)="goToAddAddress()" >
-          <ion-text>Add Address</ion-text>
+          <ion-text>{{translateService.translate("ADD_ADDRESS")}}</ion-text>
         </ion-button>
       </ion-col>
       <ion-col size="12" *ngIf="selectedAddress" >
         <ion-button shape="round" size="default" color="primary"  expand="full" (click)="selectedAddressOrder()" >
-          <ion-text>Select Address</ion-text>
+          <ion-text>{{translateService.translate("SELECT_ADDRESS")}}</ion-text>
         </ion-button>
       </ion-col>
     </ion-row>
