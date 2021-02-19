@@ -10,6 +10,7 @@ import { User } from 'src/app/interfaces/user';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { SearchMedecinService } from 'src/app/services/search/search-medecin.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 import { ModalControllers } from '../../../classes/modalController';
 
 @Component({
@@ -30,7 +31,8 @@ export class CartComponent implements OnInit {
     private storageService: StorageService,
     private interactionService: InteractionService,
     private searchService: SearchMedecinService,
-    private modalCntrl: ModalController) {
+    private modalCntrl: ModalController,
+    public translateService: TranslateMedsurgService) {
     this.modalControllers = new ModalControllers(modalCntrl);
   }
 

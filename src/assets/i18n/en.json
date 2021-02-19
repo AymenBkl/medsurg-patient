@@ -100,7 +100,12 @@
     "HOME":"HOME",
     "ORDERS":"Orders",
     "PROFILE":"Profile",
-    "BACK":"BACK"
+    "BACK":"BACK",
+    "YOUR_CART":"Your Cart",
+    "REMOVE":"REMOVE",
+    "CLEAR":"CLEAR",
+    "CART_EMPTY":"Cart Empty",
+    "PURCHACE":"Purchase Now"
 
 
 

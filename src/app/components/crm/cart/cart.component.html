@@ -2,7 +2,7 @@
   <ion-grid>
     <ion-row *ngIf="cartProducts && cartProducts.length > 0">
       <ion-title class="title-pharmacy">
-        <ion-text>Your Cart</ion-text>
+        <ion-text>{{translateService.translate("YOUR_CART")}}</ion-text>
         <ion-icon src="../../../../assets/imgs/shopping-cart.svg" class="icon-cart" ></ion-icon>
       </ion-title>
       <ion-col size="12" *ngIf="cartProducts && cartProducts.length != 0">
@@ -17,14 +17,14 @@
               {{cartProduct.mainProduct.name}}
             </ion-title>
             <ion-text class="product-detail">
-              CN : {{cartProduct.mainProduct.company_name}}
+              {{translateService.translate("CN")}} : {{cartProduct.mainProduct.company_name}}
             </ion-text>
             <ion-text class="product-detail">
-              Description : {{cartProduct.mainProduct.description}}
+              {{translateService.translate("DESCRIPTION")}} : {{cartProduct.mainProduct.description}}
             </ion-text>
             
             <ion-text class="product-detail">
-              PACKING : {{cartProduct.mainProduct.packing}}
+              {{translateService.translate("PACKING")}} : {{cartProduct.mainProduct.packing}}
             </ion-text>
           </div>
           <div class="button-ajust-holder">
@@ -38,7 +38,7 @@
               </div>
           <ion-button color="danger" expand="block" (click)="removeMedecin(cartProduct)">
             <ion-icon name="trash-outline"></ion-icon>    
-            <ion-text>REMOVE</ion-text>      
+            <ion-text>{{translateService.translate("REMOVE")}}</ion-text>      
           </ion-button>
         </div>
       </ion-col>
@@ -46,7 +46,7 @@
 
     <ion-row *ngIf="!cartProducts || cartProducts.length == 0">
       <ion-col size="12">
-        <ion-title class="title-pharmacy">Cart Empty</ion-title>
+        <ion-title class="title-pharmacy">{{translateService.translate("CART_EMPTY")}}</ion-title>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -54,13 +54,13 @@
     <ion-col size="9">
       <ion-button shape="round" size="default" color="success" expand="full" (click)="findPharmacies()" >
         <ion-icon name="cart-outline"></ion-icon>
-        <ion-text>Purchase Now</ion-text>
+        <ion-text>{{translateService.translate("PURCHACE")}}</ion-text>
       </ion-button>
     </ion-col>
     <ion-col size="3">
       <ion-button shape="round" size="default" color="danger" expand="full" (click)="clearCart()" >
         <ion-icon name="trash-outline"></ion-icon>
-        <ion-text>Clear</ion-text>
+        <ion-text>{{translateService.translate("CLEAR")}}</ion-text>
       </ion-button>
     </ion-col>
     <ion-col size="12" >

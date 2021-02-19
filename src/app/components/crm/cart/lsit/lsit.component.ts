@@ -8,6 +8,7 @@ import { Product } from 'src/app/interfaces/product';
 import { SearchProduct } from 'src/app/interfaces/searchproduct';
 import { User } from 'src/app/interfaces/user';
 import { StorageService } from 'src/app/services/storage.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 import { ModalControllers } from '../../../../classes/modalController';
 
 @Component({
@@ -24,7 +25,8 @@ export class LsitComponent implements OnInit {
   cartProducts: {} = {};
   emptyCartProduct:boolean;
   constructor(private router: Router,
-              private storageService: StorageService) {
+              private storageService: StorageService,
+              public translateService: TranslateMedsurgService) {
               }
 
   ngOnInit() {
