@@ -5,6 +5,7 @@ import { Referal } from 'src/app/interfaces/referal';
 import { User } from 'src/app/interfaces/user';
 import { ReferalService } from 'src/app/services/crm/referal.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-add-referal',
@@ -25,7 +26,8 @@ export class AddReferalComponent implements OnInit {
   submitted = false;
   constructor(private referalService: ReferalService,
               private interactionService: InteractionService,
-              private  router: Router) { }
+              private  router: Router,
+              public translateService: TranslateMedsurgService) { }
 
   ngOnInit() {
     this.initReferal();

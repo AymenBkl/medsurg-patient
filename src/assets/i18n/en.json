@@ -132,7 +132,9 @@
     "REFUND_TITLE":"REFUND OF ORDER",
     "REFUND_PRICE":"Refunded Price",
     "CREATE_REFUND":"Make A Refund",
-    "REFUND_TYPE":"This refund is"
+    "REFUND_TYPE":"This refund is",
+    "START":"Start",
+    "ADD_REF":"Add Referal"
 
 
 
