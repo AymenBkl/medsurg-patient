@@ -102,16 +102,16 @@ export class EditPrescriptionComponent implements OnInit {
       .then((result: any) => {
         this.interactionService.hide();
         if (result){
-          this.interactionService.createToast('Image Uploaded !', 'success', 'bottom');
+          this.interactionService.createToast('TOAST_IMAGE_UPLOAD', 'success', 'bottom');
           this.prescription.imageUrl = result.prescription;
           this.editPrescription();
         }
         else {
-          this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
+          this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
         }
       }).catch(err => {
         this.interactionService.hide();
-        this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
+        this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
       });
     });
   }
@@ -122,16 +122,16 @@ export class EditPrescriptionComponent implements OnInit {
       .then(result => {
         this.interactionService.hide();
         if (result && result != false){
-          this.interactionService.createToast('Prescription Updated!', 'success', 'bottom');
+          this.interactionService.createToast('TOAST_PRESCRIPTION_UPDATED', 'success', 'bottom');
           this.modalCntrl.dismiss();
         }
         else {
-          this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
+          this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
         }
       })
       .catch((err)=> {
         this.interactionService.hide();
-        this.interactionService.createToast('Something went wrong try Again !', 'danger', 'bottom');
+        this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
       })
   }
 
@@ -141,7 +141,7 @@ export class EditPrescriptionComponent implements OnInit {
     }
     const mimeType = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
-      this.interactionService.createToast('Only images are supported.', 'danger', 'bottom');
+      this.interactionService.createToast('TOAST_IMAGE_ERROR', 'danger', 'bottom');
       return;
     }
     const reader = new FileReader();
