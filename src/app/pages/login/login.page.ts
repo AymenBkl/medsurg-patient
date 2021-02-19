@@ -6,6 +6,7 @@ import { InteractionService } from '../../services/interaction.service';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ResetPasswordPage } from '../reset-password/reset-password.page';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private interactionService: InteractionService,
     private router: Router,
-    private modalController: ModalController) {
+    private modalController: ModalController,
+    public translateService: TranslateMedsurgService) {
     this.buildLoginForm();
   }
 

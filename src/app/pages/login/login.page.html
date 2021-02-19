@@ -7,12 +7,12 @@
         <form novalidate [formGroup]="loginForm" class="form" (ngSubmit)="logIn()">
           <ion-item lines="none" class="ion-input">
             <ion-icon name="call"></ion-icon>
-            <ion-input placeHolder="Phone Number" formControlName="phoneNumber" (keypress)="numberOnlyValidation($event)"></ion-input>
+            <ion-input [placeholder]="translateService.translate('PHONE_NUMBER')" formControlName="phoneNumber" (keypress)="numberOnlyValidation($event)"></ion-input>
           </ion-item>
           <ion-label class="label-error" *ngIf="formErrors && formErrors.phoneNumber">*{{formErrors.phoneNumber}}</ion-label>
           <ion-item lines="none" class="ion-input">
             <ion-icon name="lock-closed"></ion-icon>
-            <ion-input placeHolder="Password" formControlName="password"></ion-input>
+            <ion-input [placeholder]="translateService.translate('PASSWORD')" formControlName="password"></ion-input>
           </ion-item>
           <ion-label class="label-error" *ngIf="formErrors && formErrors.password">*{{formErrors.password}}</ion-label>
           <ion-item lines="none" class="ion-input">
@@ -20,16 +20,16 @@
             <div class="icon-holder">
               <ion-icon name="ellipse" [ngClass]="loginForm.value.remember == true ? 'icon-checked' : 'icon'"></ion-icon>
             </div>
-            <ion-label class="checkbox-label">Remember Me </ion-label>
+            <ion-label class="checkbox-label">{{translateService.translate("REMEMBER")}}</ion-label>
           </ion-item>
           <ion-label class="label-error" *ngIf="validationErrors && validationErrors.errcode == 2">
             *{{validationErrors.errmsg}}</ion-label>
           <ion-button class="buttons" [disabled]="loginForm.invalid || submitted " type="submit" shape="round" size="default" expand="full">
-            <ion-label *ngIf="!submitted">Login</ion-label>
+            <ion-label *ngIf="!submitted">{{translateService.translate("Login")}}</ion-label>
             <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
           </ion-button>
         </form>
-        <ion-label class="reset-password" (click)="resetPassword()" >Reset Password
+        <ion-label class="reset-password" (click)="resetPassword()" >{{translateService.translate("RESET_PASSWORD")}}
         </ion-label>
       </ion-col>
     </ion-row>
@@ -37,8 +37,7 @@
       
 
       <ion-col size="12" style="text-align: center;">
-        <ion-label class="label">You don't have an account ? <span [routerLink]="['/register']"
-            class="span">Register</span></ion-label>
+        <ion-label class="label" [routerLink]="['/register']">{{translateService.translate("DHAVE_ACCOUNT")}}</ion-label>
       </ion-col>
     </ion-row>
   </ion-grid>

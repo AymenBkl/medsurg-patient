@@ -34,7 +34,10 @@
     "CHANGE_PHONE":"Change Phone",
     "HAVE_ACCOUNT":"Already have an account ? Login",
     "PHONE_EXISTS":"Phone Number already exists",
-    "INCORRECT_DETAIL":"Password or username is incorrect" 
+    "INCORRECT_DETAIL":"Password or username is incorrect",
+    "REMEMBER":"Remember Me", 
+    "RESET_PASSWORD":"Reset Password",
+    "DHAVE_ACCOUNT":"You don't have an account ? Register"
 
 
 
