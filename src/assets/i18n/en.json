@@ -112,8 +112,24 @@
     "CHECK_REFERAL":"Check Referal",
     "CREATE_ORDER":"Create Your order now !!!",
     "CREATE":"CREATE",
+    "CREATED":"Created",
     "PAY_CREATE":"Pay And Create",
-    "REFERAL_CODE":"Referal code"
+    "REFERAL_CODE":"Referal code",
+    "PHARMACY_DETAILS":"Pharmacy Details",
+    "NOT PAIED":"NOT PAID",
+    "ORDER_IS":"This Order is ",
+    "PAYMENT_IS":"Payment is ",
+    "CHECK_REFUND":"Check Refund",
+    "MEDECINS":"Medecins",
+    "QUANTITY":"Quantity",
+    "COMMISSION":"Commission ",
+    "TOTAL_PRICE":"Total Price",
+    "CONFIRM_PAYMENT":"CONFIRM YOUR PAYMENT NOW",
+    "C_ORDER":"CANCEL ORDER",
+    "CCLAIM_REFUND":"cancel and claim refund",
+    "CLAIM_REFUND":"claim refund",
+    "UPDATE_REFUND":"Update Refund"
+
 
 
 

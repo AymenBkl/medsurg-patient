@@ -7,6 +7,7 @@ import { User } from 'src/app/interfaces/user';
 import { CashfreeService } from 'src/app/services/cashfree.service';
 import { OrderService } from 'src/app/services/crm/order.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -24,7 +25,8 @@ export class OrderDetailComponent implements OnInit {
     private orderService: OrderService,
     private interactionService: InteractionService,
     private cashfree: CashfreeService,
-    private iab: InAppBrowser) {
+    private iab: InAppBrowser,
+    public translateService: TranslateMedsurgService) {
       this.modalControllerOder = new ModalControllersOrders(modalCntrl);
   }
 

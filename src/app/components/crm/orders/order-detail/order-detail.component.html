@@ -4,7 +4,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        <ion-title class="title-patient">Pharmacy Details</ion-title>
+        <ion-title class="title-patient">{{translateService.translate("PHARMACY_DETAILS")}}</ion-title>
         <ion-item class="profile-holder">
           <ion-avatar class="img">
             <img *ngIf="!order.pharmacy || order.pharmacy.imageUrl == ''" src="../../../../../assets/imgs/pharmacy-user-img.png">
@@ -21,7 +21,7 @@
     </ion-row>
     <ion-row *ngIf="order.address">
       <ion-col size="12">
-        <ion-title class="title-patient">Address</ion-title>
+        <ion-title class="title-patient">{{translateService.translate("ADDRESS")}}</ion-title>
         <div  class="address">
           {{order.address.city}},
           {{order.address.streetName1}},
@@ -34,27 +34,27 @@
     <ion-row>
       <ion-col size="12">
         <ion-item  class="profile-holder" >
-          <ion-title class="title-patient">This Order is {{order.status | uppercase}}</ion-title>
+          <ion-title class="title-patient">{{translateService.translate("ORDER_IS")}} {{translateService.translate(order.status | uppercase) }}</ion-title>
         </ion-item>
       </ion-col>
       <ion-col size="12" *ngIf="order.method == 'card' && order.paymentStatus.txStatus">
         <ion-item  class="profile-holder" >
-          <ion-title class="title-patient">Payment is {{order.paymentStatus.txStatus | uppercase}}</ion-title>
+          <ion-title class="title-patient">{{translateService.translate("PAYMENT_IS")}} {{translateService.translate(order.paymentStatus.txStatus | uppercase) }}</ion-title>
         </ion-item>
       </ion-col>
       <ion-col size="12" *ngIf="order.method == 'card' && !order.paymentStatus.txStatus">
         <ion-item  class="profile-holder" >
-          <ion-title class="title-patient">Payment is {{order.paymentStatus.orderStatus | uppercase}}</ion-title>
+          <ion-title class="title-patient">{{translateService.translate("PAYMENT_IS")}} {{translateService.translate(order.paymentStatus.orderStatus | uppercase)  }}</ion-title>
         </ion-item>
       </ion-col>
       <ion-col size="12" *ngIf="order.refund.refund" (click)='callRefundDetail()'>
         <ion-item  class="profile-holder" >
-          <ion-title class="title-patient" >Check Refund</ion-title>
+          <ion-title class="title-patient" >{{translateService.translate("CHECK_REFUND")}}</ion-title>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-title class="title-patient">Medecins</ion-title>
+      <ion-title class="title-patient">{{translateService.translate("MEDECINS")}}</ion-title>
       <ion-col size="12" >
       <div  class="product-holder" *ngFor="let product of order.products">
         <ion-avatar class="product-img">
@@ -66,24 +66,24 @@
           {{product.product.mainProduct.name}}
         </ion-title>
         <ion-text class="product-detail">
-          CN : {{product.product.mainProduct.company_name}} 
+          {{translateService.translate("CN")}} : {{product.product.mainProduct.company_name}} 
         </ion-text>
         <ion-text class="product-detail">
-          Description : {{product.product.mainProduct.description}} 
+          {{translateService.translate("DESCRIPTION")}} : {{product.product.mainProduct.description}} 
         </ion-text>
         <ion-text class="product-detail">
-          PACKING : {{product.product.mainProduct.packing}} 
+          {{translateService.translate("PACKING")}} : {{product.product.mainProduct.packing}} 
         </ion-text>
       </div>
       <div class="product-nav">
-        <ion-text>Quantity</ion-text> : {{product.quantity}}
+        <ion-text>{{translateService.translate("QUANTITY")}}</ion-text> : {{product.quantity}}
       </div>
     </div>
     </ion-col>
     </ion-row>
     <ion-row *ngIf="order.refund && order.refund.refund && order.refund.payedByAdmin == 'PAID'">
       <ion-col size="12">
-        <ion-title class="title-patient">Commission: {{order.refund.commissionApplied}}%</ion-title>
+        <ion-title class="title-patient">{{translateService.translate("Commission ")}}: {{order.refund.commissionApplied}}%</ion-title>
         <div  class="total-price-holder1">
           <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : ₹{{order.refund.refund.refundPrice -  (order.refund.refund.refundPrice*order.refund.commissionApplied)/100 }}
         </div>
@@ -91,7 +91,7 @@
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <ion-title class="title-patient">Total Price</ion-title>
+        <ion-title class="title-patient">{{translateService.translate("TOTAL_PRICE")}}</ion-title>
         <div  class="total-price-holder">
           <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : ₹{{order.totalPrice}}
         </div>
@@ -102,32 +102,32 @@
     <ion-row class="bottom-row">
       <ion-col size="12" >
         <ion-button shape="round" size="default" color="success"  expand="full" *ngIf="(order.paymentStatus && order.method == 'card') && (((order.paymentStatus.txStatus && (order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED')) || ((!order.paymentStatus.txStatus && order.paymentStatus.orderStatus == 'ACTIVE'))) && order.status == 'created')" (click)="getPaymentLink()" >
-          <ion-text>CONFIRM YOUR PAYMENT NOW</ion-text>
+          <ion-text>{{translateService.translate("CONFIRM_PAYMENT")}}</ion-text>
         </ion-button>
       </ion-col>
       <ion-col size="12" >
         <ion-button shape="round" size="default" color="danger"  expand="full" *ngIf="order.paymentStatus && (((order.paymentStatus.txStatus && (order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED')) || ((!order.paymentStatus.txStatus && order.paymentStatus.orderStatus == 'ACTIVE'))) && order.status == 'created')" (click)="checkStatus()" >
-          <ion-text>CANCEL ORDER</ion-text>
+          <ion-text>{{translateService.translate("C_ORDER")}}</ion-text>
         </ion-button>
       </ion-col>
       <ion-col size="12" >
         <ion-button shape="round" size="default" color="danger"  expand="full" *ngIf="order.paymentStatus && (((order.paymentStatus.txStatus && (order.paymentStatus.txStatus == 'SUCCESS')) || ((!order.paymentStatus.txStatus && order.paymentStatus.orderStatus == 'PAID'))) && order.status == 'accepted')" (click)="cancelOrder()" >
-          <ion-text>cancel and claim refund</ion-text>
+          <ion-text>{{translateService.translate("CCLAIM_REFUND")}}</ion-text>
         </ion-button>
       </ion-col>
       <ion-col size="12" >
         <ion-button shape="round" size="default" color="danger"  expand="full" *ngIf="order.method == 'cod' && order.status != 'delivered'" (click)="checkStatus()" >
-          <ion-text>CANCEL ORDER</ion-text>
+          <ion-text>{{translateService.translate("C_ORDER")}}</ion-text>
         </ion-button>
       </ion-col>
       <ion-col size="12" >
         <ion-button shape="round" size="default" color="primary"  expand="full" *ngIf="isValidRefund && order.refund.payedByAdmin == 'NOT PAIED' && order.refund.refund == null" (click)="callRefund()" >
-          <ion-text>claim refund</ion-text>
+          <ion-text>{{translateService.translate("CLAIM_REFUND")}}</ion-text>
         </ion-button>
       </ion-col>
       <ion-col size="12" >
         <ion-button shape="round" size="default" color="primary"  expand="full" *ngIf="isValidRefund && order.refund.payedByAdmin == 'NOT PAIED' && order.refund.refund != null" (click)="callRefund()" >
-          <ion-text>Update Refund</ion-text>
+          <ion-text>{{translateService.translate("Update Refund")}}</ion-text>
         </ion-button>
       </ion-col>
     </ion-row>
