@@ -3,6 +3,7 @@ import { User } from 'src/app/interfaces/user';
 import { AuthService } from '../../services/auth.service';
 import { NavController , ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -17,7 +18,8 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService,
               private navCntrl: NavController,
               private modalCntrl: ModalController,
-              private router: Router) { }
+              private router: Router,
+              public translateService: TranslateMedsurgService) { }
 
   ngOnInit() {
     this.getCurrentUser();

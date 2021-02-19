@@ -1,6 +1,6 @@
 <div class="name">
   <ion-title class="home-title">
-    Prescriptions
+    {{this.translateService.translate('PRESCRIPTIONS')}}
   </ion-title>
   <ion-slides class="animate-item" [options]="sliderConfig" *ngIf="prescriptions && prescriptions.length > 0">
     <ion-slide *ngFor="let prescription of prescriptions" (click)="openEditPrescription(prescription)">
@@ -21,7 +21,7 @@
     </ion-slide>
   </ion-slides>
   <div class="name" *ngIf="prescriptions && prescriptions.length == 0  ">
-    <ion-title class="title">You don't have any prescriptions </ion-title>
+    <ion-title class="title">{{this.translateService.translate('NO PRESCRIPTION FOUND')}}</ion-title>
   </div>
   <div class="spin" *ngIf="!prescriptions" >
     <ion-spinner name="bubbles"></ion-spinner>

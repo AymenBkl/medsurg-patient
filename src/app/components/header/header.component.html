@@ -10,7 +10,7 @@
     </ion-buttons>
     <ion-title class="title">
       <ion-text class="title1">
-        Patient
+        {{translateService.translate('APP_TITLE')}}
       </ion-text>
       <ion-chip class="chip" *ngIf="currentUser != null">
         <ion-avatar class="img" (click)="goToCart()">
@@ -26,7 +26,7 @@
   </ion-toolbar>
   <div class="search_bar-xyz" (click)="goToFindProduct()" *ngIf="type == 'page'">
   <ion-icon name="search-outline" class="icon" *ngIf="page != 'Login' && page != 'Register'"></ion-icon>
-  {{page == 'Login' || page == 'Register' ? page : 'Search'}}
+  {{page == 'Login' || page == 'Register' ?  translateService.translate(page)  : translateService.translate("PAGE_SEARCH")}}
 </div>
 <div class="search_bar-xyz" (click)="goToFindProduct()" *ngIf="type == 'modal'">
   {{page}}

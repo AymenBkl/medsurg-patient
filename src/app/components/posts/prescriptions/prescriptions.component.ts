@@ -7,6 +7,8 @@ import { Prescription } from 'src/app/interfaces/prescription';
 import { InteractionService } from '../../../services/interaction.service';
 import { map } from 'rxjs/operators';
 import { PrescriptionService } from 'src/app/services/prescription.service';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-prescriptions',
@@ -26,7 +28,8 @@ export class PrescriptionsComponent implements OnInit {
   constructor(private authService: AuthService,
     private modalController: ModalController,
     private interactionService: InteractionService,
-    private prescriptionService: PrescriptionService) {
+    private prescriptionService: PrescriptionService,
+    public translateService:TranslateMedsurgService) {
     this.modalControllers = new ModalControllers(modalController);
   }
 
