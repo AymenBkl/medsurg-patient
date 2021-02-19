@@ -65,7 +65,7 @@ export class LoginPage implements OnInit {
           }
         }
         else {
-          this.interactionService.createToast('Something Went Wrong ! Try Again', 'danger', 'bottom');
+          this.interactionService.createToast('TOAST_ERROR1', 'danger', 'bottom');
           this.submitted = false;
         }
       })

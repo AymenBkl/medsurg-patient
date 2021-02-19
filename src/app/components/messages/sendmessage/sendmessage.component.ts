@@ -36,7 +36,7 @@ export class SendmessageComponent implements OnInit {
 
   checkMessage(){
     if (this.message.message === ''){
-      this.interactionService.createToast('Post a message', 'danger', 'bottom')
+      this.interactionService.createToast('TOAST_SEND_MESSAGES', 'danger', 'bottom')
     }
     else {
       this.postMessage();
@@ -50,16 +50,16 @@ export class SendmessageComponent implements OnInit {
           .then((result: any) => {
             this.interactionService.hide();
             if (result && result !== false){
-              this.interactionService.createToast('Your Message Posted seccusefully', 'success', 'bottom');
+              this.interactionService.createToast('TOAST_MESSAGES_SEND', 'success', 'bottom');
               this.modalCntrl.dismiss();
             }
             else {
-              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+              this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
             }
       }   );
       }).catch(err => {
         this.interactionService.hide();
-        this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+        this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
       });
   }
 

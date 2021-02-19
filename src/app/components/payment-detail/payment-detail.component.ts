@@ -63,16 +63,16 @@ export class PaymentDetailComponent implements OnInit {
         .then((result: any) => {
           this.submitted = false;
           if (result && result != false){
-            this.interactionService.createToast("PaymentDetail Has Been Added Succesfully", 'success', "bottom");
+            this.interactionService.createToast("TOAST_PAYMENTDETAIL_CREATED", 'success', "bottom");
             this.back();
           }
           else {
-            this.interactionService.createToast("Something Went Wrong !", 'danger', "bottom");
+            this.interactionService.createToast("TOAST_ERROR", 'danger', "bottom");
           }
         })
         .catch(err => {
           this.submitted = false;
-          this.interactionService.createToast("Something Went Wrong !", 'danger', "bottom");
+          this.interactionService.createToast("TOAST_ERROR", 'danger', "bottom");
         })
     }
   }
@@ -84,16 +84,16 @@ export class PaymentDetailComponent implements OnInit {
         .then((result: any) => {
           this.submitted = false;
           if (result && result != false){
-            this.interactionService.createToast("PaymentDetail Has Been Updated Succesfully", 'success', "bottom");
+            this.interactionService.createToast("TOAST_PAYMENTDETAIL_UPDATED", 'success', "bottom");
             this.back();
           }
           else {
-            this.interactionService.createToast("Something Went Wrong !", 'danger', "bottom");
+            this.interactionService.createToast("TOAST_ERROR", 'danger', "bottom");
           }
         })
         .catch(err => {
           this.submitted = false;
-          this.interactionService.createToast("Something Went Wrong !", 'danger', "bottom");
+          this.interactionService.createToast("TOAST_ERROR", 'danger', "bottom");
         })
     }
   }

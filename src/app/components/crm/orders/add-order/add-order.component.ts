@@ -136,25 +136,25 @@ export class AddOrderComponent implements OnInit {
           this.referalP = result;
           this.order.referal = {referal:result,commissionApplied:0,payedByAdmin:'NOT PAIED'};
           if (this.referalP.owner._id != this.currentUser._id) {
-            this.interactionService.createToast('Referal Added', 'success', 'bottom');
+            this.interactionService.createToast('TOAST_REFERAL_ADDED', 'success', 'bottom');
             this.nextSlide();
           }
           else {
-            this.interactionService.createToast('You cant apply your own referal', 'light', 'bottom');
+            this.interactionService.createToast('TOAST_REFERAL_OWN', 'light', 'bottom');
             this.referalCode = '';
             this.referalP = null;
           }
         }
         else {
           this.referalP = null;
-          this.interactionService.createToast('Referal not exist', 'danger', 'bottom');
+          this.interactionService.createToast('TOAST_REFERAL_NEXIST', 'danger', 'bottom');
           this.referalCode = '';
         }
       })
       .catch((err) => {
         this.referalP = null;
         this.referalCode = '';
-        this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+        this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
         this.submitted = false;
       })
   }
@@ -169,19 +169,19 @@ export class AddOrderComponent implements OnInit {
               this.interactionService.hide();
               if (result && result != false) {
                 this.modifyPres();
-                this.interactionService.createToast('Order created Successfully ', 'success', 'bottom');
+                this.interactionService.createToast('TOAST_ORDER_CREATED', 'success', 'bottom');
                 setTimeout(() => {
                   this.router.navigate(['/orders']);
                   this.modalCntrl.dismiss();
                 }, 1000);
               }
               else {
-                this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+                this.interactionService.createToast('TOAST_ERROR1', 'danger', 'bottom');
               }
             })
             .catch(err => {
               this.interactionService.hide();
-              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+              this.interactionService.createToast('TOAST_ERROR1', 'danger', 'bottom');
             })
         })
     }

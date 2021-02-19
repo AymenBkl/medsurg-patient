@@ -58,18 +58,18 @@ export class RefundComponent implements OnInit {
           .then((result: any) => {
             this.interactionService.hide();
             if (result && result != false) {
-              this.interactionService.createToast('Your Order Has been Updated !', 'success', 'bottom');
+              this.interactionService.createToast('TOAST_ORDER_UPDATED', 'success', 'bottom');
               setTimeout(() => {
                 this.modalCntrl.dismiss(null);
               }, 1500);
             }
             else {
-              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+              this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
             }
           })
           .catch(err => {
             this.interactionService.hide();
-            this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+            this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
           })
       })
   }
@@ -109,18 +109,18 @@ export class RefundComponent implements OnInit {
       .then((result: any) => {
         this.interactionService.hide();
         if (result && result != false) {
-          this.interactionService.createToast('Creating your refund Has been Created !', 'success', 'bottom');
+          this.interactionService.createToast('TOAST_REFUND_CREATED', 'success', 'bottom');
           setTimeout(() => {
             this.modalCntrl.dismiss(null);
           }, 1500);
         }
         else {
-          this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+          this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
         }
       })
       .catch(err => {
         this.interactionService.hide();
-        this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+        this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
       })
   })
  }
@@ -132,18 +132,18 @@ export class RefundComponent implements OnInit {
       .then((result: any) => {
         this.interactionService.hide();
         if (result && result != false) {
-          this.interactionService.createToast('Updating your refund Has been Created !', 'success', 'bottom');
+          this.interactionService.createToast('TOAST_REFUND_UPDATED', 'success', 'bottom');
           setTimeout(() => {
             this.modalCntrl.dismiss(null);
           }, 1500);
         }
         else {
-          this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+          this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
         }
       })
       .catch(err => {
         this.interactionService.hide();
-        this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+        this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
       })
   })
  }

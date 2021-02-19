@@ -75,7 +75,7 @@ export class ResetPasswordPage implements OnInit {
               })
             }
             else {
-              this.interactionService.createToast('Something Went Wrong ! Try Again', 'danger', 'bottom');
+              this.interactionService.createToast('TOAST_ERROR1', 'danger', 'bottom');
               this.submitted = false;
             }
           })
@@ -108,14 +108,14 @@ export class ResetPasswordPage implements OnInit {
             this.interactionService.createToast('CODE HAS BEEN SENT', 'success', 'bottom');
           }
           else {
-            this.interactionService.createToast('Something Went Wrong ! Try Again', 'danger', 'bottom');
+            this.interactionService.createToast('TOAST_ERROR1', 'danger', 'bottom');
           }
         })
         .catch(err => {
           this.submitted = false;
           console.log(err);
           this.interactionService.hide();
-          this.interactionService.createToast('Something Went Wrong ! Try Again', 'danger', 'bottom');
+          this.interactionService.createToast('TOAST_ERROR1', 'danger', 'bottom');
         })
       })
   }

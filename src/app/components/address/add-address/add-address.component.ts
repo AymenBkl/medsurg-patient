@@ -48,16 +48,16 @@ export class AddAddressComponent implements OnInit {
       .then((result: any) => {
         this.submitted = false;
         if (result && result != false){
-          this.interactionService.createToast("Address Has Been Added Succesfully", 'success', "bottom");
+          this.interactionService.createToast("TOAST_ADDRESS_ADDED", 'success', "bottom");
           this.back();
         }
         else {
-          this.interactionService.createToast("Something Went Wrong !", 'danger', "bottom");
+          this.interactionService.createToast("TOAST_ERROR", 'danger', "bottom");
         }
       })
       .catch(err => {
         this.submitted = false;
-        this.interactionService.createToast("Something Went Wrong !", 'danger', "bottom");
+        this.interactionService.createToast("TOAST_ERROR", 'danger', "bottom");
       })
   }
 

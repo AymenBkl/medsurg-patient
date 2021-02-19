@@ -70,13 +70,13 @@ export class AddReferalComponent implements OnInit {
             this.submitted = false;
             this.interactionService.hide();
               if (result && result != false){
-                this.interactionService.createToast('Your Referal Created seccusefully', 'success', 'bottom');
+                this.interactionService.createToast('TOAST_REFERAL_CREATED', 'success', 'bottom');
                 setTimeout(() => {
                   this.router.navigate(['/referal']);
                 },1000)
               }
               else {
-                this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+                this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
               }
         }   );
         }).catch(err => {
@@ -84,7 +84,7 @@ export class AddReferalComponent implements OnInit {
           this.submitted = false;
           this.interactionService.hide();
 
-          this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+          this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
         });
   }
 

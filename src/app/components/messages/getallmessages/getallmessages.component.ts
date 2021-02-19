@@ -43,23 +43,23 @@ export class GetallmessagesComponent implements OnInit {
               this.messages = result;
               if (this.messages.length != 0) {3
                 this.filterMessages(result);
-                this.interactionService.createToast('Your Messages has been loaded !', 'success', 'bottom');
+                this.interactionService.createToast('TOAST_MESSAGES_ALL', 'success', 'bottom');
               }
               else {
-                this.interactionService.createToast('You dont have any messages !', 'warning', 'bottom');
+                this.interactionService.createToast('TOAST_NO_MESSAGES', 'warning', 'bottom');
               }
             }
             else {
-              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+              this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
             }
           })
           .catch(err => {
             this.interactionService.hide();
             if (err.status == 404) {
-              this.interactionService.createToast('No meesages Found !', 'warrning', 'bottom');
+              this.interactionService.createToast('TOAST_NOTFOUND_MESSAGES', 'warrning', 'bottom');
             }
             else {
-              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+              this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
             }
           });
       })

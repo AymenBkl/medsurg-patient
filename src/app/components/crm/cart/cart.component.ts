@@ -104,13 +104,13 @@ export class CartComponent implements OnInit {
               this.router.navigate(['/tabs/search-medecin/search/buy', { products: JSON.stringify(this.searchProduct) }]);
             }
             else {
-              this.interactionService.createToast('Not Found', 'danger', 'bottom');
+              this.interactionService.createToast('TOAST_NOTFOUND', 'danger', 'bottom');
             }
           })
           .catch(err => {
             this.interactionService.hide();
             console.log(err);
-            this.interactionService.createToast('Something Went Wrong ! Try Again', 'danger', 'bottom');
+            this.interactionService.createToast('TOAST_ERROR1', 'danger', 'bottom');
           });
       });
   }
