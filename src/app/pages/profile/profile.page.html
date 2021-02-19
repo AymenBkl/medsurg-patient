@@ -37,17 +37,17 @@
       <form novalidate  [formGroup]="profileForm"  class="form" (ngSubmit)="update()" data-aos="fade-up">
         <ion-item lines="none" class="ion-input" data-aos="fade-up" data-aos-duration="3000">
           <ion-icon name="person-circle"></ion-icon>
-          <ion-input placeHolder="Firstname" formControlName="firstname"></ion-input>
+          <ion-input [placeholder]="translateService.translate('FIRSTNAME')" formControlName="firstname"></ion-input>
         </ion-item>
-        <ion-label class="label-error" *ngIf="formErrors && formErrors.firstname">*{{formErrors.firstname}}</ion-label>
+        <ion-label class="label-error" *ngIf="formErrors && formErrors.firstname">*{{translateService.translate(formErrors.firstname)}}</ion-label>
     
         <ion-item lines="none" class="ion-input">
           <ion-icon name="person-circle"></ion-icon>
-          <ion-input placeHolder="Lastname" formControlName="lastname"></ion-input>
+          <ion-input [placeholder]="translateService.translate('LASTNAME')" formControlName="lastname"></ion-input>
         </ion-item>
-        <ion-label class="label-error" *ngIf="formErrors && formErrors.lastname">*{{formErrors.lastname}}</ion-label>
+        <ion-label class="label-error" *ngIf="formErrors && formErrors.lastname">*{{translateService.translate(formErrors.lastname)}}</ion-label>
         <ion-button class="buttons" [disabled]="profileForm.invalid || submitted" (click)="update()" shape="round" size="default" expand="full">
-          <ion-label *ngIf="!submitted">UPDATE</ion-label>
+          <ion-label *ngIf="!submitted">{{translateService.translate("UPDATE")}}</ion-label>
           <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
         </ion-button>
       </form>
@@ -59,7 +59,7 @@
             <img src="../../../assets/imgs/ordonnance.png">
           </ion-avatar>
           <div class="name-holder">
-            <ion-text class="card-title">See Your Prescriptions</ion-text>
+            <ion-text class="card-title">{{translateService.translate("SEE_PRESCRIPTIONS")}}</ion-text>
           </div>
           <div class="name-holder">
           </div>
@@ -71,7 +71,7 @@
             <img src="../../../assets/imgs/capsules.png">
           </ion-avatar>
           <div class="name-holder">
-            <ion-text class="card-title">Search in categories</ion-text>
+            <ion-text class="card-title">{{translateService.translate("SEARCH_CATEGORIES")}}</ion-text>
           </div>
           <div class="name-holder">
           </div>
@@ -83,7 +83,7 @@
             <img src="../../../assets/imgs/marketing.svg">
           </ion-avatar>
           <div class="name-holder">
-            <ion-text class="card-title">Add Your own Referal</ion-text>
+            <ion-text class="card-title">{{translateService.translate("ADD_REFERAL")}}</ion-text>
           </div>
           <div class="name-holder">
             <ion-text class="card-subtitle"></ion-text>
@@ -96,7 +96,7 @@
             <img src="../../../assets/imgs/shopping-cart.svg">
           </ion-avatar>
           <div class="name-holder">
-            <ion-text class="card-title">See Your Cart</ion-text>
+            <ion-text class="card-title">{{translateService.translate("SEE_CART")}}</ion-text>
           </div>
           <div class="name-holder">
             <ion-text class="card-subtitle"></ion-text>
@@ -110,7 +110,7 @@
             <img src="../../../assets/imgs/bank.svg">
           </ion-avatar>
           <div class="name-holder">
-            <ion-text class="card-title">Payment Detail</ion-text>
+            <ion-text class="card-title">{{translateService.translate("PAYMENT_DETAIL")}}</ion-text>
           </div>
           <div class="name-holder">
             <ion-text class="card-subtitle"></ion-text>
@@ -124,7 +124,7 @@
             <img src="../../../assets/imgs/address.svg">
           </ion-avatar>
           <div class="name-holder">
-            <ion-text class="card-title">Manage Addresses</ion-text>
+            <ion-text class="card-title">{{translateService.translate("MANAGE_ADDRESSES")}}</ion-text>
           </div>
           <div class="name-holder">
             <ion-text class="card-subtitle"></ion-text>
@@ -137,7 +137,7 @@
               <img src="../../../assets/imgs/refund.svg">
             </ion-avatar>
             <div class="name-holder">
-              <ion-text class="card-title">Refunds</ion-text>
+              <ion-text class="card-title">{{translateService.translate("REFUNDS")}}</ion-text>
             </div>
             <div class="name-holder">
               <ion-text class="card-subtitle"></ion-text>
@@ -151,7 +151,7 @@
             <img src="../../../assets/imgs/chatting.svg">
           </ion-avatar>
           <div class="name-holder">
-            <ion-text class="card-title">Contact Admin</ion-text>
+            <ion-text class="card-title">{{translateService.translate("CONTACT_ADMIN")}}</ion-text>
           </div>
           <div class="name-holder">
             <ion-text class="card-subtitle"></ion-text>
@@ -166,7 +166,7 @@
             <img src="../../../assets/imgs/log-out.svg">
           </ion-avatar>
           <div class="name-holder">
-            <ion-text class="card-title">Logout</ion-text>
+            <ion-text class="card-title">{{translateService.translate("LOGOUT")}}</ion-text>
           </div>
           <div class="name-holder">
             <ion-text class="card-subtitle"></ion-text>

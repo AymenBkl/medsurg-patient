@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { onValueChanged } from '../register/valueChanges';
 import { UserService } from '../../services/user/user.service';
 import { Router } from '@angular/router';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -24,6 +25,7 @@ export class ProfilePage implements OnInit {
               private formBuilder: FormBuilder,
               private userService: UserService,
               private router: Router,
+              public translateService: TranslateMedsurgService,
               @Inject('bucketURL') public bucketURL,
               ) {
   }

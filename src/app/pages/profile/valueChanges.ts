@@ -9,14 +9,14 @@ let formErrors = {
 // tslint:disable-next-line: prefer-const
 let validationMessages = {
     firstname: {
-        required: 'Firstname is required.',
-        minlength: 'Firstname must be at least 4 characters long.',
-        maxlength : 'Firstname must be at most 20 characters long.'
+        required: 'REQUIRED_FIRSTNAME',
+        minlength: 'MINLEN_FIRSTNAME',
+        maxlength : 'MAXLEN_FIRSTNAME'
     },
     lastname: {
-        required: 'Lastname is required.',
-        minlength: 'Lastname must be at least 4 characters long.',
-        maxlength : 'Lastname must be at most 20 characters long.'
+        required: 'REQUIRED_LASTNAME',
+        minlength: 'MINLEN_LASTNAME',
+        maxlength : 'MAXLEN_LASTNAME'
     },
 
 };
@@ -34,7 +34,7 @@ export function onValueChanged(data: any, registerForm: FormGroup) {
                 const messages = validationMessages[field];
                 for (const key in control.errors) {
                     if (control.errors.hasOwnProperty(key)) {
-                        formErrors[field] += messages[key] + ' ';
+                        formErrors[field] += messages[key];
                     }
                 }
             }

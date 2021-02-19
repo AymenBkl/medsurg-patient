@@ -74,7 +74,18 @@
     "IFSC_CODE":"IFSC code",
     "ACCOUNT_HOLDER_NAME":"Account Holder's Name",
     "UPDATE_PAYMENT_DETAIL":"UPDATE PAYMETN DETAIL",
-    "COMMENTS":"Comments"
+    "COMMENTS":"Comments",
+    "UPDATE":"UPDATE",
+    "SEE_PRESCRIPTIONS":"See Your Prescriptions",
+    "SEARCH_CATEGORIES":"Search in categories",
+    "ADD_REFERAL":"Add Your own Referal",
+    "SEE_CART":"See Your Cart",
+    "PAYMENT_DETAIL":"Payment Detail",
+    "MANAGE_ADDRESSES":"Manage Addresses",
+    "REFUNDS":"Refunds",
+    "CONTACT_ADMIN":"Contact Admin",
+    "LOGOUT":"Logout"
+
 
 
 
