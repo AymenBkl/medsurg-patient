@@ -9,6 +9,7 @@ import { ModalControllersOrders } from 'src/app/classes/modalController.orders';
 import { config } from 'src/app/services/config';
 import { CashfreeService } from 'src/app/services/cashfree.service';
 import { PaymentStatus } from 'src/app/interfaces/paymentStatus';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-orders',
@@ -40,7 +41,8 @@ export class OrdersPage implements OnInit {
     private authService: AuthService,
     private interactionService: InteractionService,
     private modalCntrl: ModalController,
-    private cashfree: CashfreeService) {
+    private cashfree: CashfreeService,
+    public translateService: TranslateMedsurgService) {
     this.modalControllerOrder = new ModalControllersOrders(this.modalCntrl);
   }
 

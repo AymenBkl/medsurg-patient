@@ -54,7 +54,21 @@
     "DESCRIPTION":"Description",
     "PACKING":"PACKING",
     "CART_ADD":"ADD TO CART",
-    "VIEW_CART":"VIEW CART"
+    "VIEW_CART":"VIEW CART",
+    "ALL":"ALL",
+    "SUCCESS":"SUCCESS",
+    "PENDING":"PENDING",
+    "ACTIVE":"ACTIVE",
+    "FAILED":"FAILED",
+    "NEW":"NEW",
+    "ACCEPTED":"ACCEPTED",
+    "CANCELED":"CANCELED",
+    "REJECTED":"REJECTED",
+    "DELIVERED":"DELIVERED",
+    "NPAID":"NOT PAID",
+    "PAID":"PAID",
+    "ORDER_STATUS":"Order Status",
+    "NEW_ORDER":"NEW ORDER"
 
 
 
