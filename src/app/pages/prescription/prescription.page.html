@@ -5,10 +5,10 @@
 
   <ion-segment (ionChange)="segmentChanged($event)"  value="prescriptions"  class="segment-type"  slot="fixed"  class="segments">
     <ion-segment-button value="prescriptions">
-      <ion-label>Prescriptions</ion-label>
+      <ion-label>{{translateService.translate("PRESCRIPTIONS")}}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="offers">
-      <ion-label>Offers</ion-label>
+      <ion-label>{{translateService.translate("OFFERS")}}</ion-label>
     </ion-segment-button>
   </ion-segment>
   <ion-grid>
@@ -44,7 +44,7 @@
           </ion-item>
           <ion-item line="none" class="comment-holder">
             <div class="comment-holder">
-              <h1>Comments</h1>
+              <h1>{{translateService.translate("COMMENTS")}}</h1>
             </div>
           </ion-item>
           <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments;let i = index" [class.highlited]='comment.status == "approved"' >
@@ -93,7 +93,7 @@
           </ion-item>
           <ion-item line="none" class="comment-holder">
             <div class="comment-holder">
-              <h1>Comments</h1>
+              <h1>{{translateService.translate("COMMENTS")}}</h1>
             </div>
           </ion-item>
           <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments;let i = index" [class.highlited]='comment.status == "approved"' >
@@ -112,14 +112,14 @@
     </ion-row>
     <ion-row *ngIf="currentUser && prescriptions && prescriptions.length == 0" >
       <ion-col size="12">
-        <ion-text class="not-found"> You didn't post any prescriptions</ion-text>
+        <ion-text class="not-found"> {{translateService.translate("NO PRESCRIPTION FOUND")}}</ion-text>
       </ion-col>
     </ion-row>
 
     
     <ion-row *ngIf="currentUser && prescriptions && prescriptions.length == 0" >
       <ion-col size="12">
-        <ion-text class="not-found"> You didn't post any prescriptions</ion-text>
+        <ion-text class="not-found"> {{translateService.translate("NO PRESCRIPTION FOUND")}}</ion-text>
       </ion-col>
     </ion-row>
   </ion-grid>

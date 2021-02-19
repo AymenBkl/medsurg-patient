@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 import { Comment } from '../../interfaces/comment';
 import { Offer } from 'src/app/interfaces/offer';
 import { PrescriptionService } from 'src/app/services/prescription.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 @Component({
   selector: 'app-prescription',
   templateUrl: './prescription.page.html',
@@ -32,7 +33,8 @@ export class PrescriptionPage implements OnInit {
   constructor(private authService: AuthService,
               private modalController: ModalController,
               private interactionService: InteractionService,
-              private prescriptionService: PrescriptionService) {
+              private prescriptionService: PrescriptionService,
+              public translateService: TranslateMedsurgService) {
                 this.modalControllers = new ModalControllers(modalController);
               }
 
