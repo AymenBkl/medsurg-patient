@@ -3,12 +3,12 @@
 <ion-content>
   <ion-slides class="center-row"  [options]='slideOpts'  #slides class="swiper-no-swiping slides"  >
     <ion-slide class="slide intro-slide" >
-       <ion-label class="intro">Chooce Your payment Method !!!</ion-label>
+       <ion-label class="intro">{{translateService.translate("C_METHOD")}}</ion-label>
        <ion-item (click)="selectMethod('card')">
         <ion-thumbnail slot="start">
           <img src="../../../../../assets/imgs/visa.png" />
         </ion-thumbnail>
-        <ion-label>Pay Now By Card</ion-label>
+        <ion-label>{{translateService.translate("PAY_CARD")}}</ion-label>
         <ion-icon mode="ios" name="arrow-forward-outline" slot="end"></ion-icon>
       </ion-item>
     
@@ -17,32 +17,32 @@
         <ion-thumbnail slot="start">
           <img src="../../../../../assets/imgs/cod.png" />
         </ion-thumbnail>
-        <ion-label>Cash on Delivery</ion-label>
+        <ion-label>{{translateService.translate("COD")}}</ion-label>
         <ion-icon mode="ios" name="arrow-forward-outline" slot="end"></ion-icon>
       </ion-item>
     </ion-slide>
     <ion-slide class="slide">
         <ion-item lines="none" class="ion-input">
           <ion-icon name="link-outline"></ion-icon>          
-          <ion-input placeHolder="Referal code" [(ngModel)]="referalCode"></ion-input>
+          <ion-input [placeholder]="translateService.translate('REFERAL_CODE')" [(ngModel)]="referalCode"></ion-input>
         </ion-item>
         
         <ion-button class="buttons" [hidden]="referalCode == ''" (click)="checkReferal()" shape="round" size="default" expand="full">
-          <ion-label *ngIf="!submitted">Check Referal</ion-label>
+          <ion-label *ngIf="!submitted">{{translateService.translate("CHECK_REFERAL")}}</ion-label>
           <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
         </ion-button>
      </ion-slide>
 
      <ion-slide class="slide">
       <ion-item lines="none" class="ion-input">
-        <ion-label class="intro">Create Your order now !!!</ion-label>
+        <ion-label class="intro">{{translateService.translate("CREATE_ORDER")}}</ion-label>
       </ion-item>
       <ion-button class="buttons" *ngIf="order.method == 'cod'"  (click)="createOrder()" shape="round" size="default" expand="full">
-        <ion-label *ngIf="!submitted">Create</ion-label>
+        <ion-label *ngIf="!submitted">{{translateService.translate("CREATE")}}</ion-label>
         <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
       </ion-button>
       <ion-button class="buttons" *ngIf="order.method == 'card'"  (click)="payByCard()" shape="round" size="default" expand="full">
-        <ion-label *ngIf="!submitted">Pay And Create</ion-label>
+        <ion-label *ngIf="!submitted">{{translateService.translate("PAY_CREATE")}}</ion-label>
         <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
       </ion-button>
    </ion-slide>

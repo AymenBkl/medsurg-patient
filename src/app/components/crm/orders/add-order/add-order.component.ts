@@ -15,6 +15,7 @@ import { ReferalService } from 'src/app/services/crm/referal.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { PrescriptionService } from 'src/app/services/prescription.service';
 import * as mongoose from "mongoose";
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-add-order',
@@ -47,7 +48,8 @@ export class AddOrderComponent implements OnInit {
     private modalCntrl: ModalController,
     private prescriptionService: PrescriptionService,
     private cashfreeService: CashfreeService,
-    private iab: InAppBrowser) { }
+    private iab: InAppBrowser,
+    public translateService: TranslateMedsurgService) { }
 
   ngOnInit() {
     this.getData();

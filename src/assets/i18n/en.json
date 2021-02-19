@@ -105,7 +105,15 @@
     "REMOVE":"REMOVE",
     "CLEAR":"CLEAR",
     "CART_EMPTY":"Cart Empty",
-    "PURCHACE":"Purchase Now"
+    "PURCHACE":"Purchase Now",
+    "C_METHOD":"Chooce Your payment Method !!!",
+    "PAY_CARD":"Pay Now By Card",
+    "COD":"Cash on Delivery",
+    "CHECK_REFERAL":"Check Referal",
+    "CREATE_ORDER":"Create Your order now !!!",
+    "CREATE":"CREATE",
+    "PAY_CREATE":"Pay And Create",
+    "REFERAL_CODE":"Referal code"
 
 
 
