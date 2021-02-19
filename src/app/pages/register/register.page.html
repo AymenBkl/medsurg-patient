@@ -21,7 +21,7 @@
       <ion-input  [placeholder]="translateService.translate('PHONE_NUMBER')" formControlName="phoneNumber" (keypress)="numberOnlyValidation($event)"></ion-input>
     </ion-item>
     <ion-label class="label-error" *ngIf="formErrors && formErrors.phoneNumber">*{{translateService.translate(formErrors.phoneNumber)}}</ion-label>
-    <ion-label class="label-error" *ngIf="validationErrors && (validationErrors.errcode == 1 || validationErrors.errcode == 13 )">*{{validationErrors.errmsg}}</ion-label>
+    <ion-label class="label-error" *ngIf="validationErrors && (validationErrors.errcode == 1 || validationErrors.errcode == 13 )">*{{translateService.translate("PHONE_EXISTS")}}</ion-label>
     <ion-item lines="none" class="ion-input">
       <ion-icon name="lock-closed"></ion-icon>
       <ion-input [placeholder]="translateService.translate('PASSWORD')" formControlName="password"></ion-input>

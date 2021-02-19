@@ -24,7 +24,7 @@ export class ProccessHttpErrosService {
       errCode = 0;
     }
     else if (error.error && error.error.err && error.error.err.message === 'User validation failed: phoneNumber: Phone already exists' ){
-      errMsg = this.translateService.translate("PHONE_EXISTS");
+      errMsg = "PHONE_EXISTS"
       errCode = 12;
     }
 
@@ -33,11 +33,11 @@ export class ProccessHttpErrosService {
       errCode = 13;
     }
     else if (error.error && error.error.err && error.error.err.message === 'A user with the given username is already registered'){
-      errMsg = this.translateService.translate("PHONE_EXISTS");
+      errMsg = "PHONE_EXISTS"
       errCode = 1;
     }
     else if (error.error && error.error.err && error.error.err.message === 'Password or username is incorrect'){
-      errMsg = this.translateService.translate('INCORRECT_DETAIL');
+      errMsg = 'INCORRECT_DETAIL';
       errCode = 2;
     }
     else if (error.error && error.error.err === 'USER NOT FOUND'){

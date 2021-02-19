@@ -23,7 +23,7 @@
             <ion-label class="checkbox-label">{{translateService.translate("REMEMBER")}}</ion-label>
           </ion-item>
           <ion-label class="label-error" *ngIf="validationErrors && validationErrors.errcode == 2">
-            *{{validationErrors.errmsg}}</ion-label>
+            *{{this.translateService.translate('INCORRECT_DETAIL')}}</ion-label>
           <ion-button class="buttons" [disabled]="loginForm.invalid || submitted " type="submit" shape="round" size="default" expand="full">
             <ion-label *ngIf="!submitted">{{translateService.translate("Login")}}</ion-label>
             <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
