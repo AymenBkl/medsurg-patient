@@ -72,8 +72,9 @@ export class AddPrescriptionComponent implements OnInit {
 
   addPresciption(){
     if (this.images[0].url == null){
-      this.interactionService.alertWithHandler('You didnt pick any image', 'Alert' , 'Pick' , 'Post')
+      this.interactionService.alertWithHandler('ALERTHANDLER_PICKIMAGE_MSG', 'ALERTHANDLER_REMOVEMEDECIN_ALERT' , 'ALERTHANDLER_PICKIMAGE_CANCEL' , 'ALERTHANDLER_PICKIMAGE_SUCCESS')
         .then((result) => {
+          console.log(result);
           if (result && result === true){
             this.postPrescription();
           }

@@ -70,7 +70,7 @@ export class CartComponent implements OnInit {
   }
 
   removeMedecin(cartProduct: CartProduct) {
-    this.interactionService.alertWithHandler('Do you want to delete this medecin from cart', 'ALERT', 'KEEP', 'DELETE')
+    this.interactionService.alertWithHandler('ALERTHANDLER_REMOVEMEDECIN_MSG', 'ALERTHANDLER_REMOVEMEDECIN_ALERT', 'ALERTHANDLER_REMOVEMEDECIN_CANCEL', 'ALERTHANDLER_REMOVEMEDECIN_SUCCESS')
       .then((result) => {
         if (result && result == true) {
           this.storageService.removeMedecin(this.cartProduct, cartProduct);
@@ -139,7 +139,7 @@ export class CartComponent implements OnInit {
   }
 
   clearCart() {
-    this.interactionService.alertWithHandler('Do you want to clear All Medecins from cart', 'ALERT', 'KEEP', 'CLEAR')
+    this.interactionService.alertWithHandler('ALERTHANDLER_CLEARMEDECIN_MSG', 'ALERTHANDLER_REMOVEMEDECIN_ALERT', 'ALERTHANDLER_REMOVEMEDECIN_CANCEL', 'ALERTHANDLER_CLEARMEDECIN_SUCCESS')
       .then((result) => {
         if (result && result == true) {
           this.storageService.clearProductCart();

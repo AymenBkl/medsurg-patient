@@ -48,19 +48,19 @@ export class InteractionService {
    alertWithHandler(msg, hdr, cancelBtn, confirmBtn) {
     return new Promise((resolve, reject) => {
       this.alertController.create({
-        header : hdr,
-        message : msg,
+        header : this.translateService.translate(hdr),
+        message : this.translateService.translate(msg),
         animated : true,
         buttons : [
           {
-            text : cancelBtn,
+            text : this.translateService.translate(cancelBtn),
             role : 'cancel',
             handler : () => {
               resolve(false);
             }
           },
           {
-            text : confirmBtn,
+            text : this.translateService.translate(confirmBtn),
             cssClass : 'danger',
             handler : () => {
               resolve(true);
