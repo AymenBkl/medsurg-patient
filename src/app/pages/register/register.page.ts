@@ -8,6 +8,7 @@ import { InteractionService } from '../../services/interaction.service';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import * as firebase from 'firebase';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +29,8 @@ export class RegisterPage implements OnInit {
               private authService: AuthService,
               private interactionService: InteractionService,
               private router: Router,
-              private modalController: ModalController) {
+              private modalController: ModalController,
+              public translateService: TranslateMedsurgService) {
     this.buildReactiveForm();
   }
 

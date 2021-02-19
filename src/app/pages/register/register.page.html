@@ -7,32 +7,32 @@
  <form novalidate  [formGroup]="registerForm"  class="form" (ngSubmit)="register()" data-aos="fade-up">
     <ion-item lines="none" class="ion-input" data-aos="fade-up" data-aos-duration="3000">
       <ion-icon name="person-circle"></ion-icon>
-      <ion-input placeHolder="Firstname" formControlName="firstname"></ion-input>
+      <ion-input [placeholder]="translateService.translate('FIRSTNAME')" formControlName="firstname"></ion-input>
     </ion-item>
-    <ion-label class="label-error" *ngIf="formErrors && formErrors.firstname">*{{formErrors.firstname}}</ion-label>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.firstname">*{{translateService.translate(formErrors.firstname)}}</ion-label>
 
     <ion-item lines="none" class="ion-input">
       <ion-icon name="person-circle"></ion-icon>
-      <ion-input placeHolder="Lastname" formControlName="lastname"></ion-input>
+      <ion-input [placeholder]="translateService.translate('LASTNAME')" formControlName="lastname"></ion-input>
     </ion-item>
     <ion-label class="label-error" *ngIf="formErrors && formErrors.lastname">*{{formErrors.lastname}}</ion-label>
     <ion-item lines="none" class="ion-input">
       <ion-icon name="call"></ion-icon>
-      <ion-input  placeHolder="Phone Number" formControlName="phoneNumber" (keypress)="numberOnlyValidation($event)"></ion-input>
+      <ion-input  [placeholder]="translateService.translate('PHONE_NUMBER')" formControlName="phoneNumber" (keypress)="numberOnlyValidation($event)"></ion-input>
     </ion-item>
-    <ion-label class="label-error" *ngIf="formErrors && formErrors.phoneNumber">*{{formErrors.phoneNumber}}</ion-label>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.phoneNumber">*{{translateService.translate(formErrors.phoneNumber)}}</ion-label>
     <ion-label class="label-error" *ngIf="validationErrors && (validationErrors.errcode == 12 || validationErrors.errcode == 13 )">*{{validationErrors.errmsg}}</ion-label>
     <ion-item lines="none" class="ion-input">
       <ion-icon name="lock-closed"></ion-icon>
-      <ion-input placeHolder="Password" formControlName="password"></ion-input>
+      <ion-input [placeholder]="translateService.translate('PASSWORD')" formControlName="password"></ion-input>
     </ion-item>
-    <ion-label class="label-error" *ngIf="formErrors && formErrors.password">*{{formErrors.password}}</ion-label>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.password">*{{translateService.translate(formErrors.password)}}</ion-label>
 
     <ion-item lines="none" class="ion-input">
       <ion-icon name="lock-closed"></ion-icon>
-      <ion-input placeHolder="Connfirm Password" formControlName="confirmPassword"></ion-input>
+      <ion-input [placeholder]="translateService.translate('CONFIRM_PASSWORD')" formControlName="confirmPassword"></ion-input>
     </ion-item>
-    <ion-label class="label-error" *ngIf="formErrors && formErrors.confirmPassword">*{{formErrors.confirmPassword}}</ion-label>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.confirmPassword">*{{translateService.translate(formErrors.confirmPassword)}}</ion-label>
 
     <ion-button class="buttons" [disabled]="registerForm.invalid || submitted" (click)="sendToPhone()" shape="round" size="default" expand="full">
       <ion-label *ngIf="!submitted">VERIFY PHONE</ion-label>

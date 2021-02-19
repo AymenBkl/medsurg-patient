@@ -11,5 +11,25 @@
     "CATEGORIES":"Categories",
     "NO CATEGORIE FOUND":"Their is not categories",
     "PRESCRIPTIONS":"Prescriptions",
-    "NO PRESCRIPTION FOUND":"You don't have any prescriptions "
+    "NO PRESCRIPTION FOUND":"You don't have any prescriptions ",
+    "FIRSTNAME":"Firstname",
+    "LASTNAME":"Lastname",
+    "PHONE_NUMBER":"Phone Number",
+    "PASSWORD":"Password",
+    "CONFIRM_PASSWORD":"Confirm Password",
+    "REQUIRED_PHONE":"PhoneNumber is required.",
+    "MINLEN_PHONE":"PhoneNumber must be at least 10 characters long.",
+    "MAXLEN_PHONE":"PhoneNumber must be at most 10 characters long.",
+    "REQUIRED_PASSWORD":"Password is required.",
+    "MINLEN_PASSWORD":"Password must be at least 6 characters long.",
+    "MUSTMUTCH_PASSWORD":"Password are not matching",
+    "REQUIRED_FIRSTNAME":"Firstname is required.",
+    "REQUIRED_LASTNAME":"Lastname is required.",
+    "MINLEN_FIRSTNAME":"Firstname must be at least 4 characters long.",
+    "MINLEN_LASTNAME":"Lastname must be at least 4 characters long.",
+    "MAXLEN_FIRSTNAME":"Firstname must be at most 20 characters long.",
+    "MAXLEN_LASTNAME":"Lastname must be at most 20 characters long."
+
+
+
 }

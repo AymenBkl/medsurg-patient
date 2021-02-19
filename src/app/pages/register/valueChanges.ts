@@ -13,29 +13,29 @@ let formErrors = {
 let validationMessages = {
 
     firstname: {
-        required: 'Firstname is required.',
-        minlength: 'Firstname must be at least 4 characters long.',
-        maxlength : 'Firstname must be at most 20 characters long.'
+        required: 'REQUIRED_FIRSTNAME',
+        minlength: 'MINLEN_FIRSTNAME',
+        maxlength : 'MAXLEN_FIRSTNAME'
     },
     lastname: {
-        required: 'Lastname is required.',
-        minlength: 'Lastname must be at least 4 characters long.',
-        maxlength : 'Lastname must be at most 20 characters long.'
+        required: 'REQUIRED_LASTNAME',
+        minlength: 'MINLEN_LASTNAME',
+        maxlength : 'MAXLEN_LASTNAME'
     },
     phoneNumber: {
-        required: 'PhoneNumber is required.',
-        minlength: 'PhoneNumber must be at least 10 characters long.',
-        maxlength : 'PhoneNumber must be at most 10 characters long.'
+        required: 'REQUIRED_PHONE',
+        minlength: 'MINLEN_PHONE',
+        maxlength : 'MAXLEN_PHONE'
     },
     password : {
-        required: 'Password is required.',
-        minlength: 'Password must be at least 6 characters long.',
-        mustMatch : 'Password are not matching'
+        required: 'REQUIRED_PASSWORD',
+        minlength: 'MINLEN_PASSWORD',
+        mustMatch : 'MUSTMUTCH_PASSWORD'
     },
     confirmPassword : {
-        required: 'Password is required.',
-        minlength: 'Password must be at least 6 characters long.',
-        mustMatch : 'Password are not matching'
+        required: 'REQUIRED_PASSWORD',
+        minlength: 'MINLEN_PASSWORD',
+        mustMatch : 'MUSTMUTCH_PASSWORD'
     }
 
 };
@@ -53,7 +53,7 @@ export function onValueChanged(data: any, registerForm: FormGroup) {
                 const messages = validationMessages[field];
                 for (const key in control.errors) {
                     if (control.errors.hasOwnProperty(key)) {
-                        formErrors[field] += messages[key] + ' ';
+                        formErrors[field] += messages[key];
                     }
                 }
             }
