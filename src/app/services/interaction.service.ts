@@ -30,7 +30,7 @@ export class InteractionService {
 
   async createLoading(msg?) {
     this.presentingLoadingController = await this.loadingController.create({
-      message : msg,
+      message : this.translateService.translate(msg),
       cssClass : 'loading-customize',
       duration : 100000,
       spinner : 'circles'

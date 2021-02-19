@@ -49,7 +49,7 @@ export class RefundPage implements OnInit {
 
 
   getAllRefunds(){
-    this.interactionService.createLoading("Loading Your Refunds !! ..")
+    this.interactionService.createLoading("LOADING_REFUNDS")
       .then(() => {
         this.ordersService.getRefunds()
           .then((result: any) => {

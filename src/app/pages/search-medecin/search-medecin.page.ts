@@ -62,7 +62,7 @@ export class SearchMedecinPage implements OnInit {
   }
 
   findProducts(medecins) {
-    this.interactionService.createLoading('Getting your Result !')
+    this.interactionService.createLoading('LOADING_RESULT')
       .then(() => {
         this.searchService.findProduct(medecins)
           .then((products: SearchProduct | any) => {

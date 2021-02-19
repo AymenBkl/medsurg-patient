@@ -186,9 +186,27 @@
     "TOAST_CODE_SENT":"CODE HAS BEEN SENT",
     "TOAST_OTP_VERIFIED":"OTP VERIFIED",
     "TOAST_OTP_NOTVERIFIED":"Enter A Valid Number ! Try Again",
-    "TOAST_PASSWORD_RESET":"PASSOWRD HAS BEEN RESET"
-
-
+    "TOAST_PASSWORD_RESET":"PASSOWRD HAS BEEN RESET",
+    "LOADING_RESULT":"Getting your Result !",
+    "LOADING_CREATING_ORDER":"Creating your Order Please wait",
+    "LOADING_UPDATINGSTATUS_ORDER":"Updating your order status ! Please Wait",
+    "LOADING_CREATING_REFUND":"Creating your refund ! Please Wait",
+    "LOADING_UPDATING_REFUND":"Updating your refund ! Please Wait",
+    "LOADING_ADDING_REFERAL":"Adding your referal please wait !!!",
+    "LOADING_MESSAGES":"Loading Your Message !! ..",
+    "LOADING_POSTING_MESSAGES":"Posting Your Message !!",
+    "LOADING_UPLOADING_IMAGE":"Uploading Image Please wait",
+    "LOADING_CREATE_PRESCRIPTION":"Creating Prescription Please wait",
+    "LOADING_UPDATE_PRESCRIPTION":"Updating Your prescription !! Please wait",
+    "LOADING_PRODUCTS":"Getting your Products !",
+    "LOADING_ORDERS":"Loading Your Orders !! ..",
+    "LOADING_PRESCRIPTIONS":"Loading Prescriptions Please Wait !",
+    "LOADING_UPDATING_PROFILE":"Updating your information",
+    "LOADING_REFUNDS":"Loading Your Refunds !! ..",
+    "LOADING_SENDING_CODE":"Sending Code",
+    "LOADING_CONFIRMING_OTP":"Confirming OTP",
+    "LOADING_RESETING_PASSWORD":"Reseting your password !!",
+    "LOADING":"Loading Please Wait !"
 
 
 

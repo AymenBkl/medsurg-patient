@@ -55,7 +55,7 @@ export class ProfilePage implements OnInit {
 
   update() {
     this.submitted = true;
-    this.interactionService.createLoading('Updating your information')
+    this.interactionService.createLoading('LOADING_UPDATING_PROFILE')
       .then(() => {
         this.userService.updateUser(this.profileForm.value)
           .then((result: any) => {
@@ -79,7 +79,7 @@ export class ProfilePage implements OnInit {
 
   selectedImage(event) {
     if (this.isFileImage(event.target.files[0])){
-    this.interactionService.createLoading('Updating Your image !!')
+    this.interactionService.createLoading('LOADING_UPLOADING_IMAGE')
       .then(() => {
         const formData = new FormData();
         console.log(event.target.files[0]);

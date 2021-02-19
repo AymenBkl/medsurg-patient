@@ -98,7 +98,7 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/home']);
     setTimeout(() => {
       this.interactionService.hide();
-    }, 3000);
+    }, 500);
   }
 
   ionViewDidEnter() {

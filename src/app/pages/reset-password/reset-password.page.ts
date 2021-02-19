@@ -58,7 +58,7 @@ export class ResetPasswordPage implements OnInit {
   }
 
   resetPassword() {
-    this.interactionService.createLoading("Reseting your password !!")
+    this.interactionService.createLoading("LOADING_RESETING_PASSWORD")
       .then(() => {
         this.submitted = true;
         console.log(this.resetPasswordForm.value.phoneNumber, this.resetPasswordForm.value.password);
@@ -94,7 +94,7 @@ export class ResetPasswordPage implements OnInit {
 
   sendToPhone() {
     this.submitted = true;
-    this.interactionService.createLoading("Sending Code")
+    this.interactionService.createLoading("LOADING_SENDING_CODE")
       .then(() => {
         console.log(this.resetPasswordForm.value.phoneNumber);
         this.authService.verifyPhoneNumber(this.resetPasswordForm.value.phoneNumber,this.recaptchaVerifier)
@@ -122,7 +122,7 @@ export class ResetPasswordPage implements OnInit {
 
   confirmOTP() {
     this.submitted = true;
-    this.interactionService.createLoading("Confirming OTP")
+    this.interactionService.createLoading("LOADING_CONFIRMING_OTP")
       .then(() => {
         this.authService.verifyOTP(this.confirmationResult,this.verificationNumber)
         .then(result => {

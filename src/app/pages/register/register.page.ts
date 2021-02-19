@@ -93,11 +93,11 @@ export class RegisterPage implements OnInit {
   }
 
   goToHome(){
-    this.interactionService.createLoading('Please wait ! ...');
+    this.interactionService.createLoading('LOADING');
     this.router.navigate(['/home']);
     setTimeout(() => {
         this.interactionService.hide();
-    }, 3000);
+    }, 500);
   }
 
   ionViewDidEnter() {
@@ -107,7 +107,7 @@ export class RegisterPage implements OnInit {
 
   sendToPhone() {
     this.submitted = true;
-    this.interactionService.createLoading("Sending Code")
+    this.interactionService.createLoading("LOADING_SENDING_CODE")
       .then(() => {
         this.authService.verifyPhoneNumber(this.registerForm.value.phoneNumber,this.recaptchaVerifier)
         .then(result => {
@@ -134,7 +134,7 @@ export class RegisterPage implements OnInit {
 
   confirmOTP() {
     this.submitted = true;
-    this.interactionService.createLoading("Confirming OTP")
+    this.interactionService.createLoading("LOADING_CONFIRMING_OTP")
       .then(() => {
         this.authService.verifyOTP(this.confirmationResult,this.verificationNumber)
         .then(result => {
