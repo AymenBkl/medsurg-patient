@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { onValueChanged } from './valueChanges';
 
@@ -17,7 +18,8 @@ export class AddAddressComponent implements OnInit {
   @Output() addressAdded: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private interactionService:InteractionService) { }
+              private interactionService:InteractionService,
+              public translateService: TranslateMedsurgService) { }
 
   ngOnInit() {
     this.buildReactiveForm();
@@ -61,6 +63,16 @@ export class AddAddressComponent implements OnInit {
 
   back(){
     this.addressAdded.emit(false);
+  }
+
+  numberOnlyValidation(event: any) {
+    const pattern = /[0-9.,]/;
+    let inputChar = String.fromCharCode(event.charCode);
+
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
+    }
   }
 
 }

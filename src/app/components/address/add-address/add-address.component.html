@@ -4,41 +4,41 @@
  <form novalidate  [formGroup]="addressForm"  class="form" (ngSubmit)="addAddress()" data-aos="fade-up">
     <ion-item lines="none" class="ion-input" data-aos="fade-up" data-aos-duration="3000">
       <ion-icon src="../../../../assets/imgs/street-name.svg"></ion-icon>
-      <ion-input placeHolder="City" formControlName="city"></ion-input>
+      <ion-input [placeholder]='translateService.translate("CITY")' formControlName="city"></ion-input>
     </ion-item>
-    <ion-label class="label-error" *ngIf="formErrors && formErrors.city">*{{formErrors.city}}</ion-label>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.city">*{{translateService.translate(formErrors.city) }}</ion-label>
 
     <ion-item lines="none" class="ion-input">
       <ion-icon src="../../../../assets/imgs/street-name.svg"></ion-icon>
-      <ion-input placeHolder="StreetName" formControlName="streetName"></ion-input>
+      <ion-input [placeholder]='translateService.translate("STREET_NAME")' formControlName="streetName"></ion-input>
     </ion-item>
-    <ion-label class="label-error" *ngIf="formErrors && formErrors.streetName">*{{formErrors.streetName}}</ion-label>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.streetName">*{{translateService.translate(formErrors.streetName)}}</ion-label>
 
     <ion-item lines="none" class="ion-input">
       <ion-icon src="../../../../assets/imgs/street-name.svg"></ion-icon>
-      <ion-input placeHolder="StreetName1" formControlName="streetName1"></ion-input>
+      <ion-input [placeholder]='translateService.translate("STREET_NAME1")' formControlName="streetName1"></ion-input>
     </ion-item>
-    <ion-label class="label-error" *ngIf="formErrors && formErrors.streetName1">*{{formErrors.streetName1}}</ion-label>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.streetName1">*{{translateService.translate(formErrors.streetName1) }}</ion-label>
 
     <ion-item lines="none" class="ion-input">
       <ion-icon src="../../../../assets/imgs/mailbox.svg"></ion-icon>
-      <ion-input type="number" placeHolder="PostalCode" formControlName="postalCode"></ion-input>
+      <ion-input  [placeholder]='translateService.translate("POSTALCODE")' formControlName="postalCode" (keypress)="numberOnlyValidation($event)"></ion-input>
     </ion-item>
-    <ion-label class="label-error" *ngIf="formErrors && formErrors.postalCode">*{{formErrors.postalCode}}</ion-label>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.postalCode">*{{translateService.translate(formErrors.postalCode) }}</ion-label>
 
     <ion-item lines="none" class="ion-input">
       <ion-icon src="../../../../assets/imgs/building.svg"></ion-icon>
-      <ion-input type="number" placeHolder="BuildingNumber" formControlName="buildingNumber"></ion-input>
+      <ion-input type="number" [placeholder]='translateService.translate("BUILDING_NUMBER")' formControlName="buildingNumber"></ion-input>
     </ion-item>
-    <ion-label class="label-error" *ngIf="formErrors && formErrors.buildingNumber">*{{formErrors.buildingNumber}}</ion-label>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.buildingNumber">*{{translateService.translate(formErrors.buildingNumber) }}</ion-label>
 
 
     <ion-button class="buttons" [disabled]="addressForm.invalid || submitted" (click)="addAddress()" shape="round" size="default" expand="full">
-      <ion-label *ngIf="!submitted">Add Address </ion-label>
+      <ion-label *ngIf="!submitted">{{translateService.translate("ADD_ADDRESS")}}</ion-label>
       <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
     </ion-button>
     <ion-button class="buttons" [disabled]="submitted" (click)="back()" color="success" shape="round" size="default" expand="full">
-      <ion-label>Back</ion-label>
+      <ion-label>{{translateService.translate("BACK")}}</ion-label>
     </ion-button>
    
  </form>

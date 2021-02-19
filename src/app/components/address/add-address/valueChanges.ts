@@ -11,20 +11,20 @@ let formErrors = {
 // tslint:disable-next-line: prefer-const
 let validationMessages = {
     city: {
-        required: 'City is required.',
-        minlength: 'City must be at least 4 characters long.',
+        required: 'REQUIRED_CITY',
+        minlength: 'MINLEN_CITY',
     },
     streetName: {
-        required: 'StreetName is required.',
-        minlength: 'StreetName must be at least 4 characters long.',
+        required: 'REQUIRED_STREETNAME',
+        minlength: 'MINLEN_STREETNAME',
     },
     postalCode: {
-        required: 'PostalCode is required.',
-        minlength: 'PostalCode must be at least 4 characters long.',
-        maxlength : 'PostalCode must be at most 6 characters long.'
+        required: 'REQUIRED_POSTALCODE',
+        minlength: 'MINLEN_POSTALCODE',
+        maxlength : 'MAXLEN_POSTALCODE'
     },
     buildingNumber: {
-        required: 'BuildingNumber is required.',
+        required: 'REQUIRED_BUILDINGNUMBER',
     },
 
 };
@@ -42,7 +42,7 @@ export function onValueChanged(data: any, registerForm: FormGroup) {
                 const messages = validationMessages[field];
                 for (const key in control.errors) {
                     if (control.errors.hasOwnProperty(key)) {
-                        formErrors[field] += messages[key] + ' ';
+                        formErrors[field] += messages[key];
                     }
                 }
             }

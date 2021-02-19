@@ -35,6 +35,14 @@
     "CHANGE_PHONE":"Change Phone",
     "HAVE_ACCOUNT":"Already have an account ? Login",
     "PHONE_EXISTS":"Phone Number already exists",
+    "REQUIRED_CITY":"City is required.",
+    "REQUIRED_STREETNAME":"StreetName is required.",
+    "REQUIRED_POSTALCODE":"PostalCode is required.",
+    "REQUIRED_BUILDINGNUMBER":"BuildingNumber is required.",
+    "MINLEN_CITY":"City must be at least 4 characters long.",
+    "MINLEN_STREETNAME":"StreetName must be at least 4 characters long.",
+    "MINLEN_POSTALCODE":"PostalCode must be at least 4 characters long.",
+    "MAXLEN_POSTALCODE":"PostalCode must be at most 6 characters long.",
     "INCORRECT_DETAIL":"Password or username is incorrect",
     "REMEMBER":"Remember Me", 
     "RESET_PASSWORD":"Reset Password",
@@ -88,7 +96,12 @@
     "CODE":"Code",
     "REFERAL_NOTE":"It is the maximum amount that you can be rewarded. The amount paid to you can be lower than the amount displayed above",
     "WAITING":"WAITING",
-    "PICKUP":"PICKUP"
+    "PICKUP":"PICKUP",
+    "HOME":"HOME",
+    "ORDERS":"Orders",
+    "PROFILE":"Profile",
+    "BACK":"BACK"
+
 
 
 
