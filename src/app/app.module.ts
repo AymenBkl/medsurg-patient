@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthGuardService } from './services/auth-guard.service';
 import { InteractionService } from './services/interaction.service';
@@ -40,6 +40,12 @@ import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { SMS } from '@ionic-native/sms/ngx';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+  }
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -51,7 +57,14 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
     AngularFireModule.initializeApp(config.firebaseConfig), 
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
   providers: [
     StatusBar,
