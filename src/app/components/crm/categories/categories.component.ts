@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Category } from 'src/app/interfaces/category';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 import { CategoryService } from '../../../services/crm/category.service';
 @Component({
   selector: 'app-categories',
@@ -16,7 +17,8 @@ export class CategoriesComponent implements OnInit {
     spaceBetween: 0
   };
   constructor(private categoryService: CategoryService,
-    private router: Router) {
+    private router: Router,
+    public translateService: TranslateMedsurgService) {
   }
 
   ngOnInit() {

@@ -3,5 +3,7 @@
     "BANNER_MEDECIN":"Find your Medicines faster !!",
     "BANNER_ORDERS":"See the status of your orders ?",
     "BANNER_PRODUCTS":"Want to find products in faster way ?",
-    "BANNER_REFERAL":"Refer your friends and earn money"
+    "BANNER_REFERAL":"Refer your friends and earn money",
+    "CATEGORIES":"Categories",
+    "NO CATEGORIE FOUND":"Their is not categories "
 }
