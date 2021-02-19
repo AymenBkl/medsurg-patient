@@ -3,7 +3,7 @@
   <ion-slide  class="animate-item">
     <ion-card class="card" (click)="goTo('search-medecin')">
       <ion-text>
-        Find your Medicines faster !!
+        {{translateService.translate('BANNER_PRODUCTS')}}
       </ion-text>
         <img src="../../../assets/imgs/medicament.png">
     </ion-card>
@@ -11,7 +11,7 @@
   <ion-slide  class="animate-item">
     <ion-card class="card" id="card-pharmacy" (click)="goTo('prescription')" >
       <ion-text>
-        {{objectTranslate.prescription}}
+        {{translateService.translate('BANNER_PRESCRIPTION')}}
       </ion-text>
         <img src="../../../assets/imgs/ordonnance.png">
     </ion-card>
@@ -19,7 +19,7 @@
   <ion-slide  class="animate-item">
     <ion-card class="card" id="card-categorie" (click)="goTo('/tabs/tab3')" >
       <ion-text>
-        See the status of your orders ?
+        {{translateService.translate('BANNER_ORDERS')}}
       </ion-text>
         <img src="../../../assets/imgs/presse-papiers.png">
     </ion-card>
@@ -27,7 +27,7 @@
   <ion-slide  class="animate-item">
     <ion-card class="card" id="card-post" (click)="goTo('/tabs/tab4/categories')">
       <ion-text>
-        Want to find products in faster way ?
+        {{translateService.translate('BANNER_MEDECIN')}}
       </ion-text>
         <img src="../../../assets/imgs/capsules.png">
     </ion-card>
@@ -36,7 +36,7 @@
   <ion-slide  class="animate-item">
     <ion-card class="card" id="card-pharmacy" (click)="goTo('/tabs/tab4/referal')">
       <ion-text>
-        Refer your friends and earn money 
+        {{translateService.translate('BANNER_REFERAL')}}
       </ion-text>
         <img src="../../../assets/imgs/marketing.svg">
     </ion-card>

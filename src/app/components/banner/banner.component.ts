@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-banner',
@@ -15,12 +15,10 @@ export class BannerComponent implements OnInit {
       // disableOnInteraction: false,
     }
   };
-  objectTranslate: {prescription:string,order:string,referal:string,product:string,medecin:string} = {prescription:'',order:'',referal:'',product:'',medecin:''};
   constructor(private navCntrl: NavController,
-              private _translate: TranslateService) { }
+              public translateService: TranslateMedsurgService) { }
 
   ngOnInit() {
-    this.getTranslate();
   }
 
   goTo(page){
@@ -28,12 +26,4 @@ export class BannerComponent implements OnInit {
   }
 
 
-  getTranslate(){
-    this._translate.setDefaultLang('en');
-    this._translate.get('BANNER_PRESCRIPTION')
-      .subscribe(res => {
-        console.log(res);
-        this.objectTranslate.prescription = res;
-      })
-  }
 }

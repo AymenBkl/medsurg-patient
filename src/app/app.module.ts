@@ -42,9 +42,13 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateMedsurgService } from './services/translate.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+  }
+  export function LanguageLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http, "assets/i18n/", ".json");
   }
 @NgModule({
   declarations: [AppComponent],
@@ -88,6 +92,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FirebaseX,
     SMS,
     HTTP,
+    TranslateMedsurgService,
     FirebaseAuthentication,
     {
       provide: HTTP_INTERCEPTORS,
