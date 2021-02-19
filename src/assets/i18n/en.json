@@ -28,7 +28,13 @@
     "MINLEN_FIRSTNAME":"Firstname must be at least 4 characters long.",
     "MINLEN_LASTNAME":"Lastname must be at least 4 characters long.",
     "MAXLEN_FIRSTNAME":"Firstname must be at most 20 characters long.",
-    "MAXLEN_LASTNAME":"Lastname must be at most 20 characters long."
+    "MAXLEN_LASTNAME":"Lastname must be at most 20 characters long.",
+    "VERIFY_PHONE":"VERIFY PHONE",
+    "CONFIRM_OTP_REGISTER":"CONFIRM OTP AND REGISTER",
+    "CHANGE_PHONE":"Change Phone",
+    "HAVE_ACCOUNT":"Already have an account ? Login",
+    "PHONE_EXISTS":"Phone Number already exists",
+    "INCORRECT_DETAIL":"Password or username is incorrect" 
 
 
 

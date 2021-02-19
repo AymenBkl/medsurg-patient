@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TranslateMedsurgService } from './translate.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProccessHttpErrosService {
-
-  constructor() { }
+  translateService;
+  constructor(private inj: Injector) { 
+    setTimeout(() => {
+      this.translateService = this.inj.get(TranslateMedsurgService);
+    },1000)
+  }
 
   public handleError(error: HttpErrorResponse | any) {
     console.log(error);
@@ -19,7 +24,7 @@ export class ProccessHttpErrosService {
       errCode = 0;
     }
     else if (error.error && error.error.err && error.error.err.message === 'User validation failed: phoneNumber: Phone already exists' ){
-      errMsg = `Phone Number already exists`;
+      errMsg = this.translateService.translate("PHONE_EXISTS");
       errCode = 12;
     }
 
@@ -28,11 +33,11 @@ export class ProccessHttpErrosService {
       errCode = 13;
     }
     else if (error.error && error.error.err && error.error.err.message === 'A user with the given username is already registered'){
-      errMsg = `Phone Number is already registered`;
+      errMsg = this.translateService.translate("PHONE_EXISTS");
       errCode = 1;
     }
     else if (error.error && error.error.err && error.error.err.message === 'Password or username is incorrect'){
-      errMsg = `Password or username is incorrect`;
+      errMsg = this.translateService.translate('INCORRECT_DETAIL');
       errCode = 2;
     }
     else if (error.error && error.error.err === 'USER NOT FOUND'){

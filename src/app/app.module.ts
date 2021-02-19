@@ -75,6 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SplashScreen,
     AuthGuardService,
     AuthService,
+
     InteractionService,
     StorageService,
     ProccessHttpErrosService,
@@ -90,9 +91,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     CashfreeService,
     InAppBrowser,
     FirebaseX,
+    TranslateMedsurgService,
     SMS,
     HTTP,
-    TranslateMedsurgService,
     FirebaseAuthentication,
     {
       provide: HTTP_INTERCEPTORS,

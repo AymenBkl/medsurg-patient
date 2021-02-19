@@ -96,7 +96,8 @@ export class AppComponent implements OnInit {
     private router: Router,
     private translate: TranslateService
   ) {
-    this.translate.use('en');
+    this.translate.setDefaultLang('en');
+      this.translate.use('en');
     this.initializeApp();
   }
 
@@ -104,6 +105,7 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

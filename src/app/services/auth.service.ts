@@ -31,6 +31,7 @@ export class AuthService {
                   .subscribe((user) => {
                     
                   })
+                
                }
 
   checkJWT() {
