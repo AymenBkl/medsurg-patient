@@ -7,6 +7,7 @@ import { Prescription } from 'src/app/interfaces/prescription';
 import { SearchProduct } from 'src/app/interfaces/searchproduct';
 import { User } from 'src/app/interfaces/user';
 import { PrescriptionService } from 'src/app/services/prescription.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 import { InteractionService } from '../../../services/interaction.service';
 
 @Component({
@@ -34,7 +35,8 @@ export class EditPrescriptionComponent implements OnInit {
   constructor(private navParam: NavParams,
               private interactionService: InteractionService,
               private modalCntrl: ModalController,
-              private prescriptionService: PrescriptionService) { 
+              private prescriptionService: PrescriptionService,
+              public translateService: TranslateMedsurgService) { 
                 this.modalControllers = new ModalControllerSearch(modalCntrl);
               }
 

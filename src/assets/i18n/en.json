@@ -118,6 +118,7 @@
     "COD":"Cash on Delivery",
     "CHECK_REFERAL":"Check Referal",
     "CREATE_ORDER":"Create Your order now !!!",
+    "ORDER_CREATE":"CREATE ORDER",
     "CREATE":"CREATE",
     "CREATED":"Created",
     "PAY_CREATE":"Pay And Create",
@@ -143,7 +144,9 @@
     "START":"Start",
     "ADD_REF":"Add Referal",
     "SENT":"Sent",
-    "RECIEVED":"Recieved"
+    "RECIEVED":"Recieved",
+    "PHARMACY":"Pharmacy",
+    "VIEW_DETAIL":"View Detail"
 
 
 

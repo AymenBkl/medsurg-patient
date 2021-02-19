@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title class="title">
       <ion-text class="title1">
-        Patient
+        {{translateService.translate("APP_TITLE")}}
       </ion-text>
       <ion-chip class="chip" *ngIf="currentUser != null">
         <ion-avatar class="img">
@@ -23,7 +23,7 @@
   </ion-searchbar>
   <div class="search_bar-xyz-cart-buy" (click)="goToFindProduct()" *ngIf="currentUrl == 'cart' || currentUrl == 'buy'">
     <ion-icon name="search-outline" class="icon"></ion-icon>
-    Search
+    {{translateService.translate("PAGE_SEARCH")}}
   </div>
 </ion-header>
 
@@ -52,7 +52,7 @@
                   </ion-label>
                   <ion-label  class="label"
                     *ngIf="product.pharmacy && product.pharmacy.username == ''">
-                    <h1>Pharmacy</h1>
+                    <h1>{{translateService.translate("PHARMACY")}}</h1>
                   </ion-label>
 
 
@@ -74,7 +74,7 @@
                     </ion-label>
                   </div>
                   <div class="view">
-                    <ion-label>View Detail</ion-label>
+                    <ion-label>{{translateService.translate("VIEW_DETAIL")}}</ion-label>
                   </div>
             </div>
             </div>

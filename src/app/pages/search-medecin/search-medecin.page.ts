@@ -9,6 +9,7 @@ import { ModalControllerSearch } from '../../classes/modalController.searsh';
 import { ActivatedRoute, NavigationEnd,  Router } from '@angular/router';
 import { MainProduct } from 'src/app/interfaces/mainProduct';
 import { Observable } from 'rxjs';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 
 @Component({
@@ -29,7 +30,8 @@ export class SearchMedecinPage implements OnInit {
               private modalCntrl: ModalController,
               private router: Router,
               private route: ActivatedRoute,
-              private navCntrl: NavController) {
+              private navCntrl: NavController,
+              public translateService: TranslateMedsurgService,) {
                 this.modalController = new ModalControllerSearch(modalCntrl);
                }
 

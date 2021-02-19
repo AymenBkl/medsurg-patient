@@ -4,7 +4,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        <ion-title class="title-pharmacy">Pharmacy Details</ion-title>
+        <ion-title class="title-pharmacy">{{translateService.translate("PHARMACY_DETAILS")}}</ion-title>
         <ion-item class="profile-holder">
           <ion-avatar class="img">
             <img *ngIf="!searchProduct.pharmacy || searchProduct.pharmacy.imageUrl == ''" src="../../../assets/imgs/pharmacy.png">
@@ -19,7 +19,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-title class="title-pharmacy">Medecins</ion-title>
+      <ion-title class="title-pharmacy">{{translateService.translate("MEDECINS")}}</ion-title>
       <ion-col size="12" >
       <div  class="product-holder" *ngFor="let product of searchProduct.pharmacy.products">
         <ion-avatar class="product-img">
@@ -31,17 +31,17 @@
           {{product.product.mainProduct.name}}
         </ion-title>
         <ion-text class="product-detail">
-          CN : {{product.product.mainProduct.company_name}} 
+          {{translateService.translate("CN")}} : {{product.product.mainProduct.company_name}} 
         </ion-text>
         <ion-text class="product-detail">
-          Description : {{product.product.mainProduct.description}} 
+          {{translateService.translate("DESCRIPTION")}} : {{product.product.mainProduct.description}} 
         </ion-text>
         <ion-text class="product-detail">
-          PACKING : {{product.product.mainProduct.packing}} 
+          {{translateService.translate("PACKING")}} : {{product.product.mainProduct.packing}} 
         </ion-text>
       </div>
       <div class="product-nav">
-        <ion-text>Quantity</ion-text> : {{product.quantity}}
+        <ion-text>{{translateService.translate("QUANTITY")}}</ion-text> : {{product.quantity}}
       </div>
     </div>
     </ion-col>
@@ -49,7 +49,7 @@
 
     <ion-row>
       <ion-col size="12">
-        <ion-title class="title-pharmacy">Total Price</ion-title>
+        <ion-title class="title-pharmacy">{{translateService.translate("TOTAL_PRICE")}}</ion-title>
         <div  class="total-price-holder">
           <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{searchProduct.totalPrice}}
         </div>
@@ -59,7 +59,7 @@
     <ion-row class="bottom-row">
       <ion-col size="8" >
         <ion-button shape="round" size="default" color="success"  expand="full" (click)="addOrder()" >
-          <ion-text>CREATE ORDER</ion-text>
+          <ion-text>{{translateService.translate("ORDER_CREATE")}}</ion-text>
         </ion-button>
       </ion-col>
       <ion-col size="4" >

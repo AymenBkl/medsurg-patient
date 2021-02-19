@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { SearchProduct } from 'src/app/interfaces/searchproduct';
 import { User } from 'src/app/interfaces/user';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 import { ModalControllers } from '../../classes/modalController';
 
 @Component({
@@ -16,6 +17,7 @@ export class SearshMedecinDetailComponent implements OnInit {
   currentUser: User;
   isPres: {prescription:string,comment:string,type:string} = null;
   constructor(private navParams: NavParams,
+    public translateService: TranslateMedsurgService,
     private modalCntrl: ModalController) {
     this.modalControllers = new ModalControllers(modalCntrl);
   }
