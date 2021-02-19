@@ -23,7 +23,7 @@
                 </ion-label>
                 <ion-label  class="label"
                   *ngIf="currentUser.username && currentUser.username == ''">
-                  <h1>Patient</h1>
+                  <h1>{{translateService.translate("APP_TITLE")}}</h1>
                 </ion-label>
 
 
@@ -31,12 +31,12 @@
               
               <div class="address">
                 <ion-label class="label">
-                  <ion-icon class="icon"  name="link-outline"></ion-icon> : Code : {{referal.code}}
+                  <ion-icon class="icon"  name="link-outline"></ion-icon> : {{translateService.translate("CODE")}} : {{referal.code}}
                 </ion-label>
               </div>
               <div class="address">
                 <ion-label class="label">
-                  <ion-icon class="icon"  name="pricetags-outline"></ion-icon> : It is the maximum amount that you can be rewarded. The amount paid to you can be lower than the amount displayed above :  {{comission.commission}}
+                  <ion-icon class="icon"  name="pricetags-outline"></ion-icon> : {{translateService.translate("REFERAL_NOTE")}} :  {{comission.commission}}
                 </ion-label>
               </div>
               
@@ -50,7 +50,7 @@
             <div class="main-container bottom">
                 <div class="price">
                   <ion-label class="inner-item">
-                    <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{'₹ PAID:' + totalPrice.PAID + ' , ₹ UNPAID:' + totalPrice.NPAID}}
+                    <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{'₹' +  translateService.translate("PAID") + ':' + totalPrice.PAID + ' , ₹' +  translateService.translate("NPAID") + ':' + totalPrice.NPAID}}
                   </ion-label>
                 </div>
           </div>

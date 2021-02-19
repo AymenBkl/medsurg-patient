@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { OrderService } from 'src/app/services/crm/order.service';
 import { ReferalService } from 'src/app/services/crm/referal.service';
 import { SMS } from '@ionic-native/sms/ngx';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-referalpage',
@@ -23,7 +24,8 @@ export class ReferalpagePage implements OnInit {
   constructor(private referalService: ReferalService,
               private authService: AuthService,
               private orderService: OrderService,
-              private SMS: SMS) { }
+              private SMS: SMS,
+              public translateService: TranslateMedsurgService) { }
 
   ngOnInit() {
     this.getReferalCommission();

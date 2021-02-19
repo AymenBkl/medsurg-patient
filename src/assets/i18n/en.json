@@ -84,7 +84,10 @@
     "MANAGE_ADDRESSES":"Manage Addresses",
     "REFUNDS":"Refunds",
     "CONTACT_ADMIN":"Contact Admin",
-    "LOGOUT":"Logout"
+    "LOGOUT":"Logout",
+    "CODE":"Code",
+    "REFERAL_NOTE":"It is the maximum amount that you can be rewarded. The amount paid to you can be lower than the amount displayed above"
+
 
 
 
