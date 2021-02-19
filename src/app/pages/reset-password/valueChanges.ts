@@ -10,19 +10,19 @@ let formErrors = {
 // tslint:disable-next-line: prefer-const
 let validationMessages = {
     phoneNumber: {
-        required: 'PhoneNumber is required.',
-        minlength: 'PhoneNumber must be at least 10 characters long.',
-        maxlength : 'PhoneNumber must be at most 10 characters long.'
+        required: 'REQUIRED_PHONE',
+        minlength: 'MINLEN_PHONE',
+        maxlength : 'MAXLEN_PHONE'
     },
     password : {
-        required: 'Password is required.',
-        minlength: 'Password must be at least 6 characters long.',
-        mustMatch : 'Password are not matching'
+        required: 'REQUIRED_PASSWORD',
+        minlength: 'MINLEN_PASSWORD',
+        mustMatch : 'MUSTMUTCH_PASSWORD'
     },
     confirmPassword : {
-        required: 'Password is required.',
-        minlength: 'Password must be at least 6 characters long.',
-        mustMatch : 'Password are not matching'
+        required: 'REQUIRED_PASSWORD',
+        minlength: 'MINLEN_PASSWORD',
+        mustMatch : 'MUSTMUTCH_PASSWORD'
     }
 
 };
@@ -40,7 +40,7 @@ export function onValueChanged(data: any, loginForm: FormGroup) {
                 const messages = validationMessages[field];
                 for (const key in control.errors) {
                     if (control.errors.hasOwnProperty(key)) {
-                        formErrors[field] += messages[key] + ' ';
+                        formErrors[field] += messages[key];
                     }
                 }
             }

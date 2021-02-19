@@ -9,12 +9,12 @@
             <ion-icon name="call"></ion-icon>
             <ion-input [placeholder]="translateService.translate('PHONE_NUMBER')" formControlName="phoneNumber" (keypress)="numberOnlyValidation($event)"></ion-input>
           </ion-item>
-          <ion-label class="label-error" *ngIf="formErrors && formErrors.phoneNumber">*{{formErrors.phoneNumber}}</ion-label>
+          <ion-label class="label-error" *ngIf="formErrors && formErrors.phoneNumber">*{{translateService.translate(formErrors.phoneNumber)}}</ion-label>
           <ion-item lines="none" class="ion-input">
             <ion-icon name="lock-closed"></ion-icon>
             <ion-input [placeholder]="translateService.translate('PASSWORD')" formControlName="password"></ion-input>
           </ion-item>
-          <ion-label class="label-error" *ngIf="formErrors && formErrors.password">*{{formErrors.password}}</ion-label>
+          <ion-label class="label-error" *ngIf="formErrors && formErrors.password">*{{translateService.translate(formErrors.password)}}</ion-label>
           <ion-item lines="none" class="ion-input">
             <ion-checkbox class="ion-checkbox" formControlName="remember"></ion-checkbox>
             <div class="icon-holder">

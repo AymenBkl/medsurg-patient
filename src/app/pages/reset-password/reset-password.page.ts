@@ -7,6 +7,7 @@ import { MustMatch } from '../register/must-matchValdiator';
 import { onValueChanged } from './valueChanges';
 import * as firebase from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class ResetPasswordPage implements OnInit {
     private authService: AuthService,
     private interactionService: InteractionService,
     private modalController: ModalController,
-    private angularFireAuth: AngularFireAuth) {
+    private angularFireAuth: AngularFireAuth,
+    public translateService: TranslateMedsurgService) {
     this.buildResetPasswordForm();
   }
 

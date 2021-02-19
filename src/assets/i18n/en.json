@@ -37,7 +37,11 @@
     "INCORRECT_DETAIL":"Password or username is incorrect",
     "REMEMBER":"Remember Me", 
     "RESET_PASSWORD":"Reset Password",
-    "DHAVE_ACCOUNT":"You don't have an account ? Register"
+    "DHAVE_ACCOUNT":"You don't have an account ? Register",
+    "SCODE":"Send Code",
+    "CODESENT":"Code sent to +91",
+    "CONFIRM_OTP":"Confirm OTP"
+
 
 
 
