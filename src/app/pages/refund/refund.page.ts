@@ -57,23 +57,23 @@ export class RefundPage implements OnInit {
             if (result && result != false) {
               this.filterRefunds(result);
               if (result.length != 0) {
-                this.interactionService.createToast('Your Refunds has been loaded !', 'success', 'bottom');
+                this.interactionService.createToast('TOAST_REFUND_LOADED', 'success', 'bottom');
               }
               else {
-                this.interactionService.createToast('You dont have any refunds !', 'warning', 'bottom');
+                this.interactionService.createToast('TOAST_REFUND_NONE', 'warning', 'bottom');
               }
             }
             else {
-              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+              this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
             }
           })
           .catch(err => {
             this.interactionService.hide();
             if (err.status == 404) {
-              this.interactionService.createToast('No Refunds Found !', 'warrning', 'bottom');
+              this.interactionService.createToast('TOAST_REFUND_NONEFOUND', 'warrning', 'bottom');
             }
             else {
-              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+              this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
             }
           });
       })

@@ -71,7 +71,7 @@ export class SearchMedecinPage implements OnInit {
               this.products = products
             }
             else {
-              this.interactionService.createToast('Not Found', 'danger', 'bottom');
+              this.interactionService.createToast('TOAST_NOTFOUND', 'danger', 'bottom');
             }
           })
           .catch(err => {

@@ -110,12 +110,12 @@ export class CetegorieSearchPage implements OnInit {
           this.interactionService.hide();
           console.log(result);
           if (result && result != false){
-            this.interactionService.createToast('Products Loaded', 'success', 'bottom');
+            this.interactionService.createToast('TOAST_PRODUCTS_LOADED', 'success', 'bottom');
             this.initMainProducts = result.products;
             this.searchProduct = result.products;
           }
           else {
-            this.interactionService.createToast('Their is no Products in this category', 'primary', 'bottom');
+            this.interactionService.createToast('TOAST_NO_PRODUCTS_INCATEGORY', 'primary', 'bottom');
           }
         })
         .catch(err => {

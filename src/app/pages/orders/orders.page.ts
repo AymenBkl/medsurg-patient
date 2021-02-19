@@ -61,23 +61,23 @@ export class OrdersPage implements OnInit {
               console.log(result);
               if (result.length != 0) {
                 this.filterOrders(result);
-                this.interactionService.createToast('Your Orders has been loaded !', 'success', 'bottom');
+                this.interactionService.createToast('TOAST_ORDERS_LOADED', 'success', 'bottom');
               }
               else {
-                this.interactionService.createToast('You dont have any orders !', 'warning', 'bottom');
+                this.interactionService.createToast('TOAST_ORDERS_NONE', 'warning', 'bottom');
               }
             }
             else {
-              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+              this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
             }
           })
           .catch(err => {
             this.interactionService.hide();
             if (err.status == 404) {
-              this.interactionService.createToast('No Orders Found !', 'warrning', 'bottom');
+              this.interactionService.createToast('TOAST_ORDERS_NONE1', 'warrning', 'bottom');
             }
             else {
-              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+              this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
             }
           });
       })

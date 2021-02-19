@@ -64,7 +64,7 @@ export class RegisterPage implements OnInit {
       .then(result => {
         if (result && result !== false){
           this.submitted = false;
-          this.interactionService.createToast('WELCOM', 'success', 'bottom');
+          this.interactionService.createToast('TOAST_WELCOM', 'success', 'bottom');
           this.goToHome();
         } else {
           this.interactionService.createToast('TOAST_ERROR1', 'danger', 'bottom');
@@ -117,7 +117,7 @@ export class RegisterPage implements OnInit {
           if (result){
             this.confirmationResult = result;
             this.step = 'confirm OTP';
-            this.interactionService.createToast('CODE HAS BEEN SENT', 'success', 'bottom');
+            this.interactionService.createToast('TOAST_CODE_SENT', 'success', 'bottom');
           }
           else {
             this.interactionService.createToast('TOAST_ERROR1', 'danger', 'bottom');
@@ -141,17 +141,17 @@ export class RegisterPage implements OnInit {
           this.submitted = false;
           this.interactionService.hide();
           if (result && result == true){
-            this.interactionService.createToast('OTP VERIFIED', 'success', 'bottom');
+            this.interactionService.createToast('TOAST_OTP_VERIFIED', 'success', 'bottom');
             this.register();
           }
           else {
-            this.interactionService.createToast('Enter A Valid Number ! Try Again', 'danger', 'bottom');
+            this.interactionService.createToast('TOAST_OTP_NOTVERIFIED', 'danger', 'bottom');
           }
         })
         .catch(err => {
           this.submitted = false;
           this.interactionService.hide();
-          this.interactionService.createToast('Enter A Valid Number ! Try Again', 'danger', 'bottom');
+          this.interactionService.createToast('TOAST_OTP_NOTVERIFIED', 'danger', 'bottom');
         })
       })
     

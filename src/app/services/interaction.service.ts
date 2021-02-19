@@ -1,19 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { ToastController, LoadingController, AlertController } from '@ionic/angular';
 import { observable, Observable } from 'rxjs';
+import { TranslateMedsurgService } from './translate.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InteractionService {
   presentingLoadingController: HTMLIonLoadingElement;
+  translateService: TranslateMedsurgService;
   constructor(private toastController: ToastController,
               private loadingController: LoadingController,
-              private alertController: AlertController) { }
+              private alertController: AlertController,
+              private inj: Injector) { setTimeout(() => {
+                this.translateService = this.inj.get(TranslateMedsurgService);
+              },1000)}
 
   async createToast(msg, clr, pos){
     const toast = await this.toastController.create({
-      message : msg,
+      message : this.translateService.translate(msg),
       color : clr,
       position : pos,
       duration : 1500,

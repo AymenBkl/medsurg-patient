@@ -51,7 +51,7 @@ export class LoginPage implements OnInit {
       .then((result: any) => {
         console.log(result);
         if (result && result !== false) {
-          this.interactionService.createToast('WELCOM', 'success', 'bottom');
+          this.interactionService.createToast('TOAST_WELCOM', 'success', 'bottom');
           if (result.role === 'patient') {
             if (result.emailVerified === false || result.emailVerified == null) {
               this.goToHome();
@@ -107,7 +107,7 @@ export class LoginPage implements OnInit {
 
   toastAlert() {
     this.submitted = false;
-    this.interactionService.createToast('You are not allowed', 'danger', 'bottom');
+    this.interactionService.createToast('TOAST_NOT_ALLOWED', 'danger', 'bottom');
   }
 
   async resetPassword() {

@@ -67,7 +67,7 @@ export class ResetPasswordPage implements OnInit {
             this.submitted = false;
             this.interactionService.hide();
             if (result && result !== false) {
-              this.interactionService.createToast('PASSOWRD HAS BEEN RESET', 'success', 'bottom');
+              this.interactionService.createToast('TOAST_PASSWORD_RESET', 'success', 'bottom');
               this.modalController.dismiss(
                 { success: true, 
                 newPassword: this.resetPasswordForm.value.password, 
@@ -105,7 +105,7 @@ export class ResetPasswordPage implements OnInit {
           if (result){
             this.confirmationResult = result;
             this.step = 'confirm OTP';
-            this.interactionService.createToast('CODE HAS BEEN SENT', 'success', 'bottom');
+            this.interactionService.createToast('TOAST_CODE_SENT', 'success', 'bottom');
           }
           else {
             this.interactionService.createToast('TOAST_ERROR1', 'danger', 'bottom');
@@ -130,16 +130,16 @@ export class ResetPasswordPage implements OnInit {
           this.interactionService.hide();
           if (result && result == true){
             this.step = 'reset-password';
-            this.interactionService.createToast('OTP VERIFIED', 'success', 'bottom');
+            this.interactionService.createToast('TOAST_OTP_VERIFIED', 'success', 'bottom');
           }
           else {
-            this.interactionService.createToast('Enter A Valid Number ! Try Again', 'danger', 'bottom');
+            this.interactionService.createToast('TOAST_OTP_NOTVERIFIED', 'danger', 'bottom');
           }
         })
         .catch(err => {
           this.submitted = false;
           this.interactionService.hide();
-          this.interactionService.createToast('Enter A Valid Number ! Try Again', 'danger', 'bottom');
+          this.interactionService.createToast('TOAST_OTP_NOTVERIFIED', 'danger', 'bottom');
         })
       })
     

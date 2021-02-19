@@ -75,7 +75,7 @@ export class PrescriptionPage implements OnInit {
           this.interactionService.hide();
           console.log(data);
           if (data.length === 0 ){
-            this.interactionService.createToast('No data found', 'primary', 'bottom');
+            this.interactionService.createToast('TOAST_PRESCRIPTION_NOTFOUND', 'primary', 'bottom');
           }
           else {
             this.prescriptions = data.sort((a, b) => {
@@ -87,7 +87,7 @@ export class PrescriptionPage implements OnInit {
         })
         .catch(err => {
           this.interactionService.hide();
-          this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+          this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
         });
       })
   }

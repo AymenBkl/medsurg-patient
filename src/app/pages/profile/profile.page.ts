@@ -63,16 +63,16 @@ export class ProfilePage implements OnInit {
             this.submitted = false;
             if (result && result !== false){
               this.currentUser = result;
-              this.interactionService.createToast('Your Information Has Been Updated', 'success', 'bottom');
+              this.interactionService.createToast('TOAST_PROFILE_UPDATE', 'success', 'bottom');
             }
             else {
-              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+              this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
             }
           })
           .catch(err => {
             this.submitted = false;
             this.interactionService.hide();
-            this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+            this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
           });
       });
   }
@@ -88,21 +88,21 @@ export class ProfilePage implements OnInit {
           .then((result: any) => {
             this.interactionService.hide();
             if (result && result !== false){
-              this.interactionService.createToast('Your image updated', 'success', 'bottom');
+              this.interactionService.createToast('TOAST_IMAGE_UPLOAD', 'success', 'bottom');
               this.currentUser.imageUrl = result;
             }
             else {
               this.interactionService.hide();
-              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+              this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
             }
       }   );
       }).catch(err => {
         this.interactionService.hide();
-        this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+        this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
       });
     }
     else {
-      this.interactionService.createToast('You must select an image !', 'danger', 'bottom');
+      this.interactionService.createToast('TOAST_IMAGE_ERROR', 'danger', 'bottom');
     }
   }
 

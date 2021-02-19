@@ -37,12 +37,12 @@ getCategories() {
           this.categories = result;
         }
         else {
-          this.intercationService.createToast('Error', 'danger', 'bottom');
+          this.intercationService.createToast('TOAST_ERROR', 'danger', 'bottom');
         }
       })
       .catch(err => {
         this.intercationService.hide();
-        this.intercationService.createToast('Error', 'danger', 'bottom');
+        this.intercationService.createToast('TOAST_ERROR', 'danger', 'bottom');
       });
     });
 }
