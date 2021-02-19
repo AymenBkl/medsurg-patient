@@ -68,7 +68,11 @@
     "NPAID":"NOT PAID",
     "PAID":"PAID",
     "ORDER_STATUS":"Order Status",
-    "NEW_ORDER":"NEW ORDER"
+    "NEW_ORDER":"NEW ORDER",
+    "BANK_ACCOUNT":"Bank Account Number",
+    "IFSC_CODE":"IFSC code",
+    "ACCOUNT_HOLDER_NAME":"Account Holder's Name",
+    "UPDATE_PAYMENT_DETAIL":"UPDATE PAYMETN DETAIL"
 
 
 

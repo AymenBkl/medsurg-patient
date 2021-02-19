@@ -9,17 +9,17 @@
               <div class="container-info">  
                 <div class="address">
                   <ion-label class="label">
-                    <ion-icon class="icon"  src="/../../../assets/imgs/bank.svg"></ion-icon> Bank Account Number : {{currentUser.paymentDetail.bankAccountNumber}}
+                    <ion-icon class="icon"  src="/../../../assets/imgs/bank.svg"></ion-icon> {{translateService.translate("BANK_ACCOUNT")}} : {{currentUser.paymentDetail.bankAccountNumber}}
                   </ion-label>
                 </div>
                 <div class="address">
                   <ion-label class="label">
-                    <ion-icon class="icon"  src="../../../assets/imgs/bank-normal.svg"></ion-icon> IFSC code : {{currentUser.paymentDetail.IFSCCODE}}
+                    <ion-icon class="icon"  src="../../../assets/imgs/bank-normal.svg"></ion-icon> {{translateService.translate("IFSC_CODE")}} : {{currentUser.paymentDetail.IFSCCODE}}
                   </ion-label>
                 </div>
                 <div class="address">
                   <ion-label class="label">
-                    <ion-icon class="icon"  src="../../../assets/imgs/credit-card.svg"></ion-icon> Account Holder's Name : {{currentUser.paymentDetail.ACCOUNTHOLDERNAME}}
+                    <ion-icon class="icon"  src="../../../assets/imgs/credit-card.svg"></ion-icon> {{translateService.translate("ACCOUNT_HOLDER_NAME")}} : {{currentUser.paymentDetail.ACCOUNTHOLDERNAME}}
                   </ion-label>
                 </div>
               </div>
@@ -36,7 +36,7 @@
       <ion-row class="bottom-row" *ngIf="currentUser.paymentDetail && !update">
         <ion-col size="12" >
           <ion-button shape="round" size="default" color="success"  expand="full" (click)="updatePaymentDetail()" >
-            <ion-text>UPDATE PAYMETN DETAIL</ion-text>
+            <ion-text>{{translateService.translate("UPDATE_PAYMENT_DETAIL")}}</ion-text>
           </ion-button>
         </ion-col>
       </ion-row>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-payment-detail',
@@ -11,7 +12,8 @@ export class PaymentDetailPage implements OnInit {
 
   currentUser: User;
   update:boolean= false;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              public translateService: TranslateMedsurgService) { }
 
 
 
