@@ -7,6 +7,7 @@ import { User } from 'src/app/interfaces/user';
 import { CashfreeService } from 'src/app/services/cashfree.service';
 import { OrderService } from 'src/app/services/crm/order.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-refund',
@@ -22,8 +23,7 @@ export class RefundComponent implements OnInit {
     private modalCntrl: ModalController,
     private orderService: OrderService,
     private interactionService: InteractionService,
-    private cashfree: CashfreeService,
-    private iab: InAppBrowser) {
+    public translateService: TranslateMedsurgService) {
   }
 
   ngOnInit() {

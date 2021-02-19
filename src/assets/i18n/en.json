@@ -128,7 +128,11 @@
     "C_ORDER":"CANCEL ORDER",
     "CCLAIM_REFUND":"cancel and claim refund",
     "CLAIM_REFUND":"claim refund",
-    "UPDATE_REFUND":"Update Refund"
+    "UPDATE_REFUND":"Update Refund",
+    "REFUND_TITLE":"REFUND OF ORDER",
+    "REFUND_PRICE":"Refunded Price",
+    "CREATE_REFUND":"Make A Refund",
+    "REFUND_TYPE":"This refund is"
 
 
 

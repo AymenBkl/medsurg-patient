@@ -7,6 +7,7 @@ import { User } from 'src/app/interfaces/user';
 import { CashfreeService } from 'src/app/services/cashfree.service';
 import { OrderService } from 'src/app/services/crm/order.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-refund-detail',
@@ -17,7 +18,8 @@ export class RefundDetailComponent implements OnInit {
 
   order: Order;
   currentUser: User;
-  constructor(private navParams: NavParams) {
+  constructor(private navParams: NavParams,
+              public translateService: TranslateMedsurgService) {
   }
 
   ngOnInit() {

@@ -4,7 +4,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        <ion-title class="title-patient">Pharmacy Details</ion-title>
+        <ion-title class="title-patient">{{translateService.translate("PHARMACY_DETAILS")}}</ion-title>
         <ion-item class="profile-holder">
           <ion-avatar class="img">
             <img *ngIf="!order.pharmacy || order.pharmacy.imageUrl == ''" src="../../../../../assets/imgs/pharmacy-user-img.png">
@@ -21,7 +21,7 @@
     </ion-row>
     <ion-row *ngIf="order.address">
       <ion-col size="12">
-        <ion-title class="title-patient">Address</ion-title>
+        <ion-title class="title-patient">{{translateService.translate("ADDRESS")}}</ion-title>
         <div  class="address">
           {{order.address.city}},
           {{order.address.streetName1}},
@@ -34,12 +34,12 @@
     <ion-row>
       <ion-col size="12">
         <ion-item  class="profile-holder" >
-          <ion-title class="title-patient">This refund is {{order.refund.payedByAdmin | uppercase}}</ion-title>
+          <ion-title class="title-patient">{{translateService.translate("REFUND_TYPE")}} {{translateService.translate(order.refund.payedByAdmin | uppercase) }}</ion-title>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-title class="title-patient">Medecins</ion-title>
+      <ion-title class="title-patient">{{translateService.translate("MEDECINS")}}</ion-title>
       <ion-col size="12" *ngFor="let product of order.products">
       <div  class="product-holder" *ngIf="product.refundedQuantity > 0">
         <ion-avatar class="product-img" *ngIf="product.refundedQuantity > 0">
@@ -51,17 +51,17 @@
           {{product.product.mainProduct.name}}
         </ion-title>
         <ion-text class="product-detail">
-          CN : {{product.product.mainProduct.company_name}} 
+          {{translateService.translate("CN")}} : {{product.product.mainProduct.company_name}} 
         </ion-text>
         <ion-text class="product-detail">
-          Description : {{product.product.mainProduct.description}} 
+          {{translateService.translate("DESCRIPTION")}} : {{product.product.mainProduct.description}} 
         </ion-text>
         <ion-text class="product-detail">
-          PACKING : {{product.product.mainProduct.packing}} 
+          {{translateService.translate("PACKING")}} : {{product.product.mainProduct.packing}} 
         </ion-text>
       </div>
       <div class="product-nav" *ngIf="product.refundedQuantity > 0">
-        <ion-text>Quantity</ion-text> : {{product.refundedQuantity}}
+        <ion-text>{{translateService.translate("QUANTITY")}}</ion-text> : {{product.refundedQuantity}}
       </div>
     </div>
     </ion-col>
@@ -69,7 +69,7 @@
 
     <ion-row>
       <ion-col size="12">
-        <ion-title class="title-patient">Refund Price</ion-title>
+        <ion-title class="title-patient">{{translateService.translate("REFUND_PRICE")}}</ion-title>
         <div  class="total-price-holder">
           <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : ₹{{order.refund.refund.refundPrice}}
         </div>
