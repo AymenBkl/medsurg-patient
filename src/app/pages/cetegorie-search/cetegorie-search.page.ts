@@ -9,6 +9,7 @@ import { CategoryService } from 'src/app/services/crm/category.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { SearchMedecinService } from 'src/app/services/search/search-medecin.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-cetegorie-search',
@@ -31,7 +32,8 @@ export class CetegorieSearchPage implements OnInit {
               private interactionService: InteractionService,
               private searchService: SearchMedecinService,
               private categorieService: CategoryService,
-              private activatedRoute: ActivatedRoute ) { }
+              private activatedRoute: ActivatedRoute,
+              public translateService: TranslateMedsurgService) { }
 
   ngOnInit() {
     this.getCurrentCategoryId();

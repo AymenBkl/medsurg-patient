@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title class="title">
       <ion-text class="title1">
-        Patient
+        {{translateService.translate("APP_TITLE")}}
       </ion-text>
       <ion-chip class="chip" *ngIf="currentUser != null">
         <ion-avatar class="img">
@@ -28,7 +28,7 @@
 
   <ion-grid *ngIf="searchProduct && searchProduct.length != 0">
     <ion-row>
-      <ion-title class="title-pharmacy">Medecins Found </ion-title>
+      <ion-title class="title-pharmacy">{{translateService.translate("MEDECINFOUND")}} </ion-title>
       <ion-col size="12" >
       <div  class="product-holder" *ngFor="let product of searchProduct;let i = index" (click)="selectProduct(i)" [class.selected]='selectedProduct == i'>
         <ion-avatar class="product-img">
@@ -40,13 +40,13 @@
           {{product.name}}
         </ion-title>
         <ion-text class="product-detail">
-          CN : {{product.company_name}} 
+          {{translateService.translate("CN")}} : {{product.company_name}} 
         </ion-text>
         <ion-text class="product-detail">
-          Description : {{product.description}} 
+          {{translateService.translate("DESCRIPTION")}} : {{product.description}} 
         </ion-text>
         <ion-text class="product-detail">
-          PACKING : {{product.packing}} 
+          {{translateService.translate("PACKING")}} : {{product.packing}} 
         </ion-text>
       </div>
     </div>
@@ -59,12 +59,12 @@
     <ion-col size="8" >
       <ion-button shape="round" size="default" color="success"  expand="full" (click)="addToCart()" *ngIf="selectedProduct != null">
         <ion-icon name="cart-outline"></ion-icon>
-        <ion-text>ADD TO CART</ion-text>
+        <ion-text>{{translateService.translate("CART_ADD")}}</ion-text>
       </ion-button>
     </ion-col>
     <ion-col size="4" >
       <ion-button shape="round" size="default" color="light"  expand="full" *ngIf="!emptyCartProduct" (click)="goToCart()">
-        <ion-text>VIEW CART</ion-text>
+        <ion-text>{{translateService.translate("VIEW_CART")}}</ion-text>
       </ion-button>
     </ion-col>
   </ion-row>

@@ -48,7 +48,13 @@
     "BUILDING_NUMBER":"Building Number",
     "ADD_ADDRESS":"Add Address",
     "SELECT_ADDRESS":"Select Address",
-    "ADDRESS":"Address"
+    "ADDRESS":"Address",
+    "MEDECINFOUND":"Medecins Found",
+    "CN":"CN",
+    "DESCRIPTION":"Description",
+    "PACKING":"PACKING",
+    "CART_ADD":"ADD TO CART",
+    "VIEW_CART":"VIEW CART"
 
 
 
