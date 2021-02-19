@@ -86,7 +86,9 @@
     "CONTACT_ADMIN":"Contact Admin",
     "LOGOUT":"Logout",
     "CODE":"Code",
-    "REFERAL_NOTE":"It is the maximum amount that you can be rewarded. The amount paid to you can be lower than the amount displayed above"
+    "REFERAL_NOTE":"It is the maximum amount that you can be rewarded. The amount paid to you can be lower than the amount displayed above",
+    "WAITING":"WAITING",
+    "PICKUP":"PICKUP"
 
 
 
