@@ -44,7 +44,7 @@ export class SendmessageComponent implements OnInit {
   }
 
   postMessage(){
-    this.interactionService.createLoading('Posting Your Message !!')
+    this.interactionService.createLoading('LOADING_POSTING_MESSAGES')
       .then(() => {
         this.messageService.postMessage(this.message)
           .then((result: any) => {

@@ -88,7 +88,7 @@ export class EditPrescriptionComponent implements OnInit {
   }
 
   postImage(){
-    this.interactionService.createLoading('Uploading Image !! ')
+    this.interactionService.createLoading('LOADING_UPLOADING_IMAGE')
     .then(() => {
       const formData = new FormData();
       this.files.map(file => {
@@ -117,7 +117,7 @@ export class EditPrescriptionComponent implements OnInit {
   }
 
   editPrescription(){
-    this.interactionService.createLoading('Updating Your prescription !!')
+    this.interactionService.createLoading('LOADING_UPDATE_PRESCRIPTION')
     this.prescriptionService.updatePrescription(this.prescription)
       .then(result => {
         this.interactionService.hide();

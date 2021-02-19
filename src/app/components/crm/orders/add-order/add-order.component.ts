@@ -162,7 +162,7 @@ export class AddOrderComponent implements OnInit {
   createOrder() {
     if (this.currentSlide == 2) {
       console.log(this.order);
-      this.interactionService.createLoading("Creating your Order Please wait")
+      this.interactionService.createLoading("LOADING_CREATING_ORDER")
         .then(() => {
           this.orderService.createOrder(this.order)
             .then((result) => {

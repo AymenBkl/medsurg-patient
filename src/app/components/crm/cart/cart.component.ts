@@ -93,7 +93,7 @@ export class CartComponent implements OnInit {
   }
 
   searchProducts(medecins) {
-    this.interactionService.createLoading('Getting your Result !')
+    this.interactionService.createLoading('LOADING_RESULT')
       .then(() => {
         this.searchService.searchProducts(medecins)
           .then((products: SearchProduct | any) => {

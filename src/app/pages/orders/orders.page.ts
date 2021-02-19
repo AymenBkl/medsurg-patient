@@ -52,7 +52,7 @@ export class OrdersPage implements OnInit {
 
 
   getAllOrders() {
-    this.interactionService.createLoading("Loading Your Orders !! ..")
+    this.interactionService.createLoading("LOADING_ORDERS")
       .then(() => {
         this.ordersService.getOrders()
           .then((result: any) => {

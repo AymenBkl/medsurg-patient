@@ -28,7 +28,7 @@ export class CategoryPage implements OnInit {
     
 }
 getCategories() {
-  this.intercationService.createLoading('Loading Please Wait !')
+  this.intercationService.createLoading('LOADING')
     .then(() => {
       this.categoryService.getAllCategories()
       .then((result: any) => {

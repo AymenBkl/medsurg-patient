@@ -68,7 +68,7 @@ export class PrescriptionPage implements OnInit {
   }
 
   buildPrescription(){
-    this.interactionService.createLoading("Please Wait ! ")
+    this.interactionService.createLoading("LOADING_PRESCRIPTIONS")
       .then(() => {
         this.prescriptionService.getAllPrescriptions().
         then(async (data: any) => {

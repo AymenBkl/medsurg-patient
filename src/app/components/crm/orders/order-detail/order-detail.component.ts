@@ -53,7 +53,7 @@ export class OrderDetailComponent implements OnInit {
 
 
   updateOrder(status: string) {
-    this.interactionService.createLoading('Updating your order status ! Please Wait')
+    this.interactionService.createLoading('LOADING_UPDATINGSTATUS_ORDER')
       .then(() => {
         this.orderService.editOrder(this.order._id, status)
           .then((result: any) => {
@@ -156,7 +156,7 @@ export class OrderDetailComponent implements OnInit {
     await this.order.products.map(product => {
       product.refundedQuantity = product.quantity;
     })
-    this.interactionService.createLoading('Creating your refund ! Please Wait')
+    this.interactionService.createLoading('LOADING_CREATING_REFUND')
   .then(() => {
     this.orderService.createRefund(this.order._id,this.order.products,this.order.totalPrice,this.order.pharmacy._id)
       .then((result: any) => {

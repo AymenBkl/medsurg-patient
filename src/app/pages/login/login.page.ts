@@ -94,7 +94,7 @@ export class LoginPage implements OnInit {
 
 
   goToHome() {
-    this.interactionService.createLoading('please wait ! ...');
+    this.interactionService.createLoading('LOADING');
     this.router.navigate(['/home']);
     setTimeout(() => {
       this.interactionService.hide();

@@ -34,7 +34,7 @@ export class GetallmessagesComponent implements OnInit {
 
 
   getAllMessages() {
-    this.interactionService.createLoading("Loading Your Message !! ..")
+    this.interactionService.createLoading("LOADING_MESSAGES")
       .then(() => {
         this.messageService.getMessages()
           .then((result: any) => {

@@ -103,7 +103,7 @@ export class CetegorieSearchPage implements OnInit {
   }
 
   getAllMedecinsInCategorie(){
-    this.interactionService.createLoading('Getting your Products !')
+    this.interactionService.createLoading('LOADING_PRODUCTS')
       .then(() => {
         this.categorieService.getCategory(this.categorieId)
         .then((result: any) => {

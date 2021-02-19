@@ -63,7 +63,7 @@ export class AddReferalComponent implements OnInit {
 
   addReferel(){
     this.submitted = true;
-    this.interactionService.createLoading("Adding your referal please wait !!!")
+    this.interactionService.createLoading("LOADING_ADDING_REFERAL")
       .then(() => {
         this.referalService.createReferl(this.referal.code)
           .then((result: any) => {

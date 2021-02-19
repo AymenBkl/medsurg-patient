@@ -52,7 +52,7 @@ export class RefundComponent implements OnInit {
 
 
   updateOrder(status: string) {
-    this.interactionService.createLoading('Updating your order status ! Please Wait')
+    this.interactionService.createLoading('LOADING_UPDATINGSTATUS_ORDER')
       .then(() => {
         this.orderService.editOrder(this.order._id, status)
           .then((result: any) => {
@@ -103,7 +103,7 @@ export class RefundComponent implements OnInit {
   }
 
  makeRefund(){
-  this.interactionService.createLoading('Creating your refund ! Please Wait')
+  this.interactionService.createLoading('LOADING_CREATING_REFUND')
   .then(() => {
     this.orderService.createRefund(this.order._id,this.order.products,this.refundPrice,this.order.pharmacy._id)
       .then((result: any) => {
@@ -126,7 +126,7 @@ export class RefundComponent implements OnInit {
  }
 
  updateRefund(){
-  this.interactionService.createLoading('Updating your refund ! Please Wait')
+  this.interactionService.createLoading('LOADING_UPDATING_REFUND')
   .then(() => {
     this.orderService.updateRefund(this.order._id,this.order.products,this.refundPrice,this.order.refund.refund._id)
       .then((result: any) => {
