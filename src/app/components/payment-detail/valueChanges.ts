@@ -10,16 +10,16 @@ let formErrors = {
 // tslint:disable-next-line: prefer-const
 let validationMessages = {
     bankAccountNumber: {
-        required: 'Bank Account Number is required.',
-        minlength: 'Bank Account Number must be at least 4 characters long.',
+        required: 'REQUIRED_BANK',
+        minlength: 'MINLEN_BANK',
     },
     IFSCCODE: {
-        required: 'IFSCCODE is required.',
-        minlength: 'IFSCCODE must be at least 4 characters long.',
+        required: 'REQUIRED_IFSC',
+        minlength: 'MINLEN_IFSC',
     },
     ACCOUNTHOLDERNAME: {
-        required: 'ACCOUNT HOLDER NAME is required.',
-        minlength: 'ACCOUNTHOLDER NAME must be at least 4 characters long.',
+        required: 'REQUIRED_ACCOUNT_HOLDER_NAME',
+        minlength: 'MINLEN_ACCOUNT_HOLDER_NAME',
     },
 
 };
@@ -37,7 +37,7 @@ export function onValueChanged(data: any, registerForm: FormGroup) {
                 const messages = validationMessages[field];
                 for (const key in control.errors) {
                     if (control.errors.hasOwnProperty(key)) {
-                        formErrors[field] += messages[key] + ' ';
+                        formErrors[field] += messages[key];
                     }
                 }
             }

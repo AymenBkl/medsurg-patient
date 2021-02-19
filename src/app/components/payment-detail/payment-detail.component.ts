@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PaymentDetail } from 'src/app/interfaces/paymentDetail';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { onValueChanged } from './valueChanges';
 
@@ -20,7 +21,8 @@ export class PaymentDetailComponent implements OnInit {
   update:boolean = false;
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private interactionService:InteractionService) { }
+              private interactionService:InteractionService,
+              public translateService: TranslateMedsurgService) { }
 
   ngOnInit() {
     this.buildReactiveForm();

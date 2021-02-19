@@ -44,6 +44,12 @@
     "MINLEN_POSTALCODE":"PostalCode must be at least 4 characters long.",
     "MAXLEN_POSTALCODE":"PostalCode must be at most 6 characters long.",
     "INCORRECT_DETAIL":"Password or username is incorrect",
+    "REQUIRED_BANK":"Bank Account Number is required.",
+    "REQUIRED_IFSC":"IFSCCODE is required.",
+    "REQUIRED_ACCOUNT_HOLDER_NAME":"ACCOUNT HOLDER NAME is required.",
+    "MINLEN_BANK":"Bank Account Number must be at least 4 characters long.",
+    "MINLEN_IFSC":"IFSCCODE must be at least 4 characters long.",
+    "MINLEN_ACCOUNT_HOLDER_NAME":"ACCOUNTHOLDER NAME must be at least 4 characters long.",
     "REMEMBER":"Remember Me", 
     "RESET_PASSWORD":"Reset Password",
     "DHAVE_ACCOUNT":"You don't have an account ? Register",
@@ -82,6 +88,7 @@
     "IFSC_CODE":"IFSC code",
     "ACCOUNT_HOLDER_NAME":"Account Holder's Name",
     "UPDATE_PAYMENT_DETAIL":"UPDATE PAYMETN DETAIL",
+    "ADD_PAYMENT_DETAIL":"Add Payment",
     "COMMENTS":"Comments",
     "UPDATE":"UPDATE",
     "SEE_PRESCRIPTIONS":"See Your Prescriptions",
@@ -134,7 +141,9 @@
     "CREATE_REFUND":"Make A Refund",
     "REFUND_TYPE":"This refund is",
     "START":"Start",
-    "ADD_REF":"Add Referal"
+    "ADD_REF":"Add Referal",
+    "SENT":"Sent",
+    "RECIEVED":"Recieved"
 
 
 

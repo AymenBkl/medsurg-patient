@@ -51,11 +51,11 @@
   <ion-segment (ionChange)="segmentChanged($event)"  value="sent"  class="segment-type"  slot="fixed" >
     <ion-segment-button value="sent">
       <ion-icon name="paper-plane-outline"></ion-icon>      
-      <ion-label>Sent</ion-label>
+      <ion-label>{{translateService.translate("SENT")}}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="recieved">
       <ion-icon name="chevron-down-circle-outline"></ion-icon>
-      <ion-label>Recieved</ion-label>
+      <ion-label>{{translateService.translate("RECIEVED")}}</ion-label>
     </ion-segment-button>
     
   </ion-segment>

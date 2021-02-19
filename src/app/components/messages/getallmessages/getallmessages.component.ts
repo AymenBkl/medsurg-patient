@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { MessageService } from 'src/app/services/messages/messages.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 
 @Component({
   selector: 'app-getallmessages',
@@ -19,7 +20,8 @@ export class GetallmessagesComponent implements OnInit {
   currentSegmentType:string = 'sent';
 
   constructor(private messageService: MessageService,
-              private interactionService: InteractionService) { }
+              private interactionService: InteractionService,
+              public translateService: TranslateMedsurgService) { }
 
   ngOnInit() {
     
