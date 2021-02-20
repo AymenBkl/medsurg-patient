@@ -189,8 +189,8 @@ export class AddPrescriptionComponent implements OnInit {
 
   checkProductNames() {
     let productNames = this.navParam.get('productsNames');
-    if (productNames.length != 0) {
-      return productNames.join('')
+    if (productNames &&  productNames.length != 0) {
+      return productNames.join('\n')
     }
     else {
       return ''

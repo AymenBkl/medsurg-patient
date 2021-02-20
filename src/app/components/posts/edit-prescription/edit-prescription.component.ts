@@ -218,7 +218,7 @@ export class EditPrescriptionComponent implements OnInit {
               this.addImageHolderPrescription();
             }
             this.images[index].url = result.url;
-            this.files[index] = result.file;
+            this.files[index] = {file:result.file,index:'new'};
           }
         }
       })

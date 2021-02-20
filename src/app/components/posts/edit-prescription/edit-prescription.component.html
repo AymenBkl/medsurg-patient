@@ -28,7 +28,7 @@
         <ion-slides class="center-row"  [options]='slideOpts'  #slides pager>
           <ion-slide class="slide intro-slide" *ngFor="let image of images;let i = index">
             <ion-item line="none" class="prescription-holder">
-              <div class="image-upload" (click)="presentActionSheet()">
+              <div class="image-upload" (click)="presentActionSheet(i)">
                   <img *ngIf="prescription.imageUrl[i] && !image" [src]="prescription.imageUrl[i]"/>
                   <img *ngIf="!prescription.imageUrl[i] && !image.url" src="../../../assets/imgs/photo.png">
                   <img *ngIf="prescription.imageUrl[i] && image.url" [src]="image.url"/>
@@ -63,7 +63,7 @@
   <ion-spinner name="bubbles"></ion-spinner>
 </div>
 
-<ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="currentUser && prescription.description != ''">
+<ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="currentUser">
   <ion-fab-button (click)="editPresciption()" >
     <ion-icon name="checkmark-circle-outline"></ion-icon>
   </ion-fab-button>
