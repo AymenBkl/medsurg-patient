@@ -51,9 +51,9 @@ export class AddPrescriptionComponent implements OnInit {
     delete this.prescription._id;
   }
 
-  selectedImage(event, index: number) {
+  selectedImage(base64Data: string, index: number) {
     console.log(index);
-    this.preview(event.target.files, index);
+    this.preview(this.convertBase64ToBlob(base64Data), index);
   }
 
 
@@ -128,23 +128,24 @@ export class AddPrescriptionComponent implements OnInit {
       });
   }
 
-  preview(files, index: number) {
-    if (files.length === 0) {
+  preview(file, index: number) {
+    console.log(file)
+    if (!file) {
       return;
     }
-    const mimeType = files[0].type;
+    const mimeType = file.type;
     if (mimeType.match(/image\/*/) == null) {
       this.interactionService.createToast('TOAST_IMAGE_ERROR', 'danger', 'bottom');
       return;
     }
     const reader = new FileReader();
-    reader.readAsDataURL(files[0]);
+    reader.readAsDataURL(file);
     reader.onload = (event) => {
       if (this.images[index].url == null) {
         this.addImageHolderPrescription();
       }
       this.images[index] = { url: reader.result }
-      this.files[index] = files[0];
+      this.files[index] = file;
 
 
     };
@@ -160,18 +161,46 @@ export class AddPrescriptionComponent implements OnInit {
     }
   }
 
-  openGallery (): void {
+  openGallery (index:number): void {
     let options = {
-      maximumImagesCount: 8,
+      maximumImagesCount: 1,
       width: 500,
       height: 500,
-      quality: 75
+      quality: 100,
+      outputType: 1
     }
   
     this.imagePicker.getPictures(options).then(
-      file_uris => console.log(file_uris),
+      file_uris => {
+        console.log(file_uris);
+        this.selectedImage('data:image/jpeg;base64,' + file_uris,index)
+      },
+
       err => console.log('uh oh')
     );
+  }
+
+  private convertBase64ToBlob(base64Image: string) {
+    console.log(base64Image);
+    // Split into two parts
+    const parts = base64Image.split(';base64,');
+    console.log(parts[1])
+    // Hold the content type
+    const imageType = parts[0].split(':')[1];
+    console.log(imageType)
+    // Decode Base64 string 
+    const decodedData = atob(parts[1]);
+  
+    // Create UNIT8ARRAY of size same as row data length
+    const uInt8Array = new Uint8Array(decodedData.length);
+  
+    // Insert all character code into uInt8Array
+    for (let i = 0; i < decodedData.length; ++i) {
+      uInt8Array[i] = decodedData.charCodeAt(i);
+    }
+  
+    // Return BLOB image after conversion
+    return new Blob([uInt8Array], { type: imageType });
   }
 
 }
