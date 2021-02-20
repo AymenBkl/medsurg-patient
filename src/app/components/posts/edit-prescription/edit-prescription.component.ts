@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSlides, ModalController, NavController, NavParams } from '@ionic/angular';
+import { ActionSheetController, IonSlides, ModalController, NavController, NavParams } from '@ionic/angular';
 import { ModalControllers } from 'src/app/classes/modalController';
 import { ModalControllerSearch } from 'src/app/classes/modalController.searsh';
 import { Comment } from 'src/app/interfaces/comment';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { SearchProduct } from 'src/app/interfaces/searchproduct';
 import { User } from 'src/app/interfaces/user';
+import { CameraUploadService } from 'src/app/services/plugin/camera-upload.service';
 import { PrescriptionService } from 'src/app/services/prescription.service';
 import { TranslateMedsurgService } from 'src/app/services/translate.service';
 import { InteractionService } from '../../../services/interaction.service';
@@ -36,7 +37,9 @@ export class EditPrescriptionComponent implements OnInit {
               private interactionService: InteractionService,
               private modalCntrl: ModalController,
               private prescriptionService: PrescriptionService,
-              public translateService: TranslateMedsurgService) { 
+              public translateService: TranslateMedsurgService,
+              private cameraService: CameraUploadService,
+              private actionSheetController: ActionSheetController) { 
                 this.modalControllers = new ModalControllerSearch(modalCntrl);
               }
 
@@ -60,9 +63,7 @@ export class EditPrescriptionComponent implements OnInit {
     this.prescription = this.navParam.get('prescriptions');
   }
 
-  selectedImage(event,index:number) {
-    this.preview(event.target.files,index);
-  }
+  
 
   editPresciption(){
     if (this.files.length == 0){
@@ -82,7 +83,7 @@ export class EditPrescriptionComponent implements OnInit {
   }
 
   addImageHolderPrescription(){
-    if (this.images.length < 7){
+    if (this.images && this.images.length < 7){
       this.images.push({url:null});
     }
   }
@@ -135,25 +136,7 @@ export class EditPrescriptionComponent implements OnInit {
       })
   }
 
-  preview(files,index) {
-    if (files.length === 0){
-        return;
-    }
-    const mimeType = files[0].type;
-    if (mimeType.match(/image\/*/) == null) {
-      this.interactionService.createToast('TOAST_IMAGE_ERROR', 'danger', 'bottom');
-      return;
-    }
-    const reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-    reader.onload = (event) => {
-      if (this.images[index].url == null){
-        this.addImageHolderPrescription();
-      }
-      this.images[index] = {url: reader.result}
-      this.files[index] = {file:files[0],index:'new'};
-    };
-  }
+ 
 
   selectedComment(index: number){
     if (this.prescription.status != 'accepted'){
@@ -185,6 +168,63 @@ export class EditPrescriptionComponent implements OnInit {
       await this.prescription.comments.sort((a,b) => {
         return this.calculateCommentPrice(a) - this.calculateCommentPrice(b);
       })
+  }
+
+
+  async presentActionSheet(index: number) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Albums',
+      cssClass: 'my-custom-class',
+      buttons: [{
+
+        text: this.translateService.translate('OPEN_CAMERA'),
+        icon: 'camera-outline',
+        handler: () => {
+          this.getPhoto(index, 'camera')
+        }
+      },
+      {
+
+        text: this.translateService.translate('PICK_GALLERY'),
+        icon: 'image-outline',
+        handler: () => {
+          this.getPhoto(index, 'gallery')
+        }
+      },
+      {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+
+  getPhoto(index, type: string) {
+    this.cameraService.uploadPhotoGallery(type)
+      .then((result: any) => {
+        console.log(JSON.stringify(result.url));
+        console.log("file", result.file);
+        if (result && result != null) {
+          console.log("check", result.url != '' && result.file != '');
+          if (result === 'not image') {
+            this.interactionService.createToast('TOAST_IMAGE_ERROR', 'danger', 'bottom');
+          }
+          else if (result.url != '' && result.file != '') {
+            if (this.images[index].url == null) {
+              this.addImageHolderPrescription();
+            }
+            this.images[index].url = result.url;
+            this.files[index] = result.file;
+          }
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
 

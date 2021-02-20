@@ -185,9 +185,7 @@ export class AddPrescriptionComponent implements OnInit {
   }
 
 
-  openCamera() {
-
-  }
+  
 
   checkProductNames() {
     let productNames = this.navParam.get('productsNames');

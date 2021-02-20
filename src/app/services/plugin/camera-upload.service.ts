@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { Camera } from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { resolve } from 'dns';
 
@@ -38,7 +38,7 @@ export class CameraUploadService {
   openCamera() {
     return new Promise((resolve, reject) => {
       const options: CameraOptions = {
-      quality: 100,
+      quality: 60,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG
     }
@@ -57,7 +57,7 @@ export class CameraUploadService {
         maximumImagesCount: 1,
         width: 500,
         height: 500,
-        quality: 100,
+        quality: 60,
         outputType: 1
       }
 
