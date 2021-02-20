@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import {HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 import { AuthGuardService } from './services/auth-guard.service';
 import { InteractionService } from './services/interaction.service';
@@ -98,6 +99,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HTTP,
     FirebaseAuthentication,
     PhotoLibraryService,
+    AndroidPermissions,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
