@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { resolve } from 'dns';
 
@@ -9,6 +10,7 @@ import { resolve } from 'dns';
 export class CameraUploadService {
 
   constructor(private imagePicker: ImagePicker,
+              private camera: Camera,
               private androidPermissions: AndroidPermissions) { }
 
 
@@ -21,6 +23,9 @@ export class CameraUploadService {
                 if (handler == 'gallery'){
                   resolve(this.openGallery());
                 }
+                else if (handler == 'camera'){
+                  resolve(this.openCamera());
+                }
               }
             })
             .catch(err => {
@@ -28,6 +33,23 @@ export class CameraUploadService {
             });
     })
     
+  }
+
+  openCamera() {
+    return new Promise((resolve, reject) => {
+      const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG
+    }
+    this.camera.getPicture(options)
+      .then((image64Data) => {
+        resolve(this.selectedImage('data:image/jpeg;base64,' + image64Data))
+      })
+      .catch(err => {
+        reject(err);
+      })
+    })
   }
   openGallery() {
     return new Promise((resolve, reject) => {
@@ -40,9 +62,8 @@ export class CameraUploadService {
       }
 
       this.imagePicker.getPictures(options).then(
-        file_uris => {
-          console.log(file_uris);
-          resolve(this.selectedImage('data:image/jpeg;base64,' + file_uris))
+        image64Data => {
+          resolve(this.selectedImage('data:image/jpeg;base64,' + image64Data))
         },
 
         err => reject(err)
