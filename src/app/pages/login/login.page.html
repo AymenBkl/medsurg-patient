@@ -12,7 +12,7 @@
           <ion-label class="label-error" *ngIf="formErrors && formErrors.phoneNumber">*{{translateService.translate(formErrors.phoneNumber)}}</ion-label>
           <ion-item lines="none" class="ion-input">
             <ion-icon name="lock-closed"></ion-icon>
-            <ion-input [placeholder]="translateService.translate('PASSWORD')" formControlName="password"></ion-input>
+            <ion-input [type]='loginForm.value.passwordHidden ? "text":"password"' [placeholder]="translateService.translate('PASSWORD')" formControlName="password"></ion-input>
             <ion-checkbox class="checkbox" formControlName='passwordHidden'></ion-checkbox>
             <ion-icon class="icon-check-box" [name]="loginForm.value.passwordHidden == true ? 'eye-outline' : 'eye-off-outline' "></ion-icon>
           </ion-item>

@@ -19,7 +19,6 @@ export class LoginPage implements OnInit {
   formErrors: any;
   submitted = false;
   validationErrors: { errmsg, errcode };
-  passwordHidden :boolean = true;
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private interactionService: InteractionService,

@@ -48,6 +48,7 @@ export class RegisterPage implements OnInit {
       password : ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword : ['', [Validators.required, Validators.minLength(6)]],
       role : 'patient',
+      passwordHidden:true
     },
     {
       validators : MustMatch('password', 'confirmPassword')
