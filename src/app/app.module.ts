@@ -44,8 +44,7 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateMedsurgService } from './services/translate.service';
-import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
-import { PhotoLibraryService } from './services/plugins/photo-library.service';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -78,7 +77,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     SplashScreen,
     AuthGuardService,
     AuthService,
-    PhotoLibrary,
     InteractionService,
     StorageService,
     ProccessHttpErrosService,
@@ -98,8 +96,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SMS,
     HTTP,
     FirebaseAuthentication,
-    PhotoLibraryService,
     AndroidPermissions,
+    ImagePicker,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

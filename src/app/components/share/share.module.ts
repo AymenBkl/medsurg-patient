@@ -52,7 +52,7 @@ import { PaymentDetailComponent } from '../payment-detail/payment-detail.compone
     AddAddressComponent,
     RefundComponent,
     RefundDetailComponent,
-    PaymentDetailComponent
+    PaymentDetailComponent,
   ],
   exports: [
     BannerComponent,
@@ -73,7 +73,7 @@ import { PaymentDetailComponent } from '../payment-detail/payment-detail.compone
     AddAddressComponent,
     RefundComponent,
     RefundDetailComponent,
-    PaymentDetailComponent
+    PaymentDetailComponent,
   ],
   imports: [
     IonicModule,
