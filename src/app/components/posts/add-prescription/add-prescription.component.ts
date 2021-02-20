@@ -3,9 +3,9 @@ import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { IonSlides, ModalController, NavController, NavParams } from '@ionic/angular';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { User } from 'src/app/interfaces/user';
+import { CameraUploadService } from 'src/app/services/plugin/camera-upload.service';
 import { PrescriptionService } from 'src/app/services/prescription.service';
 import { InteractionService } from '../../../services/interaction.service';
-import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 @Component({
   selector: 'app-add-prescription',
@@ -30,7 +30,7 @@ export class AddPrescriptionComponent implements OnInit {
     private interactionService: InteractionService,
     private prescriptionService: PrescriptionService,
     private modalCntrl: ModalController,
-    private imagePicker: ImagePicker) { }
+    private cameraService: CameraUploadService) { }
 
   ngOnInit() {
     this.getData();
@@ -51,10 +51,7 @@ export class AddPrescriptionComponent implements OnInit {
     delete this.prescription._id;
   }
 
-  selectedImage(base64Data: string, index: number) {
-    console.log(index);
-    this.preview(this.convertBase64ToBlob(base64Data), index);
-  }
+  
 
 
 
@@ -128,27 +125,25 @@ export class AddPrescriptionComponent implements OnInit {
       });
   }
 
-  preview(file, index: number) {
-    console.log(file)
-    if (!file) {
-      return;
-    }
-    const mimeType = file.type;
-    if (mimeType.match(/image\/*/) == null) {
-      this.interactionService.createToast('TOAST_IMAGE_ERROR', 'danger', 'bottom');
-      return;
-    }
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = (event) => {
-      if (this.images[index].url == null) {
-        this.addImageHolderPrescription();
-      }
-      this.images[index] = { url: reader.result }
-      this.files[index] = file;
-
-
-    };
+  getPhoto(index){
+    this.cameraService.openGallery(index)
+      .then((result:any) => {
+        console.log(JSON.stringify(result.url));
+        console.log("file",result.file);
+        if (result && result != null){
+          console.log("check",result.url != '' && result.file != '');
+          if (result === 'not image'){
+            this.interactionService.createToast('TOAST_IMAGE_ERROR', 'danger', 'bottom');
+          }
+          else if (result.url != '' && result.file != '') {
+            if (this.images[index].url == null) {
+              this.addImageHolderPrescription();
+            }
+            this.images[index].url = result.url;
+            this.files[index] = result.file;
+          }
+        }
+      });
   }
 
   checkProductNames() {
@@ -161,46 +156,6 @@ export class AddPrescriptionComponent implements OnInit {
     }
   }
 
-  openGallery (index:number): void {
-    let options = {
-      maximumImagesCount: 1,
-      width: 500,
-      height: 500,
-      quality: 100,
-      outputType: 1
-    }
   
-    this.imagePicker.getPictures(options).then(
-      file_uris => {
-        console.log(file_uris);
-        this.selectedImage('data:image/jpeg;base64,' + file_uris,index)
-      },
-
-      err => console.log('uh oh')
-    );
-  }
-
-  private convertBase64ToBlob(base64Image: string) {
-    console.log(base64Image);
-    // Split into two parts
-    const parts = base64Image.split(';base64,');
-    console.log(parts[1])
-    // Hold the content type
-    const imageType = parts[0].split(':')[1];
-    console.log(imageType)
-    // Decode Base64 string 
-    const decodedData = atob(parts[1]);
-  
-    // Create UNIT8ARRAY of size same as row data length
-    const uInt8Array = new Uint8Array(decodedData.length);
-  
-    // Insert all character code into uInt8Array
-    for (let i = 0; i < decodedData.length; ++i) {
-      uInt8Array[i] = decodedData.charCodeAt(i);
-    }
-  
-    // Return BLOB image after conversion
-    return new Blob([uInt8Array], { type: imageType });
-  }
 
 }

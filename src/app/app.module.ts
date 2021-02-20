@@ -45,6 +45,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateMedsurgService } from './services/translate.service';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { CameraUploadService } from './services/plugin/camera-upload.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -83,6 +84,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SearchMedecinService,
     FileChooser,
     File,
+    CameraUploadService,
     OrderService,
     ReferalService,
     MessageService,
