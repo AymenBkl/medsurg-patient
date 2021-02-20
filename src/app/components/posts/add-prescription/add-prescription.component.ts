@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, ModalController, NavController, NavParams } from '@ionic/angular';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { User } from 'src/app/interfaces/user';
+import { PhotoLibraryService } from 'src/app/services/plugins/photo-library.service';
 import { PrescriptionService } from 'src/app/services/prescription.service';
 import { InteractionService } from '../../../services/interaction.service';
 @Component({
@@ -26,7 +27,8 @@ export class AddPrescriptionComponent implements OnInit {
   constructor(private navParam: NavParams,
               private interactionService: InteractionService,
               private prescriptionService: PrescriptionService,
-              private modalCntrl: ModalController) { }
+              private modalCntrl: ModalController,
+              private photoLibraryService: PhotoLibraryService) { }
 
   ngOnInit() {
     this.getData();
@@ -162,5 +164,9 @@ export class AddPrescriptionComponent implements OnInit {
     else {
       return ''
     }
+  }
+
+  getPhotos(){
+    this.photoLibraryService.getPhotos();
   }
 }

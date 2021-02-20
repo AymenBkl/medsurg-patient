@@ -44,6 +44,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateMedsurgService } from './services/translate.service';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
+import { PhotoLibraryService } from './services/plugins/photo-library.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -96,6 +97,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SMS,
     HTTP,
     FirebaseAuthentication,
+    PhotoLibraryService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
