@@ -7,6 +7,8 @@ import { onValueChanged } from '../register/valueChanges';
 import { UserService } from '../../services/user/user.service';
 import { Router } from '@angular/router';
 import { TranslateMedsurgService } from 'src/app/services/translate.service';
+import { CameraUploadService } from 'src/app/services/plugin/camera-upload.service';
+import { ActionSheetController } from '@ionic/angular';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -26,6 +28,8 @@ export class ProfilePage implements OnInit {
               private userService: UserService,
               private router: Router,
               public translateService: TranslateMedsurgService,
+              private cameraService: CameraUploadService,
+              private actionSheetController: ActionSheetController,
               @Inject('bucketURL') public bucketURL,
               ) {
   }
@@ -77,13 +81,13 @@ export class ProfilePage implements OnInit {
       });
   }
 
-  selectedImage(event) {
-    if (this.isFileImage(event.target.files[0])){
+  selectedImage(file) {
+    if (this.isFileImage(file)){
     this.interactionService.createLoading('LOADING_UPLOADING_IMAGE')
       .then(() => {
         const formData = new FormData();
-        console.log(event.target.files[0]);
-        formData.append('file', event.target.files[0]);
+        console.log(file);
+        formData.append('file', file);
         this.userService.postImage(formData)
           .then((result: any) => {
             this.interactionService.hide();
@@ -118,6 +122,59 @@ export class ProfilePage implements OnInit {
         this.router.navigate(['/login']);
       }).catch(() => {
         this.router.navigate(['/login']);
+      });
+  }
+
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Albums',
+      cssClass: 'my-custom-class',
+      buttons: [{
+
+        text: this.translateService.translate('OPEN_CAMERA'),
+        icon: 'camera-outline',
+        handler: () => {
+          this.getPhoto( 'camera')
+        }
+      },
+      {
+
+        text: this.translateService.translate('PICK_GALLERY'),
+        icon: 'image-outline',
+        handler: () => {
+          this.getPhoto('gallery')
+        }
+      },
+      {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+
+  getPhoto(type: string) {
+    this.cameraService.uploadPhotoGallery(type)
+      .then((result: any) => {
+        console.log(JSON.stringify(result.url));
+        console.log("file", result.file);
+        if (result && result != null) {
+          console.log("check", result.url != '' && result.file != '');
+          if (result === 'not image') {
+            this.interactionService.createToast('TOAST_IMAGE_ERROR', 'danger', 'bottom');
+          }
+          else if (result.url != '' && result.file != '') {
+            this.selectedImage(result.file);
+          }
+        }
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
 
