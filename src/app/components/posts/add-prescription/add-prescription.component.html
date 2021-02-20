@@ -30,7 +30,7 @@
         <ion-slides class="center-row"  [options]='slideOpts'  #slides pager>
           <ion-slide class="slide intro-slide" *ngFor="let image of images;let i = index">
             <ion-item line="none" class="prescription-holder">
-              <div class="image-upload" (click)="getPhoto(i)">
+              <div class="image-upload" (click)="presentActionSheet(i)">
                 <label for="file-input + {{i}}">
                   <img *ngIf="!image || !image.url" src="../../../../assets/imgs/photo.png"/>
                   <img *ngIf="image && image.url" [src]="image.url"/>

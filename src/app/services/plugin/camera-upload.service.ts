@@ -1,15 +1,35 @@
 import { Injectable } from '@angular/core';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { resolve } from 'dns';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CameraUploadService {
 
-  constructor(private imagePicker: ImagePicker) { }
+  constructor(private imagePicker: ImagePicker,
+              private androidPermissions: AndroidPermissions) { }
 
 
-  openGallery(index: number) {
+  uploadPhotoGallery(handler: string) {
+    return new Promise((resolve,reject) => {
+      this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE,this.androidPermissions.PERMISSION.CAMERA])
+            .then((result) => {
+              console.log(result.hasPermission);
+              if (result.hasPermission) {
+                if (handler == 'gallery'){
+                  resolve(this.openGallery());
+                }
+              }
+            })
+            .catch(err => {
+              reject(err);
+            });
+    })
+    
+  }
+  openGallery() {
     return new Promise((resolve, reject) => {
       let options = {
         maximumImagesCount: 1,
@@ -22,10 +42,10 @@ export class CameraUploadService {
       this.imagePicker.getPictures(options).then(
         file_uris => {
           console.log(file_uris);
-          resolve(this.selectedImage('data:image/jpeg;base64,' + file_uris, index))
+          resolve(this.selectedImage('data:image/jpeg;base64,' + file_uris))
         },
 
-        err => console.log('uh oh')
+        err => reject(err)
       );
     })
 
@@ -55,12 +75,11 @@ export class CameraUploadService {
   }
 
 
-  selectedImage(base64Data: string, index: number) {
-    console.log(index);
-    return this.preview(this.convertBase64ToBlob(base64Data), index);
+  selectedImage(base64Data: string) {
+    return this.preview(this.convertBase64ToBlob(base64Data));
   }
 
-  preview(file, index: number) {
+  preview(file) {
     return new Promise((resolve, reject) => {
       console.log(file)
       if (!file) {
@@ -78,4 +97,6 @@ export class CameraUploadService {
     })
 
   }
+
+
 }

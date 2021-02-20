@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
-import { IonSlides, ModalController, NavController, NavParams } from '@ionic/angular';
+import { ActionSheetController, IonSlides, ModalController, NavController, NavParams } from '@ionic/angular';
 import { Prescription } from 'src/app/interfaces/prescription';
 import { User } from 'src/app/interfaces/user';
 import { CameraUploadService } from 'src/app/services/plugin/camera-upload.service';
 import { PrescriptionService } from 'src/app/services/prescription.service';
+import { TranslateMedsurgService } from 'src/app/services/translate.service';
 import { InteractionService } from '../../../services/interaction.service';
 
 @Component({
@@ -30,7 +31,9 @@ export class AddPrescriptionComponent implements OnInit {
     private interactionService: InteractionService,
     private prescriptionService: PrescriptionService,
     private modalCntrl: ModalController,
-    private cameraService: CameraUploadService) { }
+    private actionSheetController: ActionSheetController,
+    private cameraService: CameraUploadService,
+    private translateService: TranslateMedsurgService) { }
 
   ngOnInit() {
     this.getData();
@@ -51,7 +54,7 @@ export class AddPrescriptionComponent implements OnInit {
     delete this.prescription._id;
   }
 
-  
+
 
 
 
@@ -125,14 +128,46 @@ export class AddPrescriptionComponent implements OnInit {
       });
   }
 
-  getPhoto(index){
-    this.cameraService.openGallery(index)
-      .then((result:any) => {
+  async presentActionSheet(index: number) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Albums',
+      cssClass: 'my-custom-class',
+      buttons: [{
+
+        text: this.translateService.translate('OPEN_CAMERA'),
+        icon: 'camera-outline',
+        handler: () => {
+          this.getPhoto(index, 'camera')
+        }
+      },
+      {
+
+        text: this.translateService.translate('PICK_GALLERY'),
+        icon: 'image-outline',
+        handler: () => {
+          this.getPhoto(index, 'gallery')
+        }
+      },
+      {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+
+  getPhoto(index, type: string) {
+    this.cameraService.uploadPhotoGallery(type)
+      .then((result: any) => {
         console.log(JSON.stringify(result.url));
-        console.log("file",result.file);
-        if (result && result != null){
-          console.log("check",result.url != '' && result.file != '');
-          if (result === 'not image'){
+        console.log("file", result.file);
+        if (result && result != null) {
+          console.log("check", result.url != '' && result.file != '');
+          if (result === 'not image') {
             this.interactionService.createToast('TOAST_IMAGE_ERROR', 'danger', 'bottom');
           }
           else if (result.url != '' && result.file != '') {
@@ -143,7 +178,15 @@ export class AddPrescriptionComponent implements OnInit {
             this.files[index] = result.file;
           }
         }
+      })
+      .catch(err => {
+        console.log(err);
       });
+  }
+
+
+  openCamera() {
+
   }
 
   checkProductNames() {
@@ -156,6 +199,6 @@ export class AddPrescriptionComponent implements OnInit {
     }
   }
 
-  
+
 
 }
