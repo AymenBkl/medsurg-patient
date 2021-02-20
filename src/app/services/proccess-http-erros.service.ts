@@ -42,11 +42,11 @@ export class ProccessHttpErrosService {
     }
     else if (error.error && error.error.err === 'USER NOT FOUND'){
       errCode = 3;
-      errMsg = 'USER NOT FOUND';
+      errMsg = 'TOAST_USERNOTFOUND';
     }
     else if (error.error && error.error.err && error.error.err.code === 11000) {
       errCode = 20;
-      errMsg = 'Account Already exist';
+      errMsg = 'TOAST_ACCOUNTEXISTS';
     }
     else if (error.error && error.error.err && error.error.err.codeName === 'DuplicateKey'){
       errCode = 4;
@@ -58,7 +58,7 @@ export class ProccessHttpErrosService {
     }
     else {
       errCode = 10;
-      errMsg = 'Something Went Wrong !';
+      errMsg = 'TOAST_ERROR';
     }
     return {errmsg : errMsg, errcode : errCode};
   }

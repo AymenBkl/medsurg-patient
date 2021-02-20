@@ -151,6 +151,8 @@
     "TOAST_ERROR":"Something Went Wrong ! Try Again ",
     "TOAST_ERROR1":"Something Went Wrong ! Try Again ",
     "TOAST_NOTFOUND":"Not Found",
+    "TOAST_USERNOTFOUND":"USER NOT FOUND",
+    "TOAST_ACCOUNTEXISTS":"Account Already exist",
     "TOAST_REFERAL_ADDED":"Referal Added",
     "TOAST_REFERAL_CREATED":"Your Referal Created seccusefully",
     "TOAST_REFERAL_EXIST":"Referal EXISTS",

@@ -26,7 +26,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   getCategories() {
-    setTimeout(() => {
       this.categoryService.getAllCategories()
       .then((result: any) => {
         if (result && result !== false) {
@@ -38,9 +37,7 @@ export class CategoriesComponent implements OnInit {
       })
       .catch(err => {
         this.categories = [];
-      });
-    },3000)
-    
+      });    
   }
 
 
