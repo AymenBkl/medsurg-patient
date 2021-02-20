@@ -38,7 +38,7 @@ export class CameraUploadService {
   openCamera() {
     return new Promise((resolve, reject) => {
       const options: CameraOptions = {
-      quality: 60,
+      quality: 90,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG
     }
@@ -57,7 +57,7 @@ export class CameraUploadService {
         maximumImagesCount: 1,
         width: 500,
         height: 500,
-        quality: 60,
+        quality: 90,
         outputType: 1
       }
 

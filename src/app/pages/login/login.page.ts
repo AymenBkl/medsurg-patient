@@ -19,6 +19,7 @@ export class LoginPage implements OnInit {
   formErrors: any;
   submitted = false;
   validationErrors: { errmsg, errcode };
+  passwordHidden :boolean = true;
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private interactionService: InteractionService,
@@ -35,12 +36,13 @@ export class LoginPage implements OnInit {
     this.loginForm = this.formBuilder.group({
       phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      remember: false
+      remember: false,
+      passwordHidden:true
     });
     this.loginForm.valueChanges
       .subscribe(user => {
         this.formErrors = onValueChanged(user, this.loginForm);
-        console.log(user);
+        console.log(this.loginForm.value.passwordHidden)
       });
   }
 
