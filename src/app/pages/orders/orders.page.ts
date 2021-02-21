@@ -94,7 +94,7 @@ export class OrdersPage implements OnInit {
     this.modalControllerOrder.callEditOrder(this.currentUser, order)
   }
 
-  filterOrders(orders: Order[]) {
+  async filterOrders(orders: Order[]) {
     this.allOrder = {
       PENDING: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
       SUCCESS: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
@@ -102,20 +102,22 @@ export class OrdersPage implements OnInit {
       ALL: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
       ACTIVE: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] }
     };
-    orders.map(async (order) => {
-      if (order.method == 'cod') {
-        this.allOrder.ALL.all.push(order);
-        this.allOrder.SUCCESS[order.status].push(order);
-        this.allOrder.SUCCESS.all.push(order);
-
-      }
-      else {
-        await this.checkPaymentStatus(order);
-        this.allOrder.ALL.all.push(order);
-        this.allOrder.ALL[order.status].push(order);
-      }
-      console.log(this.allOrder)
-    });
+    for(let order of orders){
+      console.log(order);
+      let r = await this.cashfree.paymentStatus(order._id)
+          .then(async (paymentStatus: PaymentStatus) => {
+            console.log(paymentStatus);
+            if (order.method == 'card' && paymentStatus.status == 'OK'){
+              let result = await this.affectCard(order,paymentStatus);
+            }
+            else if (order.method == 'cod' && paymentStatus.status == 'ERROR'){
+              this.allOrder.ALL.all.push(order);
+              this.allOrder.SUCCESS[order.status].push(order);
+              this.allOrder.SUCCESS.all.push(order);
+            }
+          })
+      
+    };
   }
 
   segmentChanged(event) {
@@ -127,25 +129,22 @@ export class OrdersPage implements OnInit {
     this.currentSegmentTypePayment = event.detail.value;
   }
 
-  async checkPaymentStatus(order: Order) {
-    if (order.method == 'card') {
-      await this.cashfree.paymentStatus(order._id)
-        .then(async (paymentStatus: PaymentStatus) => {
-          console.log(paymentStatus);
-          if (paymentStatus.txStatus == "SUCCESS" && order.status == 'created') {
-            this.updateOrder('accepted', order._id);
-          }
-          order.paymentStatus = paymentStatus;
-          if (order.paymentStatus && order.paymentStatus.txStatus) {
-            this.allOrder[order.paymentStatus.txStatus].all.push(order)
-            this.allOrder[order.paymentStatus.txStatus][order.status].push(order);
-          }
-          else if (order.paymentStatus && !order.paymentStatus.txStatus) {
-            this.allOrder[order.paymentStatus.orderStatus].all.push(order)
-            this.allOrder[order.paymentStatus.orderStatus][order.status].push(order);
-          }
-        })
+  async affectCard(order: Order,paymentStatus) {
+    if (paymentStatus.txStatus == "SUCCESS" && order.status == 'created') {
+      this.updateOrder('accepted', order._id);
     }
+    order.paymentStatus = paymentStatus;
+    this.allOrder.ALL.all.push(order);
+    this.allOrder.ALL[order.status].push(order);
+    if (order.paymentStatus && order.paymentStatus.txStatus) {
+      this.allOrder[order.paymentStatus.txStatus].all.push(order)
+      this.allOrder[order.paymentStatus.txStatus][order.status].push(order);
+    }
+    else if (order.paymentStatus && !order.paymentStatus.txStatus) {
+      this.allOrder[order.paymentStatus.orderStatus].all.push(order)
+      this.allOrder[order.paymentStatus.orderStatus][order.status].push(order);
+    }
+    
 
   }
 

@@ -12,9 +12,9 @@ export class InteractionService {
   constructor(private toastController: ToastController,
               private loadingController: LoadingController,
               private alertController: AlertController,
-              private inj: Injector) { setTimeout(() => {
+              private inj: Injector) { 
                 this.translateService = this.inj.get(TranslateMedsurgService);
-              },1000)}
+              }
 
   async createToast(msg, clr, pos){
     const toast = await this.toastController.create({
