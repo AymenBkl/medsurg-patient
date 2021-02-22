@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { NavController , ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TranslateMedsurgService } from 'src/app/services/translate.service';
+import { AnimationOptions } from '@ionic/angular/providers/nav-controller';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -35,7 +36,11 @@ export class HeaderComponent implements OnInit {
   }
 
   back() {
-    this.navCntrl.back();
+    let animations:AnimationOptions={
+      animated: true,
+      animationDirection: "back"
+    }
+    this.navCntrl.back(animations);
   }
 
   close(){
