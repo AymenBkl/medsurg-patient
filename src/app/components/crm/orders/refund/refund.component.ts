@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 import { ModalController, NavParams } from '@ionic/angular';
+import { PaymentDetailComponent } from 'src/app/components/payment-detail/payment-detail.component';
 import { Order } from 'src/app/interfaces/order';
 import { OrderProduct } from 'src/app/interfaces/orderCart';
 import { User } from 'src/app/interfaces/user';
@@ -123,6 +124,29 @@ export class RefundComponent implements OnInit {
         this.interactionService.createToast('TOAST_ERROR', 'danger', 'bottom');
       })
   })
+ }
+
+
+ async openPaymentDetail(create:boolean){
+    const modal = await this.modalCntrl.create({
+        component : PaymentDetailComponent,
+        componentProps : {
+            type: 'refund',
+        }
+        
+    });
+    modal.onDidDismiss()
+        .then(data => {
+          if (create){
+            this.makeRefund();
+          }
+          else {
+            this.updateRefund();
+          }
+          
+        });
+    return await modal.present();
+
  }
 
  updateRefund(){
