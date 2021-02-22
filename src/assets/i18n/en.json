@@ -64,6 +64,7 @@
     "ADD_ADDRESS":"Add Address",
     "SELECT_ADDRESS":"Select Address",
     "SELECT_PAYMENT_DETAIL":"Select Payment Detail",
+    "BLOCKED_USER":"You are BLOCKED",
     "ADDRESS":"Address",
     "MEDECINFOUND":"Medecins Found",
     "CN":"CN",

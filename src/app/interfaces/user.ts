@@ -15,4 +15,5 @@ export interface User {
     phoneNumber:number;
     addresses:Address[];
     paymentDetail: PaymentDetail;
+    status:string;
 }
