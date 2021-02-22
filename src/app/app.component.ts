@@ -108,7 +108,7 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.platform.backButton.subscribeWithPriority(10, () => {
         console.log("event fired");
-        if (this.router.url != '/tabs/tab1'){
+        if (this.router.url != '/tabs/tab1' && this.router.url != '/login' && this.router.url != '/register' ){
           this.navCntrl.back();
         }
         console.log("router",this.router.url)
