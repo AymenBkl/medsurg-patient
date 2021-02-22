@@ -22,7 +22,6 @@ export class PaymentDetailPage implements OnInit {
 
 
   ngOnInit() {
-    
   }
 
   ionViewDidEnter() {
@@ -30,7 +29,10 @@ export class PaymentDetailPage implements OnInit {
     this.checkPaymentDetailRefund();
   }
 
+  
+
   checkPaymentDetailRefund(){
+    console.log("here");
     this.type = this.navParams.get('type');
   }
 

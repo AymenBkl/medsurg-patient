@@ -5,6 +5,7 @@ import { PaymentDetailComponent } from 'src/app/components/payment-detail/paymen
 import { Order } from 'src/app/interfaces/order';
 import { OrderProduct } from 'src/app/interfaces/orderCart';
 import { User } from 'src/app/interfaces/user';
+import { PaymentDetailPage } from 'src/app/pages/payment-detail/payment-detail.page';
 import { CashfreeService } from 'src/app/services/cashfree.service';
 import { OrderService } from 'src/app/services/crm/order.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -129,7 +130,7 @@ export class RefundComponent implements OnInit {
 
  async openPaymentDetail(create:boolean){
     const modal = await this.modalCntrl.create({
-        component : PaymentDetailComponent,
+        component : PaymentDetailPage,
         componentProps : {
             type: 'refund',
             

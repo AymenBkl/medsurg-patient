@@ -1,4 +1,5 @@
-<app-header  [type]="'page'"></app-header>
+<app-header  [type]="'page'" *ngIf="!type || type != 'refund'"></app-header>
+<app-header  [type]="'modal'" [page]="'Select Payment Detail '"*ngIf="type && type == 'refund'"></app-header>
 
 <ion-content>
     <ion-grid *ngIf="currentUser">
@@ -40,7 +41,7 @@
           </ion-button>
         </ion-col>
         <ion-col size="12" >
-          <ion-button shape="round" size="default" expand="full" (click)="updatePaymentDetail()" *ngIf="type && type == 'refund'">
+          <ion-button shape="round" size="default" expand="full" (click)="paymentDetailSelected()" *ngIf="type && type == 'refund'">
             <ion-text>{{translateService.translate("SELECT_PAYMENT_DETAIL")}}</ion-text>
           </ion-button>
         </ion-col>
