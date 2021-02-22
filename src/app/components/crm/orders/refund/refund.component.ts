@@ -132,15 +132,16 @@ export class RefundComponent implements OnInit {
         component : PaymentDetailComponent,
         componentProps : {
             type: 'refund',
+            
         }
         
     });
     modal.onDidDismiss()
         .then(data => {
-          if (create){
+          if (create && data && data.data == true){
             this.makeRefund();
           }
-          else {
+          else if (!create && data && data.data == true){
             this.updateRefund();
           }
           

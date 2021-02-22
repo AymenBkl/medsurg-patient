@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController, NavParams } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { TranslateMedsurgService } from 'src/app/services/translate.service';
@@ -12,13 +13,25 @@ export class PaymentDetailPage implements OnInit {
 
   currentUser: User;
   update:boolean= false;
+  type:string;
   constructor(private authService: AuthService,
-              public translateService: TranslateMedsurgService) { }
+              public translateService: TranslateMedsurgService,
+              private navParams: NavParams,
+              private modalCntrl: ModalController) { }
 
 
 
   ngOnInit() {
+    
+  }
+
+  ionViewDidEnter() {
     this.getUser();
+    this.checkPaymentDetailRefund();
+  }
+
+  checkPaymentDetailRefund(){
+    this.type = this.navParams.get('type');
   }
 
   getUser(){
@@ -33,6 +46,12 @@ export class PaymentDetailPage implements OnInit {
 
   updatePaymentDetail(){
     this.update = true;
+  }
+
+  paymentDetailSelected(){
+    if (this.type && this.type == 'refund'){
+      this.modalCntrl.dismiss(true);
+    }
   }
 
 }

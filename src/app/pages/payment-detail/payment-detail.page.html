@@ -39,6 +39,11 @@
             <ion-text>{{translateService.translate("UPDATE_PAYMENT_DETAIL")}}</ion-text>
           </ion-button>
         </ion-col>
+        <ion-col size="12" >
+          <ion-button shape="round" size="default" expand="full" (click)="updatePaymentDetail()" *ngIf="type && type == 'refund'">
+            <ion-text>{{translateService.translate("SELECT_PAYMENT_DETAIL")}}</ion-text>
+          </ion-button>
+        </ion-col>
       </ion-row>
     </ion-grid>
 </ion-content>

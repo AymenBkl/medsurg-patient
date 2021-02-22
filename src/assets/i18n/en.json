@@ -63,6 +63,7 @@
     "BUILDING_NUMBER":"Building Number",
     "ADD_ADDRESS":"Add Address",
     "SELECT_ADDRESS":"Select Address",
+    "SELECT_PAYMENT_DETAIL":"Select Payment Detail",
     "ADDRESS":"Address",
     "MEDECINFOUND":"Medecins Found",
     "CN":"CN",
