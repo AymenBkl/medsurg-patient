@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './services/auth.service';
 import { User } from './interfaces/user';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -94,6 +94,7 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private authService: AuthService,
     private router: Router,
+    private navCntrl: NavController,
     private translate: TranslateService
   ) {
     this.translate.setDefaultLang('en');
@@ -105,7 +106,10 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      
+      this.platform.backButton.subscribeWithPriority(10, () => {
+        console.log("event fired");
+        this.navCntrl.back();
+      });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
