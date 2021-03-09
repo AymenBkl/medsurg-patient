@@ -141,7 +141,7 @@
     "UPDATE_REFUND":"Update Refund",
     "REFUND_TITLE":"REFUND OF ORDER",
     "REFUND_PRICE":"Refunded Price",
-    "CREATE_REFUND":"Make A Refund",
+    "CREATE_REFUND":"Claim Refund",
     "REFUND_TYPE":"This refund is",
     "START":"Start",
     "ADD_REF":"Add Referal",
