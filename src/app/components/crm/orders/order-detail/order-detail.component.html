@@ -39,7 +39,7 @@
       </ion-col>
       <ion-col size="12" *ngIf="order.method == 'card' && order.paymentStatus.txStatus">
         <ion-item  class="profile-holder" >
-          <ion-title class="title-patient">{{translateService.translate("PAYMENT_IS")}} {{translateService.translate(order.paymentStatus.txStatus | uppercase) }}</ion-title>
+          <ion-title class="title-patient">{{translateService.translate("PAYMENT_IS")}} {{order.paymentStatus.txStatus | uppercase }}</ion-title>
         </ion-item>
       </ion-col>
       <ion-col size="12" *ngIf="order.method == 'card' && !order.paymentStatus.txStatus">
@@ -101,7 +101,7 @@
 
     <ion-row class="bottom-row">
       <ion-col size="12" >
-        <ion-button shape="round" size="default" color="success"  expand="full" *ngIf="(order.paymentStatus && order.method == 'card') && (((order.paymentStatus.txStatus && (order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED')) || ((!order.paymentStatus.txStatus && order.paymentStatus.orderStatus == 'ACTIVE'))) && order.status == 'created')" (click)="getPaymentLink()" >
+        <ion-button shape="round" size="default" color="success"  expand="full" *ngIf="(order.paymentStatus && order.method == 'card') && (((order.paymentStatus.txStatus && (order.paymentStatus.txStatus == 'PENDING' || order.paymentStatus.txStatus == 'FAILED' || order.paymentStatus.txStatus == 'USER_DROPPED')) || ((!order.paymentStatus.txStatus && order.paymentStatus.orderStatus == 'ACTIVE'))) && order.status == 'created')" (click)="getPaymentLink()" >
           <ion-text>{{translateService.translate("CONFIRM_PAYMENT")}}</ion-text>
         </ion-button>
       </ion-col>

@@ -82,7 +82,7 @@
             <div class="inner-container" >
               <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'cod' && order.status != 'delivered'"><ion-icon class="ion-icon" name="card-outline" ></ion-icon> : {{translateService.translate("NPAID")}}</ion-label> 
               <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'cod' && order.status == 'delivered'"><ion-icon class="ion-icon" name="card-outline" ></ion-icon> : {{translateService.translate("PAID")}}</ion-label> 
-            <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'card' && order.paymentStatus.txStatus"><ion-icon class="ion-icon" name="card-outline" ></ion-icon> : {{translateService.translate(order.paymentStatus.txStatus)}}</ion-label>
+            <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'card' && order.paymentStatus.txStatus"><ion-icon class="ion-icon" name="card-outline" ></ion-icon> : {{order.paymentStatus.txStatus}}</ion-label>
             <ion-label class="inner-item" style="font-weight: bold;" *ngIf="order.method === 'card' && !order.paymentStatus.txStatus"> <ion-icon class="ion-icon" name="card-outline" ></ion-icon> : {{translateService.translate(order.paymentStatus.orderStatus)}}</ion-label>
 
             <ion-label *ngIf="order.status == 'canceled' || order.status=='rejected'" class="inner-item" style="font-weight: bold;color:red">{{translateService.translate("ORDER_STATUS")}} : {{order.status == 'canceled' ? translateService.translate("CANCELED") : translateService.translate("REJECTED")}}</ion-label>

@@ -137,8 +137,15 @@ export class OrdersPage implements OnInit {
     this.allOrder.ALL.all.push(order);
     this.allOrder.ALL[order.status].push(order);
     if (order.paymentStatus && order.paymentStatus.txStatus) {
-      this.allOrder[order.paymentStatus.txStatus].all.push(order)
-      this.allOrder[order.paymentStatus.txStatus][order.status].push(order);
+      if (order.paymentStatus.txStatus in this.allOrder) {
+        this.allOrder[order.paymentStatus.txStatus].all.push(order)
+        this.allOrder[order.paymentStatus.txStatus][order.status].push(order);
+      }
+      else {
+        this.allOrder.PENDING.all.push(order)
+        this.allOrder.PENDING[order.status].push(order);
+      }
+      
     }
     else if (order.paymentStatus && !order.paymentStatus.txStatus) {
       this.allOrder[order.paymentStatus.orderStatus].all.push(order)
