@@ -29,10 +29,12 @@ export class CashfreeService {
         customerEmail:'test@test.dz',
         returnUrl:''
       }
-        this.http.post('https://test.cashfree.com/api/v1/order/create',option,{'Content-Type': 'application/x-www-form-urlencoded'})
+        this.http.post('https://api.cashfree.com/api/v1/order/create',option,{'Content-Type': 'application/x-www-form-urlencoded'})
           .then(data => {
+            console.log(data);
             resolve(JSON.parse(data.data))
           },err => {
+            console.log(err);
             reject(err);
           })
       })
@@ -46,7 +48,7 @@ export class CashfreeService {
         secretKey:config.cashfree.appKey,
         orderId:orderId,
       }
-        this.http.post('https://test.cashfree.com/api/v1/order/info/link',option,{'Content-Type': 'application/x-www-form-urlencoded'})
+        this.http.post('https://api.cashfree.com/api/v1/order/info/link',option,{'Content-Type': 'application/x-www-form-urlencoded'})
           .then(data => {
             resolve(JSON.parse(data.data))
           },err => {
@@ -64,7 +66,7 @@ export class CashfreeService {
         orderId:orderId,
       }
       console.log('here');
-        this.http.post('https://test.cashfree.com/api/v1/order/info/status',option,{'Content-Type': 'application/x-www-form-urlencoded'})
+        this.http.post('https://api.cashfree.com/api/v1/order/info/status',option,{'Content-Type': 'application/x-www-form-urlencoded'})
           .then(data => {
             resolve(JSON.parse(data.data))
           },err => {
